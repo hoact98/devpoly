@@ -1,8 +1,7 @@
 <template>
-  <div class="main-layout">
-    <div class="container mt-4">
-      <child />
-    </div>
+  <div class="hold-transition login-page">
+      <slot />
+      <router-view/>
   </div>
 </template>
 

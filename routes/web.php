@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\SpaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('{path}', [SpaController::class,'index'])->where('path', '(.*)');
+// Route::get('{path}', [SpaController::class,'index'])->where('path', '(.*)');
+// Route::get('/admin/{any?}', function () {
+//     return view('home');
+// })->where('any', '[\/\w\.-]*');
 
-
-
+Route::get('/{any?}', function () {
+    return view('home');
+})->where('any', '[\/\w\.-]*');

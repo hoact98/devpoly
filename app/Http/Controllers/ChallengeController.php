@@ -11,8 +11,11 @@ class ChallengeController extends Controller
     // all challenges
     public function index()
     {
-        $chans = Challenge::all()->toArray();
-        return array_reverse($chans);
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list challenges',
+            'data' => Challenge::all(),
+        ], 200);
     }
 
     // add challenge
@@ -23,7 +26,7 @@ class ChallengeController extends Controller
         if($c){
             $slug = $slug.Str::random(5);
         }
-        $chan = new Challenge([
+        $challenge = new Challenge([
             'title' => $request->title,
             'slug' =>$slug,
             'description' => $request->description,
@@ -32,33 +35,33 @@ class ChallengeController extends Controller
             'level' => $request->level,
             'cate_challen_id' => $request->cate_challen_id,
         ]);
-        $chan->save();
+        $challenge->save();
 
-        return response()->json(['status'=>'success','message'=>'The challenge successfully added','data'=>$chan]);
+        return response()->json(['status'=>'success','message'=>'The challenge successfully added','data'=>$challenge],201);
     }
 
     // edit challenge
     public function show($id)
     {
-        $chan = Challenge::find($id);
-        return response()->json($chan);
+        $challenge = Challenge::find($id);
+        return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
     }
 
     // update challenge
     public function update($id, Request $request)
     {
-        $chan = Challenge::find($id);
-        $chan->update($request->all());
+        $challenge = Challenge::find($id);
+        $challenge->update($request->all());
 
-        return response()->json(['status'=>'success','message'=>'The challenge successfully updated','data'=>$chan]);
+        return response()->json(['status'=>'success','message'=>'The challenge successfully updated','data'=>$challenge],200);
     }
 
     // delete challenge
     public function delete($id)
     {
-        $chan = Challenge::find($id);
-        $chan->delete();
+        $challenge = Challenge::find($id);
+        $challenge->delete();
 
-        return response()->json('The challenge successfully deleted');
+        return response()->json(['status'=>'success','message'=>'The challenge successfully deleted'],200);
     }
 }

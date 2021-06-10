@@ -124,7 +124,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -354,7 +353,29 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "content-wrapper" },
-    [_c("breadcrumb", { attrs: { title: _vm.title } }), _vm._v(" "), _vm._m(0)],
+    [
+      _c("breadcrumb", { attrs: { title: _vm.title } }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "card card-primary" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.title))
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" })
+          ])
+        ])
+      ])
+    ],
     1
   )
 }
@@ -363,142 +384,118 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card card-primary" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("Quick Example "),
-                  _c("small", [_vm._v("jQuery Validation")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("form", { attrs: { id: "quickForm" } }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputName" } }, [
-                      _vm._v("Username:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "exampleInputName",
-                        placeholder: "Enter username"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                      _vm._v("Email:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputEmail1",
-                        placeholder: "Enter email"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputAddress" } }, [
-                      _vm._v("Address:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputAdress",
-                        placeholder: "Enter address"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputPhone" } }, [
-                      _vm._v("Phone:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputPhone",
-                        placeholder: "Enter phone"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                      _vm._v("Password")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "password",
-                        id: "exampleInputPassword1",
-                        placeholder: "Password"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputGender" } }, [
-                      _vm._v("Gender")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputGender",
-                        placeholder: "Enter gender"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputRole" } }, [
-                      _vm._v("Role")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "exampleInputRole",
-                        placeholder: "Enter role"
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Submit")]
-                  )
-                ])
-              ])
-            ])
+    return _c("form", { attrs: { id: "quickForm" } }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputName" } }, [
+            _vm._v("Username:")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputName",
+              placeholder: "Enter username"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Email:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputEmail1",
+              placeholder: "Enter email"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputAddress" } }, [
+            _vm._v("Address:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputAdress",
+              placeholder: "Enter address"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputPhone" } }, [
+            _vm._v("Phone:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputPhone",
+              placeholder: "Enter phone"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+            _vm._v("Password")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "password",
+              id: "exampleInputPassword1",
+              placeholder: "Password"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputGender" } }, [
+            _vm._v("Gender")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputGender",
+              placeholder: "Enter gender"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputRole" } }, [_vm._v("Role")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputRole",
+              placeholder: "Enter role"
+            }
+          })
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Submit")]
+        )
       ])
     ])
   }

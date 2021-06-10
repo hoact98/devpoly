@@ -20,7 +20,7 @@ Vue.use(CKEditor);
 // window.events = new Vue();
 
 /* eslint-disable no-new */
-
+Vue.config.productionTip = false
 Vue.use(VueRouter)
 const router = new VueRouter({
 	routes,

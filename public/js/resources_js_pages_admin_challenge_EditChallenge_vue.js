@@ -126,7 +126,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -364,11 +363,15 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "card card-primary" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.title))
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("form", { attrs: { id: "quickForm" } }, [
                   _c("div", { staticClass: "card-body" }, [
-                    _vm._m(1),
+                    _vm._m(0),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -383,16 +386,16 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
                     _vm._m(2),
                     _vm._v(" "),
                     _vm._m(3),
                     _vm._v(" "),
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(4)
                   ]),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(5)
                 ])
               ])
             ]),
@@ -406,17 +409,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Quick Example "),
-        _c("small", [_vm._v("jQuery Validation")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

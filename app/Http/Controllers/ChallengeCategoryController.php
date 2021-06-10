@@ -12,8 +12,11 @@ class ChallengeCategoryController extends Controller
     // all categories
     public function index()
     {
-        $cates = ChallengeCategory::all()->toArray();
-        return array_reverse($cates);
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list categories',
+            'data' => ChallengeCategory::all(),
+        ], 200);
     }
 
     // add category
@@ -37,14 +40,14 @@ class ChallengeCategoryController extends Controller
             'image'=>$imageName
         ]);
         $cate->save();
-        return response()->json(['status'=>'success','message'=>'The challenge category successfully added','data'=>$cate]);
+        return response()->json(['status'=>'success','message'=>'The challenge category successfully added','data'=>$cate],201);
     }
 
     // edit category
     public function show($id)
     {
         $cate = ChallengeCategory::find($id);
-        return response()->json($cate);
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$cate],200);
     }
 
     // update category
@@ -70,7 +73,7 @@ class ChallengeCategoryController extends Controller
         $cate->image = $imageName;
         $cate->save();
 
-        return response()->json(['status'=>'success','message'=>'The challenge category successfully updated','data'=>$cate]);
+        return response()->json(['status'=>'success','message'=>'The challenge category successfully updated','data'=>$cate],200);
     }
 
     // delete category
@@ -79,6 +82,6 @@ class ChallengeCategoryController extends Controller
         $cate = ChallengeCategory::find($id);
         $cate->delete();
 
-        return response()->json('The category successfully deleted');
+        return response()->json(['status'=>'success','message'=>'The category successfully deleted','data'=>$cate],200);
     }
 }

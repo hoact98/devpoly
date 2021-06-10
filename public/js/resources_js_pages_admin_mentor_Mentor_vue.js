@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: 'Thêm mentor'
+      title: 'Mentor'
     };
   },
   components: {
@@ -351,7 +351,11 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "card" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.title))
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c(
@@ -426,7 +430,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(0)
                     ]
                   )
                 ])
@@ -440,16 +444,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("DataTable with minimal features & hover style")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

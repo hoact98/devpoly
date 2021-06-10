@@ -14,7 +14,7 @@
           <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <router-link :to="{name: 'home'}" class="d-block">Alexander Pierce</router-link>
         </div>
       </div>
 
@@ -59,9 +59,15 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link :to="{name: 'add.user'}" class="nav-link">
+                <router-link :to="{name: 'roles'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm người dùng</p>
+                  <p>Role</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{name: 'permissions'}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Permission</p>
                 </router-link>
               </li>
             </ul>
