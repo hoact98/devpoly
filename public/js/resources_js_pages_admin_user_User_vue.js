@@ -450,7 +450,7 @@ var render = function() {
                               [
                                 _c("img", {
                                   attrs: {
-                                    src: "http://localhost:8000/" + user.avatar,
+                                    src: "/" + user.avatar,
                                     alt: "",
                                     width: "60px"
                                   }

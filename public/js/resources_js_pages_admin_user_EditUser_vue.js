@@ -502,10 +502,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("img", {
-                          attrs: {
-                            src: "http://localhost:8000/" + _vm.user.avatar,
-                            alt: ""
-                          }
+                          attrs: { src: "/" + _vm.user.avatar, alt: "" }
                         })
                       ]),
                       _vm._v(" "),

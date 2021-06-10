@@ -28,7 +28,7 @@
                   <div class="form-group">
                     <label for="">Avatar</label>
                     <input type="file" @change="upload($event)" class="form-control" name="avatar">
-                    <img :src="'http://localhost:8000/'+user.avatar" alt="">
+                    <img :src="'/'+user.avatar" alt="">
 
                   </div>
                     <div class="form-group">

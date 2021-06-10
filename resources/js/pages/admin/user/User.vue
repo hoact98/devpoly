@@ -27,7 +27,7 @@
                       <td style="text-align:center">{{user.id}}</td>
                       <td style="text-align:center">{{user.username}}</td>
                       <td style="text-align:center">{{user.email}}</td>
-                      <td style="text-align:center"><img :src="'http://localhost:8000/'+user.avatar" alt="" width="60px"></td>
+                      <td style="text-align:center"><img :src="'/'+user.avatar" alt="" width="60px"></td>
                       <td style="text-align:center">
                         <router-link :to="{name: 'edit.user', params: { id: user.id }}" class="btn btn-info">Edit
                         </router-link>

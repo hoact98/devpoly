@@ -1,4 +1,5 @@
 import AdminLayout from './layouts/admin.vue';
+import MainLayout from './layouts/main.vue';
 function page(path) {
   return () =>
     import( `./pages/${path}`).then(
@@ -10,8 +11,15 @@ function page(path) {
 const routes = [
   {
     path: '/',
-    component: page("admin/dashboard/Dashboard.vue"),
-    name: 'home'
+    component: MainLayout,
+    children: [
+      {
+        path: 'home',
+        alias: '',
+        component: page('public/Home.vue'),
+        name: 'home',
+      }
+    ]
   },
   {
     path: '/admin',
