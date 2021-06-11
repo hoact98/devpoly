@@ -14,5 +14,12 @@ class Feedback extends Model
         'solution_id',
         'parent_id'
     ];
-
+    public function solutions()
+    {
+    return $this->belongsTo(Solution::class, 'solution_id');
+    }
+    public function users()
+    {
+    return $this->belongsTo(User::class, 'user_id');
+    }
 }

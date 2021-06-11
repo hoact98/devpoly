@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ChallengeCategory extends Model
 {
     use HasFactory;
-
+    protected $table = "challenge_categories";
     protected $fillable = [
         'name',
         'image',
         'description',
     ];
-
+    public function challenges(){
+        return $this->hasMany(Challenge::class,'cate_challen_id');
+    }
 }

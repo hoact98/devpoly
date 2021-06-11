@@ -16,5 +16,16 @@ class Challenge extends Model
         'level',
         'cate_challen_id'
     ];
-
+    public function category()
+    {
+        return $this->belongsTo(ChallengeCategory::class, 'cate_challen_id');
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'challenge_users','challen_id','user_id');
+    }
+    public function solutions()
+    {
+        return $this->hasMany(Solution::class,'solution_id');
+    }
 }

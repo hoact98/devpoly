@@ -20,5 +20,16 @@ class Solution extends Model
         'user_id',
         'challen_id'     
     ];
-
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'solution_users','solution_id','user_id');
+    }
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class,'solution_id');
+    }
+    public function challenges()
+    {
+    return $this->belongsTo(Challenge::class, 'challen_id');
+    }
 }
