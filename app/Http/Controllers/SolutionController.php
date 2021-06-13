@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveSolutionRequest;
 use App\Models\Solution;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class SolutionController extends Controller
     }
 
     // add Solution
-    public function create(Request $request)
+    public function create(SaveSolutionRequest $request)
     {
         $solution = new Solution([
             'title' => $request->title,
@@ -38,7 +39,7 @@ class SolutionController extends Controller
     }
 
     // update Solution
-    public function update($id, Request $request)
+    public function update($id, SaveSolutionRequest $request)
     {
         $solution = Solution::find($id);
         $solution->update($request->all());

@@ -2,23 +2,23 @@ import axios from "axios";
 
 // state
 export const state = {
-  users: [],
-  user: {}
+  roles: [],
+  role: {}
 };
 
 // getters
 export const getters = {
-  user: state => state.user,
-  users: state => state.users
+  role: state => state.role,
+  roles: state => state.roles
 };
 
 // mutations
 export const mutations = {
-  FETCH(state, users) {
-    state.users = users;
+  FETCH(state, roles) {
+    state.roles = roles;
   },
-  FETCH_ONE(state, user) {
-    state.user = user;
+  FETCH_ONE(state, role) {
+    state.role = role;
   }
 };
 
@@ -26,34 +26,45 @@ export const mutations = {
 export const actions = {
   fetch({ commit }) {
     return axios
-      .get(route("users"))
+      .get(route("roles"))
       .then(response => commit("FETCH", response.data.data))
       .catch();
   },
   fetchOne({ commit }, id) {
     axios
-      .get(route("show.user", id))
+      .get(route("show.role", id))
       .then(response => commit("FETCH_ONE", response.data.data))
       .catch();
   },
-  deleteUser({}, id) {
+  deleteRole({}, id) {
     axios
-      .delete(route("delete.user", id))
-      .then(() => this.dispatch("user/fetch"))
-      .catch();
+      .delete(route("delete.role", id))
+      .then((response)=> {
+        this.dispatch("role/fetch")
+        if(response.data.status == 'success'){
+        Swal.fire(
+          'Deleted!',
+          'Role deleted successfully',
+          'success'
+        )
+        }
+
+    }).catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+    })
   },
-  editUser({}, data) {
+  editRole({}, data) {
     axios
-      .post(route("update.user", data.get('id')),data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("update.role", data.get('id')),data)
+      .then()
   },
-  addUser({}, data) {
+  addRole({}, data) {
     axios
-      .post(route("create.user"), data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("create.role"), data)
+      .then()
   }
 };

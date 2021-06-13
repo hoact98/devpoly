@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SavePermissionRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SavePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,20 @@ class SavePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                'required',
+                'min:2',
+                Rule::unique('permissions')->ignore($this->id)
+            ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => "Hãy nhập tên",
+            'name.min' => "Ít nhất có 2 ký tự",
+            'name.unique' => "Permission đã tồn tại",
         ];
     }
 }

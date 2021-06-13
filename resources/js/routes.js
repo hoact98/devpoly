@@ -69,12 +69,12 @@ const routes = [
       {
         path: 'role/add',
         component: page("admin/role/AddRole.vue"),
-        name: 'role/add',
+        name: 'add.role',
       },
       {
         path: 'role/edit/:id',
         component: page("admin/role/EditRole.vue"),
-        name: 'role/edit',
+        name: 'edit.role',
       },
       {
         path: 'permissions',
@@ -84,12 +84,12 @@ const routes = [
       {
         path: 'permission/add',
         component: page("admin/permission/AddPermission.vue"),
-        name: 'permission/add',
+        name: 'add.permission',
       },
       {
         path: 'permission/edit/:id',
         component: page("admin/permission/EditPermission.vue"),
-        name: 'permission/edit',
+        name: 'edit.permission',
       },
        {
         path: 'categories',

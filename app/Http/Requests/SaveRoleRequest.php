@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveRoleRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SaveRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,20 @@ class SaveRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                'required',
+                'min:2',
+                Rule::unique('roles')->ignore($this->id)
+            ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => "Hãy nhập tên",
+            'name.min' => "Ít nhất có 2 ký tự",
+            'name.unique' => "Role đã tồn tại",
         ];
     }
 }

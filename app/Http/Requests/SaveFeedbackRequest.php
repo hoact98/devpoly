@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 class SaveFeedbackRequest extends FormRequest
 {
     /**
@@ -13,7 +12,7 @@ class SaveFeedbackRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +23,18 @@ class SaveFeedbackRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'feedback_content' => [
+                'required',
+                'min:2',
+            ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'feedback_content.required' => "Hãy nhập nội dung",
+            'feedback_content.min' => "Ít nhất có 2 ký tự",
         ];
     }
 }

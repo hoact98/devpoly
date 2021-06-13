@@ -104,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -113,6 +114,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  computed: {
+    permissions: function permissions() {
+      return this.$store.state.permission.permissions;
+    }
+  },
+  created: function created() {
+    this.$store.dispatch('permission/fetch');
+  },
+  methods: {
+    deletePermission: function deletePermission(id) {
+      var _this = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          //Send Request to server
+          _this.$store.dispatch('permission/deletePermission', id);
+        }
+      });
+    }
   }
 });
 
@@ -354,25 +383,16 @@ var render = function() {
                     [
                       _c("thead", [
                         _c("tr", [
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("ID")]
-                          ),
+                          _c("th", [_vm._v("ID")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("name")]),
                           _vm._v(" "),
                           _c(
                             "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("name")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
                             [
                               _c(
                                 "router-link",
-                                { attrs: { to: "/admin/add-memtor" } },
+                                { attrs: { to: { name: "add.permission" } } },
                                 [
                                   _c(
                                     "button",
@@ -390,7 +410,52 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.permissions, function(permission) {
+                          return _c("tr", { key: permission.id }, [
+                            _c("td", [_vm._v(_vm._s(permission.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(permission.name))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      to: {
+                                        name: "edit.permission",
+                                        params: { id: permission.id }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Edit\n                      ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletePermission(
+                                          permission.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Delete")]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      )
                     ]
                   )
                 ])
@@ -403,36 +468,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tbody", [
-      _c("tr", [
-        _c("td", { staticStyle: { "text-align": "center" } }, [_vm._v("183")]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("John Doe")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-info", attrs: { type: "button" } },
-            [_vm._v("Update")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-danger", attrs: { type: "button" } },
-            [_vm._v("Delele")]
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

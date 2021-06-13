@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveChallengeRequest;
 use App\Models\Challenge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class ChallengeController extends Controller
     }
 
     // add challenge
-    public function create(Request $request)
+    public function create(SaveChallengeRequest $request)
     {
         $slug = Str::slug($request->name,'-');
         $c = Challenge::where('slug','=', $slug)->first();
@@ -48,7 +49,7 @@ class ChallengeController extends Controller
     }
 
     // update challenge
-    public function update($id, Request $request)
+    public function update($id, SaveChallengeRequest $request)
     {
         $challenge = Challenge::find($id);
         $challenge->update($request->all());

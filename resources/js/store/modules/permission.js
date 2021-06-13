@@ -2,23 +2,23 @@ import axios from "axios";
 
 // state
 export const state = {
-  users: [],
-  user: {}
+  permissions: [],
+  permission: {}
 };
 
 // getters
 export const getters = {
-  user: state => state.user,
-  users: state => state.users
+  permission: state => state.permission,
+  permissions: state => state.permissions
 };
 
 // mutations
 export const mutations = {
-  FETCH(state, users) {
-    state.users = users;
+  FETCH(state, permissions) {
+    state.permissions = permissions;
   },
-  FETCH_ONE(state, user) {
-    state.user = user;
+  FETCH_ONE(state, permission) {
+    state.permission = permission;
   }
 };
 
@@ -26,34 +26,45 @@ export const mutations = {
 export const actions = {
   fetch({ commit }) {
     return axios
-      .get(route("users"))
+      .get(route("permissions"))
       .then(response => commit("FETCH", response.data.data))
       .catch();
   },
   fetchOne({ commit }, id) {
     axios
-      .get(route("show.user", id))
+      .get(route("show.permission", id))
       .then(response => commit("FETCH_ONE", response.data.data))
       .catch();
   },
-  deleteUser({}, id) {
+  deletePermission({}, id) {
     axios
-      .delete(route("delete.user", id))
-      .then(() => this.dispatch("user/fetch"))
-      .catch();
+      .delete(route("delete.permission", id))
+      .then((response)=> {
+        this.dispatch("permission/fetch")
+        if(response.data.status == 'success'){
+        Swal.fire(
+          'Deleted!',
+          'Permission deleted successfully',
+          'success'
+        )
+        }
+
+    }).catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+    })
   },
-  editUser({}, data) {
+  editPermission({}, data) {
     axios
-      .post(route("update.user", data.get('id')),data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("update.permission", data.get('id')),data)
+      .then()
   },
-  addUser({}, data) {
+  addPermission({}, data) {
     axios
-      .post(route("create.user"), data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("create.permission"), data)
+      .then()
   }
 };

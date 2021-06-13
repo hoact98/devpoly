@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SavePermissionRequest;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,11 @@ class PermissionController extends Controller
     }
 
     // add permission
-    public function create(Request $request)
+    public function create(SavePermissionRequest $request)
     {
         $permission = new Permission([
             'name' => $request->name,
+            'guard_name'=> 'web'
         ]);
         $permission->save();
 
@@ -36,7 +38,7 @@ class PermissionController extends Controller
     }
 
     // update permission
-    public function update($id, Request $request)
+    public function update($id, SavePermissionRequest $request)
     {
         $permission = Permission::find($id);
         $permission->update($request->all());

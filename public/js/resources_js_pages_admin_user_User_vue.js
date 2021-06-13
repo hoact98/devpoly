@@ -109,6 +109,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -129,13 +132,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteUser: function deleteUser(id) {
-      var result = confirm('Are you sure');
+      var _this = this;
 
-      if (!result) {
-        return;
-      }
-
-      this.$store.dispatch('user/deleteUser', id);
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          //Send Request to server
+          _this.$store.dispatch('user/deleteUser', id);
+        }
+      });
     }
   }
 });
@@ -365,7 +377,11 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "card" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.title))
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c(
@@ -374,33 +390,18 @@ var render = function() {
                     [
                       _c("thead", [
                         _c("tr", [
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("ID")]
-                          ),
+                          _c("th", [_vm._v("ID")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Username")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Name")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Email")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Avatar")]),
                           _vm._v(" "),
                           _c(
                             "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("Username")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("Email")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
-                            [_vm._v("Avatar")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            { staticStyle: { "text-align": "center" } },
                             [
                               _c(
                                 "router-link",
@@ -426,41 +427,30 @@ var render = function() {
                         "tbody",
                         _vm._l(_vm.users, function(user) {
                           return _c("tr", { key: user.id }, [
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "center" } },
-                              [_vm._v(_vm._s(user.id))]
-                            ),
+                            _c("td", [_vm._v(_vm._s(user.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.username))]),
+                            _vm._v(" "),
+                            user.information
+                              ? _c("td", [
+                                  _vm._v(_vm._s(user.information.name))
+                                ])
+                              : _c("td"),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.email))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("img", {
+                                attrs: {
+                                  src: "/" + user.avatar,
+                                  alt: "",
+                                  width: "60px"
+                                }
+                              })
+                            ]),
                             _vm._v(" "),
                             _c(
                               "td",
-                              { staticStyle: { "text-align": "center" } },
-                              [_vm._v(_vm._s(user.username))]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "center" } },
-                              [_vm._v(_vm._s(user.email))]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "center" } },
-                              [
-                                _c("img", {
-                                  attrs: {
-                                    src: "/" + user.avatar,
-                                    alt: "",
-                                    width: "60px"
-                                  }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "center" } },
                               [
                                 _c(
                                   "router-link",
@@ -507,18 +497,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("DataTable with minimal features & hover style")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

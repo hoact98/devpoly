@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,10 +63,18 @@ Route::group(['prefix' => 'user'], function () {
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
 });
 
-// Route::get('roles', [RoleController::class, 'index'])->name('roles');
-// Route::group(['prefix' => 'role'], function () {
-//     Route::post('add', [RoleController::class, 'create'])->name('create.role');
-//     Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
-//     Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
-//     Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
-// });
+Route::get('roles', [RoleController::class, 'index'])->name('roles');
+Route::group(['prefix' => 'role'], function () {
+    Route::post('add', [RoleController::class, 'create'])->name('create.role');
+    Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
+    Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
+    Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
+});
+
+Route::get('permissions', [PermissionController::class, 'index'])->name('permissions');
+Route::group(['prefix' => 'permission'], function () {
+    Route::post('add', [PermissionController::class, 'create'])->name('create.permission');
+    Route::get('{id}', [PermissionController::class, 'show'])->name('show.permission');
+    Route::post('update/{id}', [PermissionController::class, 'update'])->name('update.permission');
+    Route::delete('delete/{id}', [PermissionController::class, 'delete'])->name('delete.permission');
+});

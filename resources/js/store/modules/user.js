@@ -28,32 +28,41 @@ export const actions = {
     return axios
       .get(route("users"))
       .then(response => commit("FETCH", response.data.data))
-      .catch();
   },
   fetchOne({ commit }, id) {
     axios
       .get(route("show.user", id))
       .then(response => commit("FETCH_ONE", response.data.data))
-      .catch();
   },
   deleteUser({}, id) {
     axios
       .delete(route("delete.user", id))
-      .then(() => this.dispatch("user/fetch"))
-      .catch();
+      .then((response)=> {
+        this.dispatch("user/fetch")
+        if(response.data.status == 'success'){
+        Swal.fire(
+          'Deleted!',
+          'User deleted successfully',
+          'success'
+        )
+        }
+
+    }).catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+    })
   },
   editUser({}, data) {
     axios
-      .post(route("update.user", data.get('id')),data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("update.user", data.get('id')),data)
+      .then()
   },
   addUser({}, data) {
     axios
-      .post(route("create.user"), data,{header : {
-        'Content-Type' : 'multipart/form-data'
-      }})
-      .then();
+      .post(route("create.user"), data)
+      .then()
   }
 };

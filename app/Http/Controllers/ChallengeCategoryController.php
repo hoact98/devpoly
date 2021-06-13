@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveCategoryRequest;
 use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,7 +21,7 @@ class ChallengeCategoryController extends Controller
     }
 
     // add category
-    public function create(Request $request)
+    public function create(SaveCategoryRequest $request)
     {
         $slug = Str::slug($request->name,'-');
         $c = ChallengeCategory::where('slug','=', $slug)->first();
@@ -51,7 +52,7 @@ class ChallengeCategoryController extends Controller
     }
 
     // update category
-    public function update($id, Request $request)
+    public function update($id, SaveCategoryRequest $request)
     {
         $cate = ChallengeCategory::find($id);
         $imageName = '';

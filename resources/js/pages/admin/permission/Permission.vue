@@ -15,18 +15,19 @@
                  <table  class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
-                      <th style="text-align:center">ID</th>
-                      <th style="text-align:center">name</th>
-                      <th style="text-align:center"><router-link to="/admin/add-memtor"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
+                      <th>ID</th>
+                      <th>name</th>
+                      <th><router-link :to="{name:'add.permission'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td style="text-align:center">183</td>
-                      <td style="text-align:center">John Doe</td>
-                      <td style="text-align:center">
-                        <button type="button" class="btn btn-info">Update</button>
-                        <button type="button" class="btn btn-danger">Delele</button>
+                    <tr v-for="permission in permissions" :key="permission.id">
+                      <td>{{permission.id}}</td>
+                      <td>{{permission.name}}</td>
+                      <td>
+                         <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
+                        </router-link>
+                        <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
                       </td>
                     </tr>
            
@@ -58,7 +59,34 @@ export default {
   },
     components: {
       Breadcrumb
-    }
+    },
+    computed: {
+          permissions () {
+              return this.$store.state.permission.permissions;
+          }
+      },
+      created: function () {
+          this.$store.dispatch('permission/fetch');
+      },
+      methods: {
+          deletePermission: function (id) {
+             Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+
+              if (result.value) {
+                //Send Request to server
+                this.$store.dispatch('permission/deletePermission', id);
+                }
+            })
+          }
+      }
 }
 </script>
 

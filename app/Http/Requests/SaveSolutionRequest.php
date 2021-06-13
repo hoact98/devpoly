@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveSolutionRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SaveSolutionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,31 @@ class SaveSolutionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required',
+                'min:2'
+            ],
+            'language' => 'required',
+            'description' => ['required','min:4'],
+            'link_github' => ['required',
+            Rule::unique('solutions')->ignore($this->id)],
+            'demo_url' => ['required',
+            Rule::unique('solutions')->ignore($this->id)],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => "Hãy nhập tên giải pháp",
+            'title.min' => "Ít nhất có 2 ký tự",
+            'language.required' => "Hãy nhập ngôn ngữ",
+            'link_github.required' => "Hãy nhập link github",
+            'link_github.unique' => "Link github đã tồn tại",
+            'demo_url.required' => "Hãy nhập link demo",
+            'demo_url.unique' => "Link demo đã tồn tại",
+            'description.required' => "Hãy nhập mô tả",
+            'description.min' => "Ít nhất có 2 ký tự",
         ];
     }
 }
