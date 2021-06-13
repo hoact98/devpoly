@@ -21,7 +21,11 @@
                     <label for="exampleInputName">Username:</label>
                     <input type="text" v-model="data.user.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" name="username" placeholder="Enter username">
                       <div class="text-danger" v-if="form.errors.has('username')" v-html="form.errors.get('username')" />
-                 
+                   </div>
+                    <div class="form-group">
+                    <label for="exampleInputName">Name:</label>
+                    <input type="text" v-model="data.user.information.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" name="username" placeholder="Enter name">
+                    <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email:</label>
@@ -33,7 +37,7 @@
                     <label for="">Avatar</label>
                     <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('avatar') }" class="form-control" name="avatar">
                       <div class="text-danger" v-if="form.errors.has('avatar')" v-html="form.errors.get('avatar')" />
-                    <img :src="'/'+data.user.avatar" alt="">
+                    <img :src="'/'+data.user.avatar" alt="" width="200">
                   </div>
                     <div class="form-group">
                       <label>Role</label>

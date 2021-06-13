@@ -43,25 +43,25 @@ public function run()
     // gets all permissions via Gate::before rule; see AuthServiceProvider
 
     // create demo users
-    $user = new User();
-    $user->username = 'write';
-    $user->email = 'dev_full@test.com';
-    $user->password = Hash::make('secret');
-    $user->save();
-    $user->assignRole($role1);
+    // $user = new User();
+    // $user->username = 'write';
+    // $user->email = 'dev_full@test.com';
+    // $user->password = Hash::make('secret');
+    // $user->save();
+    // $user->assignRole($role1);
 
-    $user = new User();
-    $user->username = 'admin';
-    $user->email = 'admin123@test.com';
-    $user->password = Hash::make('secret');
-    $user->save();
-    $user->assignRole($role2);
+    // $user = new User();
+    // $user->username = 'admin';
+    // $user->email = 'admin123@test.com';
+    // $user->password = Hash::make('secret');
+    // $user->save();
+    // $user->assignRole($role2);
 
-    $user = new User();
-    $user->username = 'super';
-    $user->email = 'superadmin@test.com';
-    $user->password = Hash::make('secret');
-    $user->save();
-    $user->assignRole($role3);
+    // $user = new User();
+    // $user->username = 'super';
+    // $user->email = 'superadmin@test.com';
+    // $user->password = Hash::make('secret');
+    // $user->save();
+    // $user->assignRole($role3);
     }
 }
