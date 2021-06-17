@@ -8,7 +8,7 @@
       class="custom-control-input"
       @click="handleClick"
     >
-    <label :for="id || name" class="custom-control-label my-auto">
+    <label :for="id || name" class="custom-control-label my-auto" style="font-weight:500">
       <slot />
     </label>
   </div>
@@ -21,7 +21,7 @@ export default {
   props: {
     id: { type: String, default: null },
     name: { type: String, default: 'checkbox' },
-    value: { type: Boolean, default: false },
+    value: { type: String, default: null },
     checked: { type: Boolean, default: false }
   },
 

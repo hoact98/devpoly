@@ -32,7 +32,7 @@
                                 <input v-model="permission.name" :class="{ 'is-invalid': form.errors.has('name') }" type="text" name="name" class="form-control" id="exampleInputName" placeholder="Enter name">
                             <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
                             </div>
-                            <button type="submit" :disabled="form.busy" class="btn btn-primary">Submit</button>
+                             <v-button :loading="form.busy">Submit</v-button>
                         </div>
                       
                         </div>
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -69,9 +68,6 @@ export default {
     }),
     title: 'Edit permission'
   }),
-    components: {
-      Breadcrumb
-    },
     computed: mapGetters({
       permission: 'permission/permission'
   }),

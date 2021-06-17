@@ -71,16 +71,12 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Edit Challenge',
     };
-  },
-    components: {
-      Breadcrumb
-    }
+  }
 }
 </script>
 

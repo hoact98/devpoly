@@ -30,6 +30,7 @@ class SaveRoleRequest extends FormRequest
                 'min:2',
                 Rule::unique('roles')->ignore($this->id)
             ],
+            'permission_id'=>'required'
         ];
     }
 
@@ -39,6 +40,7 @@ class SaveRoleRequest extends FormRequest
             'name.required' => "Hãy nhập tên",
             'name.min' => "Ít nhất có 2 ký tự",
             'name.unique' => "Role đã tồn tại",
+            'permission_id.required' => "Hãy chọn quyền",
         ];
     }
 }

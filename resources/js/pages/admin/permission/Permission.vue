@@ -27,7 +27,7 @@
                       <td>
                          <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
+                        <v-button type="danger" @click="deletePermission(permission.id)">Delete</v-button>
                       </td>
                     </tr>
            
@@ -50,16 +50,12 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Permissions',
     };
   },
-    components: {
-      Breadcrumb
-    },
     computed: {
           permissions () {
               return this.$store.state.permission.permissions;

@@ -34,7 +34,7 @@
                       <td>
                         <router-link :to="{name: 'edit.user', params: { id: user.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <button class="btn btn-danger" @click="deleteUser(user.id)">Delete</button>
+                        <v-button type="danger" @click="deleteUser(user.id)">Delete</v-button>
                       </td>
                     </tr>
            
@@ -57,16 +57,12 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Danh sách người dùng',
     };
   },
-    components: {
-      Breadcrumb
-    },
     computed: {
           users () {
               return this.$store.state.user.users;

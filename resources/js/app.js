@@ -30,6 +30,10 @@ window.Form = Form;
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(CKEditor);
+Vue.component('breadcrumb',require('./components/Breadcrumb.vue').default);
+Vue.component('checkbox',require('./components/Checkbox.vue').default);
+Vue.component('v-button',require('./components/Button.vue').default);
+
 // const router = new VueRouter({
 //   router,
 //   store,

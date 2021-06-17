@@ -87,7 +87,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" :disabled="form.busy" class="btn btn-primary">Submit</button>
+                   <v-button :loading="form.busy">Submit</v-button>
                 </div>
               </form>
             </div>
@@ -108,7 +108,6 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 
 export default {
    data:() => ({
@@ -126,9 +125,6 @@ export default {
     }),
     title: 'Thêm người dùng',
   }),
-    components: {
-      Breadcrumb
-    },
      computed: {
           roles () {
               return this.$store.state.role.roles;

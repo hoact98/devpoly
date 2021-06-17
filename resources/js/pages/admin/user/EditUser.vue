@@ -78,7 +78,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" :disabled="form.busy" class="btn btn-primary">Submit</button>
+                   <v-button :loading="form.busy">Submit</v-button>
                 </div>
               </form>
             </div>
@@ -99,7 +99,6 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 import { mapGetters } from 'vuex'
 export default {
      data:() => ({
@@ -117,11 +116,8 @@ export default {
     }),
     title: 'Cập nhật người dùng',
   }),
-    components: {
-      Breadcrumb
-    },
       computed: mapGetters({
-      data: 'user/user'
+        data: 'user/user'
   }),
    
    created()  {

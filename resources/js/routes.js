@@ -52,12 +52,12 @@ const routes = [
       },
       
       {
-        path: 'user/add',
+        path: 'user-add',
         component: page("admin/user/AddUser.vue"),
         name: 'add.user',
       },
       {
-        path: 'user/edit/:id',
+        path: 'user-edit/:id',
         component: page("admin/user/EditUser.vue"),
         name: 'edit.user',
       },
@@ -67,12 +67,12 @@ const routes = [
         name: 'roles',
       },
       {
-        path: 'role/add',
+        path: 'role-add',
         component: page("admin/role/AddRole.vue"),
         name: 'add.role',
       },
       {
-        path: 'role/edit/:id',
+        path: 'role-edit/:id',
         component: page("admin/role/EditRole.vue"),
         name: 'edit.role',
       },
@@ -82,12 +82,12 @@ const routes = [
         name: 'permissions',
       },
       {
-        path: 'permission/add',
+        path: 'permission-add',
         component: page("admin/permission/AddPermission.vue"),
         name: 'add.permission',
       },
       {
-        path: 'permission/edit/:id',
+        path: 'permission-edit/:id',
         component: page("admin/permission/EditPermission.vue"),
         name: 'edit.permission',
       },
@@ -97,12 +97,12 @@ const routes = [
         name: 'categories',
       },
       {
-        path: 'category/add',
+        path: 'category-add',
         component: page("admin/category/AddCategory.vue"),
         name: 'add.category',
       },
       {
-        path: 'category/edit/:id',
+        path: 'category-edit/:id',
         component: page("admin/category/EditCategory.vue"),
         name: 'edit.category',
       },{
@@ -111,7 +111,7 @@ const routes = [
         name: 'challenges'
       },
       {
-        path: 'challenge/add',
+        path: 'challenge-add',
         component: page("admin/challenge/AddChallenge.vue"),
         name: 'add.challenge'
       },
@@ -122,11 +122,13 @@ const routes = [
       },
       {
         path: 'mentors',
-        component: page('admin/mentor/Mentor.vue')
+        component: page('admin/mentor/Mentor.vue'),
+        name: 'mentors'
       },
       {
-        path: 'mentor/add',
-        component: page('admin/mentor/AddMentor.vue')
+        path: 'mentor-add',
+        component: page('admin/mentor/AddMentor.vue'),
+        name: 'edit.mentor'
       },
     ]
   }, 

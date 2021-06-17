@@ -32,7 +32,7 @@
                                 <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" id="exampleInputName" placeholder="Enter name">
                             <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
                             </div>
-                            <button type="submit" :disabled="form.busy" class="btn btn-primary">Submit</button>
+                             <v-button :loading="form.busy">Submit</v-button>
                         </div>
                       
                         </div>
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data:() => ({
     form: new Form({
@@ -66,9 +65,6 @@ export default {
     }),
     title: 'Add permission',
   }),
-    components: {
-      Breadcrumb
-    },
     methods: {
         async addPermission () {
         

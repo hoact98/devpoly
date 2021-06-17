@@ -62,16 +62,12 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Add category',
     };
-  },
-    components: {
-      Breadcrumb
-    }
+  }
 }
 </script>
 

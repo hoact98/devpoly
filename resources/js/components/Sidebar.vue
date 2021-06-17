@@ -82,13 +82,13 @@
              </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/admin/mentors" class="nav-link">
+                <router-link :to="{name:'mentors'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách Memtor</p>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/admin/mentor/add" class="nav-link">
+                <router-link :to="{name:'add.mentor'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm Memtor</p>
                 </router-link>

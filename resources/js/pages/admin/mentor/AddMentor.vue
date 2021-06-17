@@ -69,16 +69,13 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Add mentor',
     };
-  },
-    components: {
-      Breadcrumb
-    }
+  }
+   
 }
 </script>
 

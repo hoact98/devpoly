@@ -27,7 +27,7 @@
                       <td>
                          <router-link :to="{name: 'edit.role', params: { id: role.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <button class="btn btn-danger" @click="deleteRole(role.id)">Delete</button>
+                        <v-button type="danger" @click="deleteRole(role.id)">Delete</v-button>
                       </td>
                     </tr>
            
@@ -50,16 +50,12 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
 export default {
    data() {
     return {
      title: 'Roles',
     };
   },
-    components: {
-      Breadcrumb
-    },
     computed: {
           roles () {
               return this.$store.state.role.roles;
