@@ -24,7 +24,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -131,7 +130,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -145,14 +178,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         password: '',
         phone: '',
         gender: '',
-        is_active: ''
+        is_active: '',
+        permission_id: []
+      }),
+      formPass: new Form({
+        password: '',
+        new_password: '',
+        new_confirm_password: ''
       }),
       title: 'Cập nhật người dùng'
     };
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
-    data: 'user/user'
-  }),
+  computed: {
+    data: function data() {
+      return this.$store.state.user.user;
+    },
+    permission_id: function permission_id() {
+      var permission_id = [];
+      this.data.user.has_permission.forEach(function (permission) {
+        permission_id.push(permission.permission_id);
+      });
+      this.form.permission_id = permission_id;
+    }
+  },
   created: function created() {
     this.$store.dispatch('user/fetchOne', this.$route.params.id);
   },
@@ -200,6 +248,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    updatePassword: function updatePassword() {
+      var _this2 = this;
+
+      this.formPass.post(route('change.password', this.$route.params.id)).then(function (response) {
+        if (response.data.status == 'success') {
+          _this2.$router.push({
+            name: 'users'
+          });
+
+          Swal.fire('Update', 'Password update  Successfully', 'success');
+        }
+      })["catch"](function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        });
+      });
     }
   }
 });
@@ -1069,549 +1136,1026 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.updateUser.apply(null, arguments)
-                      },
-                      keydown: function($event) {
-                        return _vm.form.onKeydown($event)
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateUser.apply(null, arguments)
+                        },
+                        keydown: function($event) {
+                          return _vm.form.onKeydown($event)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputName" } }, [
-                          _vm._v("Username:")
-                        ]),
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(0),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.data.user.username,
-                              expression: "data.user.username"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("username")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "username",
-                            placeholder: "Enter username"
-                          },
-                          domProps: { value: _vm.data.user.username },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.data.user,
-                                "username",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("username")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("username")
-                                )
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputName" } }, [
-                          _vm._v("Name:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.data.user.information.name,
-                              expression: "data.user.information.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
-                          attrs: {
-                            type: "text",
-                            name: "username",
-                            placeholder: "Enter name"
-                          },
-                          domProps: { value: _vm.data.user.information.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.data.user.information,
-                                "name",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("name")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("name"))
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                          _vm._v("Email:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.data.user.email,
-                              expression: "data.user.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("email") },
-                          attrs: {
-                            type: "email",
-                            name: "email",
-                            placeholder: "Enter email"
-                          },
-                          domProps: { value: _vm.data.user.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.data.user,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("email")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("email"))
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("Avatar")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("avatar")
-                          },
-                          attrs: { type: "file", name: "avatar" },
-                          on: {
-                            change: function($event) {
-                              return _vm.upload($event)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("avatar")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("avatar"))
-                              }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("img", {
-                          attrs: {
-                            src: "/" + _vm.data.user.avatar,
-                            alt: "",
-                            width: "200"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Role")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.data.user.role.role_id,
-                                expression: "data.user.role.role_id"
-                              }
-                            ],
-                            staticClass: "form-control select2",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("role_id")
-                            },
-                            staticStyle: { width: "100%" },
-                            attrs: { name: "role_id" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.data.user.role,
-                                  "role_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.data.roles, function(role) {
-                            return _c(
-                              "option",
-                              {
-                                key: role.id,
-                                domProps: {
-                                  value: role.id,
-                                  selected:
-                                    role.id == _vm.data.user.role.role_id
-                                }
-                              },
-                              [_vm._v(_vm._s(role.name))]
-                            )
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _vm.form.errors.has("role_id")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("role_id")
-                                )
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputAddress" } }, [
-                          _vm._v("Address:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.data.user.information.address,
-                              expression: "data.user.information.address"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("address")
-                          },
-                          attrs: {
-                            type: "text",
-                            id: "exampleInputAdress",
-                            placeholder: "Enter address"
-                          },
-                          domProps: {
-                            value: _vm.data.user.information.address
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.data.user.information,
-                                "address",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("address")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("address")
-                                )
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputPhone" } }, [
-                          _vm._v("Phone:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.data.user.information.phone,
-                              expression: "data.user.information.phone"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("phone") },
-                          attrs: {
-                            type: "text",
-                            id: "exampleInputPhone",
-                            placeholder: "Enter phone"
-                          },
-                          domProps: { value: _vm.data.user.information.phone },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.data.user.information,
-                                "phone",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.form.errors.has("phone")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("phone"))
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputGender" } }, [
-                          _vm._v("Gender:")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-check" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.data.user.information.gender,
-                                expression: "data.user.information.gender"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              id: "male",
-                              name: "radio1"
-                            },
-                            domProps: {
-                              value: 1,
-                              checked: _vm._q(
-                                _vm.data.user.information.gender,
-                                1
-                              )
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(
-                                  _vm.data.user.information,
-                                  "gender",
-                                  1
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
+                        _c("div", { staticClass: "col-7 col-sm-9" }, [
                           _c(
-                            "label",
+                            "div",
                             {
-                              staticClass: "form-check-label",
-                              attrs: { for: "male" }
+                              staticClass: "tab-content",
+                              attrs: { id: "vert-tabs-tabContent" }
                             },
-                            [_vm._v("Male")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-check" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.data.user.information.gender,
-                                expression: "data.user.information.gender"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              id: "female",
-                              name: "radio1"
-                            },
-                            domProps: {
-                              value: 0,
-                              checked: _vm._q(
-                                _vm.data.user.information.gender,
-                                0
-                              )
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(
-                                  _vm.data.user.information,
-                                  "gender",
-                                  0
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "form-check-label",
-                              attrs: { for: "female" }
-                            },
-                            [_vm._v("Female")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm.form.errors.has("gender")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("gender"))
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "div",
-                          { staticClass: "custom-control custom-switch" },
-                          [
-                            _c("input", {
-                              directives: [
+                            [
+                              _c(
+                                "div",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.data.user.is_active,
-                                  expression: "data.user.is_active"
-                                }
-                              ],
-                              staticClass: "custom-control-input",
-                              attrs: { type: "checkbox", id: "customSwitch1" },
-                              domProps: {
-                                checked: Array.isArray(_vm.data.user.is_active)
-                                  ? _vm._i(_vm.data.user.is_active, null) > -1
-                                  : _vm.data.user.is_active
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.data.user.is_active,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.data.user,
-                                          "is_active",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.data.user,
-                                          "is_active",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.data.user, "is_active", $$c)
+                                  staticClass:
+                                    "tab-pane text-left fade show active",
+                                  attrs: {
+                                    id: "general",
+                                    role: "tabpanel",
+                                    "aria-labelledby": "general-tab"
                                   }
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "custom-control-label",
-                                attrs: { for: "customSwitch1" }
-                              },
-                              [_vm._v("Active")]
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "card-footer" },
-                      [
-                        _c("v-button", { attrs: { loading: _vm.form.busy } }, [
-                          _vm._v("Submit")
+                                },
+                                [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputName" } },
+                                      [_vm._v("Username:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.data.user.username,
+                                          expression: "data.user.username"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "username"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "username",
+                                        placeholder: "Enter username"
+                                      },
+                                      domProps: {
+                                        value: _vm.data.user.username
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.data.user,
+                                            "username",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("username")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("username")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputName" } },
+                                      [_vm._v("Name:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.data.user.information.name,
+                                          expression:
+                                            "data.user.information.name"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "name"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "username",
+                                        placeholder: "Enter name"
+                                      },
+                                      domProps: {
+                                        value: _vm.data.user.information.name
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.data.user.information,
+                                            "name",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("name")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("name")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputEmail1" } },
+                                      [_vm._v("Email:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.data.user.email,
+                                          expression: "data.user.email"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "email"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "email",
+                                        name: "email",
+                                        placeholder: "Enter email"
+                                      },
+                                      domProps: { value: _vm.data.user.email },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.data.user,
+                                            "email",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("email")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("email")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v("Avatar")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "avatar"
+                                        )
+                                      },
+                                      attrs: { type: "file", name: "avatar" },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.upload($event)
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("avatar")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("avatar")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        src: "/" + _vm.data.user.avatar,
+                                        alt: "",
+                                        width: "200"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", [_vm._v("Role")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.data.user.role.role_id,
+                                            expression: "data.user.role.role_id"
+                                          }
+                                        ],
+                                        staticClass: "form-control select2",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "role_id"
+                                          )
+                                        },
+                                        staticStyle: { width: "100%" },
+                                        attrs: { name: "role_id" },
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.data.user.role,
+                                              "role_id",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
+                                        }
+                                      },
+                                      _vm._l(_vm.data.roles, function(role) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: role.id,
+                                            domProps: {
+                                              value: role.id,
+                                              selected:
+                                                role.id ==
+                                                _vm.data.user.role.role_id
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(role.name))]
+                                        )
+                                      }),
+                                      0
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("role_id")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("role_id")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputAddress" } },
+                                      [_vm._v("Address:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.data.user.information.address,
+                                          expression:
+                                            "data.user.information.address"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "address"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        id: "exampleInputAdress",
+                                        placeholder: "Enter address"
+                                      },
+                                      domProps: {
+                                        value: _vm.data.user.information.address
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.data.user.information,
+                                            "address",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("address")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("address")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputPhone" } },
+                                      [_vm._v("Phone:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.data.user.information.phone,
+                                          expression:
+                                            "data.user.information.phone"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "phone"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        id: "exampleInputPhone",
+                                        placeholder: "Enter phone"
+                                      },
+                                      domProps: {
+                                        value: _vm.data.user.information.phone
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.data.user.information,
+                                            "phone",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("phone")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("phone")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "exampleInputGender" } },
+                                      [_vm._v("Gender:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-check" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.data.user.information.gender,
+                                            expression:
+                                              "data.user.information.gender"
+                                          }
+                                        ],
+                                        staticClass: "form-check-input",
+                                        attrs: {
+                                          type: "radio",
+                                          id: "male",
+                                          name: "radio1"
+                                        },
+                                        domProps: {
+                                          value: 1,
+                                          checked: _vm._q(
+                                            _vm.data.user.information.gender,
+                                            1
+                                          )
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.$set(
+                                              _vm.data.user.information,
+                                              "gender",
+                                              1
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "form-check-label",
+                                          attrs: { for: "male" }
+                                        },
+                                        [_vm._v("Male")]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-check" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.data.user.information.gender,
+                                            expression:
+                                              "data.user.information.gender"
+                                          }
+                                        ],
+                                        staticClass: "form-check-input",
+                                        attrs: {
+                                          type: "radio",
+                                          id: "female",
+                                          name: "radio1"
+                                        },
+                                        domProps: {
+                                          value: 0,
+                                          checked: _vm._q(
+                                            _vm.data.user.information.gender,
+                                            0
+                                          )
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.$set(
+                                              _vm.data.user.information,
+                                              "gender",
+                                              0
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "form-check-label",
+                                          attrs: { for: "female" }
+                                        },
+                                        [_vm._v("Female")]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.form.errors.has("gender")
+                                      ? _c("div", {
+                                          staticClass: "text-danger",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.form.errors.get("gender")
+                                            )
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "custom-control custom-switch"
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.data.user.is_active,
+                                              expression: "data.user.is_active"
+                                            }
+                                          ],
+                                          staticClass: "custom-control-input",
+                                          attrs: {
+                                            type: "checkbox",
+                                            id: "customSwitch1"
+                                          },
+                                          domProps: {
+                                            checked: Array.isArray(
+                                              _vm.data.user.is_active
+                                            )
+                                              ? _vm._i(
+                                                  _vm.data.user.is_active,
+                                                  null
+                                                ) > -1
+                                              : _vm.data.user.is_active
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.data.user.is_active,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = null,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    _vm.$set(
+                                                      _vm.data.user,
+                                                      "is_active",
+                                                      $$a.concat([$$v])
+                                                    )
+                                                } else {
+                                                  $$i > -1 &&
+                                                    _vm.$set(
+                                                      _vm.data.user,
+                                                      "is_active",
+                                                      $$a
+                                                        .slice(0, $$i)
+                                                        .concat(
+                                                          $$a.slice($$i + 1)
+                                                        )
+                                                    )
+                                                }
+                                              } else {
+                                                _vm.$set(
+                                                  _vm.data.user,
+                                                  "is_active",
+                                                  $$c
+                                                )
+                                              }
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-control-label",
+                                            attrs: { for: "customSwitch1" }
+                                          },
+                                          [_vm._v("Active")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-button",
+                                    { attrs: { loading: _vm.form.busy } },
+                                    [_vm._v("Submit")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "tab-pane fade",
+                                  attrs: {
+                                    id: "permission",
+                                    role: "tabpanel",
+                                    "aria-labelledby": "permission-tab"
+                                  }
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.permission_id,
+                                        expression: "permission_id"
+                                      }
+                                    ],
+                                    attrs: { type: "hidden" },
+                                    domProps: { value: _vm.permission_id },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.permission_id = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.data.permissions, function(
+                                    permission
+                                  ) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: permission.id,
+                                        staticClass: "form-check"
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.permission_id,
+                                              expression: "form.permission_id"
+                                            }
+                                          ],
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "checkbox",
+                                            id: "per_" + permission.id
+                                          },
+                                          domProps: {
+                                            value: permission.id,
+                                            checked: Array.isArray(
+                                              _vm.form.permission_id
+                                            )
+                                              ? _vm._i(
+                                                  _vm.form.permission_id,
+                                                  permission.id
+                                                ) > -1
+                                              : _vm.form.permission_id
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.form.permission_id,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = permission.id,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "permission_id",
+                                                      $$a.concat([$$v])
+                                                    )
+                                                } else {
+                                                  $$i > -1 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "permission_id",
+                                                      $$a
+                                                        .slice(0, $$i)
+                                                        .concat(
+                                                          $$a.slice($$i + 1)
+                                                        )
+                                                    )
+                                                }
+                                              } else {
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "permission_id",
+                                                  $$c
+                                                )
+                                              }
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "form-check-label",
+                                            attrs: {
+                                              for: "per_" + permission.id
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(permission.name))]
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _vm.form.errors.has("permission_id")
+                                    ? _c("div", {
+                                        staticClass: "text-danger",
+                                        domProps: {
+                                          innerHTML: _vm._s(
+                                            _vm.form.errors.get("permission_id")
+                                          )
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-button",
+                                    { attrs: { loading: _vm.form.busy } },
+                                    [_vm._v("Submit")]
+                                  )
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "tab-pane fade",
+                                  attrs: {
+                                    id: "password",
+                                    role: "tabpanel",
+                                    "aria-labelledby": "password-tab"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "form",
+                                    {
+                                      on: {
+                                        submit: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.updatePassword.apply(
+                                            null,
+                                            arguments
+                                          )
+                                        },
+                                        keydown: function($event) {
+                                          return _vm.form.onKeydown($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          {
+                                            attrs: { for: "exampleInputName" }
+                                          },
+                                          [_vm._v("Mật khẩu hiện tại:")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.formPass.password,
+                                              expression: "formPass.password"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.formPass.errors.has(
+                                              "password"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "password",
+                                            name: "username",
+                                            placeholder: "Enter name"
+                                          },
+                                          domProps: {
+                                            value: _vm.formPass.password
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.formPass,
+                                                "password",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.formPass.errors.has("password")
+                                          ? _c("div", {
+                                              staticClass: "text-danger",
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  _vm.formPass.errors.get(
+                                                    "password"
+                                                  )
+                                                )
+                                              }
+                                            })
+                                          : _vm._e()
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          {
+                                            attrs: { for: "exampleInputName" }
+                                          },
+                                          [_vm._v("Mật khẩu mới:")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.formPass.new_password,
+                                              expression:
+                                                "formPass.new_password"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.formPass.errors.has(
+                                              "new_password"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "password",
+                                            name: "username",
+                                            placeholder: "Enter name"
+                                          },
+                                          domProps: {
+                                            value: _vm.formPass.new_password
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.formPass,
+                                                "new_password",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.formPass.errors.has("new_password")
+                                          ? _c("div", {
+                                              staticClass: "text-danger",
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  _vm.formPass.errors.get(
+                                                    "new_password"
+                                                  )
+                                                )
+                                              }
+                                            })
+                                          : _vm._e()
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          {
+                                            attrs: { for: "exampleInputName" }
+                                          },
+                                          [_vm._v("Xác nhận mật khẩu:")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.formPass
+                                                  .new_confirm_password,
+                                              expression:
+                                                "formPass.new_confirm_password"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.formPass.errors.has(
+                                              "new_confirm_password"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "password",
+                                            name: "username",
+                                            placeholder: "Enter name"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.formPass.new_confirm_password
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.formPass,
+                                                "new_confirm_password",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.formPass.errors.has(
+                                          "new_confirm_password"
+                                        )
+                                          ? _c("div", {
+                                              staticClass: "text-danger",
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  _vm.formPass.errors.get(
+                                                    "new_confirm_password"
+                                                  )
+                                                )
+                                              }
+                                            })
+                                          : _vm._e()
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-button",
+                                        {
+                                          attrs: { loading: _vm.formPass.busy }
+                                        },
+                                        [_vm._v("Submit")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          )
                         ])
-                      ],
-                      1
-                    )
-                  ]
-                )
+                      ])
+                    ]
+                  )
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" })
+            ])
           ])
         ])
       ])
@@ -1619,7 +2163,75 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5 col-sm-3" }, [
+      _c(
+        "div",
+        {
+          staticClass: "nav flex-column nav-tabs h-100",
+          attrs: {
+            id: "vert-tabs-tab",
+            role: "tablist",
+            "aria-orientation": "vertical"
+          }
+        },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: {
+                id: "general-tab",
+                "data-toggle": "pill",
+                href: "#general",
+                role: "tab",
+                "aria-controls": "general",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("General")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "permission-tab",
+                "data-toggle": "pill",
+                href: "#permission",
+                role: "tab",
+                "aria-controls": "permission",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Permission")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "password-tab",
+                "data-toggle": "pill",
+                href: "#password",
+                role: "tab",
+                "aria-controls": "password",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Password")]
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

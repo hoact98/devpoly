@@ -35,6 +35,7 @@ class SaveUserRequest extends FormRequest
             'gender'=>['required'],
             'address'=>['required'],
             'phone'=>['required'],
+            'permission_id'=>'required'
         ];
     }
 
@@ -53,6 +54,7 @@ class SaveUserRequest extends FormRequest
             'gender.required' => "Hãy chọn giới tính",
             'address.required' => "Hãy nhập địa chỉ",
             'phone.required' => "Hãy nhập SDT",
+            'permission_id.required' => "Hãy chọn quyền",
         ];
     }
 }

@@ -27,7 +27,7 @@
                       <td>
                          <router-link :to="{name: 'edit.role', params: { id: role.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <v-button type="danger" @click="deleteRole(role.id)">Delete</v-button>
+                        <button class="btn btn-danger" @click="deleteRole(role.id)">Delete</button>
                       </td>
                     </tr>
            

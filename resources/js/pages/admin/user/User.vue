@@ -34,7 +34,7 @@
                       <td>
                         <router-link :to="{name: 'edit.user', params: { id: user.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <v-button type="danger" @click="deleteUser(user.id)">Delete</v-button>
+                        <button class="btn btn-danger"  @click="deleteUser(user.id)">Delete</button>
                       </td>
                     </tr>
            

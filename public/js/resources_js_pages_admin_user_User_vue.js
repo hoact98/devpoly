@@ -296,9 +296,9 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c(
-                                  "v-button",
+                                  "button",
                                   {
-                                    attrs: { type: "danger" },
+                                    staticClass: "btn btn-danger",
                                     on: {
                                       click: function($event) {
                                         return _vm.deleteUser(user.id)

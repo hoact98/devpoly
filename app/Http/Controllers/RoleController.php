@@ -25,7 +25,7 @@ class RoleController extends Controller
      {
          $role = new Role([
              'name' => $request->name,
-             'guard_name'=> 'web'
+            'guard_name'=>'api'
          ]);
          $role->save();
         foreach ($request->permission_id as $id) {

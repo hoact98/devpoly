@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 
+use App\Models\InformationUser;
+use App\Models\ModelHasRole;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -35,11 +37,14 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
         if (! $token = auth($this->guard)->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['errors' => ['email'=> ['Email or password does not match']]], 401);
         }
-
+        $user=User::where('email',$request->email)->first();
+        if(!$user->hasPermissionTo('login admin')){
+            return response()->json(['errors' => ['email'=> ['permission denied']]], 
+            422);
+        }
         return $this->createNewToken($token);
     }
 
@@ -63,7 +68,17 @@ class AuthController extends Controller
                     $validator->validated(),
                     ['password' =>  Hash::make($request->password)]
                 ));
-
+        $information = new InformationUser([
+                'user_id' => $user->id,
+                'name' => $request->name,
+        ]);
+        $information->save();  
+        $userRole = new ModelHasRole([
+            'role_id'=> 1,
+            'model_type'=> User::class,
+            'model_id' => $user->id,
+        ]);
+        $userRole->save();      
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -109,6 +124,7 @@ class AuthController extends Controller
      */
     protected function createNewToken($token){
         return response()->json([
+            'status' => 'success',
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth($this->guard)->factory()->getTTL() * 60,

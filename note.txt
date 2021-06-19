@@ -1,1 +1,1 @@
-njnh
+php artisan cache:forget spatie.permission.cache

@@ -28,7 +28,7 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
@@ -54,7 +54,7 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
     Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
 });
-
+Route::post('change-password/{id}',[UserController::class, 'changePass'])->name('change.password');
 Route::get('users', [UserController::class, 'index'])->name('users');
 Route::group(['prefix' => 'user'], function () {
     Route::post('add', [UserController::class, 'create'])->name('create.user');

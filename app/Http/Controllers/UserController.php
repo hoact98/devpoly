@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveUserRequest;
 use App\Models\InformationUser;
+use App\Models\ModelHasPermission;
 use App\Models\ModelHasRole;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,6 +78,14 @@ class UserController extends Controller
             'model_id' => $user->id,
         ]);
         $userRole->save();
+        foreach ($request->permission_id as $id) {
+            $model_has_permission = new ModelHasPermission([
+                'permission_id' => $id,
+                'model_id'=> $user->id,
+                'model_type'=> User::class,
+            ]);
+            $model_has_permission->save();
+        }
         return response()->json(['status'=>'success','message'=>'The user successfully added','data'=>$user],201);
     }
 
@@ -87,13 +97,14 @@ class UserController extends Controller
         $data['user']->load('information');
         $data['user']['role'] = ModelHasRole::where('model_id',$id)->first();
         $data['roles']=Role::all();
+        $data['user']->load('hasPermission');
+        $data['permissions']= Permission::all();
         return response()->json(['status'=>'success','message'=>'Succsess get user','data'=>$data],200);
     }
 
     // update user
     public function update($id, SaveUserRequest $request)
     {
-      
         if($request->is_active==true){
             $is_active = 1;
         }else{
@@ -112,9 +123,15 @@ class UserController extends Controller
          $user->avatar = $imageName;
          $user->is_active = $is_active;
          $user->save();
-        $userRole = ModelHasRole::where('model_id',$id)->first();
-        $userRole->role_id = $request->role_id;
+         
+        ModelHasRole::where('model_id',$id)->delete();
+        $userRole = new ModelHasRole([
+            'role_id'=> $request->role_id,
+            'model_type'=> User::class,
+            'model_id' => $id,
+        ]);
         $userRole->save();
+
         $info = InformationUser::where('user_id',$id)->first();
         if(!empty($info)){
             $info->name = $request->name;
@@ -132,6 +149,15 @@ class UserController extends Controller
             ]);
             $information->save();
         }
+        ModelHasPermission::where('model_id',$id)->delete();
+        foreach ($request->permission_id as $id) {
+           $model_has_permission = new ModelHasPermission([
+               'permission_id' => $id,
+               'model_id'=> $user->id,
+               'model_type'=> User::class,
+           ]);
+           $model_has_permission->save();
+       }
         return response()->json([
             'status'=>'success',
             'messege' => 'The user successfully updated','data'=>$user
@@ -148,5 +174,25 @@ class UserController extends Controller
             'status'=>'success',
             'messege' => 'Succsess delete user',
         ], 200);
+    }
+
+    public function changePass(Request $request)
+    {
+        $request->validate([
+            'password' => ['required','min:6'],
+            'new_password' => ['required','min:6'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+        $user = User::find($request->id);
+           if (Hash::check($request->password, $user->password)) {
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+                return response()->json([
+                'status' => 'success',
+                ]);
+           }else{
+            return response()->json(['errors' => ['password'=> ['Current password does not match']]], 
+            422);
+           }
     }
 }

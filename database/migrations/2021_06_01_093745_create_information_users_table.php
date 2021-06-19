@@ -19,7 +19,7 @@ class CreateInformationUsersTable extends Migration
             $table->string('name')->nullable();
             $table->integer('gender')->default(0);
             $table->string('address')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable()->unique();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -23,7 +23,7 @@ class PermissionController extends Controller
     {
         $permission = new Permission([
             'name' => $request->name,
-            'guard_name'=> 'web'
+            'guard_name'=>'api'
         ]);
         $permission->save();
 

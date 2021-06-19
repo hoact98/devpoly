@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -31,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $guarded = [];
+    protected $guard_name = 'api';
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -90,6 +91,14 @@ class User extends Authenticatable implements JWTSubject
     public function roles()
     {
         return $this->belongsToMany(Role::class,'model_has_roles', 'model_id', 'role_id');
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,'model_has_permissions', 'model_id', 'permission_id');
+    }
+    public function hasPermission()
+    {
+        return $this->hasMany(ModelHasPermission::class,'model_id');
     }
     public function challenges()
     {

@@ -27,7 +27,7 @@
                       <td>
                          <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
                         </router-link>
-                        <v-button type="danger" @click="deletePermission(permission.id)">Delete</v-button>
+                        <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
                       </td>
                     </tr>
            
