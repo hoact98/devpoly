@@ -34,7 +34,7 @@ class SaveUserRequest extends FormRequest
             'role_id'=>'required',
             'gender'=>['required'],
             'address'=>['required'],
-            'phone'=>['required'],
+            'phone'=>['required',Rule::unique('information_users')->ignore($this->id)],
             'permission_id'=>'required'
         ];
     }
@@ -54,6 +54,7 @@ class SaveUserRequest extends FormRequest
             'gender.required' => "Hãy chọn giới tính",
             'address.required' => "Hãy nhập địa chỉ",
             'phone.required' => "Hãy nhập SDT",
+            'phone.unique' => "SDT đã tồn tại",
             'permission_id.required' => "Hãy chọn quyền",
         ];
     }
