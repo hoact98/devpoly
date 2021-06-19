@@ -31,7 +31,7 @@
                     <label for="exampleInputEmail1">Email:</label>
                     <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
                       <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-                  
+
                   </div>
                   <div class="form-group">
                     <label for="">Avatar</label>
@@ -123,7 +123,7 @@ export default {
       computed: mapGetters({
       data: 'user/user'
   }),
-   
+
    created()  {
        this.$store.dispatch('user/fetchOne',this.$route.params.id);
     },
@@ -158,7 +158,7 @@ export default {
             })
     });
         },
-      
+
     }
 }
 </script>

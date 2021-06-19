@@ -12,49 +12,36 @@
                 <h3 class="card-title">{{ title }}</h3>
               </div>
               <!-- /.card-header -->
-
+              <router-link :to="{name: 'add.challengecategory'}"><button type="button" class="btn btn-primary">Add New</button></router-link>
               <div class="card-body">
-                <th style="text-align: center">
-                  <router-link to="/admin/challenge/add"
-                    ><button type="button" class="btn btn-primary">
-                      Add New
-                    </button></router-link
-                  >
-                </th>
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
                       <th style="text-align: center">ID</th>
-                      <th style="text-align: center">Title</th>
-                      <th style="text-align: center">Category</th>
+                      <th style="text-align: center">Name</th>
+                      <th style="text-align: center">SlTT</th>
                       <th style="text-align: center">Detail</th>
-                      <th style="text-align: center">Action</th>
+                    <th style="text-align: center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="challenge in challenges" :key="challenge.id">
-                      <td>
-                        <p>{{ challenge.id }}</p>
-                      </td>
-                      <td>
-                        <p>{{ challenge.title }}</p>
-                      </td>
-                      <td>
-                        <p>{{ challenge.cate_challen_id }}</p>
-                      </td>
+                    <tr v-for="challengecategory in challengecategories" :key="challengecategory.id">
+                      <td><p>{{ challengecategory.id }}</p></td>
+                      <td><p>{{ challengecategory.name }}</p></td>
+                      <th>Sl TT</th>
                       <th>Detail</th>
                       <td>
                         <router-link
                           :to="{
-                            name: 'edit.challenge',
-                            params: { id: challenge.id },
+                            name: 'edit.challengecategory',
+                            params: { id: challengecategory.id },
                           }"
                           class="btn btn-info"
                           >Edit
                         </router-link>
                         <button
                           class="btn btn-danger"
-                          @click="deletechallenge(challenge.id)"
+                          @click="deletechallengecategory(challengecategory.id)"
                         >
                           Delete
                         </button>
@@ -82,22 +69,22 @@ import Breadcrumb from "../../../components/Breadcrumb.vue";
 export default {
   data() {
     return {
-      title: "Challenge",
+      title: "Challenge Category",
     };
   },
   components: {
     Breadcrumb,
   },
   computed: {
-    challenges() {
-      return this.$store.state.challenge.challenges;
+    challengecategories() {
+      return this.$store.state.challengecategory.challengecategories;
     },
   },
   created: function () {
-    this.$store.dispatch("challenge/fetch");
+    this.$store.dispatch("challengecategory/fetch");
   },
   methods: {
-    deletechallenge(id) {
+    deletechallengecategory(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -109,7 +96,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           //Send Request to server
-          this.$store.dispatch("challenge/deletechallenge", id);
+          this.$store.dispatch("challengecategory/deletechallengecategory", id);
         }
       });
     },
@@ -119,4 +106,3 @@ export default {
 
 <style>
 </style>
-

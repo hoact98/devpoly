@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_pages_admin_challenge_AddChallenge_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue"],{
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
@@ -53,10 +53,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -67,6 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -159,104 +160,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: new Form({
-        title: "",
+        name: "",
         description: "",
-        language: "",
-        link_figma: "",
-        level: "",
-        cate_challen_id: ""
+        image: ""
       }),
-      title: "Add Challenge"
+      title: "Cập nhật Danh Muc Thu Thach"
     };
   },
   components: {
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: {
-    challengecategories: function challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
-    }
-  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    data: "challengecategory/challengecategory"
+  }),
   created: function created() {
-    this.$store.dispatch("challengecategory/fetch");
+    this.$store.dispatch("challengecategory/fetchOne", this.$route.params.id);
   },
   methods: {
-    addChallenge: function addChallenge() {
+    upload: function upload(event) {
+      this.form.image = event.target.files[0];
+    },
+    updateChallengeCategory: function updateChallengeCategory() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -264,15 +194,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.form);
-                _context.next = 3;
-                return _this.form.post(route("create.challenge")).then(function (response) {
+                _this.form.name = _this.data.name;
+                _this.form.description = _this.data.description;
+                _context.next = 4;
+                return _this.form.post(route("update.challengecategory", _this.$route.params.id)).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
-                      name: "challenges"
+                      name: "challengecategories"
                     });
 
-                    Swal.fire("Created", "Challenge created Successfully", "success");
+                    Swal.fire("Update", "Challenge Category update  Successfully", "success");
                   }
                 })["catch"](function () {
                   Swal.fire({
@@ -282,7 +213,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -1092,10 +1023,10 @@ component.options.__file = "resources/js/components/Breadcrumb.vue"
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/challenge/AddChallenge.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/admin/challenge/AddChallenge.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1103,8 +1034,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddChallenge.vue?vue&type=template&id=1f9caeb7& */ "./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7&");
-/* harmony import */ var _AddChallenge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddChallenge.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js&");
+/* harmony import */ var _EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditchallengeCategory.vue?vue&type=template&id=18176ab0& */ "./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0&");
+/* harmony import */ var _EditchallengeCategory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditchallengeCategory.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1114,9 +1045,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _AddChallenge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _EditchallengeCategory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -1126,7 +1057,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/admin/challenge/AddChallenge.vue"
+component.options.__file = "resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -1147,10 +1078,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1158,8 +1089,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddChallenge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddChallenge.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddChallenge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditchallengeCategory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditchallengeCategory.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditchallengeCategory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -1180,19 +1111,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0& ***!
+  \*************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddChallenge_vue_vue_type_template_id_1f9caeb7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddChallenge.vue?vue&type=template&id=1f9caeb7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditchallengeCategory_vue_vue_type_template_id_18176ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditchallengeCategory.vue?vue&type=template&id=18176ab0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0&");
 
 
 /***/ }),
@@ -1249,10 +1180,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/AddChallenge.vue?vue&type=template&id=1f9caeb7& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue?vue&type=template&id=18176ab0& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1288,7 +1219,10 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        return _vm.addChallenge.apply(null, arguments)
+                        return _vm.updateChallengeCategory.apply(
+                          null,
+                          arguments
+                        )
                       },
                       keydown: function($event) {
                         return _vm.form.onKeydown($event)
@@ -1298,43 +1232,36 @@ var render = function() {
                   [
                     _c("div", { staticClass: "card-body" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("Title:")]),
+                        _c("label", [_vm._v("Name:")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.title,
-                              expression: "form.title"
+                              value: _vm.data.name,
+                              expression: "data.name"
                             }
                           ],
                           staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("title")
-                          },
-                          attrs: {
-                            type: "text",
-                            id: "",
-                            placeholder: "Title",
-                            name: "title"
-                          },
-                          domProps: { value: _vm.form.title },
+                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          attrs: { type: "text", name: "name" },
+                          domProps: { value: _vm.data.name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "title", $event.target.value)
+                              _vm.$set(_vm.data, "name", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.form.errors.has("title")
+                        _vm.form.errors.has("name")
                           ? _c("div", {
                               staticClass: "text-danger",
                               domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("title"))
+                                innerHTML: _vm._s(_vm.form.errors.get("name"))
                               }
                             })
                           : _vm._e()
@@ -1344,9 +1271,7 @@ var render = function() {
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", { attrs: { for: "" } }, [
-                            _vm._v("Description:")
-                          ]),
+                          _c("label", [_vm._v("Description:")]),
                           _vm._v(" "),
                           _c("ckeditor", {
                             class: {
@@ -1354,11 +1279,11 @@ var render = function() {
                             },
                             attrs: { name: "description" },
                             model: {
-                              value: _vm.form.description,
+                              value: _vm.data.description,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "description", $$v)
+                                _vm.$set(_vm.data, "description", $$v)
                               },
-                              expression: "form.description"
+                              expression: "data.description"
                             }
                           })
                         ],
@@ -1366,285 +1291,35 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Language:")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.language,
-                                expression: "form.language"
-                              }
-                            ],
-                            staticClass: "form-select",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("language")
-                            },
-                            attrs: {
-                              "aria-label": "Default select example",
-                              name: "language"
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "language",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { selected: "" } }, [
-                              _vm._v("Chọn Ngôn Ngữ")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "HTML CSS JS" } }, [
-                              _vm._v("HTML CSS JS")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "PHP" } }, [
-                              _vm._v("PHP")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "PYTHON" } }, [
-                              _vm._v("PYTHON")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.form.errors.has("language")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("language")
-                                )
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Link-Figma:")
-                        ]),
+                        _c("label", { attrs: { for: "" } }, [_vm._v("Image")]),
                         _vm._v(" "),
                         _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.link_figma,
-                              expression: "form.link_figma"
-                            }
-                          ],
                           staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("link_figma")
-                          },
-                          attrs: {
-                            type: "text",
-                            id: "",
-                            placeholder: "Link-Figma",
-                            name: "link_figma"
-                          },
-                          domProps: { value: _vm.form.link_figma },
+                          class: { "is-invalid": _vm.form.errors.has("image") },
+                          attrs: { type: "file", name: "image" },
                           on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "link_figma",
-                                $event.target.value
-                              )
+                            change: function($event) {
+                              return _vm.upload($event)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.form.errors.has("link_figma")
+                        _vm.form.errors.has("image")
                           ? _c("div", {
                               staticClass: "text-danger",
                               domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("link_figma")
-                                )
+                                innerHTML: _vm._s(_vm.form.errors.get("image"))
                               }
                             })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("Level:")]),
+                          : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.level,
-                                expression: "form.level"
-                              }
-                            ],
-                            staticClass: "form-select",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("level")
-                            },
-                            attrs: {
-                              "aria-label": "Default select example",
-                              name: "level"
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "level",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { selected: "" } }, [
-                              _vm._v("Chọn độ khó")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("Easy")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("Normal")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("Dificult")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.form.errors.has("level")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(_vm.form.errors.get("level"))
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputCa" } }, [
-                          _vm._v("Category:")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.cate_challen_id,
-                                expression: "form.cate_challen_id"
-                              }
-                            ],
-                            staticClass: "form-select",
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "cate_challen_id"
-                              )
-                            },
-                            attrs: {
-                              "aria-label": "Default select example",
-                              name: "cate_challen_id"
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "cate_challen_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { selected: "" } }, [
-                              _vm._v("Chọn danh mục thử thách")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.challengecategories, function(
-                              challengecategory
-                            ) {
-                              return _c(
-                                "option",
-                                {
-                                  key: challengecategory.id,
-                                  domProps: { value: challengecategory.id }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(challengecategory.name) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.form.errors.has("cate_challen_id")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("cate_challen_id")
-                                )
-                              }
-                            })
-                          : _vm._e()
+                        _c("img", {
+                          attrs: {
+                            src: "/" + _vm.data.image,
+                            alt: "",
+                            width: "200"
+                          }
+                        })
                       ])
                     ]),
                     _vm._v(" "),

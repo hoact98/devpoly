@@ -109,15 +109,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: 'Categories'
+      title: "Challenge Category"
     };
   },
   components: {
     Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  computed: {
+    categories: function categories() {
+      console.log(this.$store.state.category.categories); //   return this.$store.state.category.categories;
+    }
+  },
+  created: function created() {
+    this.$store.dispatch("category/fetch");
+  },
+  methods: {// deleteUser(id) {
+    //   Swal.fire({
+    //     title: "Are you sure?",
+    //     text: "You won't be able to revert this!",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Yes, delete it!",
+    //   }).then((result) => {
+    //     if (result.value) {
+    //       //Send Request to server
+    //       this.$store.dispatch("user/deleteUser", id);
+    //     }
+    //   });
+    // },
   }
 });
 
@@ -374,22 +409,21 @@ var render = function() {
                           _c(
                             "th",
                             { staticStyle: { "text-align": "center" } },
-                            [_vm._v("Image")]
+                            [_vm._v("Sl TT")]
                           ),
                           _vm._v(" "),
                           _c(
                             "th",
                             { staticStyle: { "text-align": "center" } },
-                            [_vm._v("Description")]
+                            [_vm._v("Detail")]
                           ),
                           _vm._v(" "),
                           _c(
                             "th",
-                            { staticStyle: { "text-align": "center" } },
                             [
                               _c(
                                 "router-link",
-                                { attrs: { to: "/admin/add-category" } },
+                                { attrs: { to: { name: "add.category" } } },
                                 [
                                   _c(
                                     "button",
@@ -407,7 +441,58 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.categories, function(category) {
+                          return _c("tr", { key: category.id }, [
+                            _c("td", [_vm._v(_vm._s(category.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(category.username))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Sl TT")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Detail")]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      to: {
+                                        name: "edit.category",
+                                        params: { id: category.id }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Edit\n                      ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteUser(category.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                        Delete\n                      "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      )
                     ]
                   )
                 ])
@@ -420,42 +505,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tbody", [
-      _c("tr", [
-        _c("td", { staticStyle: { "text-align": "center" } }, [_vm._v("183")]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [_vm._v("hihi")]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("image")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("day la mot bai toan kho")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticStyle: { "text-align": "center" } }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-info", attrs: { type: "button" } },
-            [_vm._v("Update")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-danger", attrs: { type: "button" } },
-            [_vm._v("Delele")]
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

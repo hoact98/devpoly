@@ -36,7 +36,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-              <router-link :to="{name: 'dashboard'}" class="nav-link active"> 
+              <router-link :to="{name: 'dashboard'}" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -105,13 +105,13 @@
              </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link :to="{name: 'categories'}" class="nav-link">
+                <router-link :to="{name: 'challengecategories'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách Danh Mục</p>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link :to="{name: 'add.category'}" class="nav-link">
+                <router-link :to="{name: 'add.challengecategory'}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm Danh Mục</p>
                 </router-link>

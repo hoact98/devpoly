@@ -29,7 +29,7 @@ class SaveCategoryRequest extends FormRequest
                 'min:2',
                 Rule::unique('challenge_categories')->ignore($this->id)
             ],
-            'image' => ['required','image'],
+            'image' => ['image'],
             'description' => ['required','min:4']
         ];
     }

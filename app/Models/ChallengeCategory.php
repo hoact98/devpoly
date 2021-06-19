@@ -10,6 +10,7 @@ class ChallengeCategory extends Model
     use HasFactory;
     protected $table = "challenge_categories";
     protected $fillable = [
+        'slug',
         'name',
         'image',
         'description',
