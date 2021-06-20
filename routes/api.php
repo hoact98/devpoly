@@ -96,8 +96,7 @@ Route::group(['prefix' => 'challenge'], function () {
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
-<<<<<<< HEAD
+
 });
-=======
+
 });
->>>>>>> 9b7d408 (admin new)

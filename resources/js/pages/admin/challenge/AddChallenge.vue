@@ -15,7 +15,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-<<<<<<< HEAD
+
               <form @submit.prevent="addChallenge" @keydown="form.onKeydown($event)">
                 <div class="card-body">
                   <div class="form-group">
@@ -34,7 +34,7 @@
                     <select class="form-control select2" aria-label="Default select example" name="language" v-model="form.language"
                       :class="{ 'is-invalid': form.errors.has('language') }">
                       <option value="">Chọn Ngôn Ngữ</option>
-=======
+
               <form
                 @submit.prevent="addChallenge"
                 @keydown="form.onKeydown($event)"
@@ -77,12 +77,12 @@
                       :class="{ 'is-invalid': form.errors.has('language') }"
                     >
                       <option selected>Chọn Ngôn Ngữ</option>
->>>>>>> 9b7d408 (admin new)
+
                       <option value="HTML CSS JS">HTML CSS JS</option>
                       <option value="PHP">PHP</option>
                       <option value="PYTHON">PYTHON</option>
                     </select>
-<<<<<<< HEAD
+
                     <div class="text-danger" v-if="form.errors.has('language')"
                       v-html="form.errors.get('language')"/>
                   </div>
@@ -105,7 +105,7 @@
                       v-model="form.level"
                       :class="{ 'is-invalid': form.errors.has('level') }">
                       <option value="">Chọn độ khó</option>
-=======
+
                     <div
                       class="text-danger"
                       v-if="form.errors.has('language')"
@@ -139,26 +139,26 @@
                       :class="{ 'is-invalid': form.errors.has('level') }"
                     >
                       <option selected>Chọn độ khó</option>
->>>>>>> 9b7d408 (admin new)
+
                       <option value="1">Easy</option>
                       <option value="2">Normal</option>
                       <option value="3">Dificult</option>
                     </select>
-<<<<<<< HEAD
+
                     <div class="text-danger" v-if="form.errors.has('level')" v-html="form.errors.get('level')" />
-=======
+
                     <div
                       class="text-danger"
                       v-if="form.errors.has('level')"
                       v-html="form.errors.get('level')"
                     />
->>>>>>> 9b7d408 (admin new)
+
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputCa">Category:</label>
                     <select
-<<<<<<< HEAD
+
                       class="form-control select2"
                       aria-label="Default select example"
                       name="cate_challen_id"
@@ -168,7 +168,7 @@
                       <option v-for="challengecategory in challengecategories"
                         :key="challengecategory.id"
                         :value="challengecategory.id">
-=======
+
                       class="form-select"
                       aria-label="Default select example"
                       name="cate_challen_id"
@@ -183,19 +183,19 @@
                         :key="challengecategory.id"
                         :value="challengecategory.id"
                       >
->>>>>>> 9b7d408 (admin new)
+
                         {{ challengecategory.name }}
                       </option>
                     </select>
                     <div
                       class="text-danger"
                       v-if="form.errors.has('cate_challen_id')"
-<<<<<<< HEAD
+
                       v-html="form.errors.get('cate_challen_id')"/>
-=======
+
                       v-html="form.errors.get('cate_challen_id')"
                     />
->>>>>>> 9b7d408 (admin new)
+
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -221,11 +221,11 @@
 
 
 <script>
-<<<<<<< HEAD
-=======
+
+
 import Breadcrumb from "../../../components/Breadcrumb.vue";
 
->>>>>>> 9b7d408 (admin new)
+
 export default {
   data: () => ({
     form: new Form({
@@ -238,12 +238,12 @@ export default {
     }),
     title: "Add Challenge",
   }),
-<<<<<<< HEAD
-=======
+
+
   components: {
     Breadcrumb,
   },
->>>>>>> 9b7d408 (admin new)
+
   computed: {
     challengecategories() {
       return this.$store.state.challengecategory.challengecategories;
@@ -276,8 +276,7 @@ export default {
 </script>
 
 <style>
-<<<<<<< HEAD
+
 </style>
-=======
-</style>
->>>>>>> 9b7d408 (admin new)
+
+

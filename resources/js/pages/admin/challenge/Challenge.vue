@@ -14,8 +14,8 @@
               <!-- /.card-header -->
 
               <div class="card-body">
-<<<<<<< HEAD
-                
+
+
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
@@ -29,7 +29,7 @@
                           <button type="button" class="btn btn-primary">Add New</button>
                         </router-link>
                     </th>
-=======
+
                 <th style="text-align: center">
                   <router-link to="/admin/challenge/add"
                     ><button type="button" class="btn btn-primary">
@@ -45,12 +45,12 @@
                       <th style="text-align: center">Category</th>
                       <th style="text-align: center">Detail</th>
                       <th style="text-align: center">Action</th>
->>>>>>> 9b7d408 (admin new)
+
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="challenge in challenges" :key="challenge.id">
-<<<<<<< HEAD
+
                       <td>{{ challenge.id }}</td>
                       <td>{{ challenge.title }} </td>
                       <td>{{ challenge.category.name }} </td>
@@ -60,7 +60,7 @@
                         <router-link :to="{ name: 'edit.challenge',params: { id: challenge.id },}" class="btn btn-info">Edit
                         </router-link>
                         <button class="btn btn-danger" @click="deletechallenge(challenge.id)">Delete</button>
-=======
+
                       <td>
                         <p>{{ challenge.id }}</p>
                       </td>
@@ -86,7 +86,7 @@
                         >
                           Delete
                         </button>
->>>>>>> 9b7d408 (admin new)
+
                       </td>
                     </tr>
                   </tbody>
@@ -107,22 +107,22 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
+
+
 import Breadcrumb from "../../../components/Breadcrumb.vue";
->>>>>>> 9b7d408 (admin new)
+
 export default {
   data() {
     return {
       title: "Challenge",
     };
   },
-<<<<<<< HEAD
-=======
+
+
   components: {
     Breadcrumb,
   },
->>>>>>> 9b7d408 (admin new)
+
   computed: {
     challenges() {
       return this.$store.state.challenge.challenges;
@@ -154,7 +154,7 @@ export default {
 
 <style>
 </style>
-<<<<<<< HEAD
-=======
 
->>>>>>> 9b7d408 (admin new)
+
+
+

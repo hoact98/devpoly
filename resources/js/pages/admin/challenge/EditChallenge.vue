@@ -15,36 +15,20 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-<<<<<<< HEAD
-              <form @submit.prevent="updateChallenge" @keydown="form.onKeydown($event)">
-=======
               <form
                 @submit.prevent="updateChallenge"
                 @keydown="form.onKeydown($event)"
               >
->>>>>>> 9b7d408 (admin new)
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Title:</label>
                     <input
                       type="text"
                       class="form-control"
-<<<<<<< HEAD
-                      placeholder="Title"
-                      name="title"
-                     v-model="data.title"
-                      :class="{'is-invalid': form.errors.has('title'),}"/>
-                    <div class="text-danger" v-if="form.errors.has('title')" v-html="form.errors.get('title')"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Description:</label>
-                    <ckeditor name="description" v-model="data.description"
-                      :class="{ 'is-invalid': form.errors.has('description') }"></ckeditor>
-=======
                       id=""
                       placeholder="Title"
                       name="title"
-                     v-model="data.title"
+                      v-model="data.title"
                       :class="{
                         'is-invalid': form.errors.has('title'),
                       }"
@@ -59,56 +43,24 @@
                     <label for="">Description:</label>
                     <ckeditor
                       name="description"
-                         v-model="data.description"
+                      v-model="data.description"
                       :class="{ 'is-invalid': form.errors.has('description') }"
                     ></ckeditor>
->>>>>>> 9b7d408 (admin new)
                   </div>
                   <div class="form-group">
                     <label for="">Language:</label>
                     <select
-<<<<<<< HEAD
-                      class="form-control select2"
-                      aria-label="Default select example"
-                      name="language" v-model="data.language"
-                      :class="{ 'is-invalid': form.errors.has('language') }">
-                      <option value="">Chọn Ngôn Ngữ</option>
-=======
                       class="form-select"
                       aria-label="Default select example"
                       name="language"
-                              v-model="data.language"
+                      v-model="data.language"
                       :class="{ 'is-invalid': form.errors.has('language') }"
                     >
                       <option selected>Chọn Ngôn Ngữ</option>
->>>>>>> 9b7d408 (admin new)
                       <option value="HTML CSS JS">HTML CSS JS</option>
                       <option value="PHP">PHP</option>
                       <option value="PYTHON">PYTHON</option>
                     </select>
-<<<<<<< HEAD
-                    <div class="text-danger"
-                      v-if="form.errors.has('language')"
-                      v-html="form.errors.get('language')" />
-                  </div>
-                  <div class="form-group">
-                    <label for="">Link-Figma:</label>
-                    <input type="text"
-                      class="form-control"
-                      placeholder="Link-Figma"
-                      name="link_figma" v-model="data.link_figma"/>
-                    <div class="text-danger"
-                      v-if="form.errors.has('link_figma')"
-                      v-html="form.errors.get('link_figma')" />
-                  </div>
-                  <div class="form-group">
-                    <label for="">Level:</label>
-                    <select class="form-control select2"
-                      aria-label="Default select example"
-                      name="level"  v-model="data.level"
-                      :class="{ 'is-invalid': form.errors.has('level') }" >
-                      <option value="">Chọn độ khó</option>
-=======
                     <div
                       class="text-danger"
                       v-if="form.errors.has('language')"
@@ -123,7 +75,7 @@
                       id=""
                       placeholder="Link-Figma"
                       name="link_figma"
-                          v-model="data.link_figma"
+                      v-model="data.link_figma"
                       :class="{ 'is-invalid': form.errors.has('link_figma') }"
                     />
                     <div
@@ -138,49 +90,28 @@
                       class="form-select"
                       aria-label="Default select example"
                       name="level"
-                                v-model="data.level"
+                      v-model="data.level"
                       :class="{ 'is-invalid': form.errors.has('level') }"
                     >
                       <option selected>Chọn độ khó</option>
->>>>>>> 9b7d408 (admin new)
                       <option value="1">Easy</option>
                       <option value="2">Normal</option>
                       <option value="3">Dificult</option>
                     </select>
-<<<<<<< HEAD
-                    <div class="text-danger" v-if="form.errors.has('level')"
-                      v-html="form.errors.get('level')" />
-=======
                     <div
                       class="text-danger"
                       v-if="form.errors.has('level')"
                       v-html="form.errors.get('level')"
                     />
->>>>>>> 9b7d408 (admin new)
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputCa">Category:</label>
                     <select
-<<<<<<< HEAD
-                      class="form-control select2"
-                      aria-label="Default select example"
-                      name="cate_challen_id" v-model="data.cate_challen_id" :class="{'is-invalid': form.errors.has('cate_challen_id'),}">
-                      <option value="">Chọn danh mục thử thách</option>
-                      <option v-for="challengecategory in data.challengecategory"
-                        :key="challengecategory.id"
-                        :value="challengecategory.id">
-                        {{ challengecategory.name }}
-                      </option>
-                    </select>
-                    <div  class="text-danger"
-                      v-if="form.errors.has('cate_challen_id')"
-                      v-html="form.errors.get('cate_challen_id')"/>
-=======
                       class="form-select"
                       aria-label="Default select example"
                       name="cate_challen_id"
-                                      v-model="data.cate_challen_id"
+                      v-model="data.cate_challen_id"
                       :class="{
                         'is-invalid': form.errors.has('cate_challen_id'),
                       }"
@@ -199,12 +130,17 @@
                       v-if="form.errors.has('cate_challen_id')"
                       v-html="form.errors.get('cate_challen_id')"
                     />
->>>>>>> 9b7d408 (admin new)
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit"  :disabled="form.busy" class="btn btn-primary">Submit</button>
+                  <button
+                    type="submit"
+                    :disabled="form.busy"
+                    class="btn btn-primary"
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>
@@ -224,10 +160,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import Breadcrumb from "../../../components/Breadcrumb.vue";
->>>>>>> 9b7d408 (admin new)
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
@@ -241,39 +174,6 @@ export default {
     }),
     title: "Edit Challenge",
   }),
-<<<<<<< HEAD
-  computed: mapGetters({
-    data: "challenge/challenge",
-  }),
-  created() {
-    this.$store.dispatch("challenge/fetchOne", this.$route.params.id);
-  },
-  methods: {
-    async updateChallenge() {
-      this.form.title = this.data.title;
-      this.form.description = this.data.description;
-      this.form.language = this.data.language;
-      this.form.link_figma = this.data.link_figma;
-      this.form.level = this.data.level;
-    this.form.cate_challen_id = this.data.cate_challen_id;
-      await this.form
-        .post(route("update.challenge", this.$route.params.id))
-        .then((response) => {
-          if (response.data.status == "success") {
-            this.$router.push({ name: "challenges" });
-            Swal.fire("Update", "Challenge update  Successfully", "success");
-          }
-        })
-        .catch(() => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          });
-        });
-    },
-  },
-=======
   components: {
     Breadcrumb,
   },
@@ -291,7 +191,7 @@ export default {
       this.form.language = this.data.language;
       this.form.link_figma = this.data.link_figma;
       this.form.level = this.data.level;
-    this.form.cate_challen_id = this.data.cate_challen_id;
+      this.form.cate_challen_id = this.data.cate_challen_id;
       await this.form
         .post(route("update.challenge", this.$route.params.id))
         .then((response) => {
@@ -309,13 +209,8 @@ export default {
         });
     },
   },
->>>>>>> 9b7d408 (admin new)
 };
 </script>
 
 <style>
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 9b7d408 (admin new)

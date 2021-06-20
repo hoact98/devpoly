@@ -105,10 +105,7 @@ class UserController extends Controller
     // update user
     public function update($id, SaveUserRequest $request)
     {
-<<<<<<< HEAD
-=======
 
->>>>>>> 9b7d408 (admin new)
         if($request->is_active==true){
             $is_active = 1;
         }else{

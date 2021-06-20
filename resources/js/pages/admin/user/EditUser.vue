@@ -14,7 +14,7 @@
                 <h3 class="card-title">{{title}}</h3>
               </div>
               <!-- /.card-header -->
-<<<<<<< HEAD
+
 
               <div class="card-body">
                 <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)">
@@ -25,7 +25,7 @@
                           <a class="nav-link" id="permission-tab" data-toggle="pill" href="#permission" role="tab" aria-controls="permission" aria-selected="false">Permission</a>
                           <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
                         </div>
-=======
+
               <!-- form start -->
                <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)">
                 <div class="card-body">
@@ -67,7 +67,7 @@
                       <label for="exampleInputPhone">Phone:</label>
                       <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.information.phone" id="exampleInputPhone" placeholder="Enter phone">
                       <div class="text-danger" v-if="form.errors.has('phone')" v-html="form.errors.get('phone')" />
->>>>>>> 9b7d408 (admin new)
+
                     </div>
                     <div class="col-7 col-sm-9">
                       <div class="tab-content" id="vert-tabs-tabContent">
@@ -86,7 +86,7 @@
                                 <label for="exampleInputEmail1">Email:</label>
                                 <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
                                   <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-                              
+
                               </div>
                               <div class="form-group">
                                 <label for="">Avatar</label>
@@ -200,12 +200,12 @@ export default {
     }),
     title: 'Cập nhật người dùng',
   }),
-<<<<<<< HEAD
+
    computed: {
         data () {
             return this.$store.state.user.user;
         },
-        
+
         permission_id (){
           var permission_id = [];
             this.data.user.has_permission.forEach(function (permission) {
@@ -214,7 +214,7 @@ export default {
             this.form.permission_id=permission_id;
         }
    },
-=======
+
     components: {
       Breadcrumb
     },
@@ -222,7 +222,7 @@ export default {
       data: 'user/user'
   }),
 
->>>>>>> 9b7d408 (admin new)
+
    created()  {
        this.$store.dispatch('user/fetchOne',this.$route.params.id);
     },
@@ -256,7 +256,7 @@ export default {
               text: 'Something went wrong!',
             })
     });
-<<<<<<< HEAD
+
     },
     updatePassword(){
       this.formPass.post(route('change.password',this.$route.params.id))
@@ -277,11 +277,11 @@ export default {
             })
     });
     }
-      
-=======
+
+
         },
 
->>>>>>> 9b7d408 (admin new)
+
     }
 }
 </script>

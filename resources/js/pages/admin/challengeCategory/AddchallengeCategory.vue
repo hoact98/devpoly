@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 9b7d408 (admin new)
+
+
 <template>
   <div class="content-wrapper">
     <breadcrumb :title='title'></breadcrumb>
@@ -28,12 +27,12 @@
                     </div>
                    <div class="form-group">
                     <label >Description:</label>
-<<<<<<< HEAD
+
                     <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
                       <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
-=======
+
                     <ckeditor  v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description" value="Hello, World!"></ckeditor>
->>>>>>> 9b7d408 (admin new)
+
                     </div>
 
                     <div class="form-group">
@@ -65,11 +64,10 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
+
 import Breadcrumb from '../../../components/Breadcrumb.vue'
 
->>>>>>> 9b7d408 (admin new)
+
 export default {
    data:() => ({
     form: new Form({
@@ -79,12 +77,11 @@ export default {
     }),
     title: 'Thêm Danh Mục Thử Thách',
   }),
-<<<<<<< HEAD
-=======
+
     components: {
       Breadcrumb
     },
->>>>>>> 9b7d408 (admin new)
+
      computed: {
       },
     methods: {
@@ -109,20 +106,18 @@ export default {
               text: 'Something went wrong!',
             })
     });
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 9b7d408 (admin new)
+
+
     },
     }
 }
 </script>
 
 <style>
-<<<<<<< HEAD
-</style>
-=======
 
 </style>
->>>>>>> 9b7d408 (admin new)
+
+
+
