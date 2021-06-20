@@ -12,35 +12,29 @@
                 <h3 class="card-title">{{ title }}</h3>
               </div>
               <!-- /.card-header -->
-
+              
               <div class="card-body">
-                
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Level</th>
-                      <th>Language</th>
-                      <th>
-                        <router-link :to="{name:'add.challenge'}" >
-                          <button type="button" class="btn btn-primary">Add New</button>
-                        </router-link>
-                    </th>
+                      <th>Name</th>
+                      <th>Image</th>
+                    <th><router-link :to="{name: 'add.challengecategory'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="challenge in challenges" :key="challenge.id">
-                      <td>{{ challenge.id }}</td>
-                      <td>{{ challenge.title }} </td>
-                      <td>{{ challenge.category.name }} </td>
-                      <td>{{challenge.level}}</td>
-                      <td>{{challenge.language}}</td>
+                    <tr v-for="challengecategory in challengecategories" :key="challengecategory.id">
+                      <td>{{ challengecategory.id }}</td>
+                      <td>{{ challengecategory.name }}</td>
+                      <td><img :src="'/'+challengecategory.image" alt="" width="60px"></td>
                       <td>
-                        <router-link :to="{ name: 'edit.challenge',params: { id: challenge.id },}" class="btn btn-info">Edit
+                        <router-link :to="{ name: 'edit.challengecategory',params: { id: challengecategory.id },}" class="btn btn-info">Edit
                         </router-link>
-                        <button class="btn btn-danger" @click="deletechallenge(challenge.id)">Delete</button>
+                        <button class="btn btn-danger"
+                          @click="deletechallengecategory(challengecategory.id)">
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -64,19 +58,19 @@
 export default {
   data() {
     return {
-      title: "Challenge",
+      title: "Challenge Category",
     };
   },
   computed: {
-    challenges() {
-      return this.$store.state.challenge.challenges;
+    challengecategories() {
+      return this.$store.state.challengecategory.challengecategories;
     },
   },
   created: function () {
-    this.$store.dispatch("challenge/fetch");
+    this.$store.dispatch("challengecategory/fetch");
   },
   methods: {
-    deletechallenge(id) {
+    deletechallengecategory(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -88,7 +82,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           //Send Request to server
-          this.$store.dispatch("challenge/deletechallenge", id);
+          this.$store.dispatch("challengecategory/deletechallengecategory", id);
         }
       });
     },

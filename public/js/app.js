@@ -2558,17 +2558,17 @@ var routes = [{
     component: page("admin/permission/EditPermission.vue"),
     name: 'edit.permission'
   }, {
-    path: 'categories',
-    component: page("admin/category/Category.vue"),
-    name: 'categories'
+    path: 'challengecategories',
+    component: page("admin/challengeCategory/challengeCategory.vue"),
+    name: 'challengecategories'
   }, {
-    path: 'category-add',
-    component: page("admin/category/AddCategory.vue"),
-    name: 'add.category'
+    path: 'challengecategory-add',
+    component: page("admin/challengeCategory/AddchallengeCategory.vue"),
+    name: 'add.challengecategory'
   }, {
-    path: 'category-edit/:id',
-    component: page("admin/category/EditCategory.vue"),
-    name: 'edit.category'
+    path: 'challengecategory-edit/:id',
+    component: page("admin/challengeCategory/EditchallengeCategory.vue"),
+    name: 'edit.challengecategory'
   }, {
     path: 'challenges',
     component: page("admin/challenge/Challenge.vue"),
@@ -2652,6 +2652,185 @@ var modules = requireContext.keys().map(function (file) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   modules: modules
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/challenge.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/challenge.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "actions": () => (/* binding */ actions)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
+
+var state = {
+  challenges: [],
+  challenge: {}
+}; // getters
+
+var getters = {
+  challenge: function challenge(state) {
+    return state.challenge;
+  },
+  challenges: function challenges(state) {
+    return state.challenges;
+  }
+}; // mutations
+
+var mutations = {
+  FETCH: function FETCH(state, challenges) {
+    state.challenges = challenges;
+  },
+  FETCH_ONE: function FETCH_ONE(state, challenge) {
+    state.challenge = challenge;
+  }
+}; // actions
+
+var actions = {
+  fetch: function fetch(_ref) {
+    var commit = _ref.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("challenges")).then(function (response) {
+      return commit("FETCH", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref2, id) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.challenge", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    });
+  },
+  deletechallenge: function deletechallenge(_ref3, id) {
+    var _this = this;
+
+    _objectDestructuringEmpty(_ref3);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
+      _this.dispatch("challenge/fetch");
+
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'challenge deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editchallenge: function editchallenge(_ref4, data) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challenge", data.get('id')), data).then();
+  },
+  addchallenge: function addchallenge(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challenge"), data).then();
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/challengecategory.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/store/modules/challengecategory.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "actions": () => (/* binding */ actions)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
+
+var state = {
+  challengecategories: [],
+  challengecategory: {}
+}; // getters
+
+var getters = {
+  challengecategory: function challengecategory(state) {
+    return state.challengecategory;
+  },
+  challengecategories: function challengecategories(state) {
+    return state.challengecategories;
+  }
+}; // mutations
+
+var mutations = {
+  FETCH: function FETCH(state, challengecategories) {
+    state.challengecategories = challengecategories;
+  },
+  FETCH_ONE: function FETCH_ONE(state, challengecategory) {
+    state.challengecategory = challengecategory;
+  }
+}; // actions
+
+var actions = {
+  fetch: function fetch(_ref) {
+    var commit = _ref.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("challengecategories")).then(function (response) {
+      return commit("FETCH", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref2, id) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.challengecategory", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    });
+  },
+  deletechallengecategory: function deletechallengecategory(_ref3, id) {
+    var _this = this;
+
+    _objectDestructuringEmpty(_ref3);
+
+    console.log(id);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
+      _this.dispatch("challengecategory/fetch");
+
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'challengecategory deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editchallengecategory: function editchallengecategory(_ref4, data) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challengecategory", data.get('id')), data).then();
+  },
+  addChallengeCategory: function addChallengeCategory(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challengecategory"), data).then();
+  }
+};
 
 /***/ }),
 
@@ -42582,7 +42761,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: { name: "categories" } }
+                          attrs: { to: { name: "challengecategories" } }
                         },
                         [
                           _c("i", { staticClass: "far fa-circle nav-icon" }),
@@ -42602,7 +42781,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: { name: "add.category" } }
+                          attrs: { to: { name: "add.challengecategory" } }
                         },
                         [
                           _c("i", { staticClass: "far fa-circle nav-icon" }),
@@ -59490,30 +59669,6 @@ var map = {
 		"./resources/js/pages/admin/auth/Login.vue",
 		"resources_js_pages_admin_auth_Login_vue"
 	],
-	"./admin/category/AddCategory": [
-		"./resources/js/pages/admin/category/AddCategory.vue",
-		"resources_js_pages_admin_category_AddCategory_vue"
-	],
-	"./admin/category/AddCategory.vue": [
-		"./resources/js/pages/admin/category/AddCategory.vue",
-		"resources_js_pages_admin_category_AddCategory_vue"
-	],
-	"./admin/category/Category": [
-		"./resources/js/pages/admin/category/Category.vue",
-		"resources_js_pages_admin_category_Category_vue"
-	],
-	"./admin/category/Category.vue": [
-		"./resources/js/pages/admin/category/Category.vue",
-		"resources_js_pages_admin_category_Category_vue"
-	],
-	"./admin/category/EditCategory": [
-		"./resources/js/pages/admin/category/EditCategory.vue",
-		"resources_js_pages_admin_category_EditCategory_vue"
-	],
-	"./admin/category/EditCategory.vue": [
-		"./resources/js/pages/admin/category/EditCategory.vue",
-		"resources_js_pages_admin_category_EditCategory_vue"
-	],
 	"./admin/challenge/AddChallenge": [
 		"./resources/js/pages/admin/challenge/AddChallenge.vue",
 		"resources_js_pages_admin_challenge_AddChallenge_vue"
@@ -59537,6 +59692,30 @@ var map = {
 	"./admin/challenge/EditChallenge.vue": [
 		"./resources/js/pages/admin/challenge/EditChallenge.vue",
 		"resources_js_pages_admin_challenge_EditChallenge_vue"
+	],
+	"./admin/challengeCategory/AddchallengeCategory": [
+		"./resources/js/pages/admin/challengeCategory/AddchallengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue"
+	],
+	"./admin/challengeCategory/AddchallengeCategory.vue": [
+		"./resources/js/pages/admin/challengeCategory/AddchallengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue"
+	],
+	"./admin/challengeCategory/EditchallengeCategory": [
+		"./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue"
+	],
+	"./admin/challengeCategory/EditchallengeCategory.vue": [
+		"./resources/js/pages/admin/challengeCategory/EditchallengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue"
+	],
+	"./admin/challengeCategory/challengeCategory": [
+		"./resources/js/pages/admin/challengeCategory/challengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_challengeCategory_vue"
+	],
+	"./admin/challengeCategory/challengeCategory.vue": [
+		"./resources/js/pages/admin/challengeCategory/challengeCategory.vue",
+		"resources_js_pages_admin_challengeCategory_challengeCategory_vue"
 	],
 	"./admin/dashboard/Dashboard": [
 		"./resources/js/pages/admin/dashboard/Dashboard.vue",
@@ -59686,6 +59865,8 @@ module.exports = webpackAsyncContext;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./challenge.js": "./resources/js/store/modules/challenge.js",
+	"./challengecategory.js": "./resources/js/store/modules/challengecategory.js",
 	"./permission.js": "./resources/js/store/modules/permission.js",
 	"./role.js": "./resources/js/store/modules/role.js",
 	"./user.js": "./resources/js/store/modules/user.js"
@@ -59819,7 +60000,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_auth_Login_vue":1,"resources_js_pages_admin_category_AddCategory_vue":1,"resources_js_pages_admin_category_Category_vue":1,"resources_js_pages_admin_category_EditCategory_vue":1,"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_auth_Login_vue":1,"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

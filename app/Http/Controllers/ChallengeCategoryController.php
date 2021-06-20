@@ -23,6 +23,9 @@ class ChallengeCategoryController extends Controller
     // add category
     public function create(SaveCategoryRequest $request)
     {
+        $this->validate($request, [
+            'image' => ['required','image'],
+        ]);
         $slug = Str::slug($request->name,'-');
         $c = ChallengeCategory::where('slug','=', $slug)->first();
         if($c){
@@ -55,7 +58,7 @@ class ChallengeCategoryController extends Controller
     public function update($id, SaveCategoryRequest $request)
     {
         $cate = ChallengeCategory::find($id);
-        $imageName = '';
+        $imageName = $cate->image;
         if($request->hasFile('image')){
            $image = time().'-'.$request->image->getClientOriginalName();
            $request->image->move(public_path('files'),$image);

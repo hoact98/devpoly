@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveChallengeRequest;
 use App\Models\Challenge;
+use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,17 +13,19 @@ class ChallengeController extends Controller
     // all challenges
     public function index()
     {
+        $challenges= Challenge::all();
+        $challenges->load('category');
         return response()->json([
             'status'=>'success',
             'messege' => 'Succsess get list challenges',
-            'data' => Challenge::all(),
+            'data' => $challenges,
         ], 200);
     }
 
     // add challenge
     public function create(SaveChallengeRequest $request)
     {
-        $slug = Str::slug($request->name,'-');
+        $slug = Str::slug($request->title,'-');
         $c = Challenge::where('slug','=', $slug)->first();
         if($c){
             $slug = $slug.Str::random(5);
@@ -45,6 +48,7 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
+        $challenge['challengecategory'] = ChallengeCategory::all();
         return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
     }
 

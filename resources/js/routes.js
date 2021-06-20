@@ -91,20 +91,20 @@ const routes = [
         component: page("admin/permission/EditPermission.vue"),
         name: 'edit.permission',
       },
-       {
-        path: 'categories',
-        component: page("admin/category/Category.vue"),
-        name: 'categories',
+      {
+        path: 'challengecategories',
+        component: page("admin/challengeCategory/challengeCategory.vue"),
+        name: 'challengecategories',
       },
       {
-        path: 'category-add',
-        component: page("admin/category/AddCategory.vue"),
-        name: 'add.category',
+        path: 'challengecategory-add',
+        component: page("admin/challengeCategory/AddchallengeCategory.vue"),
+        name: 'add.challengecategory',
       },
       {
-        path: 'category-edit/:id',
-        component: page("admin/category/EditCategory.vue"),
-        name: 'edit.category',
+        path: 'challengecategory-edit/:id',
+        component: page("admin/challengeCategory/EditchallengeCategory.vue"),
+        name: 'edit.challengecategory',
       },{
         path: 'challenges',
         component: page("admin/challenge/Challenge.vue"),

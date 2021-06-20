@@ -10,6 +10,7 @@ class Challenge extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'language',
         'link_figma',

@@ -11,6 +11,7 @@ class ChallengeCategory extends Model
     protected $table = "challenge_categories";
     protected $fillable = [
         'name',
+        'slug',
         'image',
         'description',
     ];
