@@ -48,6 +48,10 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
+<<<<<<< HEAD
+=======
+        $challenge['Onechallengecategory'] = ChallengeCategory::where('id', $id)->first();
+>>>>>>> 9b7d408 (admin new)
         $challenge['challengecategory'] = ChallengeCategory::all();
         return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
     }

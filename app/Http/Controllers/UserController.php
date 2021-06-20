@@ -40,7 +40,7 @@ class UserController extends Controller
 
     // add user -> add user_role
     public function create(SaveUserRequest $request)
-    {       
+    {
         $this->validate($request, [
             'password' => ['required','min:6'],
         ]);
@@ -105,6 +105,10 @@ class UserController extends Controller
     // update user
     public function update($id, SaveUserRequest $request)
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9b7d408 (admin new)
         if($request->is_active==true){
             $is_active = 1;
         }else{

@@ -13,7 +13,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChallengeCategoryController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
-
+use App\Http\Controllers\ChallengeCategoryController;
+use App\Http\Controllers\ChallengeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,7 +35,7 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user', [AuthController::class, 'userProfile']);    
+    Route::get('/user', [AuthController::class, 'userProfile']);
 });
 
 // Route::group(['middleware' => 'auth:api'], function () {
@@ -95,4 +96,8 @@ Route::group(['prefix' => 'challenge'], function () {
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 9b7d408 (admin new)

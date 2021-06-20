@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9b7d408 (admin new)
 <template>
   <div class="content-wrapper">
     <breadcrumb :title="title"></breadcrumb>
@@ -15,6 +19,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
+<<<<<<< HEAD
               <form @submit.prevent="updateChallengeCategory" @keydown="form.onKeydown($event)" >
                 <div class="card-body">
                   <div class="form-group">
@@ -27,16 +32,60 @@
                     <ckeditor v-model="data.description" :class="{'is-invalid': form.errors.has('description'),}" name="description"></ckeditor>
                     <div  class="text-danger" v-if="form.errors.has('description')"
                       v-html="form.errors.get('description')"/>
+=======
+              <form
+                @submit.prevent="updateChallengeCategory"
+                @keydown="form.onKeydown($event)"
+              >
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Name:</label>
+                    <input
+                      v-model="data.name"
+                      :class="{ 'is-invalid': form.errors.has('name') }"
+                      class="form-control"
+                      type="text"
+                      name="name"
+                    />
+                    <div
+                      class="text-danger"
+                      v-if="form.errors.has('name')"
+                      v-html="form.errors.get('name')"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                    <ckeditor
+                      v-model="data.description"
+                      :class="{ 'is-invalid': form.errors.has('description') }"
+                      name="description"
+                    ></ckeditor>
+>>>>>>> 9b7d408 (admin new)
                   </div>
 
                   <div class="form-group">
                     <label for="">Image</label>
+<<<<<<< HEAD
                     <input type="file"
                       @change="upload($event)"
                       :class="{'is-invalid': form.errors.has('image'),}"
                       class="form-control"
                       name="image"/>
                     <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+=======
+                    <input
+                      type="file"
+                      @change="upload($event)"
+                      :class="{ 'is-invalid': form.errors.has('image') }"
+                      class="form-control"
+                      name="image"
+                    />
+                    <div
+                      class="text-danger"
+                      v-if="form.errors.has('image')"
+                      v-html="form.errors.get('image')"
+                    />
+>>>>>>> 9b7d408 (admin new)
                     <img :src="'/' + data.image" alt="" width="200" />
                   </div>
                 </div>
@@ -61,7 +110,13 @@
   </div>
 </template>
 
+<<<<<<< HEAD
 <script>
+=======
+
+<script>
+import Breadcrumb from "../../../components/Breadcrumb.vue";
+>>>>>>> 9b7d408 (admin new)
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
@@ -72,9 +127,19 @@ export default {
     }),
     title: "Cập nhật Danh Muc Thu Thach",
   }),
+<<<<<<< HEAD
   computed: mapGetters({
     data: "challengecategory/challengecategory",
   }),
+=======
+  components: {
+    Breadcrumb,
+  },
+  computed: mapGetters({
+    data: "challengecategory/challengecategory",
+  }),
+
+>>>>>>> 9b7d408 (admin new)
   created() {
     this.$store.dispatch("challengecategory/fetchOne", this.$route.params.id);
   },
@@ -109,4 +174,9 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style></style>
+=======
+<style>
+</style>
+>>>>>>> 9b7d408 (admin new)
