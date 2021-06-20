@@ -1,0 +1,143 @@
+/* content */
+
+main .content {
+    font-family: 'Poppins', sans-serif;
+}
+
+main .content h1,
+main .social h2 {
+    font-weight: 500;
+    font-size: 2.5rem;
+    padding: 22px 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.content-item {
+    padding: 22px;
+    border: 1px solid var(--border-color-grey);
+    border-radius: var(--border-radius-main);
+    margin-bottom: 24px;
+    background-color: var(--black-bold);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    transition: 0.3s;
+    color: #fff;
+}
+
+.solution-author {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.author-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius-main);
+    margin-right: 12px;
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.solution-title {
+    margin: 16px 0;
+}
+
+.solution-title h3 {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+.solution-title h3:hover {
+    text-decoration: underline;
+}
+
+.help-message {
+    font-size: 1.6rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.solution-help {
+    border-radius: var(--border-radius-main);
+    border: 1px solid var(--border-color-grey);
+    padding: 16px 12px;
+    cursor: pointer;
+}
+
+.solution-help span {
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+
+.solution-challenge {
+    padding: 12px;
+    border-radius: var(--border-radius-main);
+    background-color: var(--black);
+    margin: 22px 0 12px 0;
+    cursor: pointer;
+}
+
+.solution-action {
+    display: flex;
+    align-items: center;
+}
+
+.challenge-name p {
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.challenge-level span {
+    font-family: 'Lato', sans-serif;
+}
+
+.challenge-img {
+    height: 110px;
+}
+
+.challenge-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-main);
+}
+
+.button-block1 {
+    font-weight: 600;
+    border: 1px solid var(--border-color-grey);
+    border-radius: var(--border-radius-main);
+    padding: 9px 40px;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    width: 48%;
+    justify-content: center;
+}
+
+.upvote {
+    margin-right: 12px;
+}
+
+.icon {
+    transform: rotate(-90deg);
+}
+
+.upvote span,
+.feedback span {
+    margin-left: 12px;
+}
+
+.feedback {
+    margin-bottom: 0rem !important;
+}
+
+.MuiSvgIcon-fontSizeInherit {
+    margin: 0;
+}
+
+
+/* end content */
