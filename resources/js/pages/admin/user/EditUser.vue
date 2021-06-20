@@ -166,9 +166,12 @@
                 </form>
               </div>
             </div>
+                </form>
             <!-- /.card -->
             </div>
           <!--/.col (left) -->
+        </div>
+          </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

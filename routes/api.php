@@ -13,8 +13,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChallengeCategoryController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ChallengeCategoryController;
-use App\Http\Controllers\ChallengeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
