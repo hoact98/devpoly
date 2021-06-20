@@ -179,113 +179,101 @@
 
 <script>
 export default {
-     data:() => ({
+  data: () => ({
     form: new Form({
-      username: '',
-      name: '',
-      email: '',
-      avatar: '',
-      role_id: '',
-      address: '',
-      password:'',
-      phone: '',
-      gender: '',
-      is_active: '',
-      permission_id: []
+      username: "",
+      name: "",
+      email: "",
+      avatar: "",
+      role_id: "",
+      address: "",
+      password: "",
+      phone: "",
+      gender: "",
+      is_active: "",
+      permission_id: [],
     }),
     formPass: new Form({
-      password: '',
-      new_password: '',
-      new_confirm_password: ''
+      password: "",
+      new_password: "",
+      new_confirm_password: "",
     }),
-    title: 'Cập nhật người dùng',
+    title: "Cập nhật người dùng",
   }),
 
-   computed: {
-        data () {
-            return this.$store.state.user.user;
-        },
-
-        permission_id (){
-          var permission_id = [];
-            this.data.user.has_permission.forEach(function (permission) {
-                permission_id.push(permission.permission_id);
-            });
-            this.form.permission_id=permission_id;
-        }
-   },
-
-    components: {
-      Breadcrumb
+  computed: {
+    data() {
+      return this.$store.state.user.user;
     },
-      computed: mapGetters({
-      data: 'user/user'
+
+    permission_id() {
+      var permission_id = [];
+      this.data.user.has_permission.forEach(function (permission) {
+        permission_id.push(permission.permission_id);
+      });
+      this.form.permission_id = permission_id;
+    },
+  },
+
+  components: {
+    Breadcrumb,
+  },
+  computed: mapGetters({
+    data: "user/user",
   }),
 
-
-   created()  {
-       this.$store.dispatch('user/fetchOne',this.$route.params.id);
+  created() {
+    this.$store.dispatch("user/fetchOne", this.$route.params.id);
+  },
+  methods: {
+    upload(event) {
+      this.form.avatar = event.target.files[0];
     },
-    methods: {
-        upload(event){
-         this.form.avatar = event.target.files[0];
-        },
-      async  updateUser () {
-         this.form.name = this.data.user.information.name
-        this.form.username = this.data.user.username
-        this.form.email = this.data.user.email
-        this.form.role_id = this.data.user.role.role_id
-        this.form.address = this.data.user.information.address
-        this.form.phone = this.data.user.information.phone
-        this.form.gender = this.data.user.information.gender
-        this.form.is_active = this.data.user.is_active
-      await this.form.post(route('update.user',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'User update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-
+    async updateUser() {
+      this.form.name = this.data.user.information.name;
+      this.form.username = this.data.user.username;
+      this.form.email = this.data.user.email;
+      this.form.role_id = this.data.user.role.role_id;
+      this.form.address = this.data.user.information.address;
+      this.form.phone = this.data.user.information.phone;
+      this.form.gender = this.data.user.information.gender;
+      this.form.is_active = this.data.user.is_active;
+      await this.form
+        .post(route("update.user", this.$route.params.id))
+        .then((response) => {
+          if (response.data.status == "success") {
+            this.$router.push({ name: "users" });
+            Swal.fire("Update", "User update  Successfully", "success");
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        });
     },
-    updatePassword(){
-      this.formPass.post(route('change.password',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'Password update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-    }
-
-
-        },
-
-
-    }
-}
+    updatePassword() {
+      this.formPass
+        .post(route("change.password", this.$route.params.id))
+        .then((response) => {
+          if (response.data.status == "success") {
+            this.$router.push({ name: "users" });
+            Swal.fire("Update", "Password update  Successfully", "success");
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
