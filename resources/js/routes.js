@@ -39,7 +39,7 @@ const routes = [{
                 alias: '',
                 component: page('public/chanllenge/Chanllenge.vue'),
                 meta: { guest: true },
-                name: 'solutionList',
+                name: 'chanllenge',
             }
         ]
     },

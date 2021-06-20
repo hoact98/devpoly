@@ -2666,7 +2666,7 @@ var routes = [{
     meta: {
       guest: true
     },
-    name: 'solutionList'
+    name: 'chanllenge'
   }]
 }, {
   path: '/user',
