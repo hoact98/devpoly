@@ -15,6 +15,7 @@
               </div>
               <!-- /.card-header -->
 
+
               <div class="card-body">
                 <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)">
                   <div class="row">
@@ -24,6 +25,49 @@
                           <a class="nav-link" id="permission-tab" data-toggle="pill" href="#permission" role="tab" aria-controls="permission" aria-selected="false">Permission</a>
                           <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
                         </div>
+
+              <!-- form start -->
+               <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)">
+                <div class="card-body">
+                    <div class="form-group">
+                    <label for="exampleInputName">Username:</label>
+                    <input type="text" v-model="data.user.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" name="username" placeholder="Enter username">
+                      <div class="text-danger" v-if="form.errors.has('username')" v-html="form.errors.get('username')" />
+                   </div>
+                    <div class="form-group">
+                    <label for="exampleInputName">Name:</label>
+                    <input type="text" v-model="data.user.information.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" name="username" placeholder="Enter name">
+                    <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email:</label>
+                    <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
+                      <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
+
+                  </div>
+                  <div class="form-group">
+                    <label for="">Avatar</label>
+                    <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('avatar') }" class="form-control" name="avatar">
+                      <div class="text-danger" v-if="form.errors.has('avatar')" v-html="form.errors.get('avatar')" />
+                    <img :src="'/'+data.user.avatar" alt="" width="200">
+                  </div>
+                    <div class="form-group">
+                      <label>Role</label>
+                      <select class="form-control select2" v-model="data.user.role.role_id" :class="{ 'is-invalid': form.errors.has('role_id') }" name="role_id" style="width: 100%;">
+                        <option v-for="role in data.roles" :key="role.id" :value="role.id" :selected="role.id == data.user.role.role_id">{{role.name}}</option>
+                      </select>
+                      <div class="text-danger" v-if="form.errors.has('role_id')" v-html="form.errors.get('role_id')" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputAddress">Address:</label>
+                      <input type="text" class="form-control" v-model="data.user.information.address" :class="{ 'is-invalid': form.errors.has('address') }" id="exampleInputAdress" placeholder="Enter address">
+                      <div class="text-danger" v-if="form.errors.has('address')" v-html="form.errors.get('address')" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPhone">Phone:</label>
+                      <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.information.phone" id="exampleInputPhone" placeholder="Enter phone">
+                      <div class="text-danger" v-if="form.errors.has('phone')" v-html="form.errors.get('phone')" />
+
                     </div>
                     <div class="col-7 col-sm-9">
                       <div class="tab-content" id="vert-tabs-tabContent">
@@ -42,7 +86,7 @@
                                 <label for="exampleInputEmail1">Email:</label>
                                 <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
                                   <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-                              
+
                               </div>
                               <div class="form-group">
                                 <label for="">Avatar</label>
@@ -135,98 +179,101 @@
 
 <script>
 export default {
-     data:() => ({
+  data: () => ({
     form: new Form({
-      username: '',
-      name: '',
-      email: '',
-      avatar: '',
-      role_id: '',
-      address: '',
-      password:'',
-      phone: '',
-      gender: '',
-      is_active: '',
-      permission_id: []
+      username: "",
+      name: "",
+      email: "",
+      avatar: "",
+      role_id: "",
+      address: "",
+      password: "",
+      phone: "",
+      gender: "",
+      is_active: "",
+      permission_id: [],
     }),
     formPass: new Form({
-      password: '',
-      new_password: '',
-      new_confirm_password: ''
+      password: "",
+      new_password: "",
+      new_confirm_password: "",
     }),
-    title: 'Cập nhật người dùng',
+    title: "Cập nhật người dùng",
   }),
-   computed: {
-        data () {
-            return this.$store.state.user.user;
-        },
-        
-        permission_id (){
-          var permission_id = [];
-            this.data.user.has_permission.forEach(function (permission) {
-                permission_id.push(permission.permission_id);
-            });
-            this.form.permission_id=permission_id;
-        }
-   },
-   created()  {
-       this.$store.dispatch('user/fetchOne',this.$route.params.id);
+
+  computed: {
+    data() {
+      return this.$store.state.user.user;
     },
-    methods: {
-        upload(event){
-         this.form.avatar = event.target.files[0];
-        },
-      async  updateUser () {
-         this.form.name = this.data.user.information.name
-        this.form.username = this.data.user.username
-        this.form.email = this.data.user.email
-        this.form.role_id = this.data.user.role.role_id
-        this.form.address = this.data.user.information.address
-        this.form.phone = this.data.user.information.phone
-        this.form.gender = this.data.user.information.gender
-        this.form.is_active = this.data.user.is_active
-      await this.form.post(route('update.user',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'User update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+
+    permission_id() {
+      var permission_id = [];
+      this.data.user.has_permission.forEach(function (permission) {
+        permission_id.push(permission.permission_id);
+      });
+      this.form.permission_id = permission_id;
     },
-    updatePassword(){
-      this.formPass.post(route('change.password',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'Password update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-    }
-      
-    }
-}
+  },
+
+  components: {
+    Breadcrumb,
+  },
+  computed: mapGetters({
+    data: "user/user",
+  }),
+
+  created() {
+    this.$store.dispatch("user/fetchOne", this.$route.params.id);
+  },
+  methods: {
+    upload(event) {
+      this.form.avatar = event.target.files[0];
+    },
+    async updateUser() {
+      this.form.name = this.data.user.information.name;
+      this.form.username = this.data.user.username;
+      this.form.email = this.data.user.email;
+      this.form.role_id = this.data.user.role.role_id;
+      this.form.address = this.data.user.information.address;
+      this.form.phone = this.data.user.information.phone;
+      this.form.gender = this.data.user.information.gender;
+      this.form.is_active = this.data.user.is_active;
+      await this.form
+        .post(route("update.user", this.$route.params.id))
+        .then((response) => {
+          if (response.data.status == "success") {
+            this.$router.push({ name: "users" });
+            Swal.fire("Update", "User update  Successfully", "success");
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        });
+    },
+    updatePassword() {
+      this.formPass
+        .post(route("change.password", this.$route.params.id))
+        .then((response) => {
+          if (response.data.status == "success") {
+            this.$router.push({ name: "users" });
+            Swal.fire("Update", "Password update  Successfully", "success");
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

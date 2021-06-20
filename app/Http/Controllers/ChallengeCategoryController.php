@@ -55,7 +55,7 @@ class ChallengeCategoryController extends Controller
     }
 
     // update category
-    public function update($id, SaveCategoryRequest $request)
+    public function update($id, Request $request)
     {
         $cate = ChallengeCategory::find($id);
         $imageName = $cate->image;
