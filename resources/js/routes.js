@@ -1,6 +1,7 @@
 import AdminLayout from './layouts/admin.vue';
 import MainLayout from './layouts/main.vue';
 import LoginLayout from './layouts/login.vue';
+import HomeLayout from './layouts/home.vue';
 
 function page(path) {
     return () =>
@@ -12,14 +13,68 @@ function page(path) {
 // Routes
 const routes = [{
         path: '/',
-        component: MainLayout,
+        component: HomeLayout,
         children: [{
-            path: 'home',
+            path: '/',
             alias: '',
             component: page('public/Home.vue'),
             meta: { guest: true },
             name: 'home',
+        }, {
+            path: '/home-dashboard',
+            alias: '',
+            component: page('public/Dashboard.vue'),
+            meta: { guest: true },
+            name: 'homeDashboard',
         }]
+    },
+    {
+        path: '/paths',
+        component: MainLayout,
+        children: [{
+                path: '',
+                alias: '',
+                component: page('public/Overview.vue'),
+                meta: { guest: true },
+                name: 'paths',
+            },
+            {
+                path: '/overview',
+                alias: '',
+                component: page('public/Overview.vue'),
+                meta: { guest: true },
+                name: 'overview',
+            },
+            {
+                path: '/solution',
+                alias: '',
+                component: page('public/SolutionList.vue'),
+                meta: { guest: true },
+                name: 'solution',
+            },
+            {
+                path: '/solution-detail',
+                alias: '',
+                component: page('public/SolutionDetail.vue'),
+                meta: { guest: true },
+                name: 'solutionDetail',
+            },
+            {
+                path: '/feedback',
+                alias: '',
+                component: page('public/Feedback.vue'),
+                meta: { guest: true },
+                name: 'feedback',
+            },
+            {
+                path: '/chanllenge',
+                alias: '',
+                component: page('public/Chanllenge.vue'),
+                meta: { guest: true },
+                name: 'chanllenge',
+            }
+
+        ]
     },
     {
         path: '/user',

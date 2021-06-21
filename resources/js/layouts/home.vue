@@ -1,8 +1,8 @@
 <template>
   <div class="app">
-      <SidebarMain></SidebarMain>
+      <SidebarHome></SidebarHome>
       <main>
-        <HeaderMain></HeaderMain>
+        <Header></Header>
         <slot />
         <router-view/>
         <Social></Social>
@@ -12,18 +12,17 @@
 </template>
 
 <script>
-
-import SidebarMain from '../components/site/SidebarMain.vue'
-import HeaderMain from '../components/site/HeaderMain.vue'
+import SidebarHome from '../components/site/SidebarHome.vue'
+import Header from '../components/site/Header.vue'
 import Footer from '../components/site/Footer.vue'
 import Social from '../components/site/Social.vue'
 
 export default {
-  name: 'MainLayout',
+  name: 'HomeLayout',
 
   components: {
-    SidebarMain,
-    HeaderMain,
+    SidebarHome,
+    Header,
     Footer,
     Social
   }
