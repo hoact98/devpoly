@@ -13,7 +13,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChallengeCategoryController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,7 +33,7 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user', [AuthController::class, 'userProfile']);    
+    Route::get('/user', [AuthController::class, 'userProfile']);
 });
 
 // Route::group(['middleware' => 'auth:api'], function () {

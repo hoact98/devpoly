@@ -16,6 +16,7 @@ mix.options({
         host: 'localhost',
         port: '8079'
     },
+    enableCssModules: true,
 });
 
 mix.webpackConfig({
