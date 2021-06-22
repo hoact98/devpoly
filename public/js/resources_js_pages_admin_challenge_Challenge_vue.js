@@ -11,7 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
 //
 //
 //
@@ -74,32 +73,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       title: "Challenge"
     };
-  },
-  components: {
-    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: {
     challenges: function challenges() {
@@ -240,54 +218,59 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c(
-                    "th",
-                    { staticStyle: { "text-align": "center" } },
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/admin/challenge/add" } },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { type: "button" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                    Add New\n                  "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "table",
                     { staticClass: "table table-head-fixed text-nowrap" },
                     [
-                      _vm._m(0),
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v("ID")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Title")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Category")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Level")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Language")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            [
+                              _c(
+                                "router-link",
+                                { attrs: { to: { name: "add.challenge" } } },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      attrs: { type: "button" }
+                                    },
+                                    [_vm._v("Add New")]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c(
                         "tbody",
                         _vm._l(_vm.challenges, function(challenge) {
                           return _c("tr", { key: challenge.id }, [
-                            _c("td", [_c("p", [_vm._v(_vm._s(challenge.id))])]),
+                            _c("td", [_vm._v(_vm._s(challenge.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(challenge.title) + " ")]),
                             _vm._v(" "),
                             _c("td", [
-                              _c("p", [_vm._v(_vm._s(challenge.title))])
+                              _vm._v(_vm._s(challenge.category.name) + " ")
                             ]),
                             _vm._v(" "),
-                            _c("td", [
-                              _c("p", [
-                                _vm._v(_vm._s(challenge.cate_challen_id))
-                              ])
-                            ]),
+                            _c("td", [_vm._v(_vm._s(challenge.level))]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Detail")]),
+                            _c("td", [_vm._v(_vm._s(challenge.language))]),
                             _vm._v(" "),
                             _c(
                               "td",
@@ -316,11 +299,7 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [
-                                    _vm._v(
-                                      "\n                        Delete\n                      "
-                                    )
-                                  ]
+                                  [_vm._v("Delete")]
                                 )
                               ],
                               1
@@ -341,34 +320,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { "text-align": "center" } }, [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Title")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Category")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Detail")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Action")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

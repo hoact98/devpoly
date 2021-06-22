@@ -1,9 +1,221 @@
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_pages_admin_challenge_EditChallenge_vue"],{
 
-/***/ "./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js ***!
-  \*********************************************************************************/
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/EditChallenge.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/EditChallenge.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      form: new Form({
+        title: "",
+        description: "",
+        language: "",
+        link_figma: "",
+        level: "",
+        cate_challen_id: ""
+      }),
+      title: "Edit Challenge"
+    };
+  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    data: "challenge/challenge"
+  }),
+  created: function created() {
+    this.$store.dispatch("challenge/fetchOne", this.$route.params.id);
+  },
+  methods: {
+    updateChallenge: function updateChallenge() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.form.title = _this.data.title;
+                _this.form.description = _this.data.description;
+                _this.form.language = _this.data.language;
+                _this.form.link_figma = _this.data.link_figma;
+                _this.form.level = _this.data.level;
+                _this.form.cate_challen_id = _this.data.cate_challen_id;
+                _context.next = 8;
+                return _this.form.post(route("update.challenge", _this.$route.params.id)).then(function (response) {
+                  if (response.data.status == "success") {
+                    _this.$router.push({
+                      name: "challenges"
+                    });
+
+                    Swal.fire("Update", "Challenge update  Successfully", "success");
+                  }
+                })["catch"](function () {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!"
+                  });
+                });
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
 /***/ ((module) => {
 
 /**
@@ -758,263 +970,6 @@ try {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/regenerator/index.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js");
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/EditChallenge.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/admin/challenge/EditChallenge.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      form: new Form({
-        title: "",
-        description: "",
-        language: "",
-        link_figma: "",
-        level: "",
-        cate_challen_id: ""
-      }),
-      title: "Edit Challenge"
-    };
-  },
-  components: {
-    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default
-  },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    data: "challenge/challenge"
-  }),
-  created: function created() {
-    this.$store.dispatch("challenge/fetchOne", this.$route.params.id);
-  },
-  methods: {
-    updateChallenge: function updateChallenge() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.form.title = _this.data.title;
-                _this.form.description = _this.data.description;
-                _this.form.language = _this.data.language;
-                _this.form.link_figma = _this.data.link_figma;
-                _this.form.level = _this.data.level;
-                _this.form.cate_challen_id = _this.data.cate_challen_id;
-                _context.next = 8;
-                return _this.form.post(route("update.challenge", _this.$route.params.id)).then(function (response) {
-                  if (response.data.status == "success") {
-                    _this.$router.push({
-                      name: "challenges"
-                    });
-
-                    Swal.fire("Update", "Challenge update  Successfully", "success");
-                  }
-                })["catch"](function () {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!"
-                  });
-                });
-
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/pages/admin/challenge/EditChallenge.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/pages/admin/challenge/EditChallenge.vue ***!
@@ -1148,12 +1103,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("title")
-                          },
+                          class: { "is-invalid": _vm.form.errors.has("title") },
                           attrs: {
                             type: "text",
-                            id: "",
                             placeholder: "Title",
                             name: "title"
                           },
@@ -1219,7 +1171,7 @@ var render = function() {
                                 expression: "data.language"
                               }
                             ],
-                            staticClass: "form-select",
+                            staticClass: "form-control select2",
                             class: {
                               "is-invalid": _vm.form.errors.has("language")
                             },
@@ -1248,7 +1200,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { selected: "" } }, [
+                            _c("option", { attrs: { value: "" } }, [
                               _vm._v("Chọn Ngôn Ngữ")
                             ]),
                             _vm._v(" "),
@@ -1293,12 +1245,8 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("link_figma")
-                          },
                           attrs: {
                             type: "text",
-                            id: "",
                             placeholder: "Link-Figma",
                             name: "link_figma"
                           },
@@ -1343,7 +1291,7 @@ var render = function() {
                                 expression: "data.level"
                               }
                             ],
-                            staticClass: "form-select",
+                            staticClass: "form-control select2",
                             class: {
                               "is-invalid": _vm.form.errors.has("level")
                             },
@@ -1372,7 +1320,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { selected: "" } }, [
+                            _c("option", { attrs: { value: "" } }, [
                               _vm._v("Chọn độ khó")
                             ]),
                             _vm._v(" "),
@@ -1416,7 +1364,7 @@ var render = function() {
                                 expression: "data.cate_challen_id"
                               }
                             ],
-                            staticClass: "form-select",
+                            staticClass: "form-control select2",
                             class: {
                               "is-invalid": _vm.form.errors.has(
                                 "cate_challen_id"
@@ -1447,7 +1395,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { selected: "" } }, [
+                            _c("option", { attrs: { value: "" } }, [
                               _vm._v("Chọn danh mục thử thách")
                             ]),
                             _vm._v(" "),

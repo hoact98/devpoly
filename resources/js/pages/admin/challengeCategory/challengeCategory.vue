@@ -12,37 +12,27 @@
                 <h3 class="card-title">{{ title }}</h3>
               </div>
               <!-- /.card-header -->
-              <router-link :to="{name: 'add.challengecategory'}"><button type="button" class="btn btn-primary">Add New</button></router-link>
+              
               <div class="card-body">
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
-                      <th style="text-align: center">ID</th>
-                      <th style="text-align: center">Name</th>
-                      <th style="text-align: center">SlTT</th>
-                      <th style="text-align: center">Detail</th>
-                    <th style="text-align: center">Action</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Image</th>
+                    <th><router-link :to="{name: 'add.challengecategory'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="challengecategory in challengecategories" :key="challengecategory.id">
-                      <td><p>{{ challengecategory.id }}</p></td>
-                      <td><p>{{ challengecategory.name }}</p></td>
-                      <th>Sl TT</th>
-                      <th>Detail</th>
+                      <td>{{ challengecategory.id }}</td>
+                      <td>{{ challengecategory.name }}</td>
+                      <td><img :src="'/'+challengecategory.image" alt="" width="60px"></td>
                       <td>
-                        <router-link
-                          :to="{
-                            name: 'edit.challengecategory',
-                            params: { id: challengecategory.id },
-                          }"
-                          class="btn btn-info"
-                          >Edit
+                        <router-link :to="{ name: 'edit.challengecategory',params: { id: challengecategory.id },}" class="btn btn-info">Edit
                         </router-link>
-                        <button
-                          class="btn btn-danger"
-                          @click="deletechallengecategory(challengecategory.id)"
-                        >
+                        <button class="btn btn-danger"
+                          @click="deletechallengecategory(challengecategory.id)">
                           Delete
                         </button>
                       </td>
@@ -65,15 +55,11 @@
 </template>
 
 <script>
-import Breadcrumb from "../../../components/Breadcrumb.vue";
 export default {
   data() {
     return {
       title: "Challenge Category",
     };
-  },
-  components: {
-    Breadcrumb,
   },
   computed: {
     challengecategories() {

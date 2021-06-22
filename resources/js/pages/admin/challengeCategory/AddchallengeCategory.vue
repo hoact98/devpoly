@@ -1,4 +1,3 @@
-
 <template>
   <div class="content-wrapper">
     <breadcrumb :title='title'></breadcrumb>
@@ -25,7 +24,8 @@
                     </div>
                    <div class="form-group">
                     <label >Description:</label>
-                    <ckeditor  v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description" value="Hello, World!"></ckeditor>
+                    <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
+                      <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
                     </div>
 
                     <div class="form-group">
@@ -57,8 +57,6 @@
 </template>
 
 <script>
-import Breadcrumb from '../../../components/Breadcrumb.vue'
-
 export default {
    data:() => ({
     form: new Form({
@@ -68,9 +66,6 @@ export default {
     }),
     title: 'Thêm Danh Mục Thử Thách',
   }),
-    components: {
-      Breadcrumb
-    },
      computed: {
       },
     methods: {
@@ -95,13 +90,10 @@ export default {
               text: 'Something went wrong!',
             })
     });
-
-
     },
     }
 }
 </script>
 
 <style>
-
 </style>

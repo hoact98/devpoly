@@ -11,7 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue");
 //
 //
 //
@@ -68,25 +67,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       title: "Challenge Category"
     };
-  },
-  components: {
-    Breadcrumb: _components_Breadcrumb_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: {
     challengecategories: function challengecategories() {
@@ -218,106 +203,119 @@ var render = function() {
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
-              _c(
-                "div",
-                { staticClass: "card" },
-                [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("h3", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(_vm.title))
-                    ])
-                  ]),
-                  _vm._v(" "),
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.title))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
                   _c(
-                    "router-link",
-                    { attrs: { to: { name: "add.challengecategory" } } },
+                    "table",
+                    { staticClass: "table table-head-fixed text-nowrap" },
                     [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "button" }
-                        },
-                        [_vm._v("Add New")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-head-fixed text-nowrap" },
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.challengecategories, function(
-                            challengecategory
-                          ) {
-                            return _c("tr", { key: challengecategory.id }, [
-                              _c("td", [
-                                _c("p", [_vm._v(_vm._s(challengecategory.id))])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("p", [
-                                  _vm._v(_vm._s(challengecategory.name))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Sl TT")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Detail")]),
-                              _vm._v(" "),
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v("ID")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Name")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Image")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            [
                               _c(
-                                "td",
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: { name: "add.challengecategory" }
+                                  }
+                                },
                                 [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "btn btn-info",
-                                      attrs: {
-                                        to: {
-                                          name: "edit.challengecategory",
-                                          params: { id: challengecategory.id }
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Edit\n                      ")]
-                                  ),
-                                  _vm._v(" "),
                                   _c(
                                     "button",
                                     {
-                                      staticClass: "btn btn-danger",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deletechallengecategory(
-                                            challengecategory.id
-                                          )
-                                        }
-                                      }
+                                      staticClass: "btn btn-primary",
+                                      attrs: { type: "button" }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                        Delete\n                      "
-                                      )
-                                    ]
+                                    [_vm._v("Add New")]
                                   )
-                                ],
-                                1
+                                ]
                               )
-                            ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ])
-                ],
-                1
-              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.challengecategories, function(
+                          challengecategory
+                        ) {
+                          return _c("tr", { key: challengecategory.id }, [
+                            _c("td", [_vm._v(_vm._s(challengecategory.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(challengecategory.name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("img", {
+                                attrs: {
+                                  src: "/" + challengecategory.image,
+                                  alt: "",
+                                  width: "60px"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      to: {
+                                        name: "edit.challengecategory",
+                                        params: { id: challengecategory.id }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Edit\n                      ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletechallengecategory(
+                                          challengecategory.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                        Delete\n                      "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ])
+              ])
             ])
           ])
         ])
@@ -326,30 +324,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { "text-align": "center" } }, [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [_vm._v("SlTT")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Detail")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Action")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
