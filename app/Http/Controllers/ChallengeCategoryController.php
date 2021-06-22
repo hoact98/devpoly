@@ -6,7 +6,7 @@ use App\Http\Requests\SaveCategoryRequest;
 use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use App\Models\Challenge;
 class ChallengeCategoryController extends Controller
 {
 
@@ -85,7 +85,21 @@ class ChallengeCategoryController extends Controller
     {
         $cate = ChallengeCategory::find($id);
         $cate->delete();
-
         return response()->json(['status'=>'success','message'=>'The category successfully deleted','data'=>$cate],200);
+    }
+    public function get_All_Challenge_Category(){
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list categories',
+            'data' => ChallengeCategory::all(),
+        ], 200);
+    }
+    public function get_One_Challenge_Category($slug){
+        $ChallengeCategory['oneChallengeCategory'] = ChallengeCategory::where('slug','=', $slug)->first();
+        $ChallengeCategoryID = $ChallengeCategory['oneChallengeCategory']->id;
+        if($ChallengeCategory['oneChallengeCategory'] != null){
+            $ChallengeCategory['listChallenge'] = Challenge::where('cate_challen_id',$ChallengeCategoryID);
+        }
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$ChallengeCategory],200);
     }
 }

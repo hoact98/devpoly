@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
+use App\Models\Feedbacks;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -10,14 +10,14 @@ class FeedbackController extends Controller
    // all feedbacks
    public function index()
    {
-       $feedbacks = Feedback::all()->toArray();
+       $feedbacks = Feedbacks::all()->toArray();
        return array_reverse($feedbacks);
    }
 
    // add feedback
    public function create(Request $request)
    {
-       $feedback = new Feedback([
+       $feedback = new Feedbacks([
            'feedback_content' => $request->feedback_content,
            'user_id' => $request->user_id,
            'solution_id' => $request->solution_id,
@@ -31,14 +31,14 @@ class FeedbackController extends Controller
    // edit feedback
    public function show($id)
    {
-       $feedback = Feedback::find($id);
+       $feedback = Feedbacks::find($id);
        return response()->json($feedback);
    }
 
    // update feedback
    public function update($id, Request $request)
    {
-       $feedback = Feedback::find($id);
+       $feedback = Feedbacks::find($id);
        $feedback->update($request->all());
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback]);
@@ -47,7 +47,7 @@ class FeedbackController extends Controller
    // delete feedback
    public function delete($id)
    {
-       $feedback = Feedback::find($id);
+       $feedback = Feedbacks::find($id);
        $feedback->delete();
 
        return response()->json('The feedback successfully deleted');

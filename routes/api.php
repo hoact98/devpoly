@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChallengeCategoryController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\FeedbackController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,17 +82,25 @@ Route::group(['prefix' => 'permission'], function () {
 });
 
 Route::get('challengecategories', [ChallengeCategoryController::class, 'index'])->name('challengecategories');
+Route::get('get_All_Challenge_Category', [ChallengeCategoryController::class, 'get_All_Challenge_Category'])->name('get_All.challengecategory');
+Route::get('get_One_Challenge_Category/{slug}', [ChallengeCategoryController::class, 'get_One_Challenge_Category'])->name('get_One.challengecategory');
 Route::group(['prefix' => 'challengecategory'], function () {
     Route::post('add', [ChallengeCategoryController::class, 'create'])->name('create.challengecategory');
     Route::get('{id}', [ChallengeCategoryController::class, 'show'])->name('show.challengecategory');
     Route::post('update/{id}', [ChallengeCategoryController::class, 'update'])->name('update.challengecategory');
     Route::delete('delete/{id}', [ChallengeCategoryController::class, 'delete'])->name('delete.challengecategory');
+
 });
 
 Route::get('challenges', [ChallengeController::class, 'index'])->name('challenges');
+Route::get('get_One_Challenge/{slug}', [ChallengeController::class, 'get_One_Challenge'])->name('get_One.challenge');
 Route::group(['prefix' => 'challenge'], function () {
     Route::post('add', [ChallengeController::class, 'create'])->name('create.challenge');
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
 });
+
+
+Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
+

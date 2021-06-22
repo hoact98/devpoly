@@ -48,7 +48,7 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
-        $challenge['Onechallengecategory'] = ChallengeCategory::where('id', $id)->first();
+        $challenge['Onechallengecategory'] = ChallengeCategory::where('id',$challenge->cate_challen_id )->first();
         $challenge['challengecategory'] = ChallengeCategory::all();
         return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
     }
@@ -70,4 +70,11 @@ class ChallengeController extends Controller
 
         return response()->json(['status'=>'success','message'=>'The challenge successfully deleted'],200);
     }
+      // show one challenge
+      public function get_One_Challenge($slug)
+      {
+          $challenge =  Challenge::where('slug','=', $slug)->first();
+          $challenge['Onechallengecategory'] = ChallengeCategory::where('id',$challenge->cate_challen_id)->first();
+          return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
+      }
 }
