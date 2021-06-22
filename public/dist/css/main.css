@@ -21,14 +21,13 @@
 }
 
 html {
-    font-size: 62.5%!important;
+    font-size: 75.5% !important;
     box-sizing: border-box;
 }
 
 body {
     font-family: 'Lato', sans-serif;
     color: var(--white);
-    font-size: 1.2rem;
 }
 
 .app {
@@ -44,7 +43,7 @@ h6 {
     font-family: 'Poppins', sans-serif;
 }
 
-aside {
+.sidebar1 {
     background-color: var(--black-bold);
     width: 240px;
     box-sizing: border-box;
@@ -53,27 +52,27 @@ aside {
     border-right: 1px solid var(--border-color-grey);
 }
 
-aside .logo {
+.sidebar1 .logo {
     padding-left: 14px;
 }
 
 
-/* nav */
+/* .nav1 */
 
-nav {
+.nav1 {
     margin-top: 26px;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
-nav ul {
+.nav1 ul {
     list-style: none;
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-nav ul li a {
+.nav1 ul li a {
     text-decoration: none;
     color: var(--grey-color);
     position: relative;
@@ -85,11 +84,11 @@ nav ul li a {
     transition: 0.4s;
 }
 
-nav ul li a.home {
+.nav1 ul li a.home {
     font-weight: 700;
 }
 
-nav ul li a.active::before {
+.nav1 ul li a.active::before {
     content: "";
     position: absolute;
     width: 4px;
@@ -100,7 +99,7 @@ nav ul li a.active::before {
     border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0;
 }
 
-nav ul li a:hover {
+.nav1 ul li a:hover {
     background-color: #454f59;
     color: var(--white);
 }
@@ -110,19 +109,19 @@ nav ul li a:hover {
     font-weight: 700;
 }
 
-nav ul li a .path-heading {
+.nav1 ul li a .path-heading {
     font-weight: 700;
     color: var(--white);
     display: inline-block;
     margin: 8px 0;
 }
 
-nav ul li a .path-description {
+.nav1 ul li a .path-description {
     display: inline-block;
     width: 60%;
 }
 
-nav ul li a .icon-cate {
+.nav1 ul li a .icon-cate {
     fill: currentColor;
     width: 20px;
     height: 20px;
@@ -151,11 +150,11 @@ nav ul li a .icon-cate {
     cursor: pointer;
 }
 
-nav ul li a.block-path:hover {
+.nav1 ul li a.block-path:hover {
     background-color: none;
 }
 
-nav ul li img.path-banner {
+.nav1 ul li img.path-banner {
     visibility: visible;
     inset: 0px;
     border-radius: var(--border-radius-main);
@@ -167,7 +166,7 @@ nav ul li img.path-banner {
 }
 
 
-/* end nav */
+/* end .nav1 */
 
 
 /* main */
@@ -360,20 +359,18 @@ footer {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
         padding-bottom: 16px;
     }
-    aside {
+    .sidebar1 {
         position: fixed;
         width: 100%;
         text-align: left;
         z-index: 100;
     }
-
-    header{
+    header {
         position: fixed;
         width: 100%;
         background: var(--black);
     }
-
-    .content{
+    .content {
         margin-top: 80px!important;
     }
 }
@@ -388,14 +385,14 @@ footer {
     .hide-on-destop {
         display: none;
     }
-    aside {
+    .sidebar1 {
         width: 100px;
         position: fixed;
     }
-    main{
+    main {
         margin-left: 100px;
     }
-    nav ul li img.path-banner {
+    .nav1 ul li img.path-banner {
         visibility: visible;
         inset: 0px;
         border-radius: var(--border-radius-main);
@@ -407,18 +404,18 @@ footer {
         object-fit: cover;
         object-position: center;
     }
-    aside {
+    .sidebar1 {
         padding: 0;
         text-align: center;
     }
-    nav ul li a .icon-cate {
+    .nav1 ul li a .icon-cate {
         margin: 0;
     }
-    aside .logo {
+    .sidebar1 .logo {
         padding: 26px 0 0 0;
         width: 100%;
     }
-    nav ul li a.active::before {
+    .nav1 ul li a.active::before {
         left: 0;
     }
 }
@@ -427,11 +424,10 @@ footer {
     .hide-on-destop-large {
         display: none;
     }
-
-    aside {
+    .sidebar1 {
         position: fixed;
     }
-    main{
+    main {
         margin-left: 240px;
     }
 }

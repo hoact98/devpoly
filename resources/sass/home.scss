@@ -39,6 +39,7 @@ main .social h2 {
 }
 
 .content-item-title {
+    font-size: 80% !important;
     height: 6rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -46,7 +47,7 @@ main .social h2 {
     text-overflow: ellipsis;
     overflow: hidden;
     h3 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         margin: 12px 0;
     }
 }
@@ -60,7 +61,7 @@ main .social h2 {
     overflow: hidden;
     p {
         line-height: 1.7;
-        font-size: 1.4rem;
+        font-size: 15px;
         max-width: 720px;
         color: var(--white-grey);
     }
