@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = ['from_user_id','to_user_id','type','file_format',,'message','date','time','ip'];
+    protected $table = "messages";
+    protected $fillable = [
+        'from_user_id',
+        'to_user_id',
+        'type',
+        'file_format',
+        'message',
+        'date',
+        'time',
+        'ip'
+    ];
 }

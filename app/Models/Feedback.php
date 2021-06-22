@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feedbacks extends Model
+class Feedback extends Model
 {
     use HasFactory;
+    protected $table = 'feedbacks';
     protected $fillable = [
         'feedback_content',
         'user_id',

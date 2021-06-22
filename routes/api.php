@@ -14,6 +14,8 @@ use App\Http\Controllers\ChallengeCategoryController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SolutionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -99,6 +101,16 @@ Route::group(['prefix' => 'challenge'], function () {
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
+});
+
+Route::get('solutions', [SolutionController::class, 'index'])->name('solutions');
+Route::get('category-solutions/{slug}', [SolutionController::class, 'categorySolution'])->name('categorySolutions');
+Route::get('detail-solution/{id}', [SolutionController::class, 'detailSolution'])->name('detailSolution');
+Route::group(['prefix' => 'challenge'], function () {
+    Route::post('add', [SolutionController::class, 'create'])->name('create.solution');
+    Route::get('{id}', [SolutionController::class, 'show'])->name('show.solution');
+    Route::post('update/{id}', [SolutionController::class, 'update'])->name('update.solution');
+    Route::delete('delete/{id}', [SolutionController::class, 'delete'])->name('delete.solution');
 });
 
 
