@@ -34,7 +34,7 @@ class SaveUserRequest extends FormRequest
             'role_id'=>'required',
             'gender'=>['required'],
             'address'=>['required'],
-            'phone'=>['required',Rule::unique('information_users')->ignore($this->id)],
+            'phone'=>['required',Rule::unique('information_users')->ignore($this->id,'user_id')],
             'permission_id'=>'required'
         ];
     }
