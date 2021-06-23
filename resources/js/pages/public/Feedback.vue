@@ -311,11 +311,21 @@
                     </div>
                 </div>
             </section>
-</template>
+</template> 
 
 <script>
 export default {
-
+    data(){
+        return {}
+    },
+    computed: {
+        feedback () {
+            return this.$store.state.feedbacks.feedback
+        }
+    },
+    created: function(){
+        this.$store.dispatch('feedback/fetch')
+    }
 }
 </script>
 
