@@ -10,8 +10,8 @@
                                 <div class="desc-title">
                                     <h1>Responsive Web Developer</h1>
                                 </div>
-                                <div class="short-desc">
-                                    Learn and Practice Responsive Web Development by building 8 Websites with given designs
+                                <div class="short-desc" v-if="data "  v-html="data.description">
+
                                 </div>
                                 <div id="desc-box" class="desc-box1">
                                     <div class="box-title">
@@ -40,7 +40,7 @@
                         <div class="require col-xl-4 col-lg-6">
                             <div class="container-content">
                                 <div class="require-image">
-                                    <img src="images/request_image.png" alt="error">
+                                    <img v-if="data "   :src="'/'+data.image" alt="error">
                                 </div>
                                 <div class="require-title">
                                     <h5>Certificate Requirements</h5>
@@ -50,7 +50,7 @@
                                     <li>Completed 8 challenges</li>
                                 </ul>
                                 <div class="progres">
-                                    <h5>Progress</h5>
+                                    <!-- <h5>Progress</h5>
                                     <p>0 / 8 completed</p>
                                     <div class="progres-level">
                                         <div class="progres-level-item"></div>
@@ -61,214 +61,41 @@
                                         <div class="progres-level-item"></div>
                                         <div class="progres-level-item"></div>
                                         <div class="progres-level-item"></div>
-                                    </div>
+                                    </div> -->
                                 </div>
-    
+
                                 <div class="apply-button">
                                     <button>APPLY FOR CERTIFICATE</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="product">
+                    <div  v-if="data "   class="product">
                         <div class="product-title">
                             <h2>Products you will build</h2>
                             <div class="list-product row">
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <router-link :to="{name: 'chanllenge'}">
+                                <div     v-for="challenge in data.challenges" :key="challenge.id" class="product-item col-xl-4 col-md-6">
+                                    <router-link :to="{name: 'chanllenge',params:{ slug:challenge.slug}}">
                                         <div class="product-content">
                                             <div class="product-image">
                                                 <img src="images/404_image.png" alt="">
                                             </div>
                                             <div class="product-content-title">
-                                                404 Not Found
+                                            {{challenge.title}}
                                             </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
+                                            <div v-html="challenge.description.substring(0,150)+' ...' " class="product-desc">
+
                                             </div>
                                             <div class="product-level">
                                                 <div class="product-level-name">
                                                     <p>Beginner</p>
                                                 </div>
                                                 <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
+                                                    <div  v-for="level in challenge.level" :key="level"  class="product-level-item"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </router-link>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <router-link :to="{name: 'chanllenge'}">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <router-link :to="{name: 'chanllenge'}">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <a href="#">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <a href="#">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <a href="#">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="product-item col-xl-4 col-md-6">
-                                    <a href="#">
-                                        <div class="product-content">
-                                            <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
-                                            </div>
-                                            <div class="product-content-title">
-                                                404 Not Found
-                                            </div>
-                                            <div class="product-desc">
-                                                This challenge is suitable for you if you just started with coding. The challenge will test your basic CSS and HTML skills.
-                                            </div>
-                                            <div class="product-level">
-                                                <div class="product-level-name">
-                                                    <p>Beginner</p>
-                                                </div>
-                                                <div class="product-level-main">
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                    <div class="product-level-item"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -277,10 +104,23 @@
             </div>
 </template>
 
-<script>
-export default {
 
-}
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data: () => ({
+    title: "Chi Tiet Danh Muc Thu Thach",
+  }),
+  computed: mapGetters({
+    data: "challengecategory/challengecategory",
+
+  }),
+  created() {
+    this.$store.dispatch("challengecategory/get_One_Data", this.$route.params.slug);
+  },
+  methods: {
+  },
+};
 </script>
 
 <style lang="scss">

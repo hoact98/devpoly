@@ -11,13 +11,10 @@
 
                     <div class="row">
                         <div class="col-md-8 col-xs-12 col-lg-8 col-xl-8">
-                            <h1 class="challenge-title">404 Not Found</h1>
+                            <h1 class="challenge-title">{{data.title}}</h1>
 
-                            <div class="challenge-detail challenge-block mb-4">
-                                <p><strong>Challenge:</strong> Create a 404 not found page following the design. The page should be responsive. Don’t look at the existing solution. Fulfill user stories below:</p>
-                                <ul>
-                                    <li><strong>User story:</strong> I can see a page following the given design</li>
-                                </ul>
+                            <div v-if="data" v-html="data.description" class="challenge-detail challenge-block mb-4">
+
                             </div>
 
                             <div class="challenge-require challenge-block">
@@ -50,10 +47,23 @@
             </section>
 </template>
 
-<script>
-export default {
 
-}
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data: () => ({
+
+    title: " Challenge",
+  }),
+  computed: mapGetters({
+    data: "challenge/challenge",
+  }),
+  created() {
+    this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);
+  },
+  methods: {
+  },
+};
 </script>
 
 <style lang="scss">

@@ -74,7 +74,7 @@ class ChallengeController extends Controller
       public function get_One_Challenge($slug)
       {
           $challenge =  Challenge::where('slug','=', $slug)->first();
-          $challenge['Onechallengecategory'] = ChallengeCategory::where('id',$challenge->cate_challen_id)->first();
+          $challenge->load('category');
           return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
       }
 }

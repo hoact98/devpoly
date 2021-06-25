@@ -2910,7 +2910,7 @@ var routes = [{
     },
     name: 'paths'
   }, {
-    path: '/overview',
+    path: '/overview/:slug',
     alias: '',
     component: page('public/Overview.vue'),
     meta: {
@@ -2942,7 +2942,7 @@ var routes = [{
     },
     name: 'feedback'
   }, {
-    path: '/chanllenge',
+    path: '/chanllenge/:slug',
     alias: '',
     component: page('public/Chanllenge.vue'),
     meta: {
@@ -3143,6 +3143,9 @@ var mutations = {
   },
   FETCH_ONE: function FETCH_ONE(state, challenge) {
     state.challenge = challenge;
+  },
+  GET_ONE_DATA_CHALLENGE: function GET_ONE_DATA_CHALLENGE(state, challenge) {
+    state.challenge = challenge;
   }
 }; // actions
 
@@ -3159,10 +3162,16 @@ var actions = {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deletechallenge: function deletechallenge(_ref3, id) {
+  fet_One_Data: function fet_One_Data(_ref3, slug) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challenge", slug)).then(function (response) {
+      return commit("GET_ONE_DATA_CHALLENGE", response.data.data);
+    });
+  },
+  deletechallenge: function deletechallenge(_ref4, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
       _this.dispatch("challenge/fetch");
@@ -3178,13 +3187,13 @@ var actions = {
       });
     });
   },
-  editchallenge: function editchallenge(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editchallenge: function editchallenge(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challenge", data.get('id')), data).then();
   },
-  addchallenge: function addchallenge(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addchallenge: function addchallenge(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challenge"), data).then();
   }
@@ -3232,6 +3241,12 @@ var mutations = {
   },
   FETCH_ONE: function FETCH_ONE(state, challengecategory) {
     state.challengecategory = challengecategory;
+  },
+  GET_DATA_TO_HOME: function GET_DATA_TO_HOME(state, challengecategories) {
+    state.challengecategories = challengecategories;
+  },
+  GET_ONE_DATA_TO_OVERVIEW: function GET_ONE_DATA_TO_OVERVIEW(state, challengecategory) {
+    state.challengecategory = challengecategory;
   }
 }; // actions
 
@@ -3242,18 +3257,29 @@ var actions = {
       return commit("FETCH", response.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  get_All_Data: function get_All_Data(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_All.challengecategory")).then(function (response) {
+      return commit("GET_DATA_TO_HOME", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.challengecategory", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deletechallengecategory: function deletechallengecategory(_ref3, id) {
+  get_One_Data: function get_One_Data(_ref4, slug) {
+    var commit = _ref4.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
+      return commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data);
+    });
+  },
+  deletechallengecategory: function deletechallengecategory(_ref5, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref5);
 
-    console.log(id);
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
       _this.dispatch("challengecategory/fetch");
 
@@ -3268,13 +3294,13 @@ var actions = {
       });
     });
   },
-  editchallengecategory: function editchallengecategory(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editchallengecategory: function editchallengecategory(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challengecategory", data.get('id')), data).then();
   },
-  addChallengeCategory: function addChallengeCategory(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addChallengeCategory: function addChallengeCategory(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challengecategory"), data).then();
   }
@@ -8028,7 +8054,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.8rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 1.4rem;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8052,7 +8078,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.8rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 1.4rem;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44801,7 +44827,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -44986,7 +45012,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav" }, [
+    _c("nav", { staticClass: "nav1" }, [
       _c("ul", [
         _c(
           "li",
@@ -45127,7 +45153,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -45312,7 +45338,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav" }, [
+    _c("nav", { staticClass: "nav1" }, [
       _c("ul", [
         _c(
           "li",
