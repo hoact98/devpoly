@@ -19,6 +19,9 @@ export const mutations = {
     },
     FETCH_ONE(state, challenge) {
         state.challenge = challenge;
+    },
+    GET_ONE_DATA_CHALLENGE(state, challenge) {
+        state.challenge = challenge;
     }
 };
 
@@ -33,6 +36,11 @@ export const actions = {
         axios
             .get(route("show.challenge", id))
             .then(response => commit("FETCH_ONE", response.data.data))
+    },
+    fet_One_Data({ commit }, slug) {
+        axios
+            .get(route("get_One.challenge", slug))
+            .then(response => commit("GET_ONE_DATA_CHALLENGE", response.data.data))
     },
     deletechallenge({}, id) {
         axios

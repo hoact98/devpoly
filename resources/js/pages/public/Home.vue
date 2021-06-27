@@ -7,7 +7,7 @@
                                 <h1>Welcome to DevChallenges</h1>
                             </div>
                         </div>
-    
+
                         <div class="row content-list">
                             <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
                                 <div class="content-item">
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
                                 <div class="content-item">
                                     <div class="content-item-image">
@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
                                 <div class="content-item">
                                     <div class="content-item-image">
@@ -59,51 +59,19 @@
                                 <h1>Challenge Paths</h1>
                             </div>
                         </div>
-    
+
                         <div class="row content-list">
-                            <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-                                <router-link :to="{name: 'overview'}">
+                            <div  v-for="challengecategory in challengecategories" :key="challengecategory.id" class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
+                                <router-link :to="{name: 'overview',params: { slug: challengecategory.slug }}">
                                 <div class="content-item">
                                     <div class="content-item-image img-challenge-path">
-                                        <img src="svg/challenge-path-1.svg" alt="">
+                                        <img :src="'/'+challengecategory.image" alt="">
                                     </div>
                                     <div class="content-item-title">
-                                        <h3>Responsive Web Developer</h3>
+                                        <h3>{{ challengecategory.name }}</h3>
                                     </div>
                                     <div class="content-item-des">
-                                        <p>Learn and Practice Responsive Web Development by building 8 Websites with given designs</p>
-                                    </div>
-                                </div>
-                                </router-link>
-                            </div>
-    
-                            <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-                                <router-link :to="{name: 'overview'}">
-                                <div class="content-item">
-                                    <div class="content-item-image">
-                                        <img src="svg/challenge-path-2.svg" alt="">
-                                    </div>
-                                    <div class="content-item-title">
-                                        <h3>Front-end Developer</h3>
-                                    </div>
-                                    <div class="content-item-des">
-                                        <p>Become a Full-stack developer by building 8 advanced full-stack web applications</p>
-                                    </div>
-                                </div>
-                                </router-link>
-                            </div>
-    
-                            <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-                                <router-link :to="{name: 'overview'}">
-                                <div class="content-item">
-                                    <div class="content-item-image">
-                                        <img src="svg/challenge-path-3.svg" alt="">
-                                    </div>
-                                    <div class="content-item-title">
-                                        <h3>Full-stack Developer</h3>
-                                    </div>
-                                    <div class="content-item-des">
-                                        <p>Become a Full-stack developer by building 8 advanced full-stack web applications</p>
+                                        <p v-html="challengecategory.description"></p>
                                     </div>
                                 </div>
                                 </router-link>
@@ -113,12 +81,26 @@
                 </div>
             </section>
 </template>
-
 <script>
 export default {
-
-}
+  data() {
+    return {
+      title: "Home",
+    };
+  },
+  computed: {
+    challengecategories() {
+      return this.$store.state.challengecategory.challengecategories;
+    },
+  },
+  created: function () {
+    this.$store.dispatch("challengecategory/get_All_Data");
+  },
+  methods: {
+  },
+};
 </script>
+
 
 <style lang="scss">
 @import "../../../sass/home.scss";

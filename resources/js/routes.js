@@ -39,7 +39,7 @@ const routes = [{
                 name: 'paths',
             },
             {
-                path: '/overview',
+                path: '/overview/:slug',
                 alias: '',
                 component: page('public/Overview.vue'),
                 meta: { guest: true },
@@ -67,7 +67,7 @@ const routes = [{
                 name: 'feedback',
             },
             {
-                path: '/chanllenge',
+                path: '/chanllenge/:slug',
                 alias: '',
                 component: page('public/Chanllenge.vue'),
                 meta: { guest: true },

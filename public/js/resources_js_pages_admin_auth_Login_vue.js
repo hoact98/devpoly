@@ -1111,9 +1111,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("label", { attrs: { for: "remember" } }, [
-                    _vm._v(
-                      "\r\n                  Remember Me\r\n                "
-                    )
+                    _vm._v("\n                  Remember Me\n                ")
                   ])
                 ])
               ]),
