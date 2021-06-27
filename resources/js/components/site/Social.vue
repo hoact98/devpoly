@@ -3,7 +3,7 @@
                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Stay Update</h2>
+                            <h2 style="color: #fff">Stay Update</h2>
                         </div>
                     </div>
 
@@ -15,8 +15,8 @@
                                 </div>
 
                                 <div>
-                                    <p class="social-label">Discord</p>
-                                    <p class="social-description">Join other developers to ask for help or help others.</p>
+                                    <p class="social-label" style="color: #fff">Discord</p>
+                                    <p class="social-description" style="color: #fff">Join other developers to ask for help or help others.</p>
                                 </div>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                                 </div>
 
                                 <div>
-                                    <p class="social-label">Thu Nghiem Youtube</p>
-                                    <p class="social-description">Watch coding tutorials and listen to my stories</p>
+                                    <p class="social-label" style="color: #fff">Thu Nghiem Youtube</p>
+                                    <p class="social-description" style="color: #fff">Watch coding tutorials and listen to my stories</p>
                                 </div>
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                                 </div>
 
                                 <div>
-                                    <p class="social-label">DevChallenges Twitter</p>
-                                    <p class="social-description">Get updates on DevChallenges and other users</p>
+                                    <p class="social-label" style="color: #fff">DevChallenges Twitter</p>
+                                    <p class="social-description" style="color: #fff">Get updates on DevChallenges and other users</p>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +54,8 @@
                                 </div>
 
                                 <div>
-                                    <p class="social-label">Thu Nghiem Twitter</p>
-                                    <p class="social-description">See what I am up to and let's connect</p>
+                                    <p class="social-label" style="color: #fff">Thu Nghiem Twitter</p>
+                                    <p class="social-description" style="color: #fff">See what I am up to and let's connect</p>
                                 </div>
                             </div>
                         </div>
