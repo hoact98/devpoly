@@ -106,7 +106,7 @@ Route::group(['prefix' => 'challenge'], function () {
 Route::get('solutions', [SolutionController::class, 'index'])->name('solutions');
 Route::get('category-solutions/{slug}', [SolutionController::class, 'categorySolution'])->name('categorySolutions');
 Route::get('detail-solution/{id}', [SolutionController::class, 'detailSolution'])->name('detailSolution');
-Route::group(['prefix' => 'challenge'], function () {
+Route::group(['prefix' => 'solution'], function () {
     Route::post('add', [SolutionController::class, 'create'])->name('create.solution');
     Route::get('{id}', [SolutionController::class, 'show'])->name('show.solution');
     Route::post('update/{id}', [SolutionController::class, 'update'])->name('update.solution');

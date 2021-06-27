@@ -2910,7 +2910,7 @@ var routes = [{
     },
     name: 'paths'
   }, {
-    path: '/overview',
+    path: '/overview/:slug',
     alias: '',
     component: page('public/Overview.vue'),
     meta: {
@@ -2942,7 +2942,7 @@ var routes = [{
     },
     name: 'feedback'
   }, {
-    path: '/chanllenge',
+    path: '/chanllenge/:slug',
     alias: '',
     component: page('public/Chanllenge.vue'),
     meta: {
@@ -3143,6 +3143,9 @@ var mutations = {
   },
   FETCH_ONE: function FETCH_ONE(state, challenge) {
     state.challenge = challenge;
+  },
+  GET_ONE_DATA_CHALLENGE: function GET_ONE_DATA_CHALLENGE(state, challenge) {
+    state.challenge = challenge;
   }
 }; // actions
 
@@ -3159,10 +3162,16 @@ var actions = {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deletechallenge: function deletechallenge(_ref3, id) {
+  fet_One_Data: function fet_One_Data(_ref3, slug) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challenge", slug)).then(function (response) {
+      return commit("GET_ONE_DATA_CHALLENGE", response.data.data);
+    });
+  },
+  deletechallenge: function deletechallenge(_ref4, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
       _this.dispatch("challenge/fetch");
@@ -3178,13 +3187,13 @@ var actions = {
       });
     });
   },
-  editchallenge: function editchallenge(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editchallenge: function editchallenge(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challenge", data.get('id')), data).then();
   },
-  addchallenge: function addchallenge(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addchallenge: function addchallenge(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challenge"), data).then();
   }
@@ -3232,6 +3241,12 @@ var mutations = {
   },
   FETCH_ONE: function FETCH_ONE(state, challengecategory) {
     state.challengecategory = challengecategory;
+  },
+  GET_DATA_TO_HOME: function GET_DATA_TO_HOME(state, challengecategories) {
+    state.challengecategories = challengecategories;
+  },
+  GET_ONE_DATA_TO_OVERVIEW: function GET_ONE_DATA_TO_OVERVIEW(state, challengecategory) {
+    state.challengecategory = challengecategory;
   }
 }; // actions
 
@@ -3242,18 +3257,29 @@ var actions = {
       return commit("FETCH", response.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  get_All_Data: function get_All_Data(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_All.challengecategory")).then(function (response) {
+      return commit("GET_DATA_TO_HOME", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.challengecategory", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deletechallengecategory: function deletechallengecategory(_ref3, id) {
+  get_One_Data: function get_One_Data(_ref4, slug) {
+    var commit = _ref4.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
+      return commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data);
+    });
+  },
+  deletechallengecategory: function deletechallengecategory(_ref5, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref5);
 
-    console.log(id);
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
       _this.dispatch("challengecategory/fetch");
 
@@ -3268,13 +3294,13 @@ var actions = {
       });
     });
   },
-  editchallengecategory: function editchallengecategory(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editchallengecategory: function editchallengecategory(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challengecategory", data.get('id')), data).then();
   },
-  addChallengeCategory: function addChallengeCategory(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addChallengeCategory: function addChallengeCategory(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challengecategory"), data).then();
   }
@@ -8127,7 +8153,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, "/* content */\nmain .content[data-v-4818f4ba] {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1[data-v-4818f4ba],\nmain .social h2[data-v-4818f4ba] {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.content-item[data-v-4818f4ba] {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img[data-v-4818f4ba] {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title h3[data-v-4818f4ba] {\n  font-size: 1.8rem;\n  margin: 12px 0;\n}\n.content-item-title[data-v-4818f4ba] {\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des[data-v-4818f4ba] {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p[data-v-4818f4ba] {\n  line-height: 1.7;\n  font-size: 1.4rem;\n  max-width: 720px;\n  color: var(--white-grey);\n}\n\n/* challenge path */\n.challenge-path .content-item[data-v-4818f4ba] {\n  cursor: pointer;\n}\n\n/* end challenge path */\n/* end content */\n", ""]);
+=======
+___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
+>>>>>>> f73acf054b3d92f9aeeed5b037bec74de91d3e71
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8151,7 +8181,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, ".container-content {\n  padding: 16px;\n  border: 1px solid #454f59;\n  border-radius: 0.25rem;\n}\n.description {\n  padding: 12px;\n}\n.description .desc-title h1 {\n    font-family: 'Poppins', sans-serif;\n    font-size: 2.6rem;\n    font-weight: 500;\n}\n.description .desc-time {\n    font-size: 1.2rem;\n    font-family: 'Lato', sans-serif;\n    color: #8d99a7;\n}\n.description .short-desc {\n    font-size: 1.6rem;\n}\n.description #desc-box {\n    margin-top: 16px;\n    padding: 16px;\n}\n.description #desc-box .box-title h5 {\n      font-family: 'Poppins', sans-serif;\n      font-size: 1.6rem;\n      font-weight: 500;\n}\n.description #desc-box #box-list {\n      font-size: 1.4rem;\n}\n.description #desc-box #box-list li {\n        margin-bottom: 8px;\n}\n.description .desc-box1 {\n    border: 1px solid #bba9fb;\n    border-radius: 0.25rem;\n}\n.description .desc-box2 {\n    border: 1px solid #ffda4d;\n    border-radius: 0.25rem;\n}\n.content {\n  color: #fff;\n}\n.require {\n  padding: 16px;\n}\n.require .require-image img {\n    width: 100%;\n    height: 100%;\n    border-radius: 0.25rem;\n    margin-bottom: 16px;\n}\n.require .progres p {\n    font-size: 1.3rem;\n    margin-bottom: 4px;\n    font-weight: 400;\n    color: var(--grey-color);\n}\n.require .progres .progres-level {\n    display: flex;\n    margin-bottom: 20px;\n}\n.require .progres .progres-level .progres-level-item {\n      background-color: #454f59;\n      height: 6px;\n      width: 40px;\n      margin: 0 4px 0 0;\n      border-radius: 0.225rem;\n}\n.require .apply-button button {\n    padding: 12px;\n    width: 100%;\n    background-color: #32353a;\n    border: 1px solid #454f59;\n    font-size: 1.4rem;\n    font-weight: 500;\n    color: var(--grey-color);\n    font-family: 'Poppins', sans-serif;\n    border-radius: var(--border-radius-main);\n}\n.require .require-title h5,\n.require .progres h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.list-require {\n  font-size: 1.4rem;\n}\n.list-require li {\n    margin-bottom: 8px;\n}\n.progres {\n  margin-top: 28px;\n}\n.list-product {\n  margin-bottom: 30px;\n}\n.product a {\n  text-decoration: none;\n  color: #0b0f32;\n}\n.product-title h2 {\n  font-size: 20px;\n  font-family: 'Poppins', sans-serif;\n  margin-top: 10px;\n}\n.product-item {\n  padding: 12px;\n}\n.product-item .product-content {\n    background-color: var(--black-bold);\n    border: 1px solid #454f59;\n    border-radius: var(--border-radius-main);\n    padding: 16px;\n}\n.product-content .product-image img {\n  width: 100%;\n  border-radius: 0.25rem;\n}\n.product-content .product-content-title {\n  padding-top: 16px;\n  margin-bottom: 12px;\n  font-size: 1.8rem;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  color: var(--white-grey);\n}\n.product-content .product-desc {\n  color: #c9d0da;\n  line-height: 175%;\n  margin-bottom: 22px;\n  font-size: 1.4rem;\n}\n.product-content .product-level {\n  padding: 12px;\n  background-color: var(--black);\n  border-radius: 0.25rem;\n}\n.product-content .product-level .product-level-name p {\n    color: #737f8b;\n    font-size: 11px;\n    font-family: 'Lato', sans-serif;\n    margin-bottom: 8px;\n}\n.product-content .product-level .product-level-main {\n    display: flex;\n}\n.product-content .product-level .product-level-item {\n    background-color: #e5eaf0;\n    width: 51px;\n    height: 6px;\n    border-radius: 0.125rem;\n    margin: 0 4px 0 0;\n}\n.product-content .product-level .product-level-item:first-child {\n      background-color: #bba9fb;\n}\n", ""]);
+=======
+___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
+>>>>>>> f73acf054b3d92f9aeeed5b037bec74de91d3e71
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44900,7 +44934,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -45085,7 +45119,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav" }, [
+    _c("nav", { staticClass: "nav1" }, [
       _c("ul", [
         _c(
           "li",
@@ -45226,7 +45260,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -45411,7 +45445,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav" }, [
+    _c("nav", { staticClass: "nav1" }, [
       _c("ul", [
         _c(
           "li",

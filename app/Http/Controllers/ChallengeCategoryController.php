@@ -95,10 +95,10 @@ class ChallengeCategoryController extends Controller
         ], 200);
     }
     public function get_One_Challenge_Category($slug){
-        $ChallengeCategory['oneChallengeCategory'] = ChallengeCategory::where('slug','=', $slug)->first();
-        $ChallengeCategoryID = $ChallengeCategory['oneChallengeCategory']->id;
-        if($ChallengeCategory['oneChallengeCategory'] != null){
-            $ChallengeCategory['listChallenge'] = Challenge::where('cate_challen_id',$ChallengeCategoryID);
+        $ChallengeCategory = ChallengeCategory::where('slug','=', $slug)->first();
+        $ChallengeCategoryID = $ChallengeCategory->id;
+        if($ChallengeCategory != null){
+           $ChallengeCategory->load('challenges');
         }
         return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$ChallengeCategory],200);
     }
