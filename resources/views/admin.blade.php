@@ -42,6 +42,7 @@ $config = [
 <style>
   table tr {color:black}
   table tbody {color:black}
+  .form-group label {color:black}
 </style>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper" id="app">
