@@ -38,8 +38,11 @@ $config = [
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
-
 </head>
+<style>
+  table tr {color:black}
+  table tbody {color:black}
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper" id="app">
 
@@ -86,7 +89,6 @@ $config = [
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> --}}
 
