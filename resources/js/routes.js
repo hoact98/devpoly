@@ -1,6 +1,5 @@
 import AdminLayout from './layouts/admin.vue';
 import MainLayout from './layouts/main.vue';
-import LoginLayout from './layouts/login.vue';
 import HomeLayout from './layouts/home.vue';
 
 function page(path) {
@@ -18,14 +17,30 @@ const routes = [{
             path: '/',
             alias: '',
             component: page('public/Home.vue'),
-            meta: { guest: true },
+            meta: {
+                guest: true
+            },
             name: 'home',
         }, {
             path: '/home-dashboard',
             alias: '',
             component: page('public/Dashboard.vue'),
-            meta: { guest: true },
+            meta: {
+                guest: true
+            },
             name: 'homeDashboard',
+        }]
+    },
+    {
+        path: '/',
+        component: HomeLayout,
+        children: [{
+            path: 'login',
+            component: page('auth/Login.vue'),
+            name: 'login',
+            meta: {
+                guest: true
+            },
         }]
     },
     {
@@ -35,56 +50,58 @@ const routes = [{
                 path: '',
                 alias: '',
                 component: page('public/Overview.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'paths',
             },
             {
                 path: '/overview/:slug',
                 alias: '',
                 component: page('public/Overview.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'overview',
             },
             {
                 path: '/solution',
                 alias: '',
                 component: page('public/SolutionList.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'solution',
             },
             {
                 path: '/solution-detail',
                 alias: '',
                 component: page('public/SolutionDetail.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'solutionDetail',
             },
             {
                 path: '/feedback',
                 alias: '',
                 component: page('public/Feedback.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'feedback',
             },
             {
                 path: '/chanllenge/:slug',
                 alias: '',
                 component: page('public/Chanllenge.vue'),
-                meta: { guest: true },
+                meta: {
+                    guest: true
+                },
                 name: 'chanllenge',
             }
 
         ]
-    },
-    {
-        path: '/user',
-        component: LoginLayout,
-        children: [{
-            path: 'login',
-            component: page('admin/auth/Login.vue'),
-            name: 'admin.login',
-            meta: { guest: true },
-        }]
     },
     {
         path: '/admin',

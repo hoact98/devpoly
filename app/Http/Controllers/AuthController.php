@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -41,11 +41,14 @@ class AuthController extends Controller
             return response()->json(['errors' => ['email'=> ['Email or password does not match']]], 401);
         }
         $user=User::where('email',$request->email)->first();
-        if(!$user->hasPermissionTo('login admin')){
-            return response()->json(['errors' => ['email'=> ['permission denied']]], 
-            422);
+        if($user->hasPermissionTo('login admin')){
+            $role = 1;
+        }else if($user->hasPermissionTo('login user')){
+            $role = 2;
+        }else{
+            $role = 3;
         }
-        return $this->createNewToken($token);
+        return $this->createNewToken($token,$role);
     }
 
     /**
@@ -72,13 +75,13 @@ class AuthController extends Controller
                 'user_id' => $user->id,
                 'name' => $request->name,
         ]);
-        $information->save();  
+        $information->save();
         $userRole = new ModelHasRole([
             'role_id'=> 1,
             'model_type'=> User::class,
             'model_id' => $user->id,
         ]);
-        $userRole->save();      
+        $userRole->save();
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -122,10 +125,11 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token){
+    protected function createNewToken($token,$role){
         return response()->json([
             'status' => 'success',
             'access_token' => $token,
+            'role' => $role,
             'token_type' => 'bearer',
             'expires_in' => auth($this->guard)->factory()->getTTL() * 60,
             'user' => auth()->user()

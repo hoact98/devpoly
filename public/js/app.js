@@ -2333,8 +2333,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -2350,21 +2348,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2660,30 +2643,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'LoginLayout'
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/main.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/main.vue?vue&type=script&lang=js& ***!
@@ -2862,9 +2821,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _layouts_admin_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/admin.vue */ "./resources/js/layouts/admin.vue");
 /* harmony import */ var _layouts_main_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/main.vue */ "./resources/js/layouts/main.vue");
-/* harmony import */ var _layouts_login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/login.vue */ "./resources/js/layouts/login.vue");
-/* harmony import */ var _layouts_home_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/home.vue */ "./resources/js/layouts/home.vue");
-
+/* harmony import */ var _layouts_home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/home.vue */ "./resources/js/layouts/home.vue");
 
 
 
@@ -2880,7 +2837,7 @@ function page(path) {
 
 var routes = [{
   path: '/',
-  component: _layouts_home_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+  component: _layouts_home_vue__WEBPACK_IMPORTED_MODULE_2__.default,
   children: [{
     path: '/',
     alias: '',
@@ -2897,6 +2854,17 @@ var routes = [{
       guest: true
     },
     name: 'homeDashboard'
+  }]
+}, {
+  path: '/',
+  component: _layouts_home_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  children: [{
+    path: 'login',
+    component: page('auth/Login.vue'),
+    name: 'login',
+    meta: {
+      guest: true
+    }
   }]
 }, {
   path: '/paths',
@@ -2949,17 +2917,6 @@ var routes = [{
       guest: true
     },
     name: 'chanllenge'
-  }]
-}, {
-  path: '/user',
-  component: _layouts_login_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-  children: [{
-    path: 'login',
-    component: page('admin/auth/Login.vue'),
-    name: 'admin.login',
-    meta: {
-      guest: true
-    }
   }]
 }, {
   path: '/admin',
@@ -3100,6 +3057,16 @@ var modules = requireContext.keys().map(function (file) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   modules: modules
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/auth.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/auth.js ***!
+  \********************************************/
+/***/ (() => {
+
+
 
 /***/ }),
 
@@ -8153,11 +8120,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, "/* content */\nmain .content[data-v-4818f4ba] {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1[data-v-4818f4ba],\nmain .social h2[data-v-4818f4ba] {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.content-item[data-v-4818f4ba] {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img[data-v-4818f4ba] {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title h3[data-v-4818f4ba] {\n  font-size: 1.8rem;\n  margin: 12px 0;\n}\n.content-item-title[data-v-4818f4ba] {\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des[data-v-4818f4ba] {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p[data-v-4818f4ba] {\n  line-height: 1.7;\n  font-size: 1.4rem;\n  max-width: 720px;\n  color: var(--white-grey);\n}\n\n/* challenge path */\n.challenge-path .content-item[data-v-4818f4ba] {\n  cursor: pointer;\n}\n\n/* end challenge path */\n/* end content */\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
->>>>>>> f73acf054b3d92f9aeeed5b037bec74de91d3e71
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8181,11 +8144,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, ".container-content {\n  padding: 16px;\n  border: 1px solid #454f59;\n  border-radius: 0.25rem;\n}\n.description {\n  padding: 12px;\n}\n.description .desc-title h1 {\n    font-family: 'Poppins', sans-serif;\n    font-size: 2.6rem;\n    font-weight: 500;\n}\n.description .desc-time {\n    font-size: 1.2rem;\n    font-family: 'Lato', sans-serif;\n    color: #8d99a7;\n}\n.description .short-desc {\n    font-size: 1.6rem;\n}\n.description #desc-box {\n    margin-top: 16px;\n    padding: 16px;\n}\n.description #desc-box .box-title h5 {\n      font-family: 'Poppins', sans-serif;\n      font-size: 1.6rem;\n      font-weight: 500;\n}\n.description #desc-box #box-list {\n      font-size: 1.4rem;\n}\n.description #desc-box #box-list li {\n        margin-bottom: 8px;\n}\n.description .desc-box1 {\n    border: 1px solid #bba9fb;\n    border-radius: 0.25rem;\n}\n.description .desc-box2 {\n    border: 1px solid #ffda4d;\n    border-radius: 0.25rem;\n}\n.content {\n  color: #fff;\n}\n.require {\n  padding: 16px;\n}\n.require .require-image img {\n    width: 100%;\n    height: 100%;\n    border-radius: 0.25rem;\n    margin-bottom: 16px;\n}\n.require .progres p {\n    font-size: 1.3rem;\n    margin-bottom: 4px;\n    font-weight: 400;\n    color: var(--grey-color);\n}\n.require .progres .progres-level {\n    display: flex;\n    margin-bottom: 20px;\n}\n.require .progres .progres-level .progres-level-item {\n      background-color: #454f59;\n      height: 6px;\n      width: 40px;\n      margin: 0 4px 0 0;\n      border-radius: 0.225rem;\n}\n.require .apply-button button {\n    padding: 12px;\n    width: 100%;\n    background-color: #32353a;\n    border: 1px solid #454f59;\n    font-size: 1.4rem;\n    font-weight: 500;\n    color: var(--grey-color);\n    font-family: 'Poppins', sans-serif;\n    border-radius: var(--border-radius-main);\n}\n.require .require-title h5,\n.require .progres h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.list-require {\n  font-size: 1.4rem;\n}\n.list-require li {\n    margin-bottom: 8px;\n}\n.progres {\n  margin-top: 28px;\n}\n.list-product {\n  margin-bottom: 30px;\n}\n.product a {\n  text-decoration: none;\n  color: #0b0f32;\n}\n.product-title h2 {\n  font-size: 20px;\n  font-family: 'Poppins', sans-serif;\n  margin-top: 10px;\n}\n.product-item {\n  padding: 12px;\n}\n.product-item .product-content {\n    background-color: var(--black-bold);\n    border: 1px solid #454f59;\n    border-radius: var(--border-radius-main);\n    padding: 16px;\n}\n.product-content .product-image img {\n  width: 100%;\n  border-radius: 0.25rem;\n}\n.product-content .product-content-title {\n  padding-top: 16px;\n  margin-bottom: 12px;\n  font-size: 1.8rem;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  color: var(--white-grey);\n}\n.product-content .product-desc {\n  color: #c9d0da;\n  line-height: 175%;\n  margin-bottom: 22px;\n  font-size: 1.4rem;\n}\n.product-content .product-level {\n  padding: 12px;\n  background-color: var(--black);\n  border-radius: 0.25rem;\n}\n.product-content .product-level .product-level-name p {\n    color: #737f8b;\n    font-size: 11px;\n    font-family: 'Lato', sans-serif;\n    margin-bottom: 8px;\n}\n.product-content .product-level .product-level-main {\n    display: flex;\n}\n.product-content .product-level .product-level-item {\n    background-color: #e5eaf0;\n    width: 51px;\n    height: 6px;\n    border-radius: 0.125rem;\n    margin: 0 4px 0 0;\n}\n.product-content .product-level .product-level-item:first-child {\n      background-color: #bba9fb;\n}\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "main .content {\n  font-family: 'Poppins', sans-serif;\n}\nmain .content h1,\nmain .social h2 {\n  font-weight: 500;\n  font-size: 2.2rem;\n  padding: 22px 0;\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n}\n.logo {\n  margin-top: 3rem;\n}\n.content-item {\n  padding: 22px;\n  border: 1px solid var(--border-color-grey);\n  border-radius: var(--border-radius-main);\n  margin-bottom: 24px;\n  background-color: var(--black-bold);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);\n  transition: 0.3s;\n}\n.content-item-image img {\n  display: block;\n  width: 288px;\n  height: 150px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  border-radius: var(--border-radius-main);\n}\n.content-item-title {\n  font-size: 80% !important;\n  height: 6rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-title h3 {\n    font-size: 1.5rem;\n    margin: 12px 0;\n}\n.content-item-des {\n  height: 12rem;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 5;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n.content-item-des p {\n    line-height: 1.7;\n    font-size: 15px;\n    max-width: 720px;\n    color: var(--white-grey);\n}\n.challenge-path .content-item {\n  cursor: pointer;\n}\n", ""]);
->>>>>>> f73acf054b3d92f9aeeed5b037bec74de91d3e71
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43230,45 +43189,6 @@ component.options.__file = "resources/js/layouts/home.vue"
 
 /***/ }),
 
-/***/ "./resources/js/layouts/login.vue":
-/*!****************************************!*\
-  !*** ./resources/js/layouts/login.vue ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login.vue?vue&type=template&id=7f3bd556& */ "./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556&");
-/* harmony import */ var _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login.vue?vue&type=script&lang=js& */ "./resources/js/layouts/login.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__.render,
-  _login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/layouts/login.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/layouts/main.vue":
 /*!***************************************!*\
   !*** ./resources/js/layouts/main.vue ***!
@@ -43531,22 +43451,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/home.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./resources/js/layouts/login.vue?vue&type=script&lang=js&":
-/*!*****************************************************************!*\
-  !*** ./resources/js/layouts/login.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./login.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -43826,23 +43730,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_4818f4ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_4818f4ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./home.vue?vue&type=template&id=4818f4ba&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/home.vue?vue&type=template&id=4818f4ba&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556& ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7f3bd556___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./login.vue?vue&type=template&id=7f3bd556& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556&");
 
 
 /***/ }),
@@ -44748,54 +44635,20 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
-          _c("button", [
-            _c(
-              "svg",
-              {
-                staticStyle: { "min-width": "24px" },
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true",
-                  fill: "#8d99a7"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12 6.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
-                  }
-                }),
-                _c("circle", { attrs: { cx: "12", cy: "12", r: "2" } })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("button", { staticClass: "login-github" }, [
-            _c(
-              "svg",
-              {
-                staticClass: "MuiSvgIcon-root MuiSvgIcon-fontSizeInherit",
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
-                  }
-                })
-              ]
-            ),
-            _vm._v(
-              "\n                             Login with Github\n                         "
-            )
-          ])
+          _c(
+            "div",
+            { staticClass: "col-9 col-sm-12 login-and-setting" },
+            [
+              _c("router-link", { attrs: { to: { name: "login" } } }, [
+                _c("button", { staticClass: "login" }, [
+                  _vm._v(
+                    "\n                             Login\n                         "
+                  )
+                ])
+              ])
+            ],
+            1
+          )
         ])
       ])
     ])
@@ -44856,57 +44709,20 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
-          _c("button", [
-            _c(
-              "svg",
-              {
-                staticStyle: { "min-width": "24px" },
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true",
-                  fill: "#8d99a7"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12 6.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
-                  }
-                }),
-                _vm._v(" "),
-                _c("circle", { attrs: { cx: "12", cy: "12", r: "2" } })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("button", { staticClass: "login-github" }, [
-            _c(
-              "svg",
-              {
-                staticClass: "MuiSvgIcon-root MuiSvgIcon-fontSizeInherit",
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
-                  }
-                })
-              ]
-            ),
-            _vm._v(
-              "\n                             Login with Github\n                         "
-            )
-          ])
-        ])
+        _c(
+          "div",
+          { staticClass: "col-9 col-sm-12 login-and-setting" },
+          [
+            _c("router-link", { attrs: { to: { name: "login" } } }, [
+              _c("button", { staticClass: "login" }, [
+                _vm._v(
+                  "\n                             Login\n                         "
+                )
+              ])
+            ])
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -44934,7 +44750,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -45119,7 +44935,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav1" }, [
+    _c("nav", { staticClass: "nav" }, [
       _c("ul", [
         _c(
           "li",
@@ -45260,7 +45076,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("aside", { staticClass: "sidebar1 hide-on-mobile" }, [
+  return _c("aside", { staticClass: "sidebar hide-on-mobile" }, [
     _c(
       "div",
       { staticClass: "d-flex justify-content-between align-item-center" },
@@ -45445,7 +45261,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("nav", { staticClass: "nav1" }, [
+    _c("nav", { staticClass: "nav" }, [
       _c("ul", [
         _c(
           "li",
@@ -45937,36 +45753,6 @@ var render = function() {
       )
     ],
     1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/layouts/login.vue?vue&type=template&id=7f3bd556& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "hold-transition login-page" },
-    [_vm._t("default"), _vm._v(" "), _c("router-view")],
-    2
   )
 }
 var staticRenderFns = []
@@ -62607,14 +62393,6 @@ var index = {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./admin/auth/Login": [
-		"./resources/js/pages/admin/auth/Login.vue",
-		"resources_js_pages_admin_auth_Login_vue"
-	],
-	"./admin/auth/Login.vue": [
-		"./resources/js/pages/admin/auth/Login.vue",
-		"resources_js_pages_admin_auth_Login_vue"
-	],
 	"./admin/challenge/AddChallenge": [
 		"./resources/js/pages/admin/challenge/AddChallenge.vue",
 		"resources_js_pages_admin_challenge_AddChallenge_vue"
@@ -62767,6 +62545,14 @@ var map = {
 		"./resources/js/pages/admin/user/User.vue",
 		"resources_js_pages_admin_user_User_vue"
 	],
+	"./auth/Login": [
+		"./resources/js/pages/auth/Login.vue",
+		"resources_js_pages_auth_Login_vue"
+	],
+	"./auth/Login.vue": [
+		"./resources/js/pages/auth/Login.vue",
+		"resources_js_pages_auth_Login_vue"
+	],
 	"./errors/404": [
 		"./resources/js/pages/errors/404.vue",
 		"resources_js_pages_errors_404_vue"
@@ -62859,6 +62645,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./auth.js": "./resources/js/store/modules/auth.js",
 	"./challenge.js": "./resources/js/store/modules/challenge.js",
 	"./challengecategory.js": "./resources/js/store/modules/challengecategory.js",
 	"./feedback.js": "./resources/js/store/modules/feedback.js",
@@ -62996,7 +62783,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_auth_Login_vue":1,"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
