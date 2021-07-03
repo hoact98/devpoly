@@ -67,7 +67,7 @@ class SolutionController extends Controller
         $solution->load('users');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
-    }
+    } 
 
     // update Solution
     public function update($id, SaveSolutionRequest $request)
@@ -86,4 +86,12 @@ class SolutionController extends Controller
 
         return response()->json(['status'=>'success','message'=>'The solution successfully delete','data'=>$solution],200);
     }
+
+    public function getAllSolution(){
+        $solution = Solution::get();
+        $solution->load('users');
+        $solution->load('challenges');
+        return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
+    }
+
 }
