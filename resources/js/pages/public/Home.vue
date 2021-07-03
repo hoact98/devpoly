@@ -62,7 +62,7 @@
 
                         <div class="row content-list">
                             <div  v-for="challengecategory in challengecategories" :key="challengecategory.id" class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-                                <router-link :to="{name: 'overview',params: { slug: challengecategory.slug }}">
+                                <router-link :to="{name: 'overview',params: { slug: challengecategory.slug }}" style="color:#fff; text-decoration: none">
                                 <div class="content-item">
                                     <div class="content-item-image img-challenge-path">
                                         <img :src="'/'+challengecategory.image" alt="">
