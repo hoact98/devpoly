@@ -14,7 +14,7 @@
               <!-- /.card-header -->
 
               <div class="card-body">
-                
+
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
@@ -31,8 +31,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="challenge in challenges" :key="challenge.id">
-                      <td>{{ challenge.id }}</td>
+                    <tr v-for="(challenge,index) in challenges" :key="index">
+                      <td>{{ index+1 }}</td>
                       <td>{{ challenge.title }} </td>
                       <td>{{ challenge.category.name }} </td>
                       <td>{{challenge.level}}</td>

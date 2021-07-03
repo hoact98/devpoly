@@ -27,11 +27,7 @@ use App\Http\Controllers\SolutionController;
 |
 */
 
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-
-], function ($router) {
+Route::group(['middleware' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -44,20 +40,6 @@ Route::group([
 
 //     Route::get('user', [UserController::class, 'current']);
 // });
-
-Route::group(['middleware' => 'guest:api'], function () {
-    Route::post('login', [LoginController::class, 'login']);
-    Route::post('register', [RegisterController::class, 'register']);
-
-    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-    Route::post('password/reset', [ResetPasswordController::class, 'reset']);
-
-    Route::post('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify');
-    Route::post('email/resend', [VerificationController::class, 'resend']);
-
-    Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
-    Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
-});
 Route::post('change-password/{id}',[UserController::class, 'changePass'])->name('change.password');
 Route::get('users', [UserController::class, 'index'])->name('users');
 Route::group(['prefix' => 'user'], function () {

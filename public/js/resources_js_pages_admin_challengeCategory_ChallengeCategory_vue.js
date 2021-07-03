@@ -253,10 +253,11 @@ var render = function() {
                       _c(
                         "tbody",
                         _vm._l(_vm.challengecategories, function(
-                          challengecategory
+                          challengecategory,
+                          index
                         ) {
-                          return _c("tr", { key: challengecategory.id }, [
-                            _c("td", [_vm._v(_vm._s(challengecategory.id))]),
+                          return _c("tr", { key: index }, [
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(challengecategory.name))]),
                             _vm._v(" "),

@@ -172,8 +172,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.form);
-                _context.next = 3;
+                _context.next = 2;
                 return _this.form.post(route("create.challenge")).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
@@ -190,7 +189,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }

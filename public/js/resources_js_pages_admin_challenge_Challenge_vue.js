@@ -258,9 +258,9 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.challenges, function(challenge) {
-                          return _c("tr", { key: challenge.id }, [
-                            _c("td", [_vm._v(_vm._s(challenge.id))]),
+                        _vm._l(_vm.challenges, function(challenge, index) {
+                          return _c("tr", { key: index }, [
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(challenge.title) + " ")]),
                             _vm._v(" "),

@@ -6,6 +6,7 @@ import store from './store/index';
 import routes from './routes'
 import App from './App.vue'
 import CKEditor from "ckeditor4-vue";
+import { initialize } from "./helpers/general";
 
 //Import Sweetalert2
 import Swal from 'sweetalert2'
@@ -49,7 +50,7 @@ const router = new VueRouter({
 	routes,
 	mode: 'history',
 })
-
+initialize(store, router);
 new Vue({
     el: '#app',
 	router,

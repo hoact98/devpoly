@@ -41,7 +41,12 @@ const routes = [{
             meta: {
                 guest: true
             },
-        }]
+        },{            path: 'register',
+            component: page('auth/Register.vue'),
+            name: 'register',
+            meta: {
+                guest: true
+            },}]
     },
     {
         path: '/paths',

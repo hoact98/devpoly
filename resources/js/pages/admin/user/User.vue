@@ -24,8 +24,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="user in users" :key="user.id">
-                      <td>{{user.id}}</td>
+                    <tr v-for="(user, index) in users" :key="index">
+                      <td>{{index+1}}</td>
                       <td>{{user.username}}</td>
                       <td v-if="user.information">{{user.information.name}}</td>
                       <td v-else></td>
@@ -37,14 +37,14 @@
                         <button class="btn btn-danger"  @click="deleteUser(user.id)">Delete</button>
                       </td>
                     </tr>
-           
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            
+
           </div>
           <!-- /.col -->
         </div>
@@ -86,7 +86,7 @@ export default {
               if (result.value) {
                 //Send Request to server
                 this.$store.dispatch('user/deleteUser', id)
-                  
+
                 }
 
             })

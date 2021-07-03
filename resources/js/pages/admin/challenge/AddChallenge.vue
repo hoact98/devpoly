@@ -132,7 +132,6 @@ export default {
   },
   methods: {
     async addChallenge() {
-      console.log(this.form);
         await this.form
           .post(route("create.challenge"))
           .then((response) => {

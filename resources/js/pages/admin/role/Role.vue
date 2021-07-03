@@ -21,8 +21,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="role in roles" :key="role.id">
-                      <td>{{role.id}}</td>
+                    <tr v-for="(role,index) in roles" :key="index">
+                      <td>{{index+1}}</td>
                       <td>{{role.name}}</td>
                       <td>
                          <router-link :to="{name: 'edit.role', params: { id: role.id }}" class="btn btn-info">Edit
@@ -30,14 +30,14 @@
                         <button class="btn btn-danger" @click="deleteRole(role.id)">Delete</button>
                       </td>
                     </tr>
-           
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            
+
           </div>
           <!-- /.col -->
         </div>

@@ -45,8 +45,10 @@ class AuthController extends Controller
             $role = 1;
         }else if($user->hasPermissionTo('login user')){
             $role = 2;
-        }else{
+        } else if ($user->hasPermissionTo('login userVip')) {
             $role = 3;
+        }else if ($user->hasPermissionTo('login mentor')){
+            $role = 4;
         }
         return $this->createNewToken($token,$role);
     }
@@ -58,7 +60,7 @@ class AuthController extends Controller
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
+            'username' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ]);
@@ -73,12 +75,12 @@ class AuthController extends Controller
                 ));
         $information = new InformationUser([
                 'user_id' => $user->id,
-                'name' => $request->name,
+                'username' => $request->name,
         ]);
         $information->save();
         $userRole = new ModelHasRole([
-            'role_id'=> 1,
-            'model_type'=> User::class,
+            'role_id' =>2,
+            'model_type' => User::class,
             'model_id' => $user->id,
         ]);
         $userRole->save();
@@ -115,7 +117,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        return response()->json(auth()->user());
+        return response()->json(auth('api')->user());
     }
 
     /**
@@ -132,7 +134,7 @@ class AuthController extends Controller
             'role' => $role,
             'token_type' => 'bearer',
             'expires_in' => auth($this->guard)->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth('api')->user()
         ]);
     }
 

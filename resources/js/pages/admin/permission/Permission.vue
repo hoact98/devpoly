@@ -21,8 +21,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="permission in permissions" :key="permission.id">
-                      <td>{{permission.id}}</td>
+                    <tr v-for="(permission,index) in permissions" :key="index">
+                      <td>{{index+1}}</td>
                       <td>{{permission.name}}</td>
                       <td>
                          <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
@@ -30,14 +30,14 @@
                         <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
                       </td>
                     </tr>
-           
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            
+
           </div>
           <!-- /.col -->
         </div>
