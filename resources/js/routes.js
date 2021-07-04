@@ -41,12 +41,14 @@ const routes = [{
             meta: {
                 guest: true
             },
-        },{            path: 'register',
+        }, {
+            path: 'register',
             component: page('auth/Register.vue'),
             name: 'register',
             meta: {
                 guest: true
-            },}]
+            },
+        }]
     },
     {
         path: '/paths',
@@ -79,13 +81,13 @@ const routes = [{
                 name: 'solution',
             },
             {
-                path: '/solution-detail',
+                path: '/get-detail-solution/:id',
                 alias: '',
                 component: page('public/SolutionDetail.vue'),
                 meta: {
                     guest: true
                 },
-                name: 'solutionDetail',
+                name: 'showDetailSolution',
             },
             {
                 path: '/feedback',
