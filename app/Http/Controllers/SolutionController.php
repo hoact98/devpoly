@@ -94,4 +94,12 @@ class SolutionController extends Controller
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     }
 
+    public function showDetailSolution($id)
+    {
+        $solution = Solution::find($id);
+        $solution->load('users');
+        $solution->load('challenges');
+        return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
+    }
+
 }
