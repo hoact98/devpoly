@@ -82,6 +82,7 @@
             </section>
 </template>
 <script>
+import { currentUser } from "../../helpers/auth";
 export default {
   data() {
     return {

@@ -100,3 +100,6 @@ Route::group(['prefix' => 'solution'], function () {
 
 Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
 
+
+Route::get('/chat-message', [ChatMessageController::class, 'fetch'])->name('fetchChat');
+Route::post('/chat-message', [ChatMessageController::class, 'send'])->name('sendChat');

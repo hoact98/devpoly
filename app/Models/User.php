@@ -112,4 +112,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Feedback::class,'user_id');
     }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }

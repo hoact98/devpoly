@@ -12,28 +12,28 @@ import { initialize } from "./helpers/general";
 import Swal from 'sweetalert2'
 window.Swal = Swal
 const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  onOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
 })
 window.Toast = Toast
 
 //Import v-from
-import { Form} from 'vform'
+import { Form } from 'vform'
 window.Form = Form;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(CKEditor);
-Vue.component('breadcrumb',require('./components/Breadcrumb.vue').default);
-Vue.component('checkbox',require('./components/Checkbox.vue').default);
-Vue.component('v-button',require('./components/Button.vue').default);
+Vue.component('breadcrumb', require('./components/Breadcrumb.vue').default);
+Vue.component('checkbox', require('./components/Checkbox.vue').default);
+Vue.component('v-button', require('./components/Button.vue').default);
 
 // const router = new VueRouter({
 //   router,
@@ -47,13 +47,13 @@ Vue.component('v-button',require('./components/Button.vue').default);
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 const router = new VueRouter({
-	routes,
-	mode: 'history',
-})
-initialize(store, router);
+        routes,
+        // mode: 'history',
+    })
+    // initialize(store, router);
 new Vue({
     el: '#app',
-	router,
-	store,
+    router,
+    store,
     render: h => h(App)
 }).$mount('#app')

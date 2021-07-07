@@ -19,4 +19,8 @@ class Message extends Model
         'time',
         'ip'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

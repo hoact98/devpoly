@@ -63,6 +63,15 @@ const routes = [{
                 name: 'paths',
             },
             {
+                path: '/chat',
+                alias: '',
+                component: page('public/Chat.vue'),
+                meta: {
+                    guest: true
+                },
+                name: 'chat',
+            },
+            {
                 path: '/overview/:slug',
                 alias: '',
                 component: page('public/Overview.vue'),
