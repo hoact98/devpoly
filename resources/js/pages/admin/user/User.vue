@@ -40,7 +40,7 @@ export default {
       columns: [
           {
               label: 'STT',
-              name:'id',
+              name:'key',
               orderable: true,
           },
           {
@@ -77,7 +77,11 @@ export default {
                 params: options
             })
             .then(response => {
-                this.data = response.data;
+               var result = response.data;
+                for(var i in result['data']){
+                    result['data'][i].key=Number(i)+1;
+                }
+                this.data = result;
             })
             // eslint-disable-next-line
             .catch(errors => {

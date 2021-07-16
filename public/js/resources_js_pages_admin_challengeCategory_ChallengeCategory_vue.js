@@ -191,7 +191,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url, {
         params: options
       }).then(function (response) {
-        _this.data = response.data;
+        var result = response.data;
+
+        for (var i in result['data']) {
+          result['data'][i].key = Number(i) + 1;
+        }
+
+        _this.data = result;
       }) // eslint-disable-next-line
       ["catch"](function (errors) {//Handle Errors
       });
