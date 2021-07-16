@@ -1,115 +1,94 @@
 <template>
-  <div class="content-wrapper">
-    <breadcrumb :title="title"></breadcrumb>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">{{ title }}</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form @submit.prevent="addChallenge" @keydown="form.onKeydown($event)">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="">Title:</label>
-                    <input type="text" class="form-control" placeholder="Title" name="title" v-model="form.title" :class="{
-                        'is-invalid': form.errors.has('title'), }"/>
-                    <div class="text-danger" v-if="form.errors.has('title')" v-html="form.errors.get('title')" />
-                  </div>
-                  <div class="form-group">
-                    <label for="">Description:</label>
-                    <ckeditor name="description" v-model="form.description"
-                      :class="{ 'is-invalid': form.errors.has('description') }"></ckeditor>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Language:</label>
-                    <select class="form-control select2" aria-label="Default select example" name="language" v-model="form.language"
-                      :class="{ 'is-invalid': form.errors.has('language') }">
-                      <option value="">Chọn Ngôn Ngữ</option>
-                      <option value="HTML CSS JS">HTML CSS JS</option>
-                      <option value="PHP">PHP</option>
-                      <option value="PYTHON">PYTHON</option>
-                    </select>
-                    <div class="text-danger" v-if="form.errors.has('language')"
-                      v-html="form.errors.get('language')"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="">Link-Figma:</label>
-                    <input type="text"
-                      class="form-control"
-                      placeholder="Link-Figma"
-                      name="link_figma"
-                      v-model="form.link_figma"
-                      :class="{ 'is-invalid': form.errors.has('link_figma') }"/>
-                    <div class="text-danger"
-                      v-if="form.errors.has('link_figma')"
-                      v-html="form.errors.get('link_figma')" />
-                  </div>
-                  <div class="form-group">
-                    <label for="">Level:</label>
-                    <select class="form-control select2"
-                      aria-label="Default select example" name="level"
-                      v-model="form.level"
-                      :class="{ 'is-invalid': form.errors.has('level') }">
-                      <option value="">Chọn độ khó</option>
-                      <option value="1">Easy</option>
-                      <option value="2">Normal</option>
-                      <option value="3">Dificult</option>
-                    </select>
-                    <div class="text-danger" v-if="form.errors.has('level')" v-html="form.errors.get('level')" />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputCa">Category:</label>
-                    <select
-                      class="form-control select2"
-                      aria-label="Default select example"
-                      name="cate_challen_id"
-                      v-model="form.cate_challen_id"
-                      :class="{'is-invalid': form.errors.has('cate_challen_id'), }">
-                      <option value="">Chọn danh mục thử thách</option>
-                      <option v-for="challengecategory in challengecategories"
-                        :key="challengecategory.id"
-                        :value="challengecategory.id">
-                        {{ challengecategory.name }}
-                      </option>
-                    </select>
-                    <div
-                      class="text-danger"
-                      v-if="form.errors.has('cate_challen_id')"
-                      v-html="form.errors.get('cate_challen_id')"/>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-          </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6"></div>
-          <!--/.col (right) -->
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <breadcrumb :title='title'></breadcrumb>
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <div class="page-content fade-in-up">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">{{title}}</div>
+                </div>
+                <div class="ibox-body">
+                    <form @submit.prevent="addChallenge" @keydown="form.onKeydown($event)">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tiêu đề: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Tiêu đề" name="title" v-model="form.title" :class="{
+                                  'is-invalid': form.errors.has('title'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('title')" v-html="form.errors.get('title')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Mô tả: </label>
+                            <div class="col-sm-10">
+                               <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
+                                <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ngôn ngữ: </label>
+                            <div class="col-sm-10">
+                               <input type="text" class="form-control" placeholder="Ngôn ngữ" name="language" v-model="form.language" :class="{
+                                  'is-invalid': form.errors.has('language'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('language')" v-html="form.errors.get('language')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Link figma: </label>
+                            <div class="col-sm-10">
+                               <input type="text" class="form-control" placeholder="Link figma" name="link_figma" v-model="form.link_figma" :class="{
+                                  'is-invalid': form.errors.has('link_figma'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('link_figma')" v-html="form.errors.get('link_figma')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Cấp độ: </label>
+                            <div class="col-sm-10">
+                               <select class="form-control select2" aria-label="Default select example" name="level"
+                                v-model="form.level" :class="{ 'is-invalid': form.errors.has('level') }">
+                                  <option value="">Chọn độ khó</option>
+                                  <option value="1">Easy</option>
+                                  <option value="2">Normal</option>
+                                  <option value="3">Dificult</option>
+                                </select>
+                                <div class="text-danger" v-if="form.errors.has('level')" v-html="form.errors.get('level')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Danh mục: </label>
+                            <div class="col-sm-10">
+                               <select  class="form-control select2" aria-label="Default select example"
+                                name="cate_challen_id" v-model="form.cate_challen_id"
+                                :class="{'is-invalid': form.errors.has('cate_challen_id'), }">
+                                <option value="">Chọn danh mục thử thách</option>
+                                <option v-for="challengecategory in challengecategories"
+                                  :key="challengecategory.id"
+                                  :value="challengecategory.id">
+                                  {{ challengecategory.name }}
+                                </option>
+                              </select>
+                              <div class="text-danger"  v-if="form.errors.has('cate_challen_id')"
+                                v-html="form.errors.get('cate_challen_id')"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 ml-sm-auto">
+                                <button class="btn btn-info" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END PAGE CONTENT-->
+        <Footer></Footer>
+    </div>
 </template>
 
-
 <script>
+import Footer from '../../../components/AdminFooter.vue';
 export default {
   data: () => ({
     form: new Form({
@@ -120,8 +99,11 @@ export default {
       level: "",
       cate_challen_id: "",
     }),
-    title: "Add Challenge",
+    title: "Tạo thử thách",
   }),
+  components:{
+    Footer
+  },
   computed: {
     challengecategories() {
       return this.$store.state.challengecategory.challengecategories;

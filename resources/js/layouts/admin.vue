@@ -1,9 +1,9 @@
 <template>
-  <div class="admin-layout">
+  <div class="page-wrapper">
       <navbar></navbar>
-        <sidebar></sidebar>
+      <sidebar></sidebar>
       <slot />
-        <router-view/>
+        
   </div>
 </template>
 
@@ -18,4 +18,5 @@ export default {
     Sidebar
   }
 }
+
 </script>

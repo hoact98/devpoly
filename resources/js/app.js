@@ -6,7 +6,11 @@ import store from './store/index';
 import routes from './routes'
 import App from './App.vue'
 import CKEditor from "ckeditor4-vue";
+import DataTable from 'laravel-vue-datatable';
 import { initialize } from "./helpers/general";
+import MainLayout from "./layouts/main.vue";
+import HomeLayout from "./layouts/home.vue";
+import AdminLayout from "./layouts/admin.vue";
 
 //Import Sweetalert2
 import Swal from 'sweetalert2'
@@ -31,25 +35,28 @@ window.Form = Form;
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(CKEditor);
+Vue.use(DataTable);
 Vue.component('breadcrumb', require('./components/Breadcrumb.vue').default);
 Vue.component('checkbox', require('./components/Checkbox.vue').default);
 Vue.component('v-button', require('./components/Button.vue').default);
-
+Vue.component('admin-layout',AdminLayout);
+Vue.component('home-layout',HomeLayout);
+Vue.component('main-layout',MainLayout);
 // const router = new VueRouter({
 //   router,
 //   store,
 //   mode: 'history'
 // })
 
-// window.events = new Vue();
-
+window.events = new Vue();
 /* eslint-disable no-new */
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 const router = new VueRouter({
         routes,
-        // mode: 'history',
+        mode: 'history',
     })
+
     // initialize(store, router);
 new Vue({
     el: '#app',

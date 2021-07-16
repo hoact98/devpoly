@@ -1,89 +1,107 @@
 <template>
-   <div class="content-wrapper">
-    <breadcrumb :title='title'></breadcrumb>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                 <table  class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>name</th>
-                      <th><router-link :to="{name:'add.role'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(role,index) in roles" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{role.name}}</td>
-                      <td>
-                         <router-link :to="{name: 'edit.role', params: { id: role.id }}" class="btn btn-info">Edit
-                        </router-link>
-                        <button class="btn btn-danger" @click="deleteRole(role.id)">Delete</button>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+  <div class="content-wrapper">
+      <!-- START PAGE CONTENT-->
+      <div class="page-heading row">
+          <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link :to="{name:'add.role'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      <div class="page-content fade-in-up">
+        <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">Data Table</div>
+              </div>
+              <div class="ibox-body">
+                  <data-table  :data="data"
+                    :columns="columns"
+                    @on-table-props-changed="reloadTable"
+                    class="table table-head-fixed text-nowrap">
+                  </data-table> 
+              </div>
+          </div>
+      </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
+import TableButton from '../../../components/TableButton.vue';
 export default {
    data() {
     return {
      title: 'Roles',
+      data: {},
+      tableProps: {
+          search: '',
+          length: 10,
+          column: 'id',
+          dir: 'desc'
+      },
+      columns: [
+          {
+              label: 'ID',
+              name: 'id',
+              orderable: true,
+          },
+          {
+              label: 'Name',
+              name: 'name',
+              orderable: true,
+          },
+           {
+              label: 'Action',
+              name: 'edit.role',
+              orderable: false,
+              component: TableButton,
+              event: "click",
+              handler: this.deleteRole,
+          }
+      ]
     };
   },
-    computed: {
-          roles () {
-              return this.$store.state.role.roles;
-          }
+   components:{
+      Footer,
+      TableButton
+  },
+    created() {
+    this.getData();
+  },
+  methods: {
+    getData(url = route("roles"), options = this.tableProps) {
+          axios.get(url, {
+              params: options
+          })
+          .then(response => {
+              this.data = response.data;
+          })
+          // eslint-disable-next-line
+          .catch(errors => {
+              //Handle Errors
+          })
       },
-      created: function () {
-          this.$store.dispatch('role/fetch');
+      reloadTable(tableProps) {
+          this.getData(route("roles"), tableProps);
       },
-      methods: {
-          deleteRole: function (id) {
-              Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
+      deleteRole: function (id) {
+          Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
 
-              if (result.value) {
-                //Send Request to server
-                this.$store.dispatch('role/deleteRole', id);
-                }
+          if (result.value) {
+            //Send Request to server
+            this.$store.dispatch('role/deleteRole', id);
+            this.getData();
+            }
 
-            })
-          }
+        })
       }
+  }
 }
 </script>
 

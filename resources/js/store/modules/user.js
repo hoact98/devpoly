@@ -65,4 +65,5 @@ export const actions = {
       .post(route("create.user"), data)
       .then()
   }
+  
 };

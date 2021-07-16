@@ -11,7 +11,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class UserController extends Controller
 {
    /**
@@ -26,18 +26,32 @@ class UserController extends Controller
     }
 
     // all users
-    public function index()
-    {
-        $users= User::all();
-        $users->load('information');
-        $users->load('roles');
-        return response()->json([
-            'status'=>'success',
-            'messege' => 'Succsess get list users',
-            'data' => $users,
-        ], 200);
-    }
+    // public function index()
+    // {
+    //     $users= User::all();
+    //     $users->load('information');
+    //     $users->load('roles');
+    //     return response()->json([
+    //         'status'=>'success',
+    //         'messege' => 'Succsess get list users',
+    //         'data' => $users,
+    //     ], 200);
+    // }
 
+    public function index(Request $request)
+    {   
+        $query = User::eloquentQuery(
+            $request->input('column'),
+            $request->input('dir'),
+            $request->input('search'),
+            [
+                "roles"
+            ]
+        );
+        $data = $query->paginate($request->input('length'));
+
+        return new DataTableCollectionResource($data);
+    }
     // add user -> add user_role
     public function create(SaveUserRequest $request)
     {

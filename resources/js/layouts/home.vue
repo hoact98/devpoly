@@ -4,7 +4,6 @@
       <main>
         <Header></Header>
         <slot />
-        <router-view/>
         <Social></Social>
         <Footer></Footer>
       </main>

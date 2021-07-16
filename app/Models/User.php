@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable,Uuid,HasRoles;
+    use HasApiTokens,HasFactory, Notifiable,Uuid,HasRoles,LaravelVueDatatableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,40 @@ class User extends Authenticatable implements JWTSubject
     protected $keyType = 'string';
     public $incrementing = false;
     protected $guard_name = 'api';
+    protected $dataTableColumns = [
+        'id' => [
+            'searchable' => false,
+        ],
+        'username' => [
+            'searchable' => true,
+        ],
+        'email' => [
+            'searchable' => true,
+        ]
+    ];
+
+    protected $dataTableRelationships = [
+        "belongsToMany" => [
+            "roles" => [
+                "model" => Role::class,
+                "foreign_key" => "role_id",
+                "pivot" => [
+                    "table_name" => "model_has_roles",
+                    "primary_key" => "model_id",
+                    "foreign_key" => "role_id",
+                    "local_key" => "model_id",
+                ],
+                // "order_by" => "name",
+                // "order_dir" => "asc",
+                "columns" => [
+                    "name" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ],
+        ]
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -69,21 +104,6 @@ class User extends Authenticatable implements JWTSubject
         ]);
     }
 
-    /**
-     * @return int
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 
     public function information (){
         return $this->hasOne(InformationUser::class,'user_id');

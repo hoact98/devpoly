@@ -1,77 +1,92 @@
 <template>
-   <div class="content-wrapper">
-   <breadcrumb :title='title'></breadcrumb>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-               <table class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Username</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Avatar</th>
-                      <th><router-link :to="{name: 'add.user'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(user, index) in users" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{user.username}}</td>
-                      <td v-if="user.information">{{user.information.name}}</td>
-                      <td v-else></td>
-                      <td>{{user.email}}</td>
-                      <td><img :src="'/'+user.avatar" alt="" width="60px"></td>
-                      <td>
-                        <router-link :to="{name: 'edit.user', params: { id: user.id }}" class="btn btn-info">Edit
-                        </router-link>
-                        <button class="btn btn-danger"  @click="deleteUser(user.id)">Delete</button>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+  <div class="content-wrapper">
+      <!-- START PAGE CONTENT-->
+      <div class="page-heading row">
+          <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link :to="{name:'add.user'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      <div class="page-content fade-in-up">
+        <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">Data Table</div>
+              </div>
+              <div class="ibox-body">
+                  <data-table  :data="data"
+                    :columns="columns"
+                    @on-table-props-changed="reloadTable"
+                    class="table table-head-fixed text-nowrap">
+                  </data-table> 
+              </div>
+          </div>
+      </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
+import TableButton from '../../../components/TableButton.vue';
 export default {
    data() {
-    return {
-     title: 'Danh sách người dùng',
+      return {
+      title: 'Danh sách người dùng',
+      data: {},
+      tableProps: {
+          search: '',
+          length: 10,
+          column: 'id',
+          dir: 'desc'
+      },
+      columns: [
+          {
+              label: 'STT',
+              name:'id',
+              orderable: true,
+          },
+          {
+              label: 'Name',
+              name: 'username',
+              orderable: true,
+          },
+          {
+              label: 'Email',
+              name: 'email',
+              orderable: true,
+          },
+          {
+              label: 'Action',
+              name: 'edit.user',
+              orderable: false,
+              component: TableButton,
+              event: "click",
+              handler: this.deleteUser,
+          }
+      ]
     };
   },
-    computed: {
-          users () {
-              return this.$store.state.user.users;
-          }
-      },
-      created: function () {
-          this.$store.dispatch('user/fetch');
-      },
+   components:{
+      Footer,
+      TableButton
+  },
+    created() {
+        this.getData();
+    },
       methods: {
+        getData(url = route("users"), options = this.tableProps) {
+            axios.get(url, {
+                params: options
+            })
+            .then(response => {
+                this.data = response.data;
+            })
+            // eslint-disable-next-line
+            .catch(errors => {
+                //Handle Errors
+            })
+        },
+        reloadTable(tableProps) {
+            this.getData(route("users"), tableProps);
+        },
          deleteUser(id) {
             Swal.fire({
               title: 'Are you sure?',
@@ -86,6 +101,7 @@ export default {
               if (result.value) {
                 //Send Request to server
                 this.$store.dispatch('user/deleteUser', id)
+                this.getData();
 
                 }
 
@@ -93,6 +109,7 @@ export default {
           }
       }
 }
+
 </script>
 
 <style>

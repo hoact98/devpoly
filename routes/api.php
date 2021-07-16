@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\OAuthController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -31,8 +25,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
-    Route::get('/user', [AuthController::class, 'userProfile'])->name('userProfile');
+    Route::get('/user', [AuthController::class, 'me'])->name('me');
 });
 
 // Route::group(['middleware' => 'auth:api'], function () {

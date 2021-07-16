@@ -1,82 +1,103 @@
 <template>
   <div class="content-wrapper">
-    <breadcrumb :title="title"></breadcrumb>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{ title }}</h3>
-              </div>
-              <!-- /.card-header -->
-
-              <div class="card-body">
-
-                <table class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Level</th>
-                      <th>Language</th>
-                      <th>
-                        <router-link :to="{name:'add.challenge'}" >
-                          <button type="button" class="btn btn-primary">Add New</button>
-                        </router-link>
-                    </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(challenge,index) in challenges" :key="index">
-                      <td>{{ index+1 }}</td>
-                      <td>{{ challenge.title }} </td>
-                      <td>{{ challenge.category.name }} </td>
-                      <td>{{challenge.level}}</td>
-                      <td>{{challenge.language}}</td>
-                      <td>
-                        <router-link :to="{ name: 'edit.challenge',params: { id: challenge.id },}" class="btn btn-info">Edit
-                        </router-link>
-                        <button class="btn btn-danger" @click="deletechallenge(challenge.id)">Delete</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+      <!-- START PAGE CONTENT-->
+      <div class="page-heading row">
+          <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link :to="{name:'add.challenge'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      <div class="page-content fade-in-up">
+        <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">Data Table</div>
+              </div>
+              <div class="ibox-body">
+                  <data-table  :data="data"
+                    :columns="columns"
+                    @on-table-props-changed="reloadTable"
+                    class="table table-head-fixed text-nowrap">
+                  </data-table> 
+              </div>
+          </div>
+      </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
+import TableButton from '../../../components/TableButton.vue';
 export default {
   data() {
     return {
-      title: "Challenge",
+      title: "Thử thách",
+       data: {},
+      tableProps: {
+          search: '',
+          length: 10,
+          column: 'id',
+          dir: 'desc'
+      },
+      columns: [
+          {
+              label: 'ID',
+              name:'id',
+              orderable: true,
+          },
+          {
+              label: 'Tiêu đề',
+              name: 'title',
+              orderable: true,
+          },
+          {
+              label: 'Ngôn ngữ',
+              name: 'language',
+              orderable: true,
+          },
+          {
+              label: 'Danh mục',
+              name: 'category.name',
+              orderable: true,
+          },
+          {
+              label: 'Cấp độ',
+              name: 'level',
+              orderable: true,
+          },
+          {
+              label: 'Action',
+              name: 'edit.challenge',
+              orderable: false,
+              component: TableButton,
+              event: "click",
+              handler: this.deleteChallenge,
+          }
+      ]
     };
   },
-  computed: {
-    challenges() {
-      return this.$store.state.challenge.challenges;
-    },
+   components:{
+      Footer,
+      TableButton
   },
-  created: function () {
-    this.$store.dispatch("challenge/fetch");
+  created() {
+     this.getData();
   },
   methods: {
-    deletechallenge(id) {
+    getData(url = route("challenges"), options = this.tableProps) {
+        axios.get(url, {
+            params: options
+        })
+        .then(response => {
+            this.data = response.data;
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+    reloadTable(tableProps) {
+        this.getData(route("challenges"), tableProps);
+    },
+    deleteChallenge(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -89,6 +110,7 @@ export default {
         if (result.value) {
           //Send Request to server
           this.$store.dispatch("challenge/deletechallenge", id);
+          this.getData();
         }
       });
     },

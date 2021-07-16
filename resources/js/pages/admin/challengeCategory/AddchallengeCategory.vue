@@ -1,62 +1,55 @@
 <template>
-  <div class="content-wrapper">
-    <breadcrumb :title='title'></breadcrumb>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-                <form @submit.prevent="addChallengeCategory" @keydown="form.onKeydown($event)">
-                  <div class="card-body">
-                    <div class="form-group">
-                    <label>Name:</label>
-                         <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-                      <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
-                    </div>
-                   <div class="form-group">
-                    <label >Description:</label>
-                    <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
-                      <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
-                    </div>
-
-                    <div class="form-group">
-                         <label for="">Image</label>
-                       <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
-                       <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <breadcrumb :title='title'></breadcrumb>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <div class="page-content fade-in-up">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">{{title}}</div>
+                </div>
+                <div class="ibox-body">
+                    <form @submit.prevent="addChallengeCategory" @keydown="form.onKeydown($event)">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tên: </label>
+                            <div class="col-sm-10">
+                                <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" id="exampleInputName" placeholder="Enter name">
+                                <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Mô tả: </label>
+                            <div class="col-sm-10">
+                               <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
+                                <!-- <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" id="exampleInputName" placeholder="Enter name"> -->
+                                <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ảnh: </label>
+                            <div class="col-sm-10">
+                                <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
+                                <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10 ml-sm-auto">
+                                <button class="btn btn-info" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END PAGE CONTENT-->
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
 export default {
    data:() => ({
     form: new Form({
@@ -66,8 +59,9 @@ export default {
     }),
     title: 'Thêm Danh Mục Thử Thách',
   }),
-     computed: {
-      },
+   components:{
+      Footer
+  },
     methods: {
       upload(event){
         this.form.image = event.target.files[0];

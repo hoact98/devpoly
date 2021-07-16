@@ -1,70 +1,88 @@
 <template>
-   <div class="content-wrapper">
-    <breadcrumb :title='title'></breadcrumb>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                 <table  class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>name</th>
-                      <th><router-link :to="{name:'add.permission'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(permission,index) in permissions" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{permission.name}}</td>
-                      <td>
-                         <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
-                        </router-link>
-                        <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+    <div class="content-wrapper">
+      <!-- START PAGE CONTENT-->
+      <div class="page-heading row">
+          <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      <div class="page-content fade-in-up">
+        <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">Data Table</div>
+              </div>
+              <div class="ibox-body">
+                  <data-table  :data="data"
+                    :columns="columns"
+                    @on-table-props-changed="reloadTable"
+                    class="table table-head-fixed text-nowrap">
+                  </data-table> 
+              </div>
+          </div>
+      </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
+import TableButton from '../../../components/TableButton.vue';
+
 export default {
    data() {
     return {
      title: 'Permissions',
+     data: {},
+      tableProps: {
+          search: '',
+          length: 10,
+          column: 'id',
+          dir: 'desc'
+      },
+      columns: [
+          {
+              label: 'ID',
+              name: 'id',
+              orderable: true,
+          },
+          {
+              label: 'Name',
+              name: 'name',
+              orderable: true,
+          },
+           {
+              label: 'Action',
+              name: 'edit.permission',
+              orderable: false,
+              component: TableButton,
+              event: "click",
+              handler: this.deletePermission,
+          }
+      ]
     };
   },
-    computed: {
-          permissions () {
-              return this.$store.state.permission.permissions;
-          }
-      },
-      created: function () {
-          this.$store.dispatch('permission/fetch');
-      },
+   components:{
+      Footer,
+      TableButton
+  },
+    created() {
+        this.getData();
+    },
       methods: {
+        getData(url = route("permissions"), options = this.tableProps) {
+            axios.get(url, {
+                params: options
+            })
+            .then(response => {
+                this.data = response.data;
+            })
+            // eslint-disable-next-line
+            .catch(errors => {
+                //Handle Errors
+            })
+        },
+        reloadTable(tableProps) {
+            this.getData(route("permissions"), tableProps);
+        },
           deletePermission: function (id) {
              Swal.fire({
               title: 'Are you sure?',
@@ -79,8 +97,11 @@ export default {
               if (result.value) {
                 //Send Request to server
                 this.$store.dispatch('permission/deletePermission', id);
+                this.getData();
+
                 }
             })
+
           }
       }
 }

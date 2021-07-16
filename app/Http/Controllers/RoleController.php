@@ -7,19 +7,34 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RoleHasPermission;
 use Illuminate\Http\Request;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class RoleController extends Controller
 {
-     // all roles
-     public function index()
-     {
-        return response()->json([
-            'status'=>'success',
-            'messege' => 'Succsess get list roles',
-            'data' => Role::all(),
-        ], 200);
-     }
+    // all roles
+    //  public function index()
+    //  {
+    //     return response()->json([
+    //         'status'=>'success',
+    //         'messege' => 'Succsess get list roles',
+    //         'data' => Role::all(),
+    //     ], 200);
+    //  }
  
+    public function index(Request $request)
+    {   
+        $length = $request->input('length');
+        $sortBy = $request->input('column');
+        $orderBy = $request->input('dir');
+        $searchValue = $request->input('search');
+        
+        $query = Role::eloquentQuery($sortBy, $orderBy, $searchValue);
+
+        $data = $query->paginate($length);
+        
+        return new DataTableCollectionResource($data);
+    }
+
      // add role
      public function create(SaveRoleRequest $request)
      {

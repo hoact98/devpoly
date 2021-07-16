@@ -2,140 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InformationUser;
-use App\Models\ModelHasRole;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
+use App\Http\Controllers\Controller; 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AuthController extends Controller 
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-        $this->guard = "api";
+  /** 
+   * Login API 
+   * 
+   * @return \Illuminate\Http\Response 
+   */ 
+  
+ 
+  public function login(Request $request)
+  {
+    
+     $rule= [
+          'email' => 'required|email',
+          'password' => 'required|min:6'
+        ];
+        $messages = [
+            'email.required' => "Hãy nhập email",
+            'password.min' => "Ít nhất có 6 ký tự",
+            'email.email' => "Email không đúng định dạng",
+        ];
+   
+        $validator =  Validator::make($request->all(),$rule,$messages);
+          if ($validator->fails()) { 
+            return response()->json(['error'=>$validator->errors()]);
+          }
+      if(!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 1]))
+          return response()->json(['errors' => ['password'=> ['Tài khoản hoặc mật khẩu không đúng!']]]);
+      $user = $request->user();
+      $tokenResult = $user->createToken('Personal Access Token');
+      $token = $tokenResult->token;
+      $token->save();
+      return response()->json([
+          'access_token' => $tokenResult->accessToken,
+          'status' => 'success',
+      ]);
+  }
+
+  /** 
+   * Register API 
+   * 
+   * @return \Illuminate\Http\Response 
+   */ 
+  public function register(Request $request) 
+  { 
+    $validator = Validator::make($request->all(), [ 
+      'name' => 'required', 
+      'email' => 'required|email', 
+      'password' => 'required', 
+      'c_password' => 'required|same:password', 
+    ]);
+    if ($validator->fails()) { 
+      return response()->json(['error'=>$validator->errors()]);
     }
+    $postArray = $request->all(); 
+    $postArray['password'] = Hash::make($postArray['password']); 
+    $user = User::create($postArray); 
+    $success['token'] =  $user->createToken('LaraPassport')->accessToken; 
+    $success['name'] =  $user->name;
+    return response()->json([
+      'status' => 'success',
+      'data' => $success,
+    ]); 
+  }
+  public function logout (Request $request) {
+    $token = $request->user()->token();
+    $token->revoke();
+    $response = ['message' => 'Bạn đã đăng xuất thành công!'];
+    return response($response, 200);
+  }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        if (! $token = auth($this->guard)->attempt($validator->validated())) {
-            return response()->json(['errors' => ['email'=> ['Email or password does not match']]], 401);
-        }
-        $user=User::where('email',$request->email)->first();
-        if($user->hasPermissionTo('login admin')){
-            $role = 1;
-        }else if($user->hasPermissionTo('login user')){
-            $role = 2;
-        } else if ($user->hasPermissionTo('login userVip')) {
-            $role = 3;
-        }else if ($user->hasPermissionTo('login mentor')){
-            $role = 4;
-        }
-        return $this->createNewToken($token,$role);
-    }
-
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' =>  Hash::make($request->password)]
-                ));
-        $information = new InformationUser([
-                'user_id' => $user->id,
-                'username' => $request->name,
-        ]);
-        $information->save();
-        $userRole = new ModelHasRole([
-            'role_id' =>2,
-            'model_type' => User::class,
-            'model_id' => $user->id,
-        ]);
-        $userRole->save();
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
-    }
-
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout() {
-        auth($this->guard)->logout();
-
-        return response()->json(['message' => 'User successfully signed out']);
-    }
-
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh() {
-        return $this->createNewToken( auth($this->guard)->refresh());
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userProfile() {
-        return response()->json(auth('api')->user());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function createNewToken($token,$role){
-        return response()->json([
-            'status' => 'success',
-            'access_token' => $token,
-            'role' => $role,
-            'token_type' => 'bearer',
-            'expires_in' => auth($this->guard)->factory()->getTTL() * 60,
-            'user' => auth('api')->user()
-        ]);
-    }
-
+  public function user(Request $request)
+  {
+    return response()->json($request->user());
+  }
 }

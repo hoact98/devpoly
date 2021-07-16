@@ -7,19 +7,35 @@ use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Challenge;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class ChallengeCategoryController extends Controller
 {
 
     // all categories
-    public function index()
-    {
-        return response()->json([
-            'status'=>'success',
-            'messege' => 'Succsess get list categories',
-            'data' => ChallengeCategory::all(),
-        ], 200);
-    }
+    // public function index()
+    // {
+    //     return response()->json([
+    //         'status'=>'success',
+    //         'messege' => 'Succsess get list categories',
+    //         'data' => ChallengeCategory::all(),
+    //     ], 200);
+    // }
 
+    public function index(Request $request)
+    {
+        $query = ChallengeCategory::eloquentQuery(
+            $request->input('column'),
+            $request->input('dir'),
+            $request->input('search'),
+            [
+                "challenges",
+            ]
+        );
+        
+        $data = $query->paginate($request->input('length'));
+
+        return new DataTableCollectionResource($data);
+    }
     // add category
     public function create(SaveCategoryRequest $request)
     {
