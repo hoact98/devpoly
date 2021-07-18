@@ -50,7 +50,7 @@ const router = new VueRouter({
         routes,
         // mode: 'history',
     })
-    // initialize(store, router);
+    initialize(store, router);
 new Vue({
     el: '#app',
     router,

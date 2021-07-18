@@ -15,7 +15,7 @@ use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SolutionController;
-
+use App\Http\Controllers\ChatController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -101,5 +101,6 @@ Route::group(['prefix' => 'solution'], function () {
 Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
 
 
-Route::get('/chat-message', [ChatMessageController::class, 'fetch'])->name('fetchChat');
-Route::post('/chat-message', [ChatMessageController::class, 'send'])->name('sendChat');
+Route::middleware(['api'])->get('/chat/rooms', [ChatController::class, 'rooms'])->name('rooms');
+Route::middleware(['api'])->get('/chat/room/{roomID}/messages', [ChatController::class, 'messages'])->name('messages');
+Route::middleware(['api'])->post('/chat/room/{roomID}/message', [ChatController::class, 'newMessage'])->name('newMessage');

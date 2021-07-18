@@ -1,7 +1,7 @@
 import AdminLayout from './layouts/admin.vue';
 import MainLayout from './layouts/main.vue';
 import HomeLayout from './layouts/home.vue';
-
+import AuthLayout from './layouts/auth.vue';
 function page(path) {
     return () =>
         import (`./pages/${path}`).then(
@@ -33,7 +33,7 @@ const routes = [{
     },
     {
         path: '/',
-        component: HomeLayout,
+        component: AuthLayout,
         children: [{
             path: 'login',
             component: page('auth/Login.vue'),
@@ -65,7 +65,7 @@ const routes = [{
             {
                 path: '/chat',
                 alias: '',
-                component: page('public/Chat.vue'),
+                component: page('public/Chat/container.vue'),
                 meta: {
                     guest: true
                 },

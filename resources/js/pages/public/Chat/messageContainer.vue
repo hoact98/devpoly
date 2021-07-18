@@ -1,29 +1,23 @@
 <template>
-  <div class="card-body msg_card_body">
+    <div class="card-body msg_card_body">
     <div
       class="d-flex justify-content-start mb-4"
-      v-for="(message, index) in allMessages"
+        v-for="(message, index) in messages"
       :key="index"
     >
-      <div class="img_cont_msg">
-        <img
-          src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-          class="rounded-circle user_img_msg"
-        />
-      </div>
-      <div class="msg_cotainer">
-        {{ message.message }}
-        <span class="msg_time">{{ message.created_at }}</span>
-      </div>
+         <message-item :message="message"/>
     </div>
   </div>
 </template>
 
 <script>
+import messageItem from './messageItem.vue';
 export default {
-  props: ["user", "allMessages"],
-};
+    components: {messageItem},
+    props:['messages'],
+}
 </script>
+
 
 <style scoped>
 .chat {
