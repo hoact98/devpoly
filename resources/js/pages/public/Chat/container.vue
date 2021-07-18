@@ -3,74 +3,14 @@
     <div class="row justify-content-center h-100">
       <div class="col-md-4 col-xl-3 chat">
         <div class="card mb-sm-3 mb-md-0 contacts_card">
-          <div class="card-header">
-            <div class="input-group">
-              <input
-                type="text"
-                placeholder="Search..."
-                name=""
-                class="form-control search"
-              />
-              <div class="input-group-prepend">
-                <span class="input-group-text search_btn"
-                  ><i class="fas fa-search"></i
-                ></span>
-              </div>
-            </div>
-          </div>
+          <div class="card-header"></div>
           <div class="card-body contacts_body">
-            <ui class="contacts">
-              <li class="active">
-                <div class="d-flex bd-highlight">
-                  <div class="img_cont">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                      class="rounded-circle user_img"
-                    />
-                    <span class="online_icon"></span>
-                  </div>
-                  <div class="user_info">
-                    <span>Chát tổng</span>
-                    <p>... dang soan tin</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="d-flex bd-highlight">
-                  <p style="color: #fff">Danh sach cac memtor</p>
-                </div>
-              </li>
-              <li>
-                <div class="d-flex bd-highlight">
-                  <div class="img_cont">
-                    <img
-                      src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
-                      class="rounded-circle user_img"
-                    />
-                    <span class="online_icon offline"></span>
-                  </div>
-                  <div class="user_info">
-                    <span>Taherah Big</span>
-                    <p>Taherah left 7 mins ago</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="d-flex bd-highlight">
-                  <div class="img_cont">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg"
-                      class="rounded-circle user_img"
-                    />
-                    <span class="online_icon offline"></span>
-                  </div>
-                  <div class="user_info">
-                    <span>Rashid Samim</span>
-                    <p>Rashid left 50 mins ago</p>
-                  </div>
-                </div>
-              </li>
-            </ui>
+               <chat-room-selection
+          v-if="currentRoom.id"
+          :rooms="chatRooms"
+          :currentRoom="currentRoom"
+          v-on:roomchanged="setRoom($event)"
+        />
           </div>
           <div class="card-footer"></div>
         </div>
@@ -105,26 +45,8 @@
               </ul>
             </div>
           </div>
-          <messages />
-          <div class="card-footer">
-            <div class="input-group">
-              <div class="input-group-append">
-                <span class="input-group-text attach_btn"
-                  ><i class="fas fa-paperclip"></i
-                ></span>
-              </div>
-              <textarea
-                name=""
-                class="form-control type_msg"
-                placeholder="Type your message..."
-              ></textarea>
-              <div class="input-group-append">
-                <span class="input-group-text send_btn"
-                  ><i class="fas fa-location-arrow"></i
-                ></span>
-              </div>
-            </div>
-          </div>
+             <message-container :messages="messages" />
+            <input-message :room="currentRoom" v-on:messagesent="getMessages()" />
         </div>
       </div>
     </div>
@@ -132,21 +54,74 @@
 </template>
 
 <script>
-import Messages from "./Message";
+import MessageContainer from "./messageContainer.vue";
+import InputMessage from "./inputMessage.vue";
+import ChatRoomSelection from "./chatRoomSelection.vue";
+import BaseRequest from "../../../core/BaseRequest";
 export default {
-  props: ["user"],
-  data() {
+  components: {
+    MessageContainer,
+    InputMessage,
+    ChatRoomSelection,
+  },
+  data: function () {
     return {
-      message: null,
+      chatRooms: [],
+      currentRoom: [],
+      messages: [],
     };
   },
-  components: { Messages },
-  methods: {
-    sendMessage() {
-      if (!this.message) {
-        return alert("Please enter message");
+   watch: {
+    currentRoom(val, oldVal) {
+      if (oldVal.id) {
+        this.disconnect(oldVal);
+      }
+      this.connect();
+    },
+  },
+    methods: {
+    connect() {
+      if (this.currentRoom.id) {
+        let vm = this;
+        this.getMessages();
+        console.log(Echo.private("chat."+this.currentRoom.id));
+        window.Echo.private("chat."+this.currentRoom.id).listen('NewChatMessage',
+          (e) => {
+            vm.getMessages();
+          }
+        );
       }
     },
+    disconnect(room) {
+      window.Echo.leave("chat." + room.id);
+    },
+    getRooms() {
+      BaseRequest
+        .get(route("rooms"))
+        .then((response) => {
+          this.chatRooms = response.data.data;
+          this.setRoom(response.data.data[0]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    setRoom(room) {
+      this.currentRoom = room;
+    },
+    getMessages() {
+      BaseRequest
+        .get(route("messages", { roomID: this.currentRoom.id }))
+        .then((response) => {
+          this.messages = response.data.data;
+        })
+        .catch((err) => {
+          //   console.log(err);
+        });
+    },
+  },
+created() {
+    this.getRooms();
   },
 };
 </script>

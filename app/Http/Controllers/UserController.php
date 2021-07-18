@@ -124,7 +124,7 @@ class UserController extends Controller
          $user->avatar = $imageName;
          $user->is_active = $is_active;
          $user->save();
-         
+
         ModelHasRole::where('model_id',$id)->delete();
         $userRole = new ModelHasRole([
             'role_id'=> $request->role_id,
@@ -192,7 +192,7 @@ class UserController extends Controller
                 'status' => 'success',
                 ]);
            }else{
-            return response()->json(['errors' => ['password'=> ['Current password does not match']]], 
+            return response()->json(['errors' => ['password'=> ['Current password does not match']]],
             422);
            }
     }

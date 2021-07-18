@@ -32,9 +32,7 @@ export const mutations = {
         state.isLoggedIn = true;
         state.loading = false;
         state.currentUser = Object.assign({}, payload.user, { token: payload.res.access_token });
-        state.inforUser = Object.assign({}, payload.user, { token: payload.res.user });
-        localStorage.setItem('user', JSON.stringify(state.currentUser));
-        localStorage.setItem('infoUser', JSON.stringify(state.inforUser));
+        localStorage.setItem('access_token', JSON.stringify(state.currentUser));
     },
     LOGIN_FAILED: (state, payload) => {
         state.authError = payload.err;

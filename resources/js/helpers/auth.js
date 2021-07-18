@@ -23,7 +23,7 @@ export function register(credential) {
 }
 
 export function currentUser() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('access_token');
 
     if (!user) {
         return null;

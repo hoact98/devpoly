@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
 class AuthController extends Controller
 {
     /**
@@ -79,7 +78,7 @@ class AuthController extends Controller
         ]);
         $information->save();
         $userRole = new ModelHasRole([
-            'role_id' =>2,
+            'role_id' =>5,
             'model_type' => User::class,
             'model_id' => $user->id,
         ]);
@@ -98,7 +97,6 @@ class AuthController extends Controller
      */
     public function logout() {
         auth($this->guard)->logout();
-
         return response()->json(['message' => 'User successfully signed out']);
     }
 

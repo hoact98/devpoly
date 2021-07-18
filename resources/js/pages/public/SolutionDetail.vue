@@ -9,7 +9,7 @@
                 <div class="author-avatar">
                   <img src="images/avatar-1.png" alt="" />
                 </div>
-                <span class="author-nickname"> {{ infoUser.token.email }} </span>
+                <span class="author-nickname">  </span>
               </div>
 
               <div class="solution-title">
@@ -525,7 +525,6 @@
 export default {
   data() {
     return {
-      infoUser : {}
     };
   },
   computed: {
@@ -535,7 +534,6 @@ export default {
 
   },
   created: function () {
-       this.infoUser =  JSON.parse(localStorage.getItem('infoUser')) 
     this.$store.dispatch("solution/fetchOne", this.$route.params.id);
   },
 };

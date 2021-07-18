@@ -1,68 +1,58 @@
 <template>
-  <div id="login">
-    <h3 class="text-center text-white pt-5">Login form</h3>
-    <div class="container">
-      <div id="login-row" class="row justify-content-center align-items-center">
-        <div id="login-column" class="col-md-6">
-          <div id="login-box" class="col-md-12">
-            <form
-              @submit.prevent="authenticate"
-              id="login-form"
-              class="form"
-              action=""
-              method="post"
-            >
-              <h3 class="text-center text-info">Login</h3>
-              <div class="form-group">
-                <label for="username" class="text-info">Email:</label><br />
-                <input
-                  v-model="form.email"
-                  :class="{ 'is-invalid': form.errors.has('email') }"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  id="email"
-                  class="form-control"
-                />
-                <div
-                  class="text-danger"
-                  v-if="form.errors.has('email')"
-                  v-html="form.errors.get('email')"
-                />
-              </div>
-              <div class="form-group">
-                <label for="password" class="text-info">Password:</label><br />
-                <input
-                  v-model="form.password"
-                  :class="{ 'is-invalid': form.errors.has('password') }"
-                  type="password"
-                  name="password"
-                  placeholder="******"
-                  id="password"
-                  class="form-control"
-                />
-                <div
-                  class="text-danger"
-                  v-if="form.errors.has('password')"
-                  v-html="form.errors.get('password')"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="submit"
-                  name="submit"
-                  class="btn btn-info btn-md"
-                  value="submit"
-                />
-              </div>
-              <div id="register-link" class="text-right">
-              <router-link :to="{name:'register'}" > <p  class="text-info">Register here</p></router-link>
-              </div>
-            </form>
-          </div>
+  <div class="auth-form__container">
+    <div class="auth-form__header">
+      <h3 class="auth-form__heading">Đăng nhập</h3>
+     <router-link :to="{name: 'register'}"> <span class="auth-form__switch-btn">Đăng ký</span></router-link>
+    </div>
+    <form
+      @submit.prevent="authenticate"
+      id="login-form"
+      class="form"
+      action=""
+      method="post"
+    >
+      <div class="auth-form__form">
+        <div class="auth-form__group">
+          <input
+            v-model="form.email"
+            :class="{ 'is-invalid': form.errors.has('email') }"
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="email"
+            class="auth-form__input"
+          />
+        </div>
+        <div class="auth-form__group">
+          <input
+            v-model="form.password"
+            :class="{ 'is-invalid': form.errors.has('password') }"
+            type="password"
+            name="password"
+            placeholder="******"
+            id="password"
+            class="auth-form__input"
+          />
         </div>
       </div>
-    </div>
+
+      <div class="auth-form__aside">
+        <div class="auth-form-help">
+          <a href="#" class="auth-form__help-link auth-form-help-fogot"
+            >Quên mật khẩu</a
+          >
+          <span class="auth-form-help-separate"> </span>
+          <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
+        </div>
+      </div>
+
+      <div class="auth-form__controls">
+             <router-link :to="{ name: 'home' }">
+        <button class="btn auth-form__controls-back">Trở lại</button></router-link
+      >
+        <button  type="submit" class="btn btn--primary">Đăng nhập</button>
+      </div>
+    </form>
   </div>
 </template>
 <script>
