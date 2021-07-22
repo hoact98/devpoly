@@ -1,228 +1,265 @@
-import AdminLayout from './layouts/admin.vue';
-import MainLayout from './layouts/main.vue';
-import HomeLayout from './layouts/home.vue';
-import AuthLayout from './layouts/auth.vue';
+import AdminLayout from "./layouts/admin.vue";
+import MainLayout from "./layouts/main.vue";
+import HomeLayout from "./layouts/home.vue";
+import AuthLayout from "./layouts/auth.vue";
+
 function page(path) {
     return () =>
-        import (`./pages/${path}`).then(
-            m => m.default || m
-        );
+        import (`./pages/${path}`).then(m => m.default || m);
 }
 
 // Routes
 const routes = [{
-        path: '/',
+        path: "/",
         component: HomeLayout,
         children: [{
-            path: '/',
-            alias: '',
-            component: page('public/Home.vue'),
-            meta: {
-                guest: true
-            },
-            name: 'home',
-        }, {
-            path: '/home-dashboard',
-            alias: '',
-            component: page('public/Dashboard.vue'),
-            meta: {
-                guest: true
-            },
-            name: 'homeDashboard',
-        }]
-    },
-    {
-        path: '/',
-        component: AuthLayout,
-        children: [{
-            path: 'login',
-            component: page('auth/Login.vue'),
-            name: 'login',
-            meta: {
-                guest: true
-            },
-        }, {
-            path: 'register',
-            component: page('auth/Register.vue'),
-            name: 'register',
-            meta: {
-                guest: true
-            },
-        }]
-    },
-    {
-        path: '/paths',
-        component: MainLayout,
-        children: [{
-                path: '',
-                alias: '',
-                component: page('public/Overview.vue'),
+                path: "/",
+                alias: "",
+                component: page("public/Home.vue"),
                 meta: {
                     guest: true
                 },
-                name: 'paths',
+                name: "home"
             },
             {
-                path: '/chat',
-                alias: '',
-                component: page('public/Chat/container.vue'),
+                path: "/home-dashboard",
+                alias: "",
+                component: page("public/Dashboard.vue"),
                 meta: {
                     guest: true
                 },
-                name: 'chat',
+                name: "homeDashboard"
             },
             {
-                path: '/overview/:slug',
-                alias: '',
-                component: page('public/Overview.vue'),
+                path: "/register",
+                alias: "",
+                component: page("auth/Register.vue"),
+                name: "register",
                 meta: {
                     guest: true
                 },
-                name: 'overview',
-            },
-            {
-                path: '/solution',
-                alias: '',
-                component: page('public/SolutionList.vue'),
-                meta: {
-                    guest: true
-                },
-                name: 'solution',
-            },
-            {
-                path: '/get-detail-solution/:id',
-                alias: '',
-                component: page('public/SolutionDetail.vue'),
-                meta: {
-                    guest: true
-                },
-                name: 'showDetailSolution',
-            },
-            {
-                path: '/feedback',
-                alias: '',
-                component: page('public/Feedback.vue'),
-                meta: {
-                    guest: true
-                },
-                name: 'feedback',
-            },
-            {
-                path: '/chanllenge/:slug',
-                alias: '',
-                component: page('public/Chanllenge.vue'),
-                meta: {
-                    guest: true
-                },
-                name: 'chanllenge',
+                name: "register"
             }
-
         ]
     },
     {
-        path: '/admin',
-        component: AdminLayout,
+        path: "/login",
+        component: AuthLayout,
         children: [{
-                path: 'dashboard',
-                alias: '',
-                component: page("admin/dashboard/Dashboard.vue"),
-                name: 'dashboard',
+                path: "/",
+                alias: "",
+                component: page("auth/Login.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "login"
             },
             {
-                path: 'users',
+                path: "/register",
+                alias: "",
+                component: page("auth/Register.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "register"
+            }
+        ]
+    },
+    {
+        path: "/paths",
+        component: MainLayout,
+        children: [{
+                path: "",
+                alias: "",
+                component: page("public/Overview.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "paths"
+            },
+            {
+                path: "/chat",
+                alias: "",
+                component: page("public/Chat/container.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "chat"
+            },
+            {
+                path: "/overview/:slug",
+                alias: "",
+                component: page("public/Overview.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "overview"
+            },
+            {
+                path: "/solution",
+                alias: "",
+                component: page("public/SolutionList.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "solution"
+            },
+            {
+                path: "/get-detail-solution/:id",
+                alias: "",
+                component: page("public/SolutionDetail.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "showDetailSolution"
+            },
+            {
+                path: "/feedback",
+                alias: "",
+                component: page("public/Feedback.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "feedback"
+            },
+            {
+                path: "/chanllenge/:slug",
+                alias: "",
+                component: page("public/Chanllenge.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "chanllenge"
+            },
+            {
+                path: "/payment",
+                alias: "",
+                component: page("public/Payment.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "payment"
+            },
+            {
+                path: "/profile",
+                alias: "",
+                component: page("public/Profile.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "profile"
+            }
+        ]
+    },
+    {
+        path: "/admin",
+        component: AdminLayout,
+        children: [{
+                path: "dashboard",
+                alias: "",
+                component: page("admin/dashboard/Dashboard.vue"),
+                name: "dashboard"
+            },
+            {
+                path: "users",
                 component: page("admin/user/User.vue"),
-                name: 'users',
+                name: "users"
             },
 
             {
-                path: 'user-add',
+                path: "user-add",
                 component: page("admin/user/AddUser.vue"),
-                name: 'add.user',
+                name: "add.user"
             },
             {
-                path: 'user-edit/:id',
+                path: "user-edit/:id",
                 component: page("admin/user/EditUser.vue"),
-                name: 'edit.user',
+                name: "edit.user"
             },
             {
-                path: 'roles',
+                path: "roles",
                 component: page("admin/role/Role.vue"),
-                name: 'roles',
+                name: "roles"
             },
             {
-                path: 'role-add',
+                path: "role-add",
                 component: page("admin/role/AddRole.vue"),
-                name: 'add.role',
+                name: "add.role"
             },
             {
-                path: 'role-edit/:id',
+                path: "role-edit/:id",
                 component: page("admin/role/EditRole.vue"),
-                name: 'edit.role',
+                name: "edit.role"
             },
             {
-                path: 'permissions',
+                path: "permissions",
                 component: page("admin/permission/Permission.vue"),
-                name: 'permissions',
+                name: "permissions"
             },
             {
-                path: 'permission-add',
+                path: "permission-add",
                 component: page("admin/permission/AddPermission.vue"),
-                name: 'add.permission',
+                name: "add.permission"
             },
             {
-                path: 'permission-edit/:id',
+                path: "permission-edit/:id",
                 component: page("admin/permission/EditPermission.vue"),
-                name: 'edit.permission',
+                name: "edit.permission"
             },
             {
-                path: 'challengecategories',
-                component: page("admin/challengeCategory/challengeCategory.vue"),
-                name: 'challengecategories',
+                path: "challengecategories",
+                component: page(
+                    "admin/challengeCategory/challengeCategory.vue"
+                ),
+                name: "challengecategories"
             },
             {
-                path: 'challengecategory-add',
-                component: page("admin/challengeCategory/AddchallengeCategory.vue"),
-                name: 'add.challengecategory',
+                path: "challengecategory-add",
+                component: page(
+                    "admin/challengeCategory/AddchallengeCategory.vue"
+                ),
+                name: "add.challengecategory"
             },
             {
-                path: 'challengecategory-edit/:id',
-                component: page("admin/challengeCategory/EditchallengeCategory.vue"),
-                name: 'edit.challengecategory',
-            }, {
-                path: 'challenges',
+                path: "challengecategory-edit/:id",
+                component: page(
+                    "admin/challengeCategory/EditchallengeCategory.vue"
+                ),
+                name: "edit.challengecategory"
+            },
+            {
+                path: "challenges",
                 component: page("admin/challenge/Challenge.vue"),
-                name: 'challenges'
+                name: "challenges"
             },
             {
-                path: 'challenge-add',
+                path: "challenge-add",
                 component: page("admin/challenge/AddChallenge.vue"),
-                name: 'add.challenge'
+                name: "add.challenge"
             },
             {
-                path: 'challenge-edit/:id',
+                path: "challenge-edit/:id",
                 component: page("admin/challenge/EditChallenge.vue"),
-                name: 'edit.challenge'
+                name: "edit.challenge"
             },
             {
-                path: 'mentors',
-                component: page('admin/mentor/Mentor.vue'),
-                name: 'mentors'
+                path: "mentors",
+                component: page("admin/mentor/Mentor.vue"),
+                name: "mentors"
             },
             {
-                path: 'mentor-add',
-                component: page('admin/mentor/AddMentor.vue'),
-                name: 'add.mentor'
-            },
+                path: "mentor-add",
+                component: page("admin/mentor/AddMentor.vue"),
+                name: "add.mentor"
+            }
         ]
     },
 
     {
         // not found handler
-        path: '*',
-        component: page("errors/404.vue"),
-
+        path: "*",
+        component: page("errors/404.vue")
     }
-]
+];
 
-
-export default routes
+export default routes;

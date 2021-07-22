@@ -1,16 +1,16 @@
 <template>
-  <div class="container-fluid h-100">
-    <div class="row justify-content-center h-100">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
       <div class="col-md-4 col-xl-3 chat">
         <div class="card mb-sm-3 mb-md-0 contacts_card">
           <div class="card-header"></div>
           <div class="card-body contacts_body">
-               <chat-room-selection
-          v-if="currentRoom.id"
-          :rooms="chatRooms"
-          :currentRoom="currentRoom"
-          v-on:roomchanged="setRoom($event)"
-        />
+            <chat-room-selection
+              v-if="currentRoom.id"
+              :rooms="chatRooms"
+              :currentRoom="currentRoom"
+              v-on:roomchanged="setRoom($event)"
+            />
           </div>
           <div class="card-footer"></div>
         </div>
@@ -45,8 +45,8 @@
               </ul>
             </div>
           </div>
-             <message-container :messages="messages" />
-            <input-message :room="currentRoom" v-on:messagesent="getMessages()" />
+          <message-container :messages="messages" />
+          <input-message :room="currentRoom" v-on:messagesent="getMessages()" />
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
       messages: [],
     };
   },
-   watch: {
+  watch: {
     currentRoom(val, oldVal) {
       if (oldVal.id) {
         this.disconnect(oldVal);
@@ -79,13 +79,14 @@ export default {
       this.connect();
     },
   },
-    methods: {
+  methods: {
     connect() {
       if (this.currentRoom.id) {
         let vm = this;
         this.getMessages();
-        console.log(Echo.private("chat."+this.currentRoom.id));
-        window.Echo.private("chat."+this.currentRoom.id).listen('NewChatMessage',
+        console.log(Echo.private("chat." + this.currentRoom.id));
+        window.Echo.private("chat." + this.currentRoom.id).listen(
+          "NewChatMessage",
           (e) => {
             vm.getMessages();
           }
@@ -96,8 +97,7 @@ export default {
       window.Echo.leave("chat." + room.id);
     },
     getRooms() {
-      BaseRequest
-        .get(route("rooms"))
+      BaseRequest.get(route("rooms"))
         .then((response) => {
           this.chatRooms = response.data.data;
           this.setRoom(response.data.data[0]);
@@ -110,8 +110,7 @@ export default {
       this.currentRoom = room;
     },
     getMessages() {
-      BaseRequest
-        .get(route("messages", { roomID: this.currentRoom.id }))
+      BaseRequest.get(route("messages", { roomID: this.currentRoom.id }))
         .then((response) => {
           this.messages = response.data.data;
         })
@@ -120,7 +119,7 @@ export default {
         });
     },
   },
-created() {
+  created() {
     this.getRooms();
   },
 };
