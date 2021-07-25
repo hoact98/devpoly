@@ -12,7 +12,7 @@ class FeedbackController extends Controller
    // all feedbacks
    public function index()
    {
-       $feedbacks = Feedback::all();
+       $feedbacks = Feedback::latest()->paginate(10);
         return response()->json([
             'status'=>'success',
             'messege' => 'Succsess get list feedback',

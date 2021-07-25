@@ -3,11 +3,12 @@
     <div class="container">
       <div class="row figma-wrapper">
         <div class="col-12">
-           <iframe class="figma"
+          <iframe
+            class="figma"
             v-if="data"
-              :src="data.link_figma"
-              allowfullscreen
-            />
+            :src="data.link_figma"
+            allowfullscreen
+          />
         </div>
       </div>
 
@@ -63,7 +64,9 @@
                   d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"
                 ></path>
               </svg>
-              <span>Start and download</span>
+              <a :href="'/'+data.soucre" download>
+                <span>Start and download</span>
+              </a>
             </button>
           </div>
         </div>
@@ -74,8 +77,8 @@
 
 
 <script>
-
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   data: () => ({
     title: " Challenge",

@@ -9,22 +9,53 @@
           >
         </div>
 
-        <div class="auth-form__form">
-          <div class="auth-form__group">
-            <input class="auth-form__input" type="text" placeholder="Email của bạn" />
-          </div>
+    <form   @submit.prevent="authenticate"
+                @keydown="form.onKeydown($event)">
+            <div class="auth-form__form">
           <div class="auth-form__group">
             <input
+              v-model="form.username"
+              :class="{ 'is-invalid': form.errors.has('username') }"
+              type="username"
+              name="username"
+              placeholder="username"
+              id="username"
               class="auth-form__input"
-              type="password"
-              placeholder="Mật khẩu của bạn"
             />
           </div>
           <div class="auth-form__group">
             <input
+              v-model="form.email"
+              :class="{ 'is-invalid': form.errors.has('email') }"
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="email"
               class="auth-form__input"
+            />
+          </div>
+          <div class="auth-form__group">
+            <input
+              v-model="form.password"
+              :class="{ 'is-invalid': form.errors.has('password') }"
               type="password"
-              placeholder="Nhập lại mật khẩu"
+              name="password"
+              placeholder="******"
+              id="password"
+              class="auth-form__input"
+            />
+          </div>
+          <div class="auth-form__group">
+            <input
+              v-model="form.password_confirmation"
+              :class="{
+                'is-invalid': form.errors.has('password_confirmation'),
+              }"
+              type="password"
+              name="password_confirmation"
+              placeholder="******"
+              id="password_confirmation"
+              class="auth-form__input"
             />
           </div>
         </div>
@@ -41,6 +72,7 @@
           <button class="btn auth-form__controls-back">Trở lại</button>
           <button class="btn btn--primary">Đăng ký</button>
         </div>
+    </form>
       </div>
     </div>
   </div>

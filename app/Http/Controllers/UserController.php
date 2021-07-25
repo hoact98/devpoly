@@ -28,7 +28,7 @@ class UserController extends Controller
     // all users
     public function index()
     {
-        $users= User::all();
+        $users= User::latest()->paginate(5);
         $users->load('information');
         $users->load('roles');
         return response()->json([

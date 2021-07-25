@@ -15,7 +15,7 @@ class SolutionController extends Controller
     // all Solutions
     public function index()
     {
-        $solutions = Solution::all()->toArray();
+        $solutions = Solution::latest()->paginate(10)->toArray();
         return array_reverse($solutions);
     }
 
@@ -67,7 +67,7 @@ class SolutionController extends Controller
         $solution->load('users');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
-    } 
+    }
 
     // update Solution
     public function update($id, SaveSolutionRequest $request)
@@ -88,7 +88,7 @@ class SolutionController extends Controller
     }
 
     public function getAllSolution(){
-        $solution = Solution::get();
+        $solution = Solution::latest()->paginate(10);
         $solution->load('users');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);

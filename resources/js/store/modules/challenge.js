@@ -27,17 +27,25 @@ export const mutations = {
 
 // actions
 export const actions = {
-    fetch({ commit }) {
+    fetch({
+        commit
+    }, page) {
         return axios
-            .get(route("challenges"))
+            .get(route("challenges", {
+                page
+            }))
             .then(response => commit("FETCH", response.data.data))
     },
-    fetchOne({ commit }, id) {
+    fetchOne({
+        commit
+    }, id) {
         axios
             .get(route("show.challenge", id))
             .then(response => commit("FETCH_ONE", response.data.data))
     },
-    fet_One_Data({ commit }, slug) {
+    fet_One_Data({
+        commit
+    }, slug) {
         axios
             .get(route("get_One.challenge", slug))
             .then(response => commit("GET_ONE_DATA_CHALLENGE", response.data.data))

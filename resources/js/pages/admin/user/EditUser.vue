@@ -42,7 +42,7 @@
                                 <label for="exampleInputEmail1">Email:</label>
                                 <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
                                   <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-                              
+
                               </div>
                               <div class="form-group">
                                 <label for="">Avatar</label>
@@ -160,7 +160,7 @@ export default {
         data () {
             return this.$store.state.user.user;
         },
-        
+
         permission_id (){
           var permission_id = [];
             this.data.user.has_permission.forEach(function (permission) {
@@ -222,7 +222,7 @@ export default {
             })
     });
     }
-      
+
     }
 }
 </script>

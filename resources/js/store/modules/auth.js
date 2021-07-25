@@ -7,6 +7,7 @@ export const state = {
     isLoggedIn: !!user,
     loading: false,
     authError: null,
+    infoUser: null,
 };
 export const getters = {
     IS_LOADING: state => {
@@ -21,6 +22,9 @@ export const getters = {
     AUTH_ERROR: state => {
         return state.authError;
     },
+    INFOR_USER:state=>{
+        return state.infoUser;
+    }
 };
 export const mutations = {
     LOGIN: state => {
@@ -31,12 +35,16 @@ export const mutations = {
         state.authError = null;
         state.isLoggedIn = true;
         state.loading = false;
+         state.infoUser = payload.res.user;
         state.currentUser = Object.assign({}, payload.user, { token: payload.res.access_token });
         localStorage.setItem('access_token', JSON.stringify(state.currentUser));
     },
     LOGIN_FAILED: (state, payload) => {
         state.authError = payload.err;
         state.loading = false;
+    },
+    USER_PROFILE: (state, payload) => {
+        state.infoUser = payload.res;
     },
     LOGOUT: (state) => {
         localStorage.removeItem('user');

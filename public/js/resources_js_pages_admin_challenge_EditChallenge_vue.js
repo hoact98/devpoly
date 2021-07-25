@@ -146,6 +146,82 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -153,6 +229,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new Form({
         title: "",
         description: "",
+        soucre: "",
+        challenge_image: "",
         language: "",
         link_figma: "",
         level: "",
@@ -168,6 +246,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.$store.dispatch("challenge/fetchOne", this.$route.params.id);
   },
   methods: {
+    uploadSource: function uploadSource(event) {
+      this.form.soucre = event.target.files[0];
+    },
+    uploadImage: function uploadImage(event) {
+      this.form.challenge_image = event.target.files[0];
+    },
     updateChallenge: function updateChallenge() {
       var _this = this;
 
@@ -1278,6 +1362,78 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Soucre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("soucre")
+                          },
+                          attrs: {
+                            type: "file",
+                            placeholder: "Soucre",
+                            name: "=soucre"
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.uploadSource($event)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("soucre")
+                          ? _c("div", {
+                              staticClass: "text-danger",
+                              domProps: {
+                                innerHTML: _vm._s(_vm.form.errors.get("soucre"))
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "" } }, [_vm._v("Image:")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("challenge_image")
+                          },
+                          attrs: {
+                            type: "file",
+                            placeholder: "Image",
+                            name: "=challenge_image"
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.uploadImage($event)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("challenge_image")
+                          ? _c("div", {
+                              staticClass: "text-danger",
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  _vm.form.errors.get("challenge_image")
+                                )
+                              }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: "/" + _vm.data.challenge_image,
+                            alt: "",
+                            width: "200"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "" } }, [_vm._v("Level:")]),
                         _vm._v(" "),
                         _c(
@@ -1441,7 +1597,7 @@ var render = function() {
                           staticClass: "btn btn-primary",
                           attrs: { type: "submit", disabled: _vm.form.busy }
                         },
-                        [_vm._v("Submit")]
+                        [_vm._v("\n                  Submit\n                ")]
                       )
                     ])
                   ]

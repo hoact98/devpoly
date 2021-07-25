@@ -35,22 +35,14 @@ Vue.component('breadcrumb', require('./components/Breadcrumb.vue').default);
 Vue.component('checkbox', require('./components/Checkbox.vue').default);
 Vue.component('v-button', require('./components/Button.vue').default);
 
-// const router = new VueRouter({
-//   router,
-//   store,
-//   mode: 'history'
-// })
-
-// window.events = new Vue();
-
 /* eslint-disable no-new */
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 const router = new VueRouter({
         routes,
-        // mode: 'history',
+        mode: 'history',
     })
-    initialize(store, router);
+initialize(store, router);
 new Vue({
     el: '#app',
     router,

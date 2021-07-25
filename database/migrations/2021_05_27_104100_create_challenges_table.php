@@ -20,6 +20,8 @@ class CreateChallengesTable extends Migration
             $table->text('description');
             $table->string('language');
             $table->string('link_figma')->unique();
+            $table->string('soucre')->unique();
+            $table->string('challenge_image')->unique();
             $table->tinyInteger('level')->default(1);
             $table->integer('cate_challen_id')->unsigned();
             $table->timestamps();

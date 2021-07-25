@@ -1,6 +1,6 @@
 export function login(credential) {
     return new Promise((res, rej) => {
-        axios.post('api/login', credential)
+        axios.post(route('login'), credential)
             .then(result => {
                 res(result.data);
             })
@@ -9,10 +9,20 @@ export function login(credential) {
             })
     })
 }
-
+export function userProfile() {
+    return new Promise((res, rej) => {
+        axios.get(route('userProfile'))
+            .then(result => {
+                res(result.data);
+            })
+            .catch(err => {
+                rej("Wrong email or password");
+            })
+    })
+}
 export function register(credential) {
     return new Promise((res, rej) => {
-        axios.post('api/register', credential)
+        axios.post(route('register'), credential)
             .then(result => {
                 res(result.data);
             })

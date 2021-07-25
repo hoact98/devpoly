@@ -16,7 +16,7 @@ class ChallengeCategoryController extends Controller
         return response()->json([
             'status'=>'success',
             'messege' => 'Succsess get list categories',
-            'data' => ChallengeCategory::all(),
+            'data' => ChallengeCategory::latest()->paginate(5),
         ], 200);
     }
 

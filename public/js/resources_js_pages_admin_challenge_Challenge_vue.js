@@ -73,21 +73,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: "Challenge"
+      title: "Challenge",
+      currentPage: 1
     };
   },
   computed: {
     challenges: function challenges() {
-      return this.$store.state.challenge.challenges;
+      return this.$store.state.challenge.challenges.data;
+    },
+    totalPage: function totalPage() {
+      return this.$store.state.challenge.challenges.last_page;
+    }
+  },
+  watch: {
+    currentPage: function currentPage() {
+      this.getData();
     }
   },
   created: function created() {
-    this.$store.dispatch("challenge/fetch");
+    this.$store.dispatch("challenge/fetch", this.currentPage);
   },
   methods: {
+    getData: function getData() {
+      this.$store.dispatch("challenge/fetch", this.currentPage);
+    },
     deletechallenge: function deletechallenge(id) {
       var _this = this;
 
@@ -246,7 +292,11 @@ var render = function() {
                                       staticClass: "btn btn-primary",
                                       attrs: { type: "button" }
                                     },
-                                    [_vm._v("Add New")]
+                                    [
+                                      _vm._v(
+                                        "\n                          Add New\n                        "
+                                      )
+                                    ]
                                   )
                                 ]
                               )
@@ -262,11 +312,9 @@ var render = function() {
                           return _c("tr", { key: index }, [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(challenge.title) + " ")]),
+                            _c("td", [_vm._v(_vm._s(challenge.title))]),
                             _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(challenge.category.name) + " ")
-                            ]),
+                            _c("td", [_vm._v(_vm._s(challenge.category.name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(challenge.level))]),
                             _vm._v(" "),
@@ -299,7 +347,11 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Delete")]
+                                  [
+                                    _vm._v(
+                                      "\n                        Delete\n                      "
+                                    )
+                                  ]
                                 )
                               ],
                               1
@@ -313,6 +365,72 @@ var render = function() {
                 ])
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c(
+              "ul",
+              { staticClass: "pagination" },
+              [
+                _vm.currentPage > 1
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.currentPage--
+                            }
+                          }
+                        },
+                        [_vm._v("Previous")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.totalPage, function(page) {
+                  return _c("li", { key: page, staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.currentPage = page
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(page))]
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _vm.currentPage < _vm.totalPage
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.currentPage++
+                            }
+                          }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
+            )
           ])
         ])
       ])

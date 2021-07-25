@@ -16,8 +16,9 @@ import SidebarHome from '../components/site/SidebarHome.vue'
 import Header from '../components/site/Header.vue'
 import Footer from '../components/site/Footer.vue'
 import Social from '../components/site/Social.vue'
-
+import { userProfile } from "../helpers/auth";
 export default {
+
   name: 'HomeLayout',
 
   components: {
@@ -25,7 +26,20 @@ export default {
     Header,
     Footer,
     Social
-  }
+  },
+    created() {
+    this.userProfile();
+  },
+   methods: {
+    userProfile() {
+      userProfile(this.form)
+        .then((res) => {
+            this.$store.commit("auth/USER_PROFILE", { res });
+        })
+        .catch((err) => {
+        });
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
