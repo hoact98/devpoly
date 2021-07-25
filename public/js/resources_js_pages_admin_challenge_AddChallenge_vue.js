@@ -141,12 +141,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: new Form({
         title: "",
         description: "",
+        soucre: "",
+        challenge_image: "",
         language: "",
         link_figma: "",
         level: "",
@@ -157,13 +236,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     challengecategories: function challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
+      return this.$store.state.challengecategory.challengecategories.data;
     }
   },
   created: function created() {
     this.$store.dispatch("challengecategory/fetch");
   },
   methods: {
+    uploadSource: function uploadSource(event) {
+      this.form.soucre = event.target.files[0];
+    },
+    uploadImage: function uploadImage(event) {
+      this.form.challenge_image = event.target.files[0];
+    },
     addChallenge: function addChallenge() {
       var _this = this;
 
@@ -1273,6 +1358,70 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Soucre:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("soucre")
+                          },
+                          attrs: {
+                            type: "file",
+                            placeholder: "Soucre",
+                            name: "=soucre"
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.uploadSource($event)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("soucre")
+                          ? _c("div", {
+                              staticClass: "text-danger",
+                              domProps: {
+                                innerHTML: _vm._s(_vm.form.errors.get("soucre"))
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "" } }, [_vm._v("Image:")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("challenge_image")
+                          },
+                          attrs: {
+                            type: "file",
+                            placeholder: "Image",
+                            name: "=challenge_image"
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.uploadImage($event)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("challenge_image")
+                          ? _c("div", {
+                              staticClass: "text-danger",
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  _vm.form.errors.get("challenge_image")
+                                )
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "" } }, [_vm._v("Level:")]),
                         _vm._v(" "),
                         _c(
@@ -1343,90 +1492,93 @@ var render = function() {
                           : _vm._e()
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exampleInputCa" } }, [
-                          _vm._v("Category:")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.cate_challen_id,
-                                expression: "form.cate_challen_id"
-                              }
-                            ],
-                            staticClass: "form-control select2",
-                            class: {
-                              "is-invalid": _vm.form.errors.has(
-                                "cate_challen_id"
-                              )
-                            },
-                            attrs: {
-                              "aria-label": "Default select example",
-                              name: "cate_challen_id"
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "cate_challen_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Chọn danh mục thử thách")
+                      _vm.challengecategories
+                        ? _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "exampleInputCa" } }, [
+                              _vm._v("Category:")
                             ]),
                             _vm._v(" "),
-                            _vm._l(_vm.challengecategories, function(
-                              challengecategory
-                            ) {
-                              return _c(
-                                "option",
-                                {
-                                  key: challengecategory.id,
-                                  domProps: { value: challengecategory.id }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(challengecategory.name) +
-                                      "\n                    "
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.cate_challen_id,
+                                    expression: "form.cate_challen_id"
+                                  }
+                                ],
+                                staticClass: "form-control select2",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "cate_challen_id"
                                   )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.form.errors.has("cate_challen_id")
-                          ? _c("div", {
-                              staticClass: "text-danger",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.form.errors.get("cate_challen_id")
-                                )
-                              }
-                            })
-                          : _vm._e()
-                      ])
+                                },
+                                attrs: {
+                                  "aria-label": "Default select example",
+                                  name: "cate_challen_id"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "cate_challen_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("Chọn danh mục thử thách")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.challengecategories, function(
+                                  challengecategory
+                                ) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: challengecategory.id,
+                                      domProps: { value: challengecategory.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(challengecategory.name) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _vm.form.errors.has("cate_challen_id")
+                              ? _c("div", {
+                                  staticClass: "text-danger",
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.form.errors.get("cate_challen_id")
+                                    )
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _vm._m(0)

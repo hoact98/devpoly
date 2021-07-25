@@ -10,16 +10,30 @@
           >
         </div>
 
-        <div class="auth-form__form">
+        <form id="login-form"  @submit.prevent="authenticate"
+                @keydown="form.onKeydown($event)">
+               <div class="auth-form__form">
           <div class="auth-form__group">
-            <input class="auth-form__input" type="text" placeholder="Email của bạn" />
+               <input
+            v-model="form.email"
+            :class="{ 'is-invalid': form.errors.has('email') }"
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="email"
+            class="auth-form__input"
+          />
           </div>
           <div class="auth-form__group">
-            <input
-              class="auth-form__input"
-              type="password"
-              placeholder="Mật khẩu của bạn"
-            />
+           <input
+            v-model="form.password"
+            :class="{ 'is-invalid': form.errors.has('password') }"
+            type="password"
+            name="password"
+            placeholder="******"
+            id="password"
+            class="auth-form__input"
+          />
           </div>
         </div>
 
@@ -37,6 +51,7 @@
           <button class="btn auth-form__controls-back">Trở lại</button>
           <button class="btn btn--primary">Đăng nhập</button>
         </div>
+        </form>
       </div>
     </div>
     <!-- end login -->
@@ -57,23 +72,7 @@ export default {
       login(this.form)
         .then((res) => {
           this.$store.commit("auth/LOGIN_SUCCESS", { res });
-          switch (res.role) {
-            case 1:
-              this.$router.push({ name: "home" });
-              break;
-            case 2:
-              this.$router.push({ name: "home" });
-              break;
-            case 3:
-              this.$router.push({ name: "home" });
-              break;
-            case 4:
-              this.$router.push({ name: "home" });
-              break;
-            default:
-              this.$router.push({ name: "home" });
-              break;
-          }
+           this.$router.push({ name: 'home' })
         })
         .catch((err) => {
           this.$store.commit("auth/LOGIN_FAILED", { err });

@@ -2,7 +2,9 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="col-3 col-sm-0 align-item-center column-mobile hide-on-tablet">
+        <div
+          class="col-3 col-sm-0 align-item-center column-mobile hide-on-tablet"
+        >
           <svg
             class="icon-mobile"
             focusable="false"
@@ -16,7 +18,8 @@
         </div>
         <div class="col-9 col-sm-12 login-and-setting">
           <div class="col-9 col-sm-12 login-and-setting">
-            <router-link :to="{ name: 'login' }">
+            <img v-if="inforUser != null" :src="'/' + inforUser.avatar" alt=""  class="img-user"/>
+            <router-link :to="{ name: 'login' }" v-else>
               <button class="login">Login</button>
             </router-link>
           </div>
@@ -27,7 +30,26 @@
 </template>
 
 <script>
-export default {};
+
+export default {
+  computed: {
+    inforUser() {
+      return this.$store.state.auth.infoUser;
+    },
+
+    isLoggedIn() {
+     return this.$store.state.auth.isLoggedIn ;
+    },
+  },
+
+};
 </script>
 
-<style></style>
+<style scoped>
+.login {
+  font-size: 18px;
+}
+.img-user{
+        max-width: 70px;
+}
+</style>

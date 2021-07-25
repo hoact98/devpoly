@@ -40,16 +40,7 @@ class AuthController extends Controller
             return response()->json(['errors' => ['email'=> ['Email or password does not match']]], 401);
         }
         $user=User::where('email',$request->email)->first();
-        if($user->hasPermissionTo('login admin')){
-            $role = 1;
-        }else if($user->hasPermissionTo('login user')){
-            $role = 2;
-        } else if ($user->hasPermissionTo('login userVip')) {
-            $role = 3;
-        }else if ($user->hasPermissionTo('login mentor')){
-            $role = 4;
-        }
-        return $this->createNewToken($token,$role);
+        return $this->createNewToken($token);
     }
 
     /**
@@ -78,7 +69,7 @@ class AuthController extends Controller
         ]);
         $information->save();
         $userRole = new ModelHasRole([
-            'role_id' =>5,
+            'role_id' =>9,
             'model_type' => User::class,
             'model_id' => $user->id,
         ]);
@@ -125,11 +116,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token,$role){
+    protected function createNewToken($token){
         return response()->json([
             'status' => 'success',
             'access_token' => $token,
-            'role' => $role,
             'token_type' => 'bearer',
             'expires_in' => auth($this->guard)->factory()->getTTL() * 60,
             'user' => auth('api')->user()

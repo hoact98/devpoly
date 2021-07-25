@@ -32,11 +32,11 @@ import Echo from 'laravel-echo';
 import {
     currentUser
 } from "./helpers/auth";
-var token ='';
+var token = '';
 if (currentUser() != null) {
-     token = currentUser().token;
+    token = currentUser().token;
 }
-
+window.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({

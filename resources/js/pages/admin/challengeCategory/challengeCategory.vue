@@ -46,6 +46,28 @@
           </div>
           <!-- /.col -->
         </div>
+           <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" v-if="currentPage > 1">
+              <a class="page-link" href="#" @click.prevent="currentPage--"
+                >Previous</a
+              >
+            </li>
+            <li v-for="page in totalPage" :key="page" class="page-item">
+              <a
+                class="page-link"
+                href="#"
+                @click.prevent="currentPage = page"
+                >{{ page }}</a
+              >
+            </li>
+            <li class="page-item" v-if="currentPage < totalPage">
+              <a class="page-link" href="#" @click.prevent="currentPage++"
+                >Next</a
+              >
+            </li>
+          </ul>
+        </nav>
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
@@ -59,17 +81,29 @@ export default {
   data() {
     return {
       title: "Challenge Category",
+         currentPage: 1,
     };
   },
   computed: {
     challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
+      return this.$store.state.challengecategory.challengecategories.data;
+    },
+        totalPage() {
+      return this.$store.state.challengecategory.challengecategories.last_page;
     },
   },
   created: function () {
-    this.$store.dispatch("challengecategory/fetch");
+    this.$store.dispatch("challengecategory/fetch", this.currentPage);
+  },
+    watch: {
+    currentPage() {
+      this.getData();
+    },
   },
   methods: {
+        getData() {
+    this.$store.dispatch("challengecategory/fetch", this.currentPage);
+    },
     deletechallengecategory(id) {
       Swal.fire({
         title: "Are you sure?",

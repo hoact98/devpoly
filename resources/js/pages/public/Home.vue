@@ -102,7 +102,7 @@
   </section>
 </template>
 <script>
-import { currentUser } from "../../helpers/auth";
+
 export default {
   data() {
     return {
@@ -114,10 +114,9 @@ export default {
       return this.$store.state.challengecategory.challengecategories;
     },
   },
-  created: function () {
-    this.$store.dispatch("challengecategory/get_All_Data");
+    created() {
+      this.$store.dispatch("challengecategory/get_All_Data");
   },
-  methods: {},
 };
 </script>
 

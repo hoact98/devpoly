@@ -67,21 +67,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: "Challenge Category"
+      title: "Challenge Category",
+      currentPage: 1
     };
   },
   computed: {
     challengecategories: function challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
+      return this.$store.state.challengecategory.challengecategories.data;
+    },
+    totalPage: function totalPage() {
+      return this.$store.state.challengecategory.challengecategories.last_page;
     }
   },
   created: function created() {
-    this.$store.dispatch("challengecategory/fetch");
+    this.$store.dispatch("challengecategory/fetch", this.currentPage);
+  },
+  watch: {
+    currentPage: function currentPage() {
+      this.getData();
+    }
   },
   methods: {
+    getData: function getData() {
+      this.$store.dispatch("challengecategory/fetch", this.currentPage);
+    },
     deletechallengecategory: function deletechallengecategory(id) {
       var _this = this;
 
@@ -318,6 +352,72 @@ var render = function() {
                 ])
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c(
+              "ul",
+              { staticClass: "pagination" },
+              [
+                _vm.currentPage > 1
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.currentPage--
+                            }
+                          }
+                        },
+                        [_vm._v("Previous")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.totalPage, function(page) {
+                  return _c("li", { key: page, staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.currentPage = page
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(page))]
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _vm.currentPage < _vm.totalPage
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.currentPage++
+                            }
+                          }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
+            )
           ])
         ])
       ])

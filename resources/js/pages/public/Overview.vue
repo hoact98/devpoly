@@ -78,7 +78,7 @@
                                     <router-link :to="{name: 'chanllenge',params:{ slug:challenge.slug}}">
                                         <div class="product-content">
                                             <div class="product-image">
-                                                <img src="images/404_image.png" alt="">
+                                                <img :src="'/'+ challenge.challenge_image" alt="">
                                             </div>
                                             <div class="product-content-title">
                                             {{challenge.title}}

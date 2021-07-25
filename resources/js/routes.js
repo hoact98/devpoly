@@ -5,7 +5,7 @@ import AuthLayout from "./layouts/auth.vue";
 
 function page(path) {
     return () =>
-        import (`./pages/${path}`).then(m => m.default || m);
+        import(`./pages/${path}`).then(m => m.default || m);
 }
 
 // Routes
