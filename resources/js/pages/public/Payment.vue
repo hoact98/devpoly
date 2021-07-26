@@ -77,7 +77,7 @@ export default {};
 
 .payment-item p {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .payment-pop-momo,
@@ -89,7 +89,7 @@ export default {};
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--background-light);
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   color: var(--black);
   display: none;
   box-shadow: none;
@@ -101,11 +101,11 @@ export default {};
 }
 
 .payment-pop-bank .payment-pop-body {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .payment-pop-bank .payment-pop-body span {
-  font-size: 1.4rem;
+  font-size: 1rem;
   display: inline-block;
   margin-top: 12px;
 }
@@ -148,7 +148,7 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -183,6 +183,6 @@ export default {};
   background-color: var(--background-light);
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%), 0 1px 2px 0 rgb(0 0 0 / 4%);
   transition: 0.3s;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
 </style>

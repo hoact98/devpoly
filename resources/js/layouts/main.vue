@@ -1,12 +1,14 @@
 <template>
   <div class="app">
-      <SidebarMain></SidebarMain>
+     <div class="home-wapper">
+        <SidebarMain></SidebarMain>
       <main>
         <HeaderMain></HeaderMain>
         <slot />
         <Social></Social>
         <Footer></Footer>
       </main>
+     </div>
   </div>
 </template>
 

@@ -338,8 +338,6 @@ export default {};
   background: var(--background-light);
 }
 
-.skill-list-suggestions {
-}
 
 .skill-list-suggestions button {
   min-width: 8rem;

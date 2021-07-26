@@ -1,6 +1,6 @@
 <template>
      <div class="content col-12">
-                <div class="container-sm">
+                <div class="container">
                     <div class="overview row">
                         <div class="description col-xl-8 col-lg-6">
                             <div class="container-content">

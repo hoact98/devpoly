@@ -1,6 +1,6 @@
 /* ============================== */
 
-.content {
+.home-wapper .content {
     padding-top: 24px;
     color: var(--black);
     margin-bottom: 30px;
@@ -25,7 +25,7 @@
 .select-box-content {
     padding: 16px;
     border: 2px solid #4e505e;
-    border-radius: 0.25rem;
+    border-radius: 0.05rem;
     background-color: #f487b4;
 }
 
@@ -37,7 +37,7 @@
 .select-box-content .desc-select {
     color: #f3f6e6;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -51,8 +51,8 @@
     background-color: #f3f6e6;
     color: #4e505e;
     border: 1px solid #4e505e;
-    border-radius: 0.25rem;
-    font-size: 1.2rem;
+    border-radius: 0.05rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: 0.3s;
 }
@@ -73,12 +73,12 @@
     padding: 16px;
     background-color: var(--background-light);
     border: 1px solid #454f59;
-    border-radius: 0.25rem;
+    border-radius: 0.05rem;
 }
 
 .overview-title h4 {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     margin-bottom: 12px;
 }
 
@@ -89,19 +89,19 @@
 
 .reputations-value {
     font-family: 'Poppins', sans-serif;
-    font-size: 2.6rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
 }
 
 .reputations-text {
     color: var(--black);
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .overview-row {
     display: flex;
     justify-content: space-between;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 10px;
 }
@@ -117,7 +117,7 @@
     padding: 16px;
     background-color: var(--background-light);
     border: 1px solid #e5eaf0;
-    border-radius: 0.25rem;
+    border-radius: 0.05rem;
 }
 
 .lastest-tutorial-content a {
@@ -131,7 +131,7 @@
 }
 
 .tutorial-title h4 {
-    font-size: 1.6;
+    font-size: 1.3rem;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 12px;
 }
@@ -140,7 +140,7 @@
     display: flex;
     justify-content: space-between;
     padding: 12px;
-    border-radius: 0.25rem;
+    border-radius: 0.05rem;
 }
 
 .tutorial-row .tutorial-title {
@@ -150,7 +150,7 @@
 
 .tutorial-row .tutorial-image img {
     width: 60px;
-    border-radius: 0.25rem;
+    border-radius: 0.05rem;
 }
 
 

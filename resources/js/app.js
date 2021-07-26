@@ -8,7 +8,6 @@ import App from './App.vue'
 import CKEditor from "ckeditor4-vue";
 import DataTable from 'laravel-vue-datatable';
 import VueRouteMiddleware from 'vue-route-middleware';
-import { initialize } from "./helpers/general";
 import MainLayout from "./layouts/main.vue";
 import HomeLayout from "./layouts/home.vue";
 import AdminLayout from "./layouts/admin.vue";

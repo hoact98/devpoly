@@ -1,18 +1,16 @@
 /* content */
 
-main .content {
-    font-family: 'Poppins', sans-serif;
-}
-
-main .content h1,
-main .social h2 {
-    font-weight: 500;
-    font-size: 2.5rem;
-    padding: 22px 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
+// .home-wapper main .content {
+//     font-family: 'Poppins', sans-serif;
+// }
+// .home-wapper main .content h1,
+// .home-wapper main .social h2 {
+//     font-weight: 500;
+//     font-size: 2.5rem;
+//     padding: 22px 0;
+//     margin: 0;
+//     font-family: 'Poppins', sans-serif;
+// }
 .content-item {
     padding: 22px;
     border: 1px solid var(--border-color-grey);
@@ -46,7 +44,7 @@ main .social h2 {
 }
 
 .solution-title h3 {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 
@@ -55,7 +53,7 @@ main .social h2 {
 }
 
 .help-message {
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-family: 'Lato', sans-serif;
 }
 
@@ -85,7 +83,7 @@ main .social h2 {
 }
 
 .challenge-name p {
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 
 .challenge-level span {
@@ -131,18 +129,16 @@ main .social h2 {
     margin: 0;
 }
 
-.upvote,
-.feedback {
-    transition: 0.3s;
-}
-
-.upvote:hover,
-.feedback:hover {
-    cursor: pointer;
-    background-color: var(--black);
-    border: 1px solid #8d99a7;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
-}
-
+// .upvote,
+// .feedback {
+//     transition: 0.3s;
+// }
+// .upvote:hover,
+// .feedback:hover {
+//     cursor: pointer;
+//     background-color: var(--black);
+//     border: 1px solid #8d99a7;
+//     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+// }
 
 /* end content */

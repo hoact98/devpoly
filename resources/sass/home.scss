@@ -1,13 +1,13 @@
 /* content */
 
-main .content {
+.home-wapper main .content {
     font-family: 'Poppins', sans-serif;
 }
 
-main .content h1,
-main .social h2 {
+.home-wapper main .content h1,
+.home-wapper main .social h2 {
     font-weight: 500;
-    font-size: 2.2rem;
+    font-size: 1.3rem;
     padding: 22px 0;
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -33,12 +33,12 @@ main .social h2 {
 }
 
 .content-item-title h3 {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     margin: 12px 0;
 }
 
 .content-item-title {
-    height: 6rem;
+    height: 5.8rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -57,7 +57,7 @@ main .social h2 {
 
 .content-item-des p {
     line-height: 1.7;
-    font-size: 1.4rem;
+    font-size: 1rem;
     max-width: 720px;
     color: var(--black);
 }

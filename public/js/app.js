@@ -2654,43 +2654,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -2706,61 +2669,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3103,6 +3011,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3146,6 +3056,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3170,9 +3082,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
@@ -3181,17 +3093,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! laravel-vue-datatable */ "./node_modules/laravel-vue-datatable/dist/laravel-vue-datatable.common.js");
 /* harmony import */ var laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vue_route_middleware__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-route-middleware */ "./node_modules/vue-route-middleware/dist/index.js");
-/* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/general */ "./resources/js/helpers/general.js");
-/* harmony import */ var _layouts_main_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/main.vue */ "./resources/js/layouts/main.vue");
-/* harmony import */ var _layouts_home_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/home.vue */ "./resources/js/layouts/home.vue");
-/* harmony import */ var _layouts_admin_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/admin.vue */ "./resources/js/layouts/admin.vue");
-/* harmony import */ var _layouts_AdminLogin_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/AdminLogin.vue */ "./resources/js/layouts/AdminLogin.vue");
-/* harmony import */ var _layouts_Auth_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./layouts/Auth.vue */ "./resources/js/layouts/Auth.vue");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
+/* harmony import */ var _layouts_main_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layouts/main.vue */ "./resources/js/layouts/main.vue");
+/* harmony import */ var _layouts_home_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/home.vue */ "./resources/js/layouts/home.vue");
+/* harmony import */ var _layouts_admin_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/admin.vue */ "./resources/js/layouts/admin.vue");
+/* harmony import */ var _layouts_AdminLogin_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/AdminLogin.vue */ "./resources/js/layouts/AdminLogin.vue");
+/* harmony import */ var _layouts_Auth_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/Auth.vue */ "./resources/js/layouts/Auth.vue");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
 
 
 
@@ -3209,50 +3119,50 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  //Import Sweetalert2
 
 
-window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_12___default());
-var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_12___default().mixin({
+window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_11___default());
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_11___default().mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000,
   timerProgressBar: true,
   onOpen: function onOpen(toast) {
-    toast.addEventListener('mouseenter', (sweetalert2__WEBPACK_IMPORTED_MODULE_12___default().stopTimer));
-    toast.addEventListener('mouseleave', (sweetalert2__WEBPACK_IMPORTED_MODULE_12___default().resumeTimer));
+    toast.addEventListener('mouseenter', (sweetalert2__WEBPACK_IMPORTED_MODULE_11___default().stopTimer));
+    toast.addEventListener('mouseleave', (sweetalert2__WEBPACK_IMPORTED_MODULE_11___default().resumeTimer));
   }
 });
 window.Toast = Toast; //Import v-from
 
 
-window.Form = vform__WEBPACK_IMPORTED_MODULE_13__.Form;
-vue__WEBPACK_IMPORTED_MODULE_14__.default.use(vuex__WEBPACK_IMPORTED_MODULE_15__.default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3___default()));
-vue__WEBPACK_IMPORTED_MODULE_14__.default.use((laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4___default()));
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('breadcrumb', __webpack_require__(/*! ./components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('checkbox', __webpack_require__(/*! ./components/Checkbox.vue */ "./resources/js/components/Checkbox.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('v-button', __webpack_require__(/*! ./components/Button.vue */ "./resources/js/components/Button.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('admin-layout', _layouts_admin_vue__WEBPACK_IMPORTED_MODULE_9__.default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('home-layout', _layouts_home_vue__WEBPACK_IMPORTED_MODULE_8__.default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('main-layout', _layouts_main_vue__WEBPACK_IMPORTED_MODULE_7__.default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('admin-login-layout', _layouts_AdminLogin_vue__WEBPACK_IMPORTED_MODULE_10__.default);
-vue__WEBPACK_IMPORTED_MODULE_14__.default.component('auth-layout', _layouts_Auth_vue__WEBPACK_IMPORTED_MODULE_11__.default); // const router = new VueRouter({
+window.Form = vform__WEBPACK_IMPORTED_MODULE_12__.Form;
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use(vuex__WEBPACK_IMPORTED_MODULE_14__.default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3___default()));
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use((laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4___default()));
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('breadcrumb', __webpack_require__(/*! ./components/Breadcrumb.vue */ "./resources/js/components/Breadcrumb.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('checkbox', __webpack_require__(/*! ./components/Checkbox.vue */ "./resources/js/components/Checkbox.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('v-button', __webpack_require__(/*! ./components/Button.vue */ "./resources/js/components/Button.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('admin-layout', _layouts_admin_vue__WEBPACK_IMPORTED_MODULE_8__.default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('home-layout', _layouts_home_vue__WEBPACK_IMPORTED_MODULE_7__.default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('main-layout', _layouts_main_vue__WEBPACK_IMPORTED_MODULE_6__.default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('admin-login-layout', _layouts_AdminLogin_vue__WEBPACK_IMPORTED_MODULE_9__.default);
+vue__WEBPACK_IMPORTED_MODULE_13__.default.component('auth-layout', _layouts_Auth_vue__WEBPACK_IMPORTED_MODULE_10__.default); // const router = new VueRouter({
 //   router,
 //   store,
 //   mode: 'history'
 // })
 
-window.events = new vue__WEBPACK_IMPORTED_MODULE_14__.default();
+window.events = new vue__WEBPACK_IMPORTED_MODULE_13__.default();
 /* eslint-disable no-new */
 
-vue__WEBPACK_IMPORTED_MODULE_14__.default.config.productionTip = false;
-vue__WEBPACK_IMPORTED_MODULE_14__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_16__.default);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_16__.default({
+vue__WEBPACK_IMPORTED_MODULE_13__.default.config.productionTip = false;
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_15__.default);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_15__.default({
   routes: _routes__WEBPACK_IMPORTED_MODULE_1__.default,
   mode: 'history'
 });
 router.beforeEach((0,vue_route_middleware__WEBPACK_IMPORTED_MODULE_5__.default)()); // initialize(store, router);
 
-new vue__WEBPACK_IMPORTED_MODULE_14__.default({
+new vue__WEBPACK_IMPORTED_MODULE_13__.default({
   el: '#app',
   router: router,
   store: _store_index__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -3308,48 +3218,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   cluster: 'eu',
   encrypted: true
 });
-
-/***/ }),
-
-/***/ "./resources/js/helpers/general.js":
-/*!*****************************************!*\
-  !*** ./resources/js/helpers/general.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "initialize": () => (/* binding */ initialize)
-/* harmony export */ });
-function initialize(store, router) {
-  router.beforeEach(function (to, from, next) {
-    var requiresAuth = to.matched.some(function (record) {
-      return record.meta.requiresAuth;
-    });
-    var currentUser = store.state.auth.currentUser;
-
-    if (requiresAuth && !currentUser) {
-      next('/login');
-    } else if (to.path === '/login' && currentUser) {
-      next('/');
-    } else {
-      next();
-    }
-  });
-  axios.interceptors.response.use(null, function (error) {
-    if (error.response.status === 401) {
-      store.commit('LOGOUT');
-      router.push('/login');
-    }
-
-    return Promise.reject(error);
-  });
-
-  if (store.getters.currentUser) {
-    axios.defaults.headers.common['Authorization'] = "Bearer ".concat(store.getters.CURRENT_USER.token);
-  }
-}
 
 /***/ }),
 
@@ -9210,7 +9078,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root {\r\n    --primary-color: #6d2fff;\r\n    --black: #32353a;\r\n    --white: #ffffff;\r\n    --border-radius-main: 6px;\r\n}\r\n\r\nhtml{\r\n    font-size: 62.5%;\r\n}\r\n\r\nbody{\r\n    font-family: 'Poppins', sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.btn{\r\n\tmin-width: 142px;\r\n\theight: 34px;\r\n\ttext-decoration: none;\r\n\tborder: none;\r\n\tborder-radius: 2px;\r\n\tfont-size: 1.5rem;\r\n\tcursor: pointer;\r\n\toutline: none;\r\n\tcolor: var(--text-color);\r\n\tbackground: var(--white-color);\r\n\tdisplay: inline-flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n\tpadding: 0 12px;\r\n}\r\n\r\n.login-wrapper{\r\n    background: linear-gradient(to top, #6d2fff , #6f42c1);\r\n    height: 100vh;\r\n}\r\n.auth-form{\r\n    position: fixed;\r\n    transform: translate(-50%, -50%);\r\n    top: 50%;\r\n    left: 50%;\r\n\twidth: 500px;\r\n\tborder-radius: 5px;\r\n\tbackground: #fff;\r\n\toverflow: hidden;\r\n}\r\n.auth-form__container{\r\n\tpadding: 32px;\r\n\tpadding-bottom: 22px;\r\n}\r\n\r\n.auth-form__header{\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: space-between;\r\n\tpadding: 0 6px;\r\n}\r\n\r\n.auth-form__heading{\r\n\tfont-size: 2.2rem;\r\n\tfont-weight: 500;\r\n\tcolor: var(--text-color);\r\n}\r\n\r\n.auth-form__switch-btn{\r\n\tfont-size: 1.4rem;\r\n\tfont-weight: 500;\r\n\tcolor: var(--primary-color);\r\n\tcursor: pointer;\r\n}\r\n\r\n.auth-form__input{\r\n\twidth: 100%;\r\n\theight: 40px;\r\n\tmargin-top: 16px;\r\n\tpadding: 0 12px;\r\n\tfont-size: 1.4rem;\r\n\tborder-radius: 2px;\r\n\tborder: 1px solid #d5d5d5;\r\n\toutline: none;\r\n}\r\n\r\n.auth-form__input:focus{\r\n\tborder-color: #777;\r\n}\r\n\r\n.auth-form__aside{\r\n\tmargin-top: 18px;\r\n}\r\n\r\n.auth-form__policy-text{\r\n\tfont-size: 1.2rem;\r\n\tline-height: 1.8rem;\r\n\ttext-align: center;\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.auth-form__policy-link{\r\n\ttext-decoration: none;\r\n\tcolor: var(--primary-color);\r\n}\r\n\r\n.auth-form__controls{\r\n\tmargin-top: 80px;\r\n}\r\n\r\n\r\n.btn.btn--primary{\r\n\tbackground: var(--primary-color);\r\n\tcolor: var(--white);\r\n}\r\n\r\n.auth-form__controls{\r\n\tdisplay: flex;\r\n\tjustify-content: flex-end;\r\n}\r\n.auth-form__controls-back{\r\n\tmargin-right: 8px;\r\n}\r\n\r\n.auth-form__controls-back:hover{\r\n\tbackground-color: rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n\r\n.auth-form-help{\r\n\tdisplay: flex;\r\n\tjustify-content: flex-end;\r\n}\r\n\r\n.auth-form__help-link{\r\n\tfont-size: 1.4rem;\r\n\ttext-decoration: none;\r\n\tcolor: #939393;\r\n}\r\n\r\n.auth-form-help-separate{\r\n\tdisplay: block;\r\n\twidth: 1px;\r\n\theight: 22px;\r\n\tbackground: #eaeaea;\r\n\tmargin: 1px 16px 0;\r\n}\r\n\r\n.auth-form-help-fogot{\r\n\tcolor: var(--primary-color);\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root {\r\n    --primary-color: #6d2fff;\r\n    --black: #32353a;\r\n    --white: #ffffff;\r\n    --border-radius-main: 6px;\r\n}\r\n\r\n\r\n/* html {\r\n    font-size: 62.5%;\r\n} */\r\n\r\n\r\n/* body {\r\n    font-family: 'Poppins', sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n} */\r\n\r\n\r\n/* .btn{\r\n\tmin-width: 142px;\r\n\theight: 34px;\r\n\ttext-decoration: none;\r\n\tborder: none;\r\n\tborder-radius: 2px;\r\n\tfont-size: 1.5rem;\r\n\tcursor: pointer;\r\n\toutline: none;\r\n\tcolor: var(--text-color);\r\n\tbackground: var(--white-color);\r\n\tdisplay: inline-flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n\tpadding: 0 12px;\r\n} */\r\n\r\n.login-wrapper {\r\n    font-family: 'Poppins', sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n    background: linear-gradient(to top, #6d2fff, #6f42c1);\r\n    height: 100vh;\r\n}\r\n\r\n.auth-form {\r\n    position: fixed;\r\n    transform: translate(-50%, -50%);\r\n    top: 50%;\r\n    left: 50%;\r\n    width: 500px;\r\n    border-radius: 5px;\r\n    background: #fff;\r\n    overflow: hidden;\r\n}\r\n\r\n.auth-form__container {\r\n    padding: 32px;\r\n    padding-bottom: 22px;\r\n}\r\n\r\n.auth-form__header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 0 6px;\r\n}\r\n\r\n.auth-form__heading {\r\n    font-size: 1.4rem;\r\n    font-weight: 500;\r\n    color: var(--text-color);\r\n}\r\n\r\n.auth-form__switch-btn {\r\n    font-size: 1.4rem;\r\n    font-weight: 500;\r\n    color: var(--primary-color);\r\n    cursor: pointer;\r\n}\r\n\r\n.auth-form__input {\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-top: 16px;\r\n    padding: 0 12px;\r\n    font-size: 1rem;\r\n    border-radius: 2px;\r\n    border: 1px solid #d5d5d5;\r\n    outline: none;\r\n}\r\n\r\n.auth-form__input:focus {\r\n    border-color: #777;\r\n}\r\n\r\n.auth-form__aside {\r\n    margin-top: 18px;\r\n}\r\n\r\n.auth-form__policy-text {\r\n    font-size: 1rem;\r\n    line-height: 1rem;\r\n    text-align: center;\r\n    padding: 0 10px;\r\n}\r\n\r\n.auth-form__policy-link {\r\n    text-decoration: none;\r\n    color: var(--primary-color);\r\n}\r\n\r\n.auth-form__controls {\r\n    margin-top: 35px;\r\n}\r\n\r\n\r\n/* \r\n.btn.btn--primary{\r\n\tbackground: var(--primary-color);\r\n\tcolor: var(--white);\r\n} */\r\n\r\n.auth-form__controls {\r\n    display: flex;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.auth-form__controls-back {\r\n    margin-right: 8px;\r\n}\r\n\r\n.auth-form__controls-back:hover {\r\n    background-color: rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.auth-form-help {\r\n    display: flex;\r\n    justify-content: flex-end;\r\n}\r\n\r\n.auth-form__help-link {\r\n    font-size: 1rem;\r\n    text-decoration: none;\r\n    color: #939393;\r\n}\r\n\r\n.auth-form-help-separate {\r\n    display: block;\r\n    width: 1px;\r\n    height: 22px;\r\n    background: #eaeaea;\r\n    margin: 1px 16px 0;\r\n}\r\n\r\n.auth-form-help-fogot {\r\n    color: var(--primary-color);\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -71339,25 +71207,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "home" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-home mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Home")])
             ])
@@ -71369,25 +71219,8 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "homeDashboard" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M4 13h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zm0 8h6c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1zm10 0h6c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zM13 4v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-layout-grid2-alt mr-2" }),
+              _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [
                 _vm._v("Dashboard")
               ])
@@ -71396,57 +71229,9 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _c(
-              "svg",
-              {
-                staticClass: "icon-cate",
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M12 11.55c-1.82-1.7-4.12-2.89-6.68-3.35C4.11 7.99 3 8.95 3 10.18v6.24c0 1.68.72 2.56 1.71 2.69 2.5.32 4.77 1.35 6.63 2.87.35.29.92.32 1.27.04 1.87-1.53 4.16-2.58 6.68-2.9.94-.13 1.71-1.06 1.71-2.02v-6.92c0-1.23-1.11-2.19-2.32-1.98-2.56.46-4.86 1.65-6.68 3.35zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Learn")])
-          ])
-        ]),
+        _vm._m(1),
         _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _c(
-              "svg",
-              {
-                staticClass: "icon-cate",
-                attrs: {
-                  focusable: "false",
-                  viewBox: "0 0 24 24",
-                  "aria-hidden": "true"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "hide-on-destop" }, [_vm._v("FAQ")])
-          ])
-        ])
+        _vm._m(2)
       ])
     ])
   ])
@@ -71459,18 +71244,42 @@ var staticRenderFns = [
     return _c("div", { staticClass: "logo" }, [
       _c("img", {
         staticClass: "hide-on-destop",
-        attrs: { src: "images/logo.png", width: "150" }
+        attrs: { src: "/images/logo.png", width: "150" }
       }),
       _vm._v(" "),
       _c("img", {
         staticClass: "hide-on-mobile hide-on-destop-large",
-        attrs: { src: "images/logo-icon.png", width: "40" }
+        attrs: { src: "/images/logo-icon.png", width: "40" }
       }),
       _vm._v(" "),
       _c("img", {
         staticClass: "hide-on-mobile hide-on-destop-large hide-on-destop",
-        attrs: { src: "images/logo.png", width: "150" }
+        attrs: { src: "/images/logo.png", width: "150" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ti-book mr-2" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Learn")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ti-help-alt mr-2" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "hide-on-destop" }, [_vm._v("FAQ")])
+      ])
     ])
   }
 ]
@@ -71533,25 +71342,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "home" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42a.9959.9959 0 00-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-arrow-left mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Home")])
             ]),
@@ -71565,25 +71356,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "overview" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M2.53 19.65l1.34.56v-9.03l-2.43 5.86c-.41 1.02.08 2.19 1.09 2.61zm19.5-3.7L17.07 3.98c-.31-.75-1.04-1.21-1.81-1.23-.26 0-.53.04-.79.15L7.1 5.95c-.75.31-1.21 1.03-1.23 1.8-.01.27.04.54.15.8l4.96 11.97c.31.76 1.05 1.22 1.83 1.23.26 0 .52-.05.77-.15l7.36-3.05c1.02-.42 1.51-1.59 1.09-2.6zM7.88 8.75c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-2 11c0 1.1.9 2 2 2h1.45l-3.45-8.34v6.34z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-wallet mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [
                 _vm._v("Overview")
@@ -71597,25 +71370,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "solution" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M12 3c-.46 0-.93.04-1.4.14-2.76.53-4.96 2.76-5.48 5.52-.48 2.61.48 5.01 2.22 6.56.43.38.66.91.66 1.47V19c0 1.1.9 2 2 2h.28c.35.6.98 1 1.72 1s1.38-.4 1.72-1H14c1.1 0 2-.9 2-2v-2.31c0-.55.22-1.09.64-1.46C18.09 13.95 19 12.08 19 10c0-3.87-3.13-7-7-7zm.5 11h-1v-2.59L9.67 9.59l.71-.71L12 10.5l1.62-1.62.71.71-1.83 1.83V14zm1 5c-.01 0-.02-.01-.03-.01V19h-2.94v-.01c-.01 0-.02.01-.03.01-.28 0-.5-.22-.5-.5s.22-.5.5-.5c.01 0 .02.01.03.01V18h2.94v.01c.01 0 .02-.01.03-.01.28 0 .5.22.5.5s-.22.5-.5.5zm0-2h-3c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h3c.28 0 .5.22.5.5s-.22.5-.5.5z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-light-bulb mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [
                 _vm._v("Solutions")
@@ -71629,25 +71384,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "feedback" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12H7c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1s-.45 1-1 1zm0-3H7c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1s-.45 1-1 1zm0-3H7c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1s-.45 1-1 1z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-comments-smiley mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [
                 _vm._v("Feedback")
@@ -71661,25 +71398,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "chat" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M20 6h-1v8c0 .55-.45 1-1 1H6v1c0 1.1.9 2 2 2h10l4 4V8c0-1.1-.9-2-2-2zm-3 5V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v13l4-4h9c1.1 0 2-.9 2-2z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-comments mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [
                 _vm._v("Trao đổi hỏi đáp")
@@ -71693,25 +71412,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "payment" } } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "icon-cate",
-                  attrs: {
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M20 6h-1v8c0 .55-.45 1-1 1H6v1c0 1.1.9 2 2 2h10l4 4V8c0-1.1-.9-2-2-2zm-3 5V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v13l4-4h9c1.1 0 2-.9 2-2z"
-                    }
-                  })
-                ]
-              ),
+              _c("i", { staticClass: "ti-clipboard mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Payment")])
             ])
@@ -71730,17 +71431,17 @@ var staticRenderFns = [
     return _c("div", { staticClass: "logo" }, [
       _c("img", {
         staticClass: "hide-on-destop",
-        attrs: { src: "images/logo.png", width: "150" }
+        attrs: { src: "/images/logo.png", width: "150" }
       }),
       _vm._v(" "),
       _c("img", {
         staticClass: "hide-on-mobile hide-on-destop-large",
-        attrs: { src: "images/logo-icon.png", width: "40" }
+        attrs: { src: "/images/logo-icon.png", width: "40" }
       }),
       _vm._v(" "),
       _c("img", {
         staticClass: "hide-on-mobile hide-on-destop-large hide-on-destop",
-        attrs: { src: "images/logo.png", width: "150" }
+        attrs: { src: "/images/logo.png", width: "150" }
       })
     ])
   },
@@ -71752,7 +71453,7 @@ var staticRenderFns = [
       _c("img", {
         staticClass: "path-banner",
         staticStyle: { display: "block" },
-        attrs: { src: "svg/banner.svg", alt: "banner-home" }
+        attrs: { src: "/svg/banner.svg", alt: "banner-home" }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "hide-on-destop" }, [
@@ -72098,28 +71799,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "app" },
-    [
-      _c("SidebarHome"),
-      _vm._v(" "),
-      _c(
-        "main",
-        [
-          _c("Header"),
-          _vm._v(" "),
-          _vm._t("default"),
-          _vm._v(" "),
-          _c("Social"),
-          _vm._v(" "),
-          _c("Footer")
-        ],
-        2
-      )
-    ],
-    1
-  )
+  return _c("div", { staticClass: "app" }, [
+    _c(
+      "div",
+      { staticClass: "home-wapper" },
+      [
+        _c("SidebarHome"),
+        _vm._v(" "),
+        _c(
+          "main",
+          [
+            _c("Header"),
+            _vm._v(" "),
+            _vm._t("default"),
+            _vm._v(" "),
+            _c("Social"),
+            _vm._v(" "),
+            _c("Footer")
+          ],
+          2
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -72144,28 +71847,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "app" },
-    [
-      _c("SidebarMain"),
-      _vm._v(" "),
-      _c(
-        "main",
-        [
-          _c("HeaderMain"),
-          _vm._v(" "),
-          _vm._t("default"),
-          _vm._v(" "),
-          _c("Social"),
-          _vm._v(" "),
-          _c("Footer")
-        ],
-        2
-      )
-    ],
-    1
-  )
+  return _c("div", { staticClass: "app" }, [
+    _c(
+      "div",
+      { staticClass: "home-wapper" },
+      [
+        _c("SidebarMain"),
+        _vm._v(" "),
+        _c(
+          "main",
+          [
+            _c("HeaderMain"),
+            _vm._v(" "),
+            _vm._t("default"),
+            _vm._v(" "),
+            _c("Social"),
+            _vm._v(" "),
+            _c("Footer")
+          ],
+          2
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

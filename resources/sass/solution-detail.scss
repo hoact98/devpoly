@@ -406,8 +406,6 @@
     cursor: pointer;
 }
 
-.solution-action {}
-
 .challenge-name p {
     margin-top: 8px;
     margin-bottom: 0;
@@ -480,5 +478,5 @@
     cursor: pointer;
     background-color: #32353a;
     border: 1px solid #8d99a7;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
