@@ -2508,6 +2508,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2537,7 +2546,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    user: 'auth/user'
+  }),
+  created: function created() {
+    this.$store.dispatch('auth/fetchUser');
+  },
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$store.dispatch('auth/logout');
+
+              case 2:
+                // Redirect to login.
+                _this.$router.push({
+                  name: 'admin.login'
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
 
 /***/ }),
 
@@ -2552,6 +2608,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2575,7 +2640,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    user: 'auth/user'
+  }),
+  created: function created() {
+    this.$store.dispatch('auth/fetchUser');
+  },
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$store.dispatch('auth/logout');
+
+              case 2:
+                // Redirect to login.
+                _this.$router.push({
+                  name: 'admin.login'
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
 
 /***/ }),
 
@@ -71212,23 +71327,95 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
-          _c(
-            "div",
-            { staticClass: "col-9 col-sm-12 login-and-setting" },
-            [
-              _c("router-link", { attrs: { to: { name: "login" } } }, [
-                _c("button", { staticClass: "login" }, [_vm._v("Login")])
+        _vm.user
+          ? _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
+              _c("ul", { staticClass: "nav navbar-toolbar" }, [
+                _vm.user
+                  ? _c("li", { staticClass: "dropdown dropdown-user" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link dropdown-toggle link",
+                          attrs: { "data-toggle": "dropdown" }
+                        },
+                        [
+                          _c("img", { attrs: { src: "/" + _vm.user.image } }),
+                          _vm._v(" "),
+                          _c("span"),
+                          _vm._v(_vm._s(_vm.user.name)),
+                          _c("i", { staticClass: "fa fa-angle-down m-l-5" })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "dropdown-menu dropdown-menu-right" },
+                        [
+                          _vm._m(0),
+                          _vm._v(" "),
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "javascript:;" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.logout.apply(null, arguments)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-power-off" }),
+                              _vm._v("Logout")
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ])
-            ],
-            1
-          )
-        ])
+            ])
+          : _c(
+              "div",
+              { staticClass: "col-9 col-sm-12 login-and-setting" },
+              [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _c("button", { staticClass: "login" }, [_vm._v("Login")])
+                ])
+              ],
+              1
+            )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
+      [_c("i", { staticClass: "fa fa-user" }), _vm._v("Profile")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
+      [_c("i", { staticClass: "fa fa-cog" }), _vm._v("Settings")]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -71283,25 +71470,99 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-9 col-sm-12 login-and-setting" },
-          [
-            _c("router-link", { attrs: { to: { name: "login" } } }, [
-              _c("button", { staticClass: "login" }, [
-                _vm._v(
-                  "\n                             Login\n                         "
-                )
+        _vm.user
+          ? _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
+              _c("ul", { staticClass: "nav navbar-toolbar" }, [
+                _vm.user
+                  ? _c("li", { staticClass: "dropdown dropdown-user" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link dropdown-toggle link",
+                          attrs: { "data-toggle": "dropdown" }
+                        },
+                        [
+                          _c("img", { attrs: { src: "/" + _vm.user.image } }),
+                          _vm._v(" "),
+                          _c("span"),
+                          _vm._v(_vm._s(_vm.user.name)),
+                          _c("i", { staticClass: "fa fa-angle-down m-l-5" })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "dropdown-menu dropdown-menu-right" },
+                        [
+                          _vm._m(0),
+                          _vm._v(" "),
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "javascript:;" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.logout.apply(null, arguments)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-power-off" }),
+                              _vm._v("Logout")
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ])
             ])
-          ],
-          1
-        )
+          : _c(
+              "div",
+              { staticClass: "col-9 col-sm-12 login-and-setting" },
+              [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _c("button", { staticClass: "login" }, [
+                    _vm._v(
+                      "\n                             Login\n                         "
+                    )
+                  ])
+                ])
+              ],
+              1
+            )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
+      [_c("i", { staticClass: "fa fa-user" }), _vm._v("Profile")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
+      [_c("i", { staticClass: "fa fa-cog" }), _vm._v("Settings")]
+    )
+  }
+]
 render._withStripped = true
 
 

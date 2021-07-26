@@ -14,13 +14,25 @@
             ></path>
           </svg>
         </div>
-        <div class="col-9 col-sm-12 login-and-setting">
-          <div class="col-9 col-sm-12 login-and-setting">
-            <router-link :to="{ name: 'login' }">
-              <button class="login">Login</button>
-            </router-link>
-          </div>
-          
+        <div class="col-9 col-sm-12 login-and-setting" v-if="user">
+         <ul class="nav navbar-toolbar">
+              <li class="dropdown dropdown-user" v-if="user">
+                  <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                      <img :src="'/'+user.image" />
+                      <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
+                      <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
+                      <li class="dropdown-divider"></li>
+                      <a class="dropdown-item" href="javascript:;" @click.prevent="logout"><i class="fa fa-power-off"></i>Logout</a>
+                  </ul>
+              </li>
+         </ul>
+        </div>
+        <div class="col-9 col-sm-12 login-and-setting" v-else>
+          <router-link :to="{ name: 'login' }">
+            <button class="login">Login</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -28,7 +40,25 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex'
+
+export default {
+   computed: mapGetters({
+    user: 'auth/user'
+  }),
+  
+  created () {
+    this.$store.dispatch('auth/fetchUser');
+  },
+  methods: {
+    async logout () {
+      // Log out the user.
+      await this.$store.dispatch('auth/logout')
+      // Redirect to login.
+     this.$router.push({ name: 'admin.login' })
+    }
+  }
+};
 </script>
 
 <style></style>
