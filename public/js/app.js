@@ -3221,6 +3221,75 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 
 /***/ }),
 
+/***/ "./resources/js/middleware/auth-client.js":
+/*!************************************************!*\
+  !*** ./resources/js/middleware/auth-client.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(to, from, next) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!_store__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/token"]) {
+              _context.next = 6;
+              break;
+            }
+
+            _context.next = 3;
+            return _store__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('auth/fetchUser');
+
+          case 3:
+            if (!_store__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/check"]) {
+              js_cookie__WEBPACK_IMPORTED_MODULE_2___default().set("intended_url", to.path);
+              next({
+                name: "login"
+              });
+            }
+
+            _context.next = 7;
+            break;
+
+          case 6:
+            next({
+              name: "login"
+            });
+
+          case 7:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+})());
+
+/***/ }),
+
 /***/ "./resources/js/middleware/auth.js":
 /*!*****************************************!*\
   !*** ./resources/js/middleware/auth.js ***!
@@ -3365,7 +3434,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _middleware_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./middleware/auth */ "./resources/js/middleware/auth.js");
-/* harmony import */ var _middleware_guest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./middleware/guest */ "./resources/js/middleware/guest.js");
+/* harmony import */ var _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./middleware/auth-client */ "./resources/js/middleware/auth-client.js");
+/* harmony import */ var _middleware_guest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./middleware/guest */ "./resources/js/middleware/guest.js");
+
 
 
 
@@ -3411,7 +3482,7 @@ var routes = [{
   alias: '',
   meta: {
     layout: 'main',
-    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Chat/container.vue"),
   name: 'chat'
@@ -3466,7 +3537,7 @@ var routes = [{
   path: "/profile",
   meta: {
     layout: 'main',
-    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Profile.vue"),
   name: "profile"
@@ -3616,7 +3687,7 @@ var routes = [{
   path: '/admin/login',
   meta: {
     layout: 'admin-login',
-    middleware: _middleware_guest__WEBPACK_IMPORTED_MODULE_1__.default
+    middleware: _middleware_guest__WEBPACK_IMPORTED_MODULE_2__.default
   },
   component: page('auth/LoginAdmin.vue'),
   name: 'admin.login'

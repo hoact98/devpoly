@@ -5,66 +5,48 @@
             <div class="auth-form__container">
                 <div class="auth-form__header">
                     <h3 class="auth-form__heading">Đăng nhập</h3>
-                    <span class="auth-form__switch-btn"
-                        ><router-link :to="{ name: 'register' }"
-                            >Đăng ký</router-link
-                        ></span
-                    >
+                    <span class="auth-form__switch-btn"><router-link :to="{ name: 'register' }">Đăng ký</router-link></span>
                 </div>
 
-                <form
-                    id="login-form"
+                <form id="login-form"
                     @submit.prevent="login"
-                    @keydown="form.onKeydown($event)"
-                >
+                    @keydown="form.onKeydown($event)">
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.email"
+                            <input v-model="form.email"
                                 :class="{
                                     'is-invalid': form.errors.has('email')
-                                }"
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                id="email"
-                                class="auth-form__input"
-                            />
+                                }" type="email" name="email" placeholder="Email" class="auth-form__input" />
+                             <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
                         </div>
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.password"
+                            <input v-model="form.password"
                                 :class="{
                                     'is-invalid': form.errors.has('password')
                                 }"
-                                type="password"
-                                name="password"
-                                placeholder="******"
-                                id="password"
-                                class="auth-form__input"
-                            />
+                                type="password" name="password" placeholder="Mật khẩu"
+                                class="auth-form__input" />
+                        <div class="text-danger" v-if="form.errors.has('password')" v-html="form.errors.get('password')" />
                         </div>
                     </div>
-
+                    <div class="auth-form__group mt-3">
+                        <label class="ui-checkbox ui-checkbox-info">
+                            <input type="checkbox" v-model="form.remember" name="remember">
+                            <span class="input-span"></span>Nhớ tôi</label> 
+                    </div>
                     <div class="auth-form__aside">
                         <div class="auth-form-help">
-                            <a
-                                href="#"
-                                class="auth-form__help-link auth-form-help-fogot"
-                                >Quên mật khẩu</a
-                            >
+                            <a href="#" class="auth-form__help-link auth-form-help-fogot">Quên mật khẩu</a>
                             <span class="auth-form-help-separate"> </span>
-                            <a href="#" class="auth-form__help-link"
-                                >Cần trợ giúp?</a
-                            >
+                            <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
                         </div>
                     </div>
 
                     <div class="auth-form__controls">
-                        <button class="btn auth-form__controls-back">
-                            Trở lại
-                        </button>
-                        <button class="btn btn-primary">Đăng nhập</button>
+                        <span class="btn auth-form__controls-back">
+                                <router-link :to="{ name: 'home' }">Trở lại</router-link>
+                        </span>
+                        <button type="submit" class="btn btn-primary" style="cursor: pointer;">Đăng nhập</button>
                     </div>
                 </form>
             </div>
@@ -73,32 +55,40 @@
     </div>
 </template>
 <script>
+import Cookies from 'js-cookie'
 export default {
     data: () => ({
         form: new Form({
             email: "",
-            password: ""
+            password: "",
+            remember: false
         })
     }),
     methods: {
-        authenticate() {
-            this.$store.dispatch("auth/LOGIN");
-            login(this.form)
-                .then(res => {
-                    this.$store.commit("auth/LOGIN_SUCCESS", { res });
-                    this.$router.push({ name: "home" });
-                })
-                .catch(err => {
-                    this.$store.commit("auth/LOGIN_FAILED", { err });
-                    //   this.showAlert(this.authError, "error");
-                });
-        }
+    async login () {
+      // Submit the form.
+      const { data } = await this.form.post(route('login'))
+      // Save the token.
+      this.$store.dispatch('auth/saveToken', {
+        token: data.access_token,
+        remember: this.form.remember
+      })
+      // Fetch the user.
+      await this.$store.dispatch('auth/fetchUser')
+      // Redirect home.
+      this.redirect()
     },
-    mputed: {
-        authError() {
-            return this.$store.getters.AUTH_ERROR;
-        }
+    redirect () {
+      const intendedUrl = Cookies.get('intended_url')
+      if (intendedUrl) {
+        Cookies.remove('intended_url')
+        this.$router.push({ path: intendedUrl })
+      } else {
+        this.$router.push({ name: 'profile' })
+      }
     }
+  }  
+    
 };
 </script>
 <style scoped>

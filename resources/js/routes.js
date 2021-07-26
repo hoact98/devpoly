@@ -1,4 +1,5 @@
 import auth from './middleware/auth';
+import auth_client from './middleware/auth-client';
 import guest from './middleware/guest';
 
 function page(path) {
@@ -37,7 +38,7 @@ const routes = [
     {
         path: '/chat',
         alias: '',
-        meta: {layout: 'main',middleware: auth},
+        meta: {layout: 'main',middleware: auth_client},
         component: page("public/Chat/container.vue"),
         name: 'chat',
     },
@@ -84,7 +85,7 @@ const routes = [
     },
     {
         path: "/profile",
-        meta: {layout: 'main', middleware: auth},
+        meta: {layout: 'main', middleware: auth_client},
         component: page("public/Profile.vue"),
         name: "profile"
     },

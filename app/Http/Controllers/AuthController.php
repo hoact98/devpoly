@@ -20,7 +20,6 @@ class AuthController extends Controller
  
   public function login(Request $request)
   {
-    
      $rule= [
           'email' => 'required|email',
           'password' => 'required|min:6'
@@ -59,7 +58,7 @@ class AuthController extends Controller
       'name' => 'required', 
       'email' => 'required|email', 
       'password' => 'required|min:6', 
-      'c_password' => 'required|same:password', 
+      'password_confirmation' => 'required|same:password', 
     ];
     $messages = [
         'name.required' => "Hãy nhập tên",
@@ -67,13 +66,17 @@ class AuthController extends Controller
         'password.min' => "Ít nhất có 6 ký tự",
         'password.required' => "Nhập mật khẩu",
         'email.email' => "Email không đúng định dạng",
-        'c_password.required'=>"Xác nhận mật khẩu",
-        'c_password.same'=>"Mật khẩu xác nhận không khớp"
+        'password_confirmation.required'=>"Xác nhận mật khẩu",
+        'password_confirmation.same'=>"Mật khẩu xác nhận không khớp"
     ];
 
     $validator =  Validator::make($request->all(),$rule,$messages);
       if ($validator->fails()) { 
         return response()->json(['errors'=>$validator->errors()],422);
+      }
+      $checkEmail =User::where('email',$request->email)->get();
+      if(count($checkEmail)>0){
+        return response()->json(['errors' => ['email'=> ['Email đã được đăng ký!']]],422);
       }
     $postArray = $request->all(); 
     $postArray['password'] = Hash::make($postArray['password']); 

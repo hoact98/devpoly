@@ -4,90 +4,68 @@
             <div class="auth-form__container">
                 <div class="auth-form__header">
                     <h3 class="auth-form__heading">Đăng ký</h3>
-                    <span class="auth-form__switch-btn"
-                        ><router-link :to="{ name: 'login' }"
-                            >Đăng nhập</router-link
-                        ></span
-                    >
+                    <span class="auth-form__switch-btn"><router-link :to="{ name: 'login' }">Đăng nhập</router-link ></span>
                 </div>
 
-                <form
-                    @submit.prevent="register"
-                    @keydown="form.onKeydown($event)"
-                >
+                <form @submit.prevent="register" @keydown="form.onKeydown($event)">
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.username"
+                            <input v-model="form.name"
                                 :class="{
-                                    'is-invalid': form.errors.has('username')
+                                    'is-invalid': form.errors.has('name')
                                 }"
-                                type="username"
-                                name="username"
-                                placeholder="username"
-                                class="auth-form__input"
-                            />
+                                type="text" name="name"
+                                placeholder="Họ tên"
+                                class="auth-form__input"/>
+                             <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
                         </div>
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.email"
+                            <input v-model="form.email"
                                 :class="{
                                     'is-invalid': form.errors.has('email')
                                 }"
-                                type="email"
-                                name="email"
+                                type="email" name="email"
                                 placeholder="Email"
-                                id="email"
-                                class="auth-form__input"
-                            />
+                                class="auth-form__input"/>
+                             <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
                         </div>
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.password"
+                            <input v-model="form.password"
                                 :class="{
                                     'is-invalid': form.errors.has('password')
                                 }"
                                 type="password"
                                 name="password"
-                                placeholder="******"
-                                class="auth-form__input"
-                            />
+                                placeholder="Mật khẩu"
+                                class="auth-form__input"/>
+                             <div class="text-danger" v-if="form.errors.has('password')" v-html="form.errors.get('password')" />
                         </div>
                         <div class="auth-form__group">
-                            <input
-                                v-model="form.password_confirmation"
-                                :class="{
-                                    'is-invalid': form.errors.has(
-                                        'password_confirmation'
-                                    )
-                                }"
+                            <input v-model="form.password_confirmation"
+                                :class="{'is-invalid': form.errors.has('password_confirmation')}"
                                 type="password"
                                 name="password_confirmation"
-                                placeholder="Mật khẩu"
-                                id="password_confirmation"
-                                class="auth-form__input"
-                            />
+                                placeholder="Xác nhận mật khẩu"
+                                class="auth-form__input" />
+                             <div class="text-danger" v-if="form.errors.has('password_confirmation')" v-html="form.errors.get('password_confirmation')" />
                         </div>
                     </div>
 
                     <div class="auth-form__aside">
                         <p class="auth-form__policy-text">
                             Bằng việc đăng ký, bạn đã đồng ý với DevFpoly về
-                            <a href="#" class="auth-form__policy-link"
-                                >Điều khoản dịch vụ</a
-                            >
+                            <a href="#" class="auth-form__policy-link">Điều khoản dịch vụ</a>
                             &
                             <a href="#" class="auth-form__policy-link"
-                                >Chính sách bảo mật</a
-                            >
+                                >Chính sách bảo mật</a>
                         </p>
                     </div>
 
                     <div class="auth-form__controls">
-                        <button class="btn auth-form__controls-back">
-                            Trở lại
-                        </button>
-                        <button class="btn btn-primary">Đăng ký</button>
+                         <span class="btn auth-form__controls-back">
+                                <router-link :to="{ name: 'home' }">Trở lại</router-link>
+                        </span>
+                        <button type="submit" class="btn btn-primary" style="cursor: pointer;">Đăng ký</button>
                     </div>
                 </form>
             </div>
@@ -98,29 +76,19 @@
 export default {
     data: () => ({
         form: new Form({
-            username: "",
+            name: "",
             email: "",
             password: "",
             password_confirmation: ""
         })
     }),
     methods: {
-        authenticate() {
-            register(this.form)
-                .then(res => {
-                    this.$router.push({ name: "login" });
-                })
-                .catch(err => {
-                    console.log(err);
-                    //   this.showAlert(this.authError, "error");
-                });
-        }
+    async register () {
+      // Submit the form.
+        await this.form.post(route('register'))
+        this.$router.push({ name: 'login' })
     },
-    mputed: {
-        authError() {
-            return this.$store.getters.AUTH_ERROR;
-        }
-    }
+  }  
 };
 </script>
 <style scoped>
