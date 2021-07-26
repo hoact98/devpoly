@@ -1,6 +1,7 @@
 import auth from './middleware/auth';
 import auth_client from './middleware/auth-client';
 import guest from './middleware/guest';
+import client from './middleware/client';
 
 function page(path) {
     return () =>
@@ -16,7 +17,6 @@ const routes = [
         meta:{layout: 'home'},
         component: page('public/Home.vue'),
         name:'home'
-        
     },
     {
         path: '/home-dashboard',
@@ -26,12 +26,12 @@ const routes = [
     },
     {
         path: '/login',
-        meta: {layout: 'auth'},
+        meta: {layout: 'auth', middleware: client},
         component: page('auth/Login.vue'),
         name: 'login',
     }, {
         path: '/register',
-        meta: {layout: 'auth'},
+        meta: {layout: 'auth', middleware: client},
         component: page('auth/Register.vue'),
         name: 'register',
     },
