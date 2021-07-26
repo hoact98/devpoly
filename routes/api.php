@@ -9,6 +9,7 @@ use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,14 @@ use App\Http\Controllers\SolutionController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::middleware('auth:api')->group(function() {
+    Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+    Route::get('/user', [AuthController::class, 'user'])->name('me');
+   
+});
 Route::group(['middleware' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/user', [AuthController::class, 'me'])->name('me');
 });
 
 // Route::group(['middleware' => 'auth:api'], function () {
@@ -93,6 +96,8 @@ Route::group(['prefix' => 'solution'], function () {
 
 Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
 
-
-Route::get('/chat-message', [ChatMessageController::class, 'fetch'])->name('fetchChat');
-Route::post('/chat-message', [ChatMessageController::class, 'send'])->name('sendChat');
+Route::prefix('chat')->middleware('auth:api')->group(function() {
+    Route::get('rooms', [ChatController::class, 'rooms'])->name('rooms');
+    Route::get('room/{roomID}/messages', [ChatController::class, 'messages'])->name('messages');
+    Route::get('room/{roomID}/message', [ChatController::class, 'newMessage'])->name('newMessage');
+});

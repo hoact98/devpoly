@@ -18,7 +18,7 @@ main .social h2 {
     border: 1px solid var(--border-color-grey);
     border-radius: var(--border-radius-main);
     margin-bottom: 24px;
-    background-color: var(--black-bold);
+    background-color: var(--background-light);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
     transition: 0.3s;
 }
@@ -59,7 +59,7 @@ main .social h2 {
     line-height: 1.7;
     font-size: 1.4rem;
     max-width: 720px;
-    color: var(--white-grey);
+    color: var(--black);
 }
 
 

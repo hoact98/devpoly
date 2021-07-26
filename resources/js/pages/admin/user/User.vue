@@ -26,6 +26,8 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
+import Image from '../../../components/ImageComponent.vue';
+import RoleComponent from '../../../components/RoleComponent.vue';
 export default {
    data() {
       return {
@@ -43,14 +45,31 @@ export default {
               name:'key',
               orderable: true,
           },
+           {
+              label: 'Hình ảnh',
+              orderable: false,
+              component: Image,
+              width: 10,
+          },
           {
-              label: 'Name',
+              label: 'Tài khoản',
               name: 'username',
               orderable: true,
           },
           {
               label: 'Email',
               name: 'email',
+              orderable: true,
+          },
+          {
+              label: 'Số thử thách',
+              name: 'challenges.length',
+              orderable: true,
+          },
+          {
+              label: 'Vai trò',
+              name: 'roles',
+              component: RoleComponent,
               orderable: true,
           },
           {
@@ -66,7 +85,9 @@ export default {
   },
    components:{
       Footer,
-      TableButton
+      TableButton,
+      Image,
+      RoleComponent
   },
     created() {
         this.getData();

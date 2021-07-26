@@ -16,7 +16,7 @@ class CreateFeedbacksTable extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
             $table->text('feedback_content');
-            $table->uuid('user_id');
+            $table->integer('user_id')->unsigned();
             $table->uuid('solution_id');
             $table->integer('parent_id')->nullable()->default(0)->unsigned();
             $table->boolean('is_approved')->default(false);

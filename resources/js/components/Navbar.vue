@@ -135,14 +135,15 @@
                     </li>
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="" />
-                            <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
+                            <!-- <img :src="'/'+user.image" />
+                            <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a> -->
+                            <span></span>admin<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
                             <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
                             <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
+                            <a class="dropdown-item" href="javascript:;" @click.prevent="logout"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
                 </ul>
@@ -152,8 +153,18 @@
 </template>
 
 <script>
-
 export default {
-  name: 'navbar'
+  name: 'navbar',
+   props: {
+        user: {},
+    },
+  methods: {
+    async logout () {
+      // Log out the user.
+      await this.$store.dispatch('auth/logout')
+      // Redirect to login.
+     this.$router.push({ name: 'admin.login' })
+    }
+  }
 }
 </script>

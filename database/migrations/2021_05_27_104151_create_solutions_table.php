@@ -19,7 +19,7 @@ class CreateSolutionsTable extends Migration
             $table->text('description');
             $table->string('link_github')->unique();
             $table->string('demo_url')->unique();
-            $table->uuid('user_id');
+            $table->integer('user_id')->unsigned();
             $table->integer('challen_id')->unsigned();
             $table->integer('number_like')->default(0);
             $table->timestamps();

@@ -28,5 +28,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../../sass/home.scss";
+// @import "../../sass/home.scss";
 </style>

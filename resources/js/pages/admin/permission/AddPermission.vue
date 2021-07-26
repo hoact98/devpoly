@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
-                                <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" id="exampleInputName" placeholder="Enter name">
+                                <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" placeholder="Enter name">
                                 <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')"></div>
                             </div>
                         </div>

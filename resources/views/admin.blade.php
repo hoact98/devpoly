@@ -28,7 +28,7 @@ $config = [
   <link rel="stylesheet" href="{{asset('dist/css/main.css')}}">
 </head>
 
-<body class="fixed-navbar has-animation">
+<body class="fixed-navbar has-animation bg-silver-300">
   <div id="app">
 
   </div>
@@ -50,7 +50,7 @@ $config = [
 
 <script src="{{asset('dist/js/hide-sidebar.js')}}"></script>
  <!-- CORE SCRIPTS-->
- {{-- <script defer src="{{asset('assets/js/app.js')}}" type="text/javascript"></script> --}}
+ <script defer src="{{asset('assets/js/app.js')}}" type="text/javascript"></script>
 
 </body>
 </html>

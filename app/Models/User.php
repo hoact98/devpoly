@@ -7,14 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Traits\HasRoles;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
-
 class User extends Authenticatable
 {
-    use HasApiTokens,HasFactory, Notifiable,Uuid,HasRoles,LaravelVueDatatableTrait;
+    use HasApiTokens,HasFactory, Notifiable,HasRoles,LaravelVueDatatableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -27,12 +24,14 @@ class User extends Authenticatable
         'password',
         'avatar',
         'online',
+        'name',
+        'address',
+        'gender',
+        'phone' ,
         'socket_id',
         'is_active'
     ];
 
-    protected $keyType = 'string';
-    public $incrementing = false;
     protected $guard_name = 'api';
     protected $dataTableColumns = [
         'id' => [
@@ -43,22 +42,24 @@ class User extends Authenticatable
         ],
         'email' => [
             'searchable' => true,
-        ]
+        ],
+        'image' => [
+            'searchable' => false,
+        ],
+        'name' => [
+            'searchable' => true,
+        ],
     ];
 
     protected $dataTableRelationships = [
         "belongsToMany" => [
             "roles" => [
                 "model" => Role::class,
-                "foreign_key" => "role_id",
                 "pivot" => [
                     "table_name" => "model_has_roles",
-                    "primary_key" => "model_id",
                     "foreign_key" => "role_id",
                     "local_key" => "model_id",
                 ],
-                // "order_by" => "name",
-                // "order_dir" => "asc",
                 "columns" => [
                     "name" => [
                         "searchable" => true,
@@ -66,6 +67,34 @@ class User extends Authenticatable
                     ]
                 ],
             ],
+            "challenges" => [
+                "model" => Challenge::class,
+                "pivot" => [
+                    "table_name" => "challenge_users",
+                    "foreign_key" => "challen_id",
+                    "local_key" => "user_id",
+                ],
+                "columns" => [
+                    "name" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ],
+            "solutions" => [
+                "model" => Solution::class,
+                "pivot" => [
+                    "table_name" => "solution_users",
+                    "foreign_key" => "solution_id",
+                    "local_key" => "user_id",
+                ],
+                "columns" => [
+                    "name" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ]
         ]
     ];
     /**
@@ -86,7 +115,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     // public function roles(){
     //     return $this->belongsToMany(Role::class,'user_roles');
     // }
@@ -104,10 +132,6 @@ class User extends Authenticatable
         ]);
     }
 
-
-    public function information (){
-        return $this->hasOne(InformationUser::class,'user_id');
-    }
     public function roles()
     {
         return $this->belongsToMany(Role::class,'model_has_roles', 'model_id', 'role_id');

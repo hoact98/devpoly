@@ -56,8 +56,8 @@
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Ảnh:</label>
                                 <div class="col-sm-10">
-                                   <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('avatar') }" class="form-control" name="avatar">
-                                   <div class="text-danger" v-if="form.errors.has('avatar')" v-html="form.errors.get('avatar')" />
+                                   <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
+                                   <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
                                 </div>
                             </div>
                              <div class="form-group row">
@@ -73,14 +73,14 @@
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Địa chỉ:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" id="exampleInputAdress" placeholder="Enter address">
+                                   <input type="text" class="form-control" v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" placeholder="Enter address">
                                    <div class="text-danger" v-if="form.errors.has('address')" v-html="form.errors.get('address')" />
                                 </div>
                             </div>
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Số điện thoại:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" v-model="form.phone" :class="{ 'is-invalid': form.errors.has('phone') }" id="exampleInputAdress" placeholder="Enter phone">
+                                   <input type="text" class="form-control" v-model="form.phone" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone">
                                    <div class="text-danger" v-if="form.errors.has('phone')" v-html="form.errors.get('phone')" />
                                 </div>
                             </div>
@@ -146,7 +146,7 @@ export default {
       name: '',
       email: '',
       password: '',
-      avatar: '',
+      image: '',
       role_id: '',
       address: '',
       phone: '',
@@ -189,7 +189,7 @@ export default {
       },
     methods: {
       upload(event){
-        this.form.avatar = event.target.files[0];
+        this.form.image = event.target.files[0];
         },
         async addUser () {
       

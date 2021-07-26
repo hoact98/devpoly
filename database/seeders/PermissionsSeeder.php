@@ -28,7 +28,7 @@ public function run()
     Permission::create(['name' => 'edit categories']);
     Permission::create(['name' => 'delete categories']);
     Permission::create(['name' => 'publish categories']);
-    Permission::create(['name' => 'unpublish categories']);
+    Permission::create(['name' => 'login admin']);
 
     // create roles and assign existing permissions
     $role1 = Role::create(['name' => 'writer']);

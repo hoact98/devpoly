@@ -28,15 +28,16 @@ class AuthController extends Controller
         $messages = [
             'email.required' => "Hãy nhập email",
             'password.min' => "Ít nhất có 6 ký tự",
+            'password.required' => "Nhập mật khẩu",
             'email.email' => "Email không đúng định dạng",
         ];
    
         $validator =  Validator::make($request->all(),$rule,$messages);
           if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()]);
+            return response()->json(['errors'=>$validator->errors()],422);
           }
-      if(!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 1]))
-          return response()->json(['errors' => ['password'=> ['Tài khoản hoặc mật khẩu không đúng!']]]);
+      if(!Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+          return response()->json(['errors' => ['password'=> ['Tài khoản hoặc mật khẩu không đúng!']]],422);
       $user = $request->user();
       $tokenResult = $user->createToken('Personal Access Token');
       $token = $tokenResult->token;
@@ -44,7 +45,7 @@ class AuthController extends Controller
       return response()->json([
           'access_token' => $tokenResult->accessToken,
           'status' => 'success',
-      ]);
+      ],200);
   }
 
   /** 
@@ -54,34 +55,44 @@ class AuthController extends Controller
    */ 
   public function register(Request $request) 
   { 
-    $validator = Validator::make($request->all(), [ 
+    $rule= [
       'name' => 'required', 
       'email' => 'required|email', 
-      'password' => 'required', 
+      'password' => 'required|min:6', 
       'c_password' => 'required|same:password', 
-    ]);
-    if ($validator->fails()) { 
-      return response()->json(['error'=>$validator->errors()]);
-    }
+    ];
+    $messages = [
+        'name.required' => "Hãy nhập tên",
+        'email.required' => "Hãy nhập email",
+        'password.min' => "Ít nhất có 6 ký tự",
+        'password.required' => "Nhập mật khẩu",
+        'email.email' => "Email không đúng định dạng",
+        'c_password.required'=>"Xác nhận mật khẩu",
+        'c_password.same'=>"Mật khẩu xác nhận không khớp"
+    ];
+
+    $validator =  Validator::make($request->all(),$rule,$messages);
+      if ($validator->fails()) { 
+        return response()->json(['errors'=>$validator->errors()],422);
+      }
     $postArray = $request->all(); 
     $postArray['password'] = Hash::make($postArray['password']); 
     $user = User::create($postArray); 
-    $success['token'] =  $user->createToken('LaraPassport')->accessToken; 
+    $success['token'] =  $user->createToken('LaravelPassport')->accessToken; 
     $success['name'] =  $user->name;
     return response()->json([
       'status' => 'success',
       'data' => $success,
-    ]); 
+    ],200); 
   }
   public function logout (Request $request) {
     $token = $request->user()->token();
     $token->revoke();
-    $response = ['message' => 'Bạn đã đăng xuất thành công!'];
-    return response($response, 200);
+    return response()->json(['status' => 'success'],200);
   }
 
   public function user(Request $request)
   {
-    return response()->json($request->user());
+    return response()->json($request->user()->load('roles'),200);
   }
 }

@@ -14,7 +14,7 @@ class CreateSolutionUsersTable extends Migration
     public function up()
     {
         Schema::create('solution_users', function (Blueprint $table) {
-            $table->uuid('user_id');
+            $table->integer('user_id')->unsigned();
             $table->uuid('solution_id');
             $table->timestamps();
             $table->primary(['user_id', 'solution_id']);

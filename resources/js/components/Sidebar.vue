@@ -1,13 +1,14 @@
 <template>
  <nav class="page-sidebar" id="sidebar">
             <div id="sidebar-collapse">
-                <div class="admin-block d-flex">
+                <!-- <div class="admin-block d-flex">
                     <div>
-                        <img src="" width="45px" />
+                        <img :src="'/'+user.image" width="45px" />
                     </div>
                     <div class="admin-info">
-                        <div class="font-strong">James Brown</div><small>Administrator</small></div>
-                </div>
+                        <div class="font-strong">{{user.roles[0].name}}</div><small>{{user.roles[0].name}}</small>
+                        </div>
+                </div> -->
                 <ul class="side-menu metismenu">
                     <li>
                          <router-link :to="{name: 'dashboard'}" class="nav-link active">
@@ -167,6 +168,9 @@
 <script>
 
 export default {
-  name: 'sidebar'
+  name: 'sidebar',
+   props: {
+        user: {},
+    },
 }
 </script>

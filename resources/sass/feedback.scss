@@ -1,6 +1,6 @@
 .feedback-content {
     padding: 12px;
-    background-color: var(--black-bold);
+    background-color: var(--background-light);
     border-radius: var(--border-radius-main);
 }
 
@@ -9,7 +9,7 @@
     border: 1px solid var(--border-color-grey);
     border-radius: var(--border-radius-main);
     padding: 9px 40px;
-    background-color: #454f59;
+    background: linear-gradient(to right, #6d2fff, #6f42c1);
     color: var(--white);
     display: flex;
     justify-content: center;
@@ -19,15 +19,16 @@
     transform: rotate(-90deg);
 }
 
-.upvote {
-    span {
-        margin-left: 12px;
-    }
+.upvote span {
+    margin-left: 12px;
 }
 
 .MuiSvgIcon-fontSizeInherit {
     margin: 0;
 }
+
+
+/*  */
 
 .feedback {
     margin-bottom: 2rem;
@@ -47,10 +48,11 @@
 
 .feedback-user-img {
     margin-right: 12px;
-    img {
-        width: 32px;
-        height: 32px;
-    }
+}
+
+.feedback-user-img img {
+    width: 32px;
+    height: 32px;
 }
 
 .feedback-user-info {
@@ -75,16 +77,17 @@
     padding: 4px 12px;
     padding-right: 0;
     border-radius: var(--border-radius-main);
-    color: #fff;
+    color: var(--black);
     outline: none;
     display: inline-block;
     margin-top: 12px;
     margin-bottom: 4px;
-    span {
-        display: inline-block;
-        border-right: 1px solid #454f59;
-        padding-right: 12px;
-    }
+}
+
+.btn-feedback span {
+    display: inline-block;
+    border-right: 1px solid #454f59;
+    padding-right: 12px;
 }
 
 .icon-feedback {
@@ -93,7 +96,7 @@
 
 .feedback-detail,
 .reply-feedback-detail {
-    background-color: #32353a;
+    background-color: var(--white);
     padding: 12px;
     border-radius: var(--border-radius-main);
     height: 100%;
@@ -104,11 +107,9 @@
     display: inline;
 }
 
-.user-skill-wrapper {
-    span {
-        display: inline-block;
-        margin-left: 4px;
-    }
+.user-skill-wrapper span {
+    display: inline-block;
+    margin-left: 4px;
 }
 
 .feedback-time {
@@ -122,14 +123,11 @@
 .challenge-info {
     padding: 16px;
     border-radius: var(--border-radius-main);
-    background-color: var(--black-bold);
+    background-color: var(--background-light);
 }
 
 .author-info {
     height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
 }
 
 .author-avatar {
@@ -150,11 +148,15 @@
     margin: 16px 0;
 }
 
-.challenge-title {
-    p {
-        font-size: 1.4rem;
-        font-family: 'Poppins', sans-serif;
-    }
+.challenge-title p {
+    font-size: 1.4rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .author-name {
@@ -163,21 +165,18 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.social {
-    h2 {
-        font-weight: 500;
-        font-size: 2.5rem;
-        padding: 22px 0;
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-    }
+.social h2 {
+    font-weight: 500;
+    font-size: 2.5rem;
+    padding: 22px 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .reply-feedback {
     padding: 12px;
-    background-color: var(--black-bold);
+    background-color: var(--background-light);
     border-radius: var(--border-radius-main);
-    padding-bottom: 24px;
 }
 
 .reply-feedback-user-info {
@@ -190,7 +189,7 @@
 }
 
 .content-feedback {
-    border-bottom: 1px solid var(--border-color-grey);
+    border-bottom: 1px solid var(--background-light);
     padding-bottom: 3rem;
     margin-bottom: 2rem;
 }
@@ -200,21 +199,22 @@
     z-index: 1;
     display: -webkit-flex;
     display: flex;
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 2.5rem;
-        background-color: transparent;
-        border-left: 2px solid var(--border-color-grey);
-        border-bottom: 2px solid var(--border-color-grey);
-        border-radius: var(--border-radius-main);
-        width: 50%;
-        height: 10%;
-        height: -moz-calc(100% - 100px);
-        height: calc(100% - 100px);
-        z-index: -1;
-    }
+}
+
+.feedback-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 2.5rem;
+    background-color: transparent;
+    border-left: 2px solid var(--background-light);
+    border-bottom: 2px solid var(--background-light);
+    border-radius: var(--border-radius-main);
+    width: 50%;
+    height: 10%;
+    height: -moz-calc(100% - 100px);
+    height: calc(100% - 100px);
+    z-index: -1;
 }
 
 @media (max-width: 992px) {

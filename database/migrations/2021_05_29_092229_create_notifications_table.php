@@ -15,8 +15,8 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('from_user_id');
-            $table->uuid('to_user_id');
+            $table->integer('from_user_id');
+            $table->integer('to_user_id');
             $table->string('type',30)->nullable();
             $table->longText('message');
             $table->date('date');

@@ -38,7 +38,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" v-model="data.user.information.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" name="username" placeholder="Enter name">
+                                    <input type="text" v-model="data.user.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" name="username" placeholder="Enter name">
                                     <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
                                 </div>
                             </div>
@@ -52,9 +52,9 @@
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Ảnh:</label>
                                 <div class="col-sm-10">
-                                  <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('avatar') }" class="form-control" name="avatar">
-                                  <div class="text-danger" v-if="form.errors.has('avatar')" v-html="form.errors.get('avatar')" />
-                                  <img :src="'/'+data.user.avatar" alt="" width="200">
+                                  <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
+                                  <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+                                  <img :src="'/'+data.user.image" alt="" width="200">
                                 </div>
                             </div>
                              <div class="form-group row">
@@ -69,14 +69,14 @@
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Địa chỉ:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" v-model="data.user.information.address" :class="{ 'is-invalid': form.errors.has('address') }" id="exampleInputAdress" placeholder="Enter address">
+                                   <input type="text" class="form-control" v-model="data.user.address" :class="{ 'is-invalid': form.errors.has('address') }" placeholder="Enter address">
                                    <div class="text-danger" v-if="form.errors.has('address')" v-html="form.errors.get('address')" />
                                 </div>
                             </div>
                              <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Số điện thoại:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.information.phone" id="exampleInputPhone" placeholder="Enter phone">
+                                  <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.phone" placeholder="Enter phone">
                                   <div class="text-danger" v-if="form.errors.has('phone')" v-html="form.errors.get('phone')" />
                                 </div>
                             </div>
@@ -84,10 +84,10 @@
                                 <label for="" class="col-sm-2 col-form-label">Gender:</label>
                                 <div class="col-md-10">
                                   <label class="ui-radio ui-radio-primary mr-3" for="male">
-                                      <input type="radio" name="gender" :value="1" id="male" v-model="data.user.information.gender">
+                                      <input type="radio" name="gender" :value="1" id="male" v-model="data.user.gender">
                                       <span class="input-span"></span>Nam</label>
                                   <label class="ui-radio ui-radio-primary" for="female">
-                                      <input type="radio" name="gender" :value="0" id="female" v-model="data.user.information.gender">
+                                      <input type="radio" name="gender" :value="0" id="female" v-model="data.user.gender">
                                       <span class="input-span"></span>Nữ</label>
                                   <div class="text-danger" v-if="form.errors.has('gender')" v-html="form.errors.get('gender')" />
                                 </div>
@@ -167,7 +167,7 @@ export default {
       username: '',
       name: '',
       email: '',
-      avatar: '',
+      image: '',
       role_id: '',
       address: '',
       password:'',
@@ -190,7 +190,6 @@ export default {
         data () {
             return this.$store.state.user.user;
         },
-        
         permission_id (){
           var permission_id = [];
             this.data.user.has_permission.forEach(function (permission) {
@@ -204,16 +203,16 @@ export default {
     },
     methods: {
         upload(event){
-         this.form.avatar = event.target.files[0];
+         this.form.image = event.target.files[0];
         },
       async  updateUser () {
-         this.form.name = this.data.user.information.name
+         this.form.name = this.data.user.name
         this.form.username = this.data.user.username
         this.form.email = this.data.user.email
         this.form.role_id = this.data.user.role.role_id
-        this.form.address = this.data.user.information.address
-        this.form.phone = this.data.user.information.phone
-        this.form.gender = this.data.user.information.gender
+        this.form.address = this.data.user.address
+        this.form.phone = this.data.user.phone
+        this.form.gender = this.data.user.gender
         this.form.is_active = this.data.user.is_active
       await this.form.post(route('update.user',this.$route.params.id))
       .then(response => {

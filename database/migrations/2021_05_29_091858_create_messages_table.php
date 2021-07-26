@@ -15,8 +15,8 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('from_user_id');
-            $table->uuid('to_user_id');
+            $table->integer('from_user_id');
+            $table->integer('to_user_id');
             $table->string('type',30)->nullable();
             $table->string('file_format',50)->nullable();
             $table->string('file_path')->nullable();
