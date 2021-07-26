@@ -2581,7 +2581,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 // Redirect to login.
                 _this.$router.push({
-                  name: 'admin.login'
+                  name: 'login'
                 });
 
               case 3:
@@ -2678,7 +2678,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 // Redirect to login.
                 _this.$router.push({
-                  name: 'admin.login'
+                  name: 'login'
                 });
 
               case 3:
