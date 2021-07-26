@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
-      <navbar :user=data></navbar>
-      <sidebar :user=data></sidebar>
+      <navbar :user=user></navbar>
+      <sidebar :user=user></sidebar>
       <slot />
         
   </div>
@@ -14,8 +14,9 @@ import Sidebar from '../components/Sidebar.vue'
 export default {
   name: 'AdminLayout',
   computed: mapGetters({
-    data: 'auth/user'
+    user: 'auth/user'
   }),
+  
    created () {
       this.$store.dispatch('auth/fetchUser');
    },

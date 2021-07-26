@@ -2225,7 +2225,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navbar',
   props: {
@@ -2971,7 +2970,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AdminLayout',
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    data: 'auth/user'
+    user: 'auth/user'
   }),
   created: function created() {
     this.$store.dispatch('auth/fetchUser');
@@ -70212,34 +70211,52 @@ var render = function() {
         _vm._v(" "),
         _vm._m(2),
         _vm._v(" "),
-        _c("li", { staticClass: "dropdown dropdown-user" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("ul", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5),
-            _vm._v(" "),
-            _vm._m(6),
-            _vm._v(" "),
-            _c("li", { staticClass: "dropdown-divider" }),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-item",
-                attrs: { href: "javascript:;" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.logout.apply(null, arguments)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-power-off" }), _vm._v("Logout")]
-            )
-          ])
-        ])
+        _vm.user
+          ? _c("li", { staticClass: "dropdown dropdown-user" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link dropdown-toggle link",
+                  attrs: { "data-toggle": "dropdown" }
+                },
+                [
+                  _c("img", { attrs: { src: "/" + _vm.user.image } }),
+                  _vm._v(" "),
+                  _c("span"),
+                  _vm._v(_vm._s(_vm.user.name)),
+                  _c("i", { staticClass: "fa fa-angle-down m-l-5" })
+                ]
+              ),
+              _vm._v(" "),
+              _c("ul", { staticClass: "dropdown-menu dropdown-menu-right" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _c("li", { staticClass: "dropdown-divider" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "javascript:;" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.logout.apply(null, arguments)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-power-off" }),
+                    _vm._v("Logout")
+                  ]
+                )
+              ])
+            ])
+          : _vm._e()
       ])
     ])
   ])
@@ -70533,23 +70550,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      {
-        staticClass: "nav-link dropdown-toggle link",
-        attrs: { "data-toggle": "dropdown" }
-      },
-      [
-        _c("span"),
-        _vm._v("admin"),
-        _c("i", { staticClass: "fa fa-angle-down m-l-5" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
       { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
       [_c("i", { staticClass: "fa fa-user" }), _vm._v("Profile")]
     )
@@ -70599,6 +70599,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "page-sidebar", attrs: { id: "sidebar" } }, [
     _c("div", { attrs: { id: "sidebar-collapse" } }, [
+      _vm.user
+        ? _c("div", { staticClass: "admin-block d-flex" }, [
+            _c("div", [
+              _c("img", { attrs: { src: "/" + _vm.user.image, width: "45px" } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "admin-info" }, [
+              _c("div", { staticClass: "font-strong" }, [
+                _vm._v(_vm._s(_vm.user.name))
+              ]),
+              _c("small", [_vm._v(_vm._s(_vm.user.roles[0].name))])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("ul", { staticClass: "side-menu metismenu" }, [
         _c(
           "li",
@@ -71838,9 +71853,9 @@ var render = function() {
     "div",
     { staticClass: "page-wrapper" },
     [
-      _c("navbar", { attrs: { user: _vm.data } }),
+      _c("navbar", { attrs: { user: _vm.user } }),
       _vm._v(" "),
-      _c("sidebar", { attrs: { user: _vm.data } }),
+      _c("sidebar", { attrs: { user: _vm.user } }),
       _vm._v(" "),
       _vm._t("default")
     ],

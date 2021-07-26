@@ -26,7 +26,7 @@
                               <a class="nav-link" href="#tab-9-3" data-toggle="tab"><i class="ti-write"></i> Mật khẩu</a>
                           </li>
                       </ul>
-                      <div class="tab-content col-9">
+                      <div class="tab-content col-9"  v-if="data.user">
                           <div class="tab-pane fade show active" id="tab-9-1">
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label">Username:</label>
@@ -205,16 +205,16 @@ export default {
         upload(event){
          this.form.image = event.target.files[0];
         },
-      async  updateUser () {
-         this.form.name = this.data.user.name
-        this.form.username = this.data.user.username
-        this.form.email = this.data.user.email
-        this.form.role_id = this.data.user.role.role_id
-        this.form.address = this.data.user.address
-        this.form.phone = this.data.user.phone
-        this.form.gender = this.data.user.gender
-        this.form.is_active = this.data.user.is_active
-      await this.form.post(route('update.user',this.$route.params.id))
+        async updateUser () {
+          this.form.name = this.data.user.name
+          this.form.username = this.data.user.username
+          this.form.email = this.data.user.email
+          this.form.role_id = this.data.user.role.role_id
+          this.form.address = this.data.user.address
+          this.form.phone = this.data.user.phone
+          this.form.gender = this.data.user.gender
+          this.form.is_active = this.data.user.is_active
+       await this.form.post(route('update.user',this.$route.params.id))
       .then(response => {
         if(response.data.status == 'success'){
            this.$router.push({ name: 'users' })

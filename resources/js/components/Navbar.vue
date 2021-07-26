@@ -133,11 +133,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-user">
+                    <li class="dropdown dropdown-user" v-if="user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <!-- <img :src="'/'+user.image" />
-                            <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a> -->
-                            <span></span>admin<i class="fa fa-angle-down m-l-5"></i></a>
+                            <img :src="'/'+user.image" />
+                            <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
+use App\Models\ModelHasRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -81,6 +82,12 @@ class AuthController extends Controller
     $postArray = $request->all(); 
     $postArray['password'] = Hash::make($postArray['password']); 
     $user = User::create($postArray); 
+    $userRole = new ModelHasRole([
+      'role_id'=> 1,
+      'model_type'=> User::class,
+      'model_id' => $user->id,
+  ]);
+  $userRole->save();
     $success['token'] =  $user->createToken('LaravelPassport')->accessToken; 
     $success['name'] =  $user->name;
     return response()->json([
