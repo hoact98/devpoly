@@ -142,6 +142,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -168,6 +185,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.$store.dispatch("challenge/fetchOne", this.$route.params.id);
   },
   methods: {
+    uploadImage: function uploadImage(event) {
+      var file = this.form.image = event.target.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function () {
+          $('#previewImg').attr("src", reader.result);
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    uploadResources: function uploadResources(event) {
+      this.form.resources = event.target.files[0];
+    },
     updateChallenge: function updateChallenge() {
       var _this = this;
 
@@ -787,6 +820,83 @@ var render = function() {
                           staticClass: "text-danger",
                           domProps: {
                             innerHTML: _vm._s(_vm.form.errors.get("link_figma"))
+                          }
+                        })
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                    _vm._v("Hình ảnh: ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has("image")
+                      },
+                      attrs: {
+                        type: "file",
+                        placeholder: "Ảnh",
+                        name: "image"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.uploadImage($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.errors.has("image")
+                      ? _c("div", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            innerHTML: _vm._s(_vm.form.errors.get("image"))
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        id: "previewImg",
+                        src: "/" + _vm.data.image,
+                        alt: "",
+                        width: "200"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                    _vm._v("Tài nguyên: ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has("resources")
+                      },
+                      attrs: {
+                        type: "file",
+                        placeholder: "Tài nguyên",
+                        name: "resources"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.uploadResources($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.errors.has("resources")
+                      ? _c("div", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            innerHTML: _vm._s(_vm.form.errors.get("resources"))
                           }
                         })
                       : _vm._e()

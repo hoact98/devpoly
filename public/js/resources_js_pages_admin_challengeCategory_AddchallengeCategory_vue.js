@@ -104,6 +104,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -121,7 +122,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     upload: function upload(event) {
-      this.form.image = event.target.files[0];
+      var file = this.form.image = event.target.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function () {
+          $('#previewImg').attr("src", reader.result);
+        };
+
+        reader.readAsDataURL(file);
+      }
     },
     addChallengeCategory: function addChallengeCategory() {
       var _this = this;
@@ -675,7 +686,11 @@ var render = function() {
                             innerHTML: _vm._s(_vm.form.errors.get("image"))
                           }
                         })
-                      : _vm._e()
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: { id: "previewImg", alt: "", width: "200" }
+                    })
                   ])
                 ]),
                 _vm._v(" "),

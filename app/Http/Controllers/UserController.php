@@ -9,6 +9,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
@@ -64,10 +65,9 @@ class UserController extends Controller
             $is_active=0;
         }
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $images = time().'-'.$image->getClientOriginalName();
-            $image->move(public_path('files'),$images);
-            $imageName = 'files/'.$images;
+           $image = time().'-'.$request->image->getClientOriginalName();
+           $request->image->move(public_path('files'),$image);
+           $imageName = 'files/'.$image;
         }
         $user = new User([
             'username' => $request->username,
@@ -122,10 +122,22 @@ class UserController extends Controller
         $user = User::find($id);
         $imageName = $user->image;
         if ($request->hasFile('image')) {
+            $rule= [
+                'image' => 'image',
+              ];
+              $messages = [
+                  'image.image' => "Phải là một hình ảnh.",
+              ];
+         
+            $validator =  Validator::make($request->all(),$rule,$messages);
+            if ($validator->fails()) { 
+                return response()->json(['errors'=>$validator->errors()],422);
+            }
             $image = $request->file('image');
             $images = time().'-'.$image->getClientOriginalName();
             $image->move(public_path('files'),$images);
             $imageName = 'files/'.$images;
+            File::delete($user->image);
         }
          $user->username = $request->username;
          $user->email = $request->email;
@@ -164,6 +176,7 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
+        File::delete($user->image);
         $user->delete();
 
         return response()->json([

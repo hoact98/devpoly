@@ -8,7 +8,7 @@
       <div class="page-content fade-in-up">
         <div class="ibox">
               <div class="ibox-head">
-                  <div class="ibox-title">Data Table</div>
+                  <div class="ibox-title">{{title}}</div>
               </div>
               <div class="ibox-body">
                   <data-table  :data="data"
@@ -118,7 +118,7 @@ export default {
         }
       });
     },
-  },
+  }
 };
 </script>
 

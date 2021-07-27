@@ -7,6 +7,8 @@ use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Challenge;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class ChallengeCategoryController extends Controller
 {
@@ -39,9 +41,18 @@ class ChallengeCategoryController extends Controller
     // add category
     public function create(SaveCategoryRequest $request)
     {
-        $this->validate($request, [
-            'image' => ['required','image'],
-        ]);
+        $rule= [
+            'image' => 'required|image',
+          ];
+          $messages = [
+              'image.required' => "Hãy chọn file ảnh.",
+              'image.image' => "Phải là một hình ảnh.",
+          ];
+     
+          $validator =  Validator::make($request->all(),$rule,$messages);
+            if ($validator->fails()) { 
+              return response()->json(['errors'=>$validator->errors()],422);
+            }
         $slug = Str::slug($request->name,'-');
         $c = ChallengeCategory::where('slug','=', $slug)->first();
         if($c){
@@ -76,9 +87,21 @@ class ChallengeCategoryController extends Controller
         $cate = ChallengeCategory::find($id);
         $imageName = $cate->image;
         if($request->hasFile('image')){
+            $rule= [
+                'image' => 'image',
+              ];
+              $messages = [
+                  'image.image' => "Phải là một hình ảnh.",
+              ];
+         
+            $validator =  Validator::make($request->all(),$rule,$messages);
+            if ($validator->fails()) { 
+                return response()->json(['errors'=>$validator->errors()],422);
+            }
            $image = time().'-'.$request->image->getClientOriginalName();
            $request->image->move(public_path('files'),$image);
            $imageName = 'files/'.$image;
+            File::delete($cate->image);
         }
         $slug = Str::slug($request->name,'-');
         $c = ChallengeCategory::where('slug','=', $slug)
@@ -100,6 +123,11 @@ class ChallengeCategoryController extends Controller
     public function delete($id)
     {
         $cate = ChallengeCategory::find($id);
+        File::delete($cate->image);
+        $chall = Challenge::where('cate_challen_id',$cate->id)->get();
+        foreach ($chall as $c ) {
+            File::delete($c->image,$c->resources);
+        }
         $cate->delete();
         return response()->json(['status'=>'success','message'=>'The category successfully deleted','data'=>$cate],200);
     }

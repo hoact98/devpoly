@@ -65,24 +65,24 @@ export default {
         this.form.name = this.permission.name
         this.form.guard_name = this.permission.guard_name
       await this.form.post(route('update.permission',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-            this.$router.push({ name: 'permissions' })
-            Swal.fire(
-                'Update',
-                'Permission update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-     
-    },
+        .then(response => {
+            if(response.data.status == 'success'){
+                this.$router.push({ name: 'permissions' })
+                Swal.fire(
+                    'Update',
+                    'Permission update  Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+        Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                })
+        });
+        
+        },
     }
 }
 </script>

@@ -8,7 +8,7 @@
       <div class="page-content fade-in-up">
         <div class="ibox">
               <div class="ibox-head">
-                  <div class="ibox-title">Data Table</div>
+                  <div class="ibox-title">{{title}}</div>
               </div>
               <div class="ibox-body">
                   <data-table  :data="data"
@@ -58,15 +58,15 @@ export default {
           }
       ]
     };
-  },
-   components:{
-      Footer,
-      TableButton
-  },
-    created() {
-    this.getData();
-  },
-  methods: {
+    },
+    components:{
+        Footer,
+        TableButton
+    },
+        created() {
+        this.getData();
+    },
+    methods: {
     getData(url = route("roles"), options = this.tableProps) {
           axios.get(url, {
               params: options
@@ -105,7 +105,7 @@ export default {
 
         })
       }
-  }
+    }
 }
 </script>
 

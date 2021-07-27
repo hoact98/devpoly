@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 26, 2021 at 04:14 PM
+-- Generation Time: Jul 27, 2021 at 11:04 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.19
 
@@ -47,7 +47,7 @@ CREATE TABLE `challenges` (
 --
 
 INSERT INTO `challenges` (`id`, `title`, `slug`, `description`, `language`, `link_figma`, `image`, `resources`, `level`, `cate_challen_id`, `created_at`, `updated_at`) VALUES
-(1, 'dddđ', 'dddđ', 'dddđ', 'dddđ', 'dddđ', 'dddđ', 'dddđ', 1, 1, NULL, NULL);
+(1, 'Trình tải lên hình ảnh', '', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo ứng dụng Tr&igrave;nh tải l&ecirc;n h&igrave;nh ảnh.&nbsp;Sử dụng bất kỳ thư viện front-end n&agrave;o m&agrave; bạn chọn.&nbsp;Tạo API của bạn.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng dưới đ&acirc;y:</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể k&eacute;o v&agrave; thả một h&igrave;nh ảnh để tải n&oacute; l&ecirc;n</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể chọn để chọn một h&igrave;nh ảnh từ thư mục của m&igrave;nh</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thấy tr&igrave;nh tải khi tải l&ecirc;n</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;Khi h&igrave;nh ảnh được tải l&ecirc;n, t&ocirc;i c&oacute; thể xem h&igrave;nh ảnh v&agrave; sao ch&eacute;p n&oacute;</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể chọn sao ch&eacute;p v&agrave;o khay nhớ tạm</li>\n</ul>', 'HTML/CSS JS', 'https://www.figma.com/file/NxbZm3CAovYh89dFXe7EOw/Image-Uploader', 'files/1627380961-404_image.png', 'files/1627380961-image-uploader-master.zip', 1, 1, NULL, '2021-07-27 03:16:01');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE `challenge_categories` (
 --
 
 INSERT INTO `challenge_categories` (`id`, `name`, `slug`, `image`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'dddđ', 'dddđ', 'dddđ', 'dddđ', NULL, NULL);
+(1, 'Lập trình viên full stack', 'lap-trinh-vien-full-stack', 'files/1627381104-solutions.png', '<p>Trở th&agrave;nh nh&agrave; ph&aacute;t triển Full-stack bằng c&aacute;ch x&acirc;y dựng 8 ứng dụng web full-stack n&acirc;ng cao</p>', NULL, '2021-07-27 03:18:24');
 
 -- --------------------------------------------------------
 
@@ -174,23 +174,6 @@ CREATE TABLE `feedbacks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `information_users`
---
-
-CREATE TABLE `information_users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` int(11) NOT NULL DEFAULT '0',
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `messages`
 --
 
@@ -267,11 +250,11 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) 
 (1, 'App\\Models\\User', 1),
 (2, 'App\\Models\\User', 1),
 (3, 'App\\Models\\User', 1),
-(4, 'App\\Models\\User', 1),
 (5, 'App\\Models\\User', 1),
 (6, 'App\\Models\\User', 1),
 (7, 'App\\Models\\User', 1),
-(8, 'App\\Models\\User', 1);
+(8, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 4);
 
 -- --------------------------------------------------------
 
@@ -291,7 +274,7 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 1),
-(1, 'App\\Models\\User', 2);
+(2, 'App\\Models\\User', 4);
 
 -- --------------------------------------------------------
 
@@ -345,9 +328,12 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('37c67b282231be735df35164c8ff5cc0d565b3946f3c33fe081415f908094548a6d363607302a845', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-20 06:43:54', '2021-07-20 06:43:54', '2022-07-20 13:43:54'),
 ('3e46d3ac93ae4ea0ebe99bfcaa4b8300e3e4e823d1a7df5784827c16dbbc77738a88007d6a053cfe', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 18:21:30', '2021-07-18 18:21:30', '2022-07-19 01:21:30'),
 ('3ec6f318360e087955d30c49ca63a9ec015d5ee143f355c43d207196ecb2d11af7f9aaaef0804fea', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 04:00:07', '2021-07-18 04:00:07', '2022-07-18 11:00:07'),
+('3f8a878a3a935df9e3bbb5a6edee15c598722dbf3b7f73bfa69750158c288d18825570dda7e98218', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-26 09:21:59', '2021-07-26 09:21:59', '2022-07-26 16:21:59'),
 ('4154e8e3c924090cd55c650b9b32bcefee0c35385d0dfc50e46a0c38b2c5fb952af074bdd0eb1ede', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 10:03:35', '2021-07-18 10:03:35', '2022-07-18 17:03:35'),
 ('444ca553e27c921cf5a1713b85516b7da58746bb9eb6fee269d7e083d2025d18b0e49bd51b418473', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 21:04:19', '2021-07-18 21:04:19', '2022-07-19 04:04:19'),
-('4a8570a6deb47706a26eb62129643db85f56e940c7b873acb379cf1fe3a2796bc4d79dc9a732e224', 2, 1, 'Personal Access Token', '[]', 0, '2021-07-26 09:10:13', '2021-07-26 09:10:13', '2022-07-26 16:10:13'),
+('4a8570a6deb47706a26eb62129643db85f56e940c7b873acb379cf1fe3a2796bc4d79dc9a732e224', 2, 1, 'Personal Access Token', '[]', 1, '2021-07-26 09:10:13', '2021-07-26 09:10:13', '2022-07-26 16:10:13'),
+('4fa3cbb1e0804172afff4b7f22e9c6860e6f644844f0cf1ae52e243bb9dfd496ef8529631a3095cc', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-26 10:09:23', '2021-07-26 10:09:23', '2022-07-26 17:09:23'),
+('511795d0b9e72f2e6342483323028681f21498dd13c183d7ee385c44f9b8deca5546bfa9dfeeae63', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-27 02:28:03', '2021-07-27 02:28:03', '2022-07-27 09:28:03'),
 ('52c1909e43fb8f794d9fa434c09d6d644829ceb8a38dedace01a661b7a905c50ccc3d298b918e415', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 11:35:02', '2021-07-18 11:35:02', '2022-07-18 18:35:02'),
 ('57afadfe5524522242989010f9f84d20eec7d90876be7a33ca92221bd7e9689d705d8fac68edd26f', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 11:42:04', '2021-07-18 11:42:04', '2022-07-18 18:42:04'),
 ('5d0b8282b06b4af301359f1cbb4ed00b8a04327809ef9ac5db0db2aa19b40ed064e1cb12a6da68a9', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-25 03:43:00', '2021-07-25 03:43:00', '2022-07-25 10:43:00'),
@@ -361,6 +347,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('8076c0c575befbca9379785a7b6127bf10fe59486474ff33441ccb554b7bc1018d443f546b60d5ac', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-26 01:17:35', '2021-07-26 01:17:35', '2022-07-26 08:17:35'),
 ('83879bdc4648553b0b14c3692194f9d6c1ba256cbe23d56c9a7d50956ab765cf79dad0f1eabe9ef4', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-19 05:53:28', '2021-07-19 05:53:28', '2022-07-19 12:53:28'),
 ('86b3940f62a23b824e5487510599205e669bc0dd4c0a9b5166b2cac399afbe2f96e90c0fa3c5c289', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-26 08:18:19', '2021-07-26 08:18:19', '2022-07-26 15:18:19'),
+('89e182f27581ca947b2c34ecf644948f251cf4467a48f3e0f9e231d4f41bb419ec87b941e32cf300', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-27 01:17:07', '2021-07-27 01:17:07', '2022-07-27 08:17:07'),
 ('8cfbb2fc509ed4167df01f17aadf387fe6b2f69ebfc9d9bdc2ecab1c0ac9c52fd5b9f6d273f56f78', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 18:48:22', '2021-07-18 18:48:22', '2022-07-19 01:48:22'),
 ('a0cfafc88e104b2f4b7bcbbf8b49cfc12baef36772d4b74dff6c47d7ba3482381fae42a98d3df5ec', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 02:53:26', '2021-07-18 02:53:26', '2022-07-18 09:53:26'),
 ('a0d1b5c09e7c776e05e421c1b413f4a274cd14bf1088e9b5ac4b441afcedc8173f1d3dc3f88215aa', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-20 09:58:29', '2021-07-20 09:58:29', '2022-07-20 16:58:29'),
@@ -496,7 +483,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (1, 'edit challenges', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
 (2, 'delete challenges', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
 (3, 'publish challenges', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
-(4, 'unpublish challenges', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
 (5, 'edit categories', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
 (6, 'delete categories', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
 (7, 'publish categories', 'web', '2021-07-18 01:31:53', '2021-07-18 01:31:53'),
@@ -542,8 +528,7 @@ CREATE TABLE `role_has_permissions` (
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (3, 1),
-(3, 2),
-(4, 2);
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -608,8 +593,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `gender`, `address`, `phone`, `image`, `online`, `socket_id`, `is_active`, `verify_token`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin123@gmail.com', 1, 'Hà Nội', '0387897456', 'files/1626599096-13.jpg', 0, NULL, 1, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-07-18 02:00:25', '2021-07-18 02:04:56'),
-(2, NULL, 'hoact', 'hoact@gmail.com', 0, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, '$2y$10$NJ/IXAdCbWmnhOTwFkL4QuKljY5dW36KtOWITK/vW7K4Pip4tEtMi', NULL, '2021-07-26 08:05:00', '2021-07-26 08:05:00');
+(1, 'admin', 'admin', 'admin123@gmail.com', 1, 'Hà Nội', '0387897456', 'files/1627378141-5.jpg', 0, NULL, 1, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-07-18 02:00:25', '2021-07-27 02:29:01'),
+(4, 'hoad', 'hoad', 'hoad@gmail', 0, 'qqqqqqq', '22222222222222', 'files/1627381978-request_image.png', 0, NULL, 0, NULL, NULL, '$2y$10$4g3mxwXHcKMm8kJfGgt0/.N7d42zqa4M7QY4.IqZ6Y4pQIuJfmTIu', NULL, '2021-07-27 03:30:10', '2021-07-27 03:32:58');
 
 --
 -- Indexes for dumped tables
@@ -668,12 +653,6 @@ ALTER TABLE `feedbacks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `feedbacks_solution_id_foreign` (`solution_id`),
   ADD KEY `feedbacks_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `information_users`
---
-ALTER TABLE `information_users`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `messages`
@@ -835,12 +814,6 @@ ALTER TABLE `feedbacks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `information_users`
---
-ALTER TABLE `information_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
@@ -874,7 +847,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -886,7 +859,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

@@ -132,7 +132,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     upload: function upload(event) {
-      this.form.image = event.target.files[0];
+      var file = this.form.image = event.target.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function () {
+          $('#previewImg').attr("src", reader.result);
+        };
+
+        reader.readAsDataURL(file);
+      }
     },
     updateChallengeCategory: function updateChallengeCategory() {
       var _this = this;
@@ -687,6 +697,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("img", {
                       attrs: {
+                        id: "previewImg",
                         src: "/" + _vm.data.image,
                         alt: "",
                         width: "200"

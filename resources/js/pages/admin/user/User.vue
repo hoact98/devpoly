@@ -8,7 +8,7 @@
       <div class="page-content fade-in-up">
         <div class="ibox">
               <div class="ibox-head">
-                  <div class="ibox-title">Data Table</div>
+                  <div class="ibox-title">{{title}}</div>
               </div>
               <div class="ibox-body">
                   <data-table  :data="data"
@@ -92,7 +92,7 @@ export default {
     created() {
         this.getData();
     },
-      methods: {
+    methods: {
         getData(url = route("users"), options = this.tableProps) {
             axios.get(url, {
                 params: options
@@ -127,12 +127,11 @@ export default {
                 //Send Request to server
                 this.$store.dispatch('user/deleteUser', id)
                 this.getData();
-
                 }
 
             })
           }
-      }
+    }
 }
 
 </script>

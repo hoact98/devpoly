@@ -43,6 +43,23 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Hình ảnh: </label>
+                            <div class="col-sm-10">
+                               <input type="file" @change="uploadImage($event)" class="form-control" placeholder="Ảnh" name="image" :class="{
+                                  'is-invalid': form.errors.has('image'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+                              <img id="previewImg" alt="" width="200" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tài nguyên: </label>
+                            <div class="col-sm-10">
+                               <input type="file" @change="uploadResources($event)" class="form-control" placeholder="Tài nguyên" name="resources"  :class="{
+                                  'is-invalid': form.errors.has('resources'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('resources')" v-html="form.errors.get('resources')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Cấp độ: </label>
                             <div class="col-sm-10">
                                <select class="form-control select2" aria-label="Default select example" name="level"
@@ -96,6 +113,8 @@ export default {
       description: "",
       language: "",
       link_figma: "",
+      resources: "",
+      image:"",
       level: "",
       cate_challen_id: "",
     }),
@@ -113,6 +132,19 @@ export default {
     this.$store.dispatch("challengecategory/fetch");
   },
   methods: {
+     uploadImage(event){
+       var file = this.form.image = event.target.files[0];
+        if(file){
+            var reader = new FileReader();
+            reader.onload = function(){
+                $('#previewImg').attr("src",reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+        },
+     uploadResources(event){
+        this.form.resources = event.target.files[0];
+        },
     async addChallenge() {
         await this.form
           .post(route("create.challenge"))

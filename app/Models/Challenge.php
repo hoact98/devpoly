@@ -15,6 +15,8 @@ class Challenge extends Model
         'description',
         'language',
         'link_figma',
+        'image',
+        'resources',
         'level',
         'cate_challen_id'
     ];

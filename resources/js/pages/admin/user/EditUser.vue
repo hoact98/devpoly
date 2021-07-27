@@ -54,7 +54,7 @@
                                 <div class="col-sm-10">
                                   <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
                                   <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
-                                  <img :src="'/'+data.user.image" alt="" width="200">
+                                  <img id="previewImg" :src="'/'+data.user.image" alt="" width="200">
                                 </div>
                             </div>
                              <div class="form-group row">
@@ -187,23 +187,30 @@ export default {
     Footer
   },
    computed: {
-        data () {
-            return this.$store.state.user.user;
-        },
-        permission_id (){
-          var permission_id = [];
-            this.data.user.has_permission.forEach(function (permission) {
-                permission_id.push(permission.permission_id);
-            });
-            this.form.permission_id=permission_id;
-        }
+      data () {
+          return this.$store.state.user.user;
+      },
+      permission_id (){
+        var permission_id = [];
+          this.data.user.has_permission.forEach(function (permission) {
+              permission_id.push(permission.permission_id);
+          });
+          this.form.permission_id=permission_id;
+      }
    },
    created()  {
        this.$store.dispatch('user/fetchOne',this.$route.params.id);
     },
     methods: {
         upload(event){
-         this.form.image = event.target.files[0];
+          var file = this.form.image = event.target.files[0];
+            if(file){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    $('#previewImg').attr("src",reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
         },
         async updateUser () {
           this.form.name = this.data.user.name

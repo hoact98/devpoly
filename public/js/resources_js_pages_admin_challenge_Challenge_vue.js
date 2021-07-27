@@ -736,7 +736,11 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "page-content fade-in-up" }, [
         _c("div", { staticClass: "ibox" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "ibox-head" }, [
+            _c("div", { staticClass: "ibox-title" }, [
+              _vm._v(_vm._s(_vm.title))
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -758,16 +762,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ibox-head" }, [
-      _c("div", { staticClass: "ibox-title" }, [_vm._v("Data Table")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -8,7 +8,7 @@
       <div class="page-content fade-in-up">
         <div class="ibox">
               <div class="ibox-head">
-                  <div class="ibox-title">Data Table</div>
+                  <div class="ibox-title">{{title}}</div>
               </div>
               <div class="ibox-body">
                   <data-table  :data="data"
@@ -67,9 +67,9 @@ export default {
     created() {
         this.getData();
     },
-      methods: {
-        getData(url = route("permissions"), options = this.tableProps) {
-            axios.get(url, {
+    methods: {
+      async  getData(url = route("permissions"), options = this.tableProps) {
+           await axios.get(url, {
                 params: options
             })
             .then(response => {
@@ -87,7 +87,7 @@ export default {
         reloadTable(tableProps) {
             this.getData(route("permissions"), tableProps);
         },
-          deletePermission: function (id) {
+         deletePermission: function (id) {
              Swal.fire({
               title: 'Are you sure?',
               text: "You won't be able to revert this!",
@@ -102,12 +102,12 @@ export default {
                 //Send Request to server
                 this.$store.dispatch('permission/deletePermission', id);
                 this.getData();
-
-                }
+              }
             })
 
           }
-      }
+    },
+    
 }
 </script>
 

@@ -58,6 +58,7 @@
                                 <div class="col-sm-10">
                                    <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
                                    <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+                                    <img id="previewImg" alt="" width="200" />
                                 </div>
                             </div>
                              <div class="form-group row">
@@ -188,8 +189,15 @@ export default {
            this.$store.dispatch('permission/fetch');
       },
     methods: {
-      upload(event){
-        this.form.image = event.target.files[0];
+        upload(event){
+         var file = this.form.image = event.target.files[0];
+            if(file){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    $('#previewImg').attr("src",reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
         },
         async addUser () {
       
