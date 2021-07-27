@@ -40,6 +40,7 @@ Route::post('change-password/{id}',[UserController::class, 'changePass'])->name(
 Route::get('users', [UserController::class, 'index'])->name('users');
 Route::group(['prefix' => 'user'], function () {
     Route::post('add', [UserController::class, 'create'])->name('create.user');
+    Route::get('all', [UserController::class, 'users'])->name('all.user');
     Route::get('{id}', [UserController::class, 'show'])->name('show.user');
     Route::post('update/{id}', [UserController::class, 'update'])->name('update.user');
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'user'], function () {
 Route::get('roles', [RoleController::class, 'index'])->name('roles');
 Route::group(['prefix' => 'role'], function () {
     Route::post('add', [RoleController::class, 'create'])->name('create.role');
+    Route::get('all', [RoleController::class, 'roles'])->name('all.role');
     Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
     Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
     Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
@@ -56,6 +58,7 @@ Route::group(['prefix' => 'role'], function () {
 Route::get('permissions', [PermissionController::class, 'index'])->name('permissions');
 Route::group(['prefix' => 'permission'], function () {
     Route::post('add', [PermissionController::class, 'create'])->name('create.permission');
+    Route::get('all', [PermissionController::class, 'permissions'])->name('all.permission');
     Route::get('{id}', [PermissionController::class, 'show'])->name('show.permission');
     Route::post('update/{id}', [PermissionController::class, 'update'])->name('update.permission');
     Route::delete('delete/{id}', [PermissionController::class, 'delete'])->name('delete.permission');
@@ -66,6 +69,7 @@ Route::get('get_All_Challenge_Category', [ChallengeCategoryController::class, 'g
 Route::get('get_One_Challenge_Category/{slug}', [ChallengeCategoryController::class, 'get_One_Challenge_Category'])->name('get_One.challengecategory');
 Route::group(['prefix' => 'challengecategory'], function () {
     Route::post('add', [ChallengeCategoryController::class, 'create'])->name('create.challengecategory');
+    Route::get('all', [ChallengeCategoryController::class, 'categories'])->name('all.challengecategory');
     Route::get('{id}', [ChallengeCategoryController::class, 'show'])->name('show.challengecategory');
     Route::post('update/{id}', [ChallengeCategoryController::class, 'update'])->name('update.challengecategory');
     Route::delete('delete/{id}', [ChallengeCategoryController::class, 'delete'])->name('delete.challengecategory');
@@ -76,6 +80,7 @@ Route::get('challenges', [ChallengeController::class, 'index'])->name('challenge
 Route::get('get_One_Challenge/{slug}', [ChallengeController::class, 'get_One_Challenge'])->name('get_One.challenge');
 Route::group(['prefix' => 'challenge'], function () {
     Route::post('add', [ChallengeController::class, 'create'])->name('create.challenge');
+    Route::get('all', [ChallengeController::class, 'challenges'])->name('all.challenge');
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
@@ -94,7 +99,7 @@ Route::group(['prefix' => 'solution'], function () {
 });
 
 
-Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
+Route::get('feedbacks', [FeedbackController::class, 'feedbacks'])->name('feedbacks');
 
 Route::prefix('chat')->middleware('auth:api')->group(function() {
     Route::get('rooms', [ChatController::class, 'rooms'])->name('rooms');

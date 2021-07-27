@@ -10,14 +10,14 @@ use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class PermissionController extends Controller
 {
     // all permissions
-    // public function index()
-    // {
-    //    return response()->json([
-    //        'status'=>'success',
-    //        'messege' => 'Succsess get list permissions',
-    //        'data' => Permission::all(),
-    //    ], 200);
-    // }
+    public function permissions()
+    {
+       return response()->json([
+           'status'=>'success',
+           'messege' => 'Succsess get list permissions',
+           'data' => Permission::all(),
+       ], 200);
+    }
 
     public function index(Request $request)
     {   

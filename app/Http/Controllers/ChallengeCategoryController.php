@@ -12,14 +12,14 @@ class ChallengeCategoryController extends Controller
 {
 
     // all categories
-    // public function index()
-    // {
-    //     return response()->json([
-    //         'status'=>'success',
-    //         'messege' => 'Succsess get list categories',
-    //         'data' => ChallengeCategory::all(),
-    //     ], 200);
-    // }
+    public function categories()
+    {
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list categories',
+            'data' => ChallengeCategory::all(),
+        ], 200);
+    }
 
     public function index(Request $request)
     {

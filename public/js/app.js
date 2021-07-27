@@ -2430,15 +2430,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'sidebar',
   props: {
@@ -4149,7 +4140,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   challenges: [],
-  challenge: {}
+  challenge: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4158,6 +4150,9 @@ var getters = {
   },
   challenges: function challenges(state) {
     return state.challenges;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutations
 
@@ -4170,6 +4165,9 @@ var mutations = {
   },
   GET_ONE_DATA_CHALLENGE: function GET_ONE_DATA_CHALLENGE(state, challenge) {
     state.challenge = challenge;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   }
 }; // actions
 
@@ -4192,10 +4190,16 @@ var actions = {
       return commit("GET_ONE_DATA_CHALLENGE", response.data.data);
     });
   },
-  deletechallenge: function deletechallenge(_ref4, id) {
+  all: function all(_ref4) {
+    var commit = _ref4.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.challenge")).then(function (response) {
+      return commit("ALL", response.data.data);
+    });
+  },
+  deletechallenge: function deletechallenge(_ref5, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref4);
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
       _this.dispatch("challenge/fetch");
@@ -4211,13 +4215,13 @@ var actions = {
       });
     });
   },
-  editchallenge: function editchallenge(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  editchallenge: function editchallenge(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challenge", data.get('id')), data).then();
   },
-  addchallenge: function addchallenge(_ref6, data) {
-    _objectDestructuringEmpty(_ref6);
+  addchallenge: function addchallenge(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challenge"), data).then();
   }
@@ -4247,7 +4251,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   challengecategories: [],
-  challengecategory: {}
+  challengecategory: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4256,6 +4261,9 @@ var getters = {
   },
   challengecategories: function challengecategories(state) {
     return state.challengecategories;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutations
 
@@ -4271,6 +4279,9 @@ var mutations = {
   },
   GET_ONE_DATA_TO_OVERVIEW: function GET_ONE_DATA_TO_OVERVIEW(state, challengecategory) {
     state.challengecategory = challengecategory;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   }
 }; // actions
 
@@ -4281,28 +4292,34 @@ var actions = {
       return commit("FETCH", response.data.data);
     });
   },
-  get_All_Data: function get_All_Data(_ref2) {
+  all: function all(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.challengecategory")).then(function (response) {
+      return commit("ALL", response.data.data);
+    });
+  },
+  get_All_Data: function get_All_Data(_ref3) {
+    var commit = _ref3.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_All.challengecategory")).then(function (response) {
       return commit("GET_DATA_TO_HOME", response.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref3, id) {
-    var commit = _ref3.commit;
+  fetchOne: function fetchOne(_ref4, id) {
+    var commit = _ref4.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.challengecategory", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  get_One_Data: function get_One_Data(_ref4, slug) {
-    var commit = _ref4.commit;
+  get_One_Data: function get_One_Data(_ref5, slug) {
+    var commit = _ref5.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
       return commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data);
     });
   },
-  deletechallengecategory: function deletechallengecategory(_ref5, id) {
+  deletechallengecategory: function deletechallengecategory(_ref6, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref5);
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
       _this.dispatch("challengecategory/fetch");
@@ -4318,13 +4335,13 @@ var actions = {
       });
     });
   },
-  editchallengecategory: function editchallengecategory(_ref6, data) {
-    _objectDestructuringEmpty(_ref6);
+  editchallengecategory: function editchallengecategory(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challengecategory", data.get('id')), data).then();
   },
-  addChallengeCategory: function addChallengeCategory(_ref7, data) {
-    _objectDestructuringEmpty(_ref7);
+  addChallengeCategory: function addChallengeCategory(_ref8, data) {
+    _objectDestructuringEmpty(_ref8);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challengecategory"), data).then();
   }
@@ -4447,7 +4464,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   permissions: [],
-  permission: {}
+  permission: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4456,12 +4474,18 @@ var getters = {
   },
   permissions: function permissions(state) {
     return state.permissions;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutations
 
 var mutations = {
   FETCH: function FETCH(state, permissions) {
     state.permissions = permissions;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE: function FETCH_ONE(state, permission) {
     state.permission = permission;
@@ -4475,16 +4499,22 @@ var actions = {
       return commit("FETCH", response.data.data);
     })["catch"]();
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  all: function all(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.permission")).then(function (response) {
+      return commit("ALL", response.data.data);
+    })["catch"]();
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.permission", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     })["catch"]();
   },
-  deletePermission: function deletePermission(_ref3, id) {
+  deletePermission: function deletePermission(_ref4, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.permission", id)).then(function (response) {
       _this.dispatch("permission/fetch");
@@ -4500,13 +4530,13 @@ var actions = {
       });
     });
   },
-  editPermission: function editPermission(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editPermission: function editPermission(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.permission", data.get('id')), data).then();
   },
-  addPermission: function addPermission(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addPermission: function addPermission(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.permission"), data).then();
   }
@@ -4536,7 +4566,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   roles: [],
-  role: {}
+  role: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4545,12 +4576,18 @@ var getters = {
   },
   roles: function roles(state) {
     return state.roles;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutations
 
 var mutations = {
   FETCH: function FETCH(state, roles) {
     state.roles = roles;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE: function FETCH_ONE(state, role) {
     state.role = role;
@@ -4564,16 +4601,22 @@ var actions = {
       return commit("FETCH", response.data.data);
     })["catch"]();
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  all: function all(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.role")).then(function (response) {
+      return commit("ALL", response.data.data);
+    })["catch"]();
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.role", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     })["catch"]();
   },
-  deleteRole: function deleteRole(_ref3, id) {
+  deleteRole: function deleteRole(_ref4, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.role", id)).then(function (response) {
       _this.dispatch("role/fetch");
@@ -4589,13 +4632,13 @@ var actions = {
       });
     });
   },
-  editRole: function editRole(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editRole: function editRole(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.role", data.get('id')), data).then();
   },
-  addRole: function addRole(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addRole: function addRole(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.role"), data).then();
   }
@@ -4623,7 +4666,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   solutions: [],
-  solution: {}
+  solution: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4632,12 +4676,18 @@ var getters = {
   },
   solution: function solution(state) {
     return state.solution;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutation 
 
 var mutations = {
   FETCH: function FETCH(state, solutions) {
     state.solutions = solutions;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE: function FETCH_ONE(state, solution) {
     state.solution = solution;
@@ -4651,8 +4701,14 @@ var actions = {
       return commit("FETCH", res.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  all: function all(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('solutions')).then(function (res) {
+      return commit("ALL", res.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('showDetailSolution', id)).then(function (res) {
       return commit("FETCH_ONE", res.data.data);
     });
@@ -4683,7 +4739,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   users: [],
-  user: {}
+  user: {},
+  all: []
 }; // getters
 
 var getters = {
@@ -4692,12 +4749,18 @@ var getters = {
   },
   users: function users(state) {
     return state.users;
+  },
+  all: function all(state) {
+    return state.all;
   }
 }; // mutations
 
 var mutations = {
   FETCH: function FETCH(state, users) {
     state.users = users;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE: function FETCH_ONE(state, user) {
     state.user = user;
@@ -4711,16 +4774,22 @@ var actions = {
       return commit("FETCH", response.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref2, id) {
+  all: function all(_ref2) {
     var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.user")).then(function (response) {
+      return commit("ALL", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.user", id)).then(function (response) {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deleteUser: function deleteUser(_ref3, id) {
+  deleteUser: function deleteUser(_ref4, id) {
     var _this = this;
 
-    _objectDestructuringEmpty(_ref3);
+    _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.user", id)).then(function (response) {
       _this.dispatch("user/fetch");
@@ -4736,13 +4805,13 @@ var actions = {
       });
     });
   },
-  editUser: function editUser(_ref4, data) {
-    _objectDestructuringEmpty(_ref4);
+  editUser: function editUser(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.user", data.get('id')), data).then();
   },
-  addUser: function addUser(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  addUser: function addUser(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.user"), data).then();
   }
@@ -70382,7 +70451,10 @@ var render = function() {
             _c(
               "router-link",
               { staticClass: "nav-link", attrs: { to: { name: "home" } } },
-              [_c("i", { staticClass: "ti-eye mr-2" }), _vm._v(" Xem trang")]
+              [
+                _c("i", { staticClass: "ti-desktop mr-2" }),
+                _vm._v(" Xem trang")
+              ]
             )
           ],
           1
@@ -70993,7 +71065,7 @@ var render = function() {
                 attrs: { to: { name: "add.challenge" } }
               },
               [
-                _c("i", { staticClass: "sidebar-item-icon fa fa-smile-o" }),
+                _c("i", { staticClass: "sidebar-item-icon ti-light-bulb" }),
                 _vm._v(" "),
                 _c("span", { staticClass: "nav-label" }, [_vm._v("Giải pháp")])
               ]
@@ -71023,13 +71095,30 @@ var render = function() {
         _vm._v(" "),
         _c("li", { staticClass: "heading" }, [_vm._v("PAGES")]),
         _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "nav-link",
+                attrs: { to: { name: "add.challenge" } }
+              },
+              [
+                _c("i", { staticClass: "sidebar-item-icon ti-comments" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "nav-label" }, [_vm._v("Trao đổi")])
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _vm._m(3),
         _vm._v(" "),
         _vm._m(4),
         _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6)
+        _vm._m(5)
       ])
     ])
   ])
@@ -71066,35 +71155,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("span", { staticClass: "nav-label" }, [_vm._v("Thử thách")]),
       _c("i", { staticClass: "fa fa-angle-left arrow" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "javascript:;" } }, [
-        _c("i", { staticClass: "sidebar-item-icon fa fa-envelope" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "nav-label" }, [_vm._v("Mailbox")]),
-        _c("i", { staticClass: "fa fa-angle-left arrow" })
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav-2-level collapse" }, [
-        _c("li", [
-          _c("a", { attrs: { href: "mailbox.html" } }, [_vm._v("Inbox")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "mail_view.html" } }, [_vm._v("Mail view")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "mail_compose.html" } }, [
-            _vm._v("Compose mail")
-          ])
-        ])
-      ])
     ])
   },
   function() {
@@ -71328,58 +71388,62 @@ var render = function() {
         ),
         _vm._v(" "),
         _vm.user
-          ? _c("div", { staticClass: "col-9 col-sm-12 login-and-setting" }, [
-              _c("ul", { staticClass: "nav navbar-toolbar" }, [
-                _vm.user
-                  ? _c("li", { staticClass: "dropdown dropdown-user" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link dropdown-toggle link",
-                          attrs: { "data-toggle": "dropdown" }
-                        },
-                        [
-                          _c("img", { attrs: { src: "/" + _vm.user.image } }),
-                          _vm._v(" "),
-                          _c("span"),
-                          _vm._v(_vm._s(_vm.user.name)),
-                          _c("i", { staticClass: "fa fa-angle-down m-l-5" })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "ul",
-                        { staticClass: "dropdown-menu dropdown-menu-right" },
-                        [
-                          _vm._m(0),
-                          _vm._v(" "),
-                          _vm._m(1),
-                          _vm._v(" "),
-                          _c("li", { staticClass: "dropdown-divider" }),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dropdown-item",
-                              attrs: { href: "javascript:;" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.logout.apply(null, arguments)
+          ? _c(
+              "div",
+              { staticClass: "offset-md-5 col-4 col-sm-12 login-and-setting" },
+              [
+                _c("ul", { staticClass: "nav navbar-toolbar" }, [
+                  _vm.user
+                    ? _c("li", { staticClass: "dropdown dropdown-user" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link dropdown-toggle link",
+                            attrs: { "data-toggle": "dropdown" }
+                          },
+                          [
+                            _c("img", { attrs: { src: "/" + _vm.user.image } }),
+                            _vm._v(" "),
+                            _c("span"),
+                            _vm._v(_vm._s(_vm.user.name)),
+                            _c("i", { staticClass: "fa fa-angle-down m-l-5" })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _vm._m(1),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { href: "javascript:;" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.logout.apply(null, arguments)
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fa fa-power-off" }),
-                              _vm._v("Logout")
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-power-off" }),
+                                _vm._v("Logout")
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            )
           : _c(
               "div",
               { staticClass: "col-9 col-sm-12 login-and-setting" },

@@ -14,7 +14,7 @@
             ></path>
           </svg>
         </div>
-        <div class="col-9 col-sm-12 login-and-setting" v-if="user">
+        <div class="offset-md-5 col-4 col-sm-12 login-and-setting" v-if="user">
          <ul class="nav navbar-toolbar">
               <li class="dropdown dropdown-user" v-if="user">
                   <a class="nav-link dropdown-toggle link" data-toggle="dropdown">

@@ -3,13 +3,15 @@ import axios from "axios";
 // state
 export const state = {
     challengecategories: [],
-    challengecategory: {}
+    challengecategory: {},
+    all: []
 };
 
 // getters
 export const getters = {
     challengecategory: state => state.challengecategory,
-    challengecategories: state => state.challengecategories
+    challengecategories: state => state.challengecategories,
+    all: state => state.all
 };
 
 // mutations
@@ -25,6 +27,9 @@ export const mutations = {
     },
     GET_ONE_DATA_TO_OVERVIEW(state, challengecategory) {
         state.challengecategory = challengecategory;
+    },
+    ALL(state, all) {
+        state.all = all;
     }
 };
 
@@ -34,6 +39,11 @@ export const actions = {
         return axios
             .get(route("challengecategories"))
             .then(response => commit("FETCH", response.data.data))
+    },
+    all({ commit }) {
+        return axios
+            .get(route("all.challengecategory"))
+            .then(response => commit("ALL", response.data.data))
     },
     get_All_Data({ commit }) {
         return axios

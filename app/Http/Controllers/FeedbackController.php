@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class FeedbackController extends Controller
 {
    // all feedbacks
-   public function index()
+   public function feedbacks()
    {
        $feedbacks = Feedback::all();
         return response()->json([

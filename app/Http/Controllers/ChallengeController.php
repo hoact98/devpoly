@@ -11,16 +11,16 @@ use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class ChallengeController extends Controller
 {
     // all challenges
-    // public function index()
-    // {
-    //     $challenges= Challenge::all();
-    //     $challenges->load('category');
-    //     return response()->json([
-    //         'status'=>'success',
-    //         'messege' => 'Succsess get list challenges',
-    //         'data' => $challenges,
-    //     ], 200);
-    // }
+    public function challenges()
+    {
+        $challenges= Challenge::all();
+        $challenges->load('category');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list challenges',
+            'data' => $challenges,
+        ], 200);
+    }
     public function index(Request $request)
     {
         $query = Challenge::eloquentQuery(

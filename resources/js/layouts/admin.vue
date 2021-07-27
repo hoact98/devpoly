@@ -17,9 +17,9 @@ export default {
     user: 'auth/user'
   }),
   
-   created () {
-      this.$store.dispatch('auth/fetchUser');
-   },
+  created () {
+    this.$store.dispatch('auth/fetchUser');
+  },
    
   components: {
     Navbar,

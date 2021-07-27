@@ -15,7 +15,7 @@
                         <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
                     </li>
                     <li>
-                        <router-link :to="{name: 'home'}" class="nav-link"><i class="ti-eye mr-2"></i> Xem trang</router-link>
+                        <router-link :to="{name: 'home'}" class="nav-link"><i class="ti-desktop mr-2"></i> Xem trang</router-link>
                     </li>
                 </ul>
                 <!-- END TOP-LEFT TOOLBAR-->

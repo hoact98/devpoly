@@ -3,19 +3,24 @@ import axios from "axios";
 // state
 export const state = {
   users: [],
-  user: {}
+  user: {},
+  all: []
 };
 
 // getters
 export const getters = {
   user: state => state.user,
-  users: state => state.users
+  users: state => state.users,
+  all: state => state.all
 };
 
 // mutations
 export const mutations = {
   FETCH(state, users) {
     state.users = users;
+  },
+  ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE(state, user) {
     state.user = user;
@@ -28,6 +33,11 @@ export const actions = {
     return axios
       .get(route("users"))
       .then(response => commit("FETCH", response.data.data))
+  },
+  all({ commit }) {
+    return axios
+      .get(route("all.user"))
+      .then(response => commit("ALL", response.data.data))
   },
   fetchOne({ commit }, id) {
     axios

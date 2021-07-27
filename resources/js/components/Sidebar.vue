@@ -77,7 +77,7 @@
                     </li>
                     <li>
                         <router-link :to="{name: 'add.challenge'}" class="nav-link">
-                            <i class="sidebar-item-icon fa fa-smile-o"></i>
+                            <i class="sidebar-item-icon ti-light-bulb"></i>
                            <span class="nav-label">Giải pháp</span>
                         </router-link>
                     </li>
@@ -89,20 +89,11 @@
                     </li>
                     
                     <li class="heading">PAGES</li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-envelope"></i>
-                            <span class="nav-label">Mailbox</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                                <a href="mailbox.html">Inbox</a>
-                            </li>
-                            <li>
-                                <a href="mail_view.html">Mail view</a>
-                            </li>
-                            <li>
-                                <a href="mail_compose.html">Compose mail</a>
-                            </li>
-                        </ul>
+                     <li>
+                        <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-comments"></i>
+                                <span class="nav-label">Trao đổi</span>
+                        </router-link>
                     </li>
                     <li>
                         <a href="calendar.html"><i class="sidebar-item-icon fa fa-calendar"></i>

@@ -26,16 +26,16 @@ class UserController extends Controller
     }
 
     // all users
-    // public function index()
-    // {
-    //     $users= User::all();
-    //     $users->load('roles');
-    //     return response()->json([
-    //         'status'=>'success',
-    //         'messege' => 'Succsess get list users',
-    //         'data' => $users,
-    //     ], 200);
-    // }
+    public function users()
+    {
+        $users= User::all();
+        $users->load('roles');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => $users,
+        ], 200);
+    }
 
     public function index(Request $request)
     {   

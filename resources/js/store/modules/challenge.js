@@ -3,13 +3,15 @@ import axios from "axios";
 // state
 export const state = {
     challenges: [],
-    challenge: {}
+    challenge: {},
+    all: []
 };
 
 // getters
 export const getters = {
     challenge: state => state.challenge,
-    challenges: state => state.challenges
+    challenges: state => state.challenges,
+    all: state => state.all
 };
 
 // mutations
@@ -22,6 +24,9 @@ export const mutations = {
     },
     GET_ONE_DATA_CHALLENGE(state, challenge) {
         state.challenge = challenge;
+    },
+    ALL(state, all) {
+        state.all = all;
     }
 };
 
@@ -41,6 +46,11 @@ export const actions = {
         axios
             .get(route("get_One.challenge", slug))
             .then(response => commit("GET_ONE_DATA_CHALLENGE", response.data.data))
+    },
+    all({ commit }) {
+        return axios
+            .get(route("all.challenge"))
+            .then(response => commit("ALL", response.data.data))
     },
     deletechallenge({}, id) {
         axios
