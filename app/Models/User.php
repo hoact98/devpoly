@@ -75,7 +75,7 @@ class User extends Authenticatable
                     "local_key" => "user_id",
                 ],
                 "columns" => [
-                    "name" => [
+                    "title" => [
                         "searchable" => true,
                         "orderable" => true,
                     ]
@@ -89,7 +89,7 @@ class User extends Authenticatable
                     "local_key" => "user_id",
                 ],
                 "columns" => [
-                    "name" => [
+                    "title" => [
                         "searchable" => true,
                         "orderable" => true,
                     ]

@@ -71891,7 +71891,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "payment" } } }, [
-              _c("i", { staticClass: "ti-clipboard mr-2" }),
+              _c("i", { staticClass: "ti-credit-card mr-2" }),
               _vm._v(" "),
               _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Payment")])
             ])

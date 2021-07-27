@@ -33,7 +33,7 @@ class ChallengeCategory extends Model
                 "model" => Challenge::class,
                 'foreign_key' => 'cate_challen_id',
                 'columns' => [
-                    'name' => [
+                    'title' => [
                         'searchable' => true,
                         'orderable' => true,
                     ],

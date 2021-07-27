@@ -8,7 +8,7 @@
                             <div class="ibox-body">
                                 <h2 class="m-b-5 font-strong" v-if="challenges">{{challenges.length}}</h2>
                                 <h2 class="m-b-5 font-strong" v-else>0</h2>
-                                <div class="m-b-5">Thử thách</div><i class="ti-shopping-cart widget-stat-icon"></i>
+                                <div class="m-b-5">Thử thách</div><i class="ti-bar-chart widget-stat-icon"></i>
                                 <!-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> -->
                             </div>
                         </div>
@@ -18,7 +18,7 @@
                             <div class="ibox-body">
                                 <h2 class="m-b-5 font-strong" v-if="solutions">{{solutions.length}}</h2>
                                 <h2 class="m-b-5 font-strong" v-else>0</h2>
-                                <div class="m-b-5">Giải pháp</div><i class="ti-bar-chart widget-stat-icon"></i>
+                                <div class="m-b-5">Giải pháp</div><i class="ti-light-bulb widget-stat-icon"></i>
                                 <!-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> -->
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="ibox-body">
                                 <h2 class="m-b-5 font-strong" v-if="categories">{{categories.length}}</h2>
                                 <h2 class="m-b-5 font-strong" v-else>0</h2>
-                                <div class="m-b-5">Danh mục</div><i class="fa fa-money widget-stat-icon"></i>
+                                <div class="m-b-5">Danh mục</div><i class="ti-wallet widget-stat-icon"></i>
                                 <!-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> -->
                             </div>
                         </div>

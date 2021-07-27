@@ -77,7 +77,7 @@
 
         <li>
           <router-link :to="{ name: 'payment' }">
-                  <i class="ti-clipboard mr-2"></i>
+                  <i class="ti-credit-card mr-2"></i>
             <span class="hide-on-destop">Payment</span></router-link
           >
         </li>
