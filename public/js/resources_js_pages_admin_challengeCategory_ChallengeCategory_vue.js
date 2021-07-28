@@ -81,6 +81,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     data: {},
@@ -163,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         label: 'Tổng số thử thách',
         name: 'challenges.length',
-        orderable: true
+        orderable: false
       }, {
         label: 'Action',
         name: 'edit.challengecategory',
@@ -219,9 +221,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           //Send Request to server
-          _this2.$store.dispatch("challengecategory/deletechallengecategory", id);
-
-          _this2.getData();
+          _this2.$store.dispatch("challengecategory/deletechallengecategory", id).then(_this2.getData(route("challengecategories"), _this2.tableProps));
         }
       });
     }
@@ -778,14 +778,31 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "router-link",
-        {
-          staticClass: "btn btn-info",
-          attrs: { to: { name: _vm.name, params: { id: _vm.data.id } } }
-        },
-        [_vm._v("Sửa\n     ")]
-      ),
+      _vm.name == "add.feedback"
+        ? _c(
+            "router-link",
+            {
+              staticClass: "btn btn-info",
+              attrs: {
+                to: {
+                  name: _vm.name,
+                  params: {
+                    parent_id: _vm.data.id,
+                    solution_id: _vm.data.solution_id
+                  }
+                }
+              }
+            },
+            [_vm._v("Trả lời\n     ")]
+          )
+        : _c(
+            "router-link",
+            {
+              staticClass: "btn btn-info",
+              attrs: { to: { name: _vm.name, params: { id: _vm.data.id } } }
+            },
+            [_vm._v("Sửa\n     ")]
+          ),
       _vm._v(" "),
       _c(
         "button",

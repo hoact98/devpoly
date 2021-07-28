@@ -6,23 +6,43 @@ use App\Http\Requests\SaveSolutionRequest;
 use App\Models\Challenge;
 use App\Models\ChallengeCategory;
 use App\Models\Solution;
-use App\Models\SolutionUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class SolutionController extends Controller
 {
     // all Solutions
-    public function index()
+    public function solutions()
     {
-        $solutions = Solution::all()->toArray();
-        return array_reverse($solutions);
+        $solutions= Solution::all();
+        $solutions->load('user');
+        $solutions->load('challenges');
+        $solutions->load('feedbacks');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list solut$solutions',
+            'data' => $solutions,
+        ], 200);
     }
-
+    public function index(Request $request)
+    {   
+        $query = Solution::eloquentQuery(
+            $request->input('column'),
+            $request->input('dir'),
+            $request->input('search'),
+            [
+                "feedbacks","challenge","user"
+            ],
+           
+        );
+        $data = $query->paginate($request->input('length'));
+        return new DataTableCollectionResource($data);
+    }
     //get detail solution with id solution
     public function detailSolution($id){
         $solution = Solution::find($id);
-        $solution->load('users');
+        $solution->load('user');
         $solution->load('feedbacks');
         return response()->json(['status'=>'success','message'=>'Get solution successfully','data'=>$solution],200);
     }
@@ -52,11 +72,7 @@ class SolutionController extends Controller
             'challen_id' => $request->challen_id,
         ]);
         $solution->save();
-        $solution_user = new SolutionUser([
-            'user_id' => Auth::id(), //user logined
-            'solution_id'=> $solution->id,
-        ]);
-        $solution_user->save();
+        
         return response()->json(['status'=>'success','message'=>'The solution successfully added','data'=>$solution],201);
     }
 
@@ -64,7 +80,7 @@ class SolutionController extends Controller
     public function show($id)
     {
         $solution = Solution::find($id);
-        $solution->load('users');
+        $solution->load('user');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     } 
@@ -89,7 +105,7 @@ class SolutionController extends Controller
 
     public function getAllSolution(){
         $solution = Solution::get();
-        $solution->load('users');
+        $solution->load('user');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     }
@@ -97,7 +113,7 @@ class SolutionController extends Controller
     public function showDetailSolution($id)
     {
         $solution = Solution::find($id);
-        $solution->load('users');
+        $solution->load('user');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     }

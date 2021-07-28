@@ -35,7 +35,7 @@ class User extends Authenticatable
     protected $guard_name = 'api';
     protected $dataTableColumns = [
         'id' => [
-            'searchable' => false,
+            'searchable' => true,
         ],
         'username' => [
             'searchable' => true,
@@ -52,6 +52,18 @@ class User extends Authenticatable
     ];
 
     protected $dataTableRelationships = [
+        "hasMany" => [
+            'solutions' => [
+                "model" => Solution::class,
+                'foreign_key' => 'user_id',
+                'columns' => [
+                    'title' => [
+                        'searchable' => true,
+                        'orderable' => true,
+                    ],
+                ],
+            ],
+        ],
         "belongsToMany" => [
             "roles" => [
                 "model" => Role::class,
@@ -72,20 +84,6 @@ class User extends Authenticatable
                 "pivot" => [
                     "table_name" => "challenge_users",
                     "foreign_key" => "challen_id",
-                    "local_key" => "user_id",
-                ],
-                "columns" => [
-                    "title" => [
-                        "searchable" => true,
-                        "orderable" => true,
-                    ]
-                ],
-            ],
-            "solutions" => [
-                "model" => Solution::class,
-                "pivot" => [
-                    "table_name" => "solution_users",
-                    "foreign_key" => "solution_id",
                     "local_key" => "user_id",
                 ],
                 "columns" => [
@@ -150,7 +148,7 @@ class User extends Authenticatable
     }
     public function solutions()
     {
-        return $this->belongsToMany(Solution::class,'solution_users', 'user_id', 'solution_id');
+        return $this->hasMany(Solution::class,'user_id');
     }
     public function feedbacks()
     {

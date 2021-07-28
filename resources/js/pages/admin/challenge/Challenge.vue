@@ -56,6 +56,7 @@ export default {
           {
               label: 'Danh mục',
               name: 'category.name',
+              columnName: 'challenge_categories.name',
               orderable: true,
           },
           {
@@ -101,6 +102,7 @@ export default {
     reloadTable(tableProps) {
         this.getData(route("challenges"), tableProps);
     },
+ 
     deleteChallenge(id) {
       Swal.fire({
         title: "Are you sure?",
@@ -113,8 +115,9 @@ export default {
       }).then((result) => {
         if (result.value) {
           //Send Request to server
-          this.$store.dispatch("challenge/deletechallenge", id);
-          this.getData();
+          this.$store.dispatch("challenge/deletechallenge", id).then(
+              this.getData(route("challenges"), this.tableProps)
+          )
         }
       });
     },

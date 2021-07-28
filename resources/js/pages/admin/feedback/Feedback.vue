@@ -1,9 +1,8 @@
 <template>
-    <div class="content-wrapper">
+  <div class="content-wrapper">
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -26,12 +25,12 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
-
+import ApprovedFeedback from '../../../components/ApprovedFeedback.vue';
 export default {
    data() {
-    return {
-     title: 'Permissions',
-     data: {},
+      return {
+      title: 'Danh sách bình luận',
+      data: {},
       tableProps: {
           search: '',
           length: 10,
@@ -40,40 +39,63 @@ export default {
       },
       columns: [
           {
-              label: 'ID',
-              name: 'id',
+              label: 'STT',
+              name:'key',
+              orderable: false,
+          },
+           {
+              label: 'Nội dung',
+              name: 'feedback_content',
+              orderable: true,
+              width: 10,
+          },
+          {
+              label: 'Họ tên',
+              name: 'users.name',
+              columnName: 'users.name',
               orderable: true,
           },
           {
-              label: 'Name',
-              name: 'name',
+              label: 'Giải pháp',
+              name: 'solutions.title',
+              columnName: 'solutions.title',
               orderable: true,
           },
-           {
+          
+          {
+              label: 'Phê duyệt',
+              name: 'is_approved',
+              component: ApprovedFeedback,
+              orderable: true,
+              event: "click",
+              handler: this.updateApproved,
+          },
+          {
               label: 'Action',
-              name: 'edit.permission',
+              name: 'add.feedback',
               orderable: false,
               component: TableButton,
               event: "click",
-              handler: this.deletePermission,
+              handler: this.deleteFeedback,
           }
       ]
     };
   },
    components:{
       Footer,
-      TableButton
+      TableButton,
+      ApprovedFeedback
   },
     created() {
         this.getData();
     },
     methods: {
-      async  getData(url = route("permissions"), options = this.tableProps) {
-           await axios.get(url, {
+        getData(url = route("feedbacks"), options = this.tableProps) {
+            axios.get(url, {
                 params: options
             })
             .then(response => {
-                var result = response.data;
+               var result = response.data;
                 for(var i in result['data']){
                     result['data'][i].key=Number(i)+1;
                 }
@@ -85,10 +107,15 @@ export default {
             })
         },
         reloadTable(tableProps) {
-            this.getData(route("permissions"), tableProps);
+            this.getData(route("feedbacks"), tableProps);
+        },   
+        updateApproved(id){
+            this.$store.dispatch('feedback/updateApproved', id).then(
+                    this.getData(route("feedbacks"), this.tableProps)
+                )
         },
-         deletePermission: function (id) {
-             Swal.fire({
+        deleteFeedback(id) {
+            Swal.fire({
               title: 'Are you sure?',
               text: "You won't be able to revert this!",
               icon: 'warning',
@@ -100,16 +127,16 @@ export default {
 
               if (result.value) {
                 //Send Request to server
-                this.$store.dispatch('permission/deletePermission', id).then(
-                    this.getData(route("permissions"), this.tableProps)
+                this.$store.dispatch('feedback/deleteFeedback', id).then(
+                    this.getData(route("feedbacks"), this.tableProps)
                 )
-              }
-            })
+                }
 
+            })
           }
-    },
-    
+    }
 }
+
 </script>
 
 <style>

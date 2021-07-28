@@ -101,7 +101,6 @@ const routes = [
         component: page("admin/user/User.vue"),
         name: 'users',
     },
-
     {
         path: '/admin/user-add',
         meta: {layout: 'admin', middleware: auth},
@@ -186,6 +185,30 @@ const routes = [
         meta: {layout: 'admin',middleware: auth},
         component: page("admin/challenge/EditChallenge.vue"),
         name: 'edit.challenge'
+    },
+    {
+        path: '/admin/solutions',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/solution/Solution.vue"),
+        name: 'solutions'
+    },
+    {
+        path: '/admin/solution-edit/:id',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/solution/EditSolution.vue"),
+        name: 'edit.solution'
+    },
+    {
+        path: '/admin/feedback-add',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/feedback/AddFeedback.vue"),
+        name: 'add.feedback'
+    },
+    {
+        path: '/admin/feedbacks',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/feedback/Feedback.vue"),
+        name: 'feedbacks'
     },
     {
         path: '/admin/mentors',

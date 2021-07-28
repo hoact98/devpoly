@@ -21,11 +21,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function current(Request $request)
-    {
-        return response()->json($request->user());
-    }
-
+   
     // all users
     public function users()
     {

@@ -51,7 +51,7 @@ export const actions = {
     axios
       .delete(route("delete.permission", id))
       .then((response)=> {
-        this.dispatch("permission/fetch")
+        // this.dispatch("permission/fetch")
         if(response.data.status == 'success'){
         Swal.fire(
           'Deleted!',

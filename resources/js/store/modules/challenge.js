@@ -56,7 +56,7 @@ export const actions = {
         axios
             .delete(route("delete.challenge", id))
             .then((response) => {
-                this.dispatch("challenge/fetch")
+                // this.dispatch("challenge/fetch")
                 if (response.data.status == 'success') {
                     Swal.fire(
                         'Deleted!',

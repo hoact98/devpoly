@@ -99,8 +99,9 @@ export default {
 
           if (result.value) {
             //Send Request to server
-            this.$store.dispatch('role/deleteRole', id);
-            this.getData();
+            this.$store.dispatch('role/deleteRole', id).then(
+                    this.getData(route("roles"), this.tableProps)
+                )
             }
 
         })

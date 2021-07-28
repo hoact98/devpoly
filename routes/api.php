@@ -93,13 +93,22 @@ Route::get('get-all-solution', [SolutionController::class, 'getAllSolution'])->n
 Route::get('get-detail-solution/{id}', [SolutionController::class, 'showDetailSolution'])->name('showDetailSolution');
 Route::group(['prefix' => 'solution'], function () {
     Route::post('add', [SolutionController::class, 'create'])->name('create.solution');
+    Route::get('all', [SolutionController::class, 'solutions'])->name('all.solution');
     Route::get('{id}', [SolutionController::class, 'show'])->name('show.solution');
     Route::post('update/{id}', [SolutionController::class, 'update'])->name('update.solution');
     Route::delete('delete/{id}', [SolutionController::class, 'delete'])->name('delete.solution');
 });
 
 
-Route::get('feedbacks', [FeedbackController::class, 'feedbacks'])->name('feedbacks');
+Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
+Route::group(['prefix' => 'feedback'], function () {
+    Route::post('add', [FeedbackController::class, 'create'])->name('create.feedback');
+    Route::get('all', [FeedbackController::class, 'feedbacks'])->name('all.feedback');
+    Route::post('update-approved/{id}', [FeedbackController::class, 'updateApproved'])->name('approved.feedback');
+    Route::get('{id}', [FeedbackController::class, 'show'])->name('show.feedback');
+    Route::post('update/{id}', [FeedbackController::class, 'update'])->name('update.feedback');
+    Route::delete('delete/{id}', [FeedbackController::class, 'delete'])->name('delete.feedback');
+});
 
 Route::prefix('chat')->middleware('auth:api')->group(function() {
     Route::get('rooms', [ChatController::class, 'rooms'])->name('rooms');

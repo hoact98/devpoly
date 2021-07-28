@@ -76,13 +76,13 @@
                         </ul>
                     </li>
                     <li>
-                        <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                        <router-link :to="{name: 'solutions'}" class="nav-link">
                             <i class="sidebar-item-icon ti-light-bulb"></i>
                            <span class="nav-label">Giải pháp</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                        <router-link :to="{name: 'feedbacks'}" class="nav-link">
                             <i class="sidebar-item-icon ti-comment-alt"></i>
                                 <span class="nav-label">Bình luận</span>
                         </router-link>

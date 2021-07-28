@@ -60,7 +60,7 @@ export default {
           {
               label: 'Tổng số thử thách',
               name:'challenges.length',
-              orderable: true,
+              orderable: false,
           },
           {
               label: 'Action',
@@ -113,8 +113,9 @@ export default {
       }).then((result) => {
         if (result.value) {
           //Send Request to server
-          this.$store.dispatch("challengecategory/deletechallengecategory", id);
-          this.getData();
+          this.$store.dispatch("challengecategory/deletechallengecategory", id).then(
+                    this.getData(route("challengecategories"), this.tableProps)
+                )
         }
       });
     },

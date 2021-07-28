@@ -43,7 +43,7 @@ export default {
           {
               label: 'STT',
               name:'key',
-              orderable: true,
+              orderable: false,
           },
            {
               label: 'Hình ảnh',
@@ -64,12 +64,13 @@ export default {
           {
               label: 'Số thử thách',
               name: 'challenges.length',
-              orderable: true,
+              orderable: false,
           },
           {
               label: 'Vai trò',
               name: 'roles',
               component: RoleComponent,
+              columnName: 'roles.name',
               orderable: true,
           },
           {
@@ -125,8 +126,9 @@ export default {
 
               if (result.value) {
                 //Send Request to server
-                this.$store.dispatch('user/deleteUser', id)
-                this.getData();
+                this.$store.dispatch('user/deleteUser', id).then(
+                    this.getData(route("users"), this.tableProps)
+                )
                 }
 
             })

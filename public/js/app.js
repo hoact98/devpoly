@@ -3843,6 +3843,38 @@ var routes = [{
   component: page("admin/challenge/EditChallenge.vue"),
   name: 'edit.challenge'
 }, {
+  path: '/admin/solutions',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/solution/Solution.vue"),
+  name: 'solutions'
+}, {
+  path: '/admin/solution-edit/:id',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/solution/EditSolution.vue"),
+  name: 'edit.solution'
+}, {
+  path: '/admin/feedback-add',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/feedback/AddFeedback.vue"),
+  name: 'add.feedback'
+}, {
+  path: '/admin/feedbacks',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/feedback/Feedback.vue"),
+  name: 'feedbacks'
+}, {
   path: '/admin/mentors',
   meta: {
     layout: 'admin'
@@ -4197,13 +4229,10 @@ var actions = {
     });
   },
   deletechallenge: function deletechallenge(_ref5, id) {
-    var _this = this;
-
     _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
-      _this.dispatch("challenge/fetch");
-
+      // this.dispatch("challenge/fetch")
       if (response.data.status == 'success') {
         Swal.fire('Deleted!', 'challenge deleted successfully', 'success');
       }
@@ -4317,13 +4346,10 @@ var actions = {
     });
   },
   deletechallengecategory: function deletechallengecategory(_ref6, id) {
-    var _this = this;
-
     _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
-      _this.dispatch("challengecategory/fetch");
-
+      // this.dispatch("challengecategory/fetch")
       if (response.data.status == 'success') {
         Swal.fire('Deleted!', 'challengecategory deleted successfully', 'success');
       }
@@ -4365,26 +4391,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
 
 var state = {
-  feedbacks: []
-};
+  feedbacks: [],
+  feedback: {},
+  all: []
+}; // getters
+
 var getters = {
+  feedback: function feedback(state) {
+    return state.feedback;
+  },
   feedbacks: function feedbacks(state) {
     return state.feedbacks;
+  },
+  all: function all(state) {
+    return state.all;
   }
-};
+}; // mutations
+
 var mutations = {
   FETCH: function FETCH(state, feedbacks) {
     state.feedbacks = feedbacks;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
+  },
+  FETCH_ONE: function FETCH_ONE(state, feedback) {
+    state.feedback = feedback;
   }
-};
+}; // actions
+
 var actions = {
   fetch: function fetch(_ref) {
     var commit = _ref.commit;
-    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("feedbacks")).then(function (res) {
-      return commit("FETCH", res.data.data);
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("feedbacks")).then(function (response) {
+      return commit("FETCH", response.data.data);
     });
+  },
+  all: function all(_ref2) {
+    var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.feedback")).then(function (response) {
+      return commit("ALL", response.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.feedback", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    });
+  },
+  deleteFeedback: function deleteFeedback(_ref4, id) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.feedback", id)).then(function (response) {
+      // this.dispatch("feedback/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'feedback deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editFeedback: function editFeedback(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.feedback", data.get('id')), data).then();
+  },
+  updateApproved: function updateApproved(_ref6, id) {
+    _objectDestructuringEmpty(_ref6);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("approved.feedback", id)).then(function (response) {
+      // this.dispatch("feedback/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Đã duyệt!', 'Bình luận đã được duyệt', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Đã xảy ra lỗi!'
+      });
+    });
+  },
+  addFeedback: function addFeedback(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.feedback"), data).then();
   }
 };
 
@@ -4512,13 +4612,10 @@ var actions = {
     })["catch"]();
   },
   deletePermission: function deletePermission(_ref4, id) {
-    var _this = this;
-
     _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.permission", id)).then(function (response) {
-      _this.dispatch("permission/fetch");
-
+      // this.dispatch("permission/fetch")
       if (response.data.status == 'success') {
         Swal.fire('Deleted!', 'Permission deleted successfully', 'success');
       }
@@ -4614,13 +4711,10 @@ var actions = {
     })["catch"]();
   },
   deleteRole: function deleteRole(_ref4, id) {
-    var _this = this;
-
     _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.role", id)).then(function (response) {
-      _this.dispatch("role/fetch");
-
+      // this.dispatch("role/fetch")
       if (response.data.status == 'success') {
         Swal.fire('Deleted!', 'Role deleted successfully', 'success');
       }
@@ -4662,6 +4756,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
  // state
 
 var state = {
@@ -4712,6 +4808,32 @@ var actions = {
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('showDetailSolution', id)).then(function (res) {
       return commit("FETCH_ONE", res.data.data);
     });
+  },
+  deleteSolution: function deleteSolution(_ref4, id) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.solution", id)).then(function (response) {
+      // this.dispatch("solution/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'Solution deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editSolution: function editSolution(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.solution", data.get('id')), data).then();
+  },
+  addSolution: function addSolution(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.solution"), data).then();
   }
 };
 
@@ -4787,13 +4909,10 @@ var actions = {
     });
   },
   deleteUser: function deleteUser(_ref4, id) {
-    var _this = this;
-
     _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.user", id)).then(function (response) {
-      _this.dispatch("user/fetch");
-
+      // this.dispatch("user/fetch")
       if (response.data.status == 'success') {
         Swal.fire('Deleted!', 'User deleted successfully', 'success');
       }
@@ -71060,10 +71179,7 @@ var render = function() {
           [
             _c(
               "router-link",
-              {
-                staticClass: "nav-link",
-                attrs: { to: { name: "add.challenge" } }
-              },
+              { staticClass: "nav-link", attrs: { to: { name: "solutions" } } },
               [
                 _c("i", { staticClass: "sidebar-item-icon ti-light-bulb" }),
                 _vm._v(" "),
@@ -71079,10 +71195,7 @@ var render = function() {
           [
             _c(
               "router-link",
-              {
-                staticClass: "nav-link",
-                attrs: { to: { name: "add.challenge" } }
-              },
+              { staticClass: "nav-link", attrs: { to: { name: "feedbacks" } } },
               [
                 _c("i", { staticClass: "sidebar-item-icon ti-comment-alt" }),
                 _vm._v(" "),
@@ -89242,6 +89355,22 @@ var map = {
 		"./resources/js/pages/admin/dashboard/Dashboard.vue",
 		"resources_js_pages_admin_dashboard_Dashboard_vue"
 	],
+	"./admin/feedback/AddFeedback": [
+		"./resources/js/pages/admin/feedback/AddFeedback.vue",
+		"resources_js_pages_admin_feedback_AddFeedback_vue"
+	],
+	"./admin/feedback/AddFeedback.vue": [
+		"./resources/js/pages/admin/feedback/AddFeedback.vue",
+		"resources_js_pages_admin_feedback_AddFeedback_vue"
+	],
+	"./admin/feedback/Feedback": [
+		"./resources/js/pages/admin/feedback/Feedback.vue",
+		"resources_js_pages_admin_feedback_Feedback_vue"
+	],
+	"./admin/feedback/Feedback.vue": [
+		"./resources/js/pages/admin/feedback/Feedback.vue",
+		"resources_js_pages_admin_feedback_Feedback_vue"
+	],
 	"./admin/mentor/AddMentor": [
 		"./resources/js/pages/admin/mentor/AddMentor.vue",
 		"resources_js_pages_admin_mentor_AddMentor_vue"
@@ -89313,6 +89442,22 @@ var map = {
 	"./admin/role/Role.vue": [
 		"./resources/js/pages/admin/role/Role.vue",
 		"resources_js_pages_admin_role_Role_vue"
+	],
+	"./admin/solution/EditSolution": [
+		"./resources/js/pages/admin/solution/EditSolution.vue",
+		"resources_js_pages_admin_solution_EditSolution_vue"
+	],
+	"./admin/solution/EditSolution.vue": [
+		"./resources/js/pages/admin/solution/EditSolution.vue",
+		"resources_js_pages_admin_solution_EditSolution_vue"
+	],
+	"./admin/solution/Solution": [
+		"./resources/js/pages/admin/solution/Solution.vue",
+		"resources_js_pages_admin_solution_Solution_vue"
+	],
+	"./admin/solution/Solution.vue": [
+		"./resources/js/pages/admin/solution/Solution.vue",
+		"resources_js_pages_admin_solution_Solution_vue"
 	],
 	"./admin/user/AddUser": [
 		"./resources/js/pages/admin/user/AddUser.vue",
@@ -89649,7 +89794,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

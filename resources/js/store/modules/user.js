@@ -48,7 +48,7 @@ export const actions = {
     axios
       .delete(route("delete.user", id))
       .then((response)=> {
-        this.dispatch("user/fetch")
+        // this.dispatch("user/fetch")
         if(response.data.status == 'success'){
         Swal.fire(
           'Deleted!',

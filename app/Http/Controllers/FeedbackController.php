@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class FeedbackController extends Controller
 {
@@ -13,13 +13,29 @@ class FeedbackController extends Controller
    public function feedbacks()
    {
        $feedbacks = Feedback::all();
+       $feedbacks->load('solutions');
+       $feedbacks->load('users');
         return response()->json([
             'status'=>'success',
             'messege' => 'Succsess get list feedback',
             'data' => $feedbacks,
         ], 200);
    }
-
+   
+   public function index(Request $request)
+   {   
+       $query = Feedback::eloquentQuery(
+           $request->input('column'),
+           $request->input('dir'),
+           $request->input('search'),
+           [
+               "solutions","users"
+           ],
+          
+       );
+       $data = $query->paginate($request->input('length'));
+       return new DataTableCollectionResource($data);
+   }
    // add feedback
    public function create(Request $request)
    {
@@ -46,6 +62,15 @@ class FeedbackController extends Controller
    {
        $feedback = Feedback::find($id);
        $feedback->update($request->all());
+
+       return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback],200);
+   }
+   // update feedback
+   public function updateApproved($id)
+   {
+       $feedback = Feedback::find($id);
+       $feedback->is_approved=1;
+       $feedback->save();
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback],200);
    }

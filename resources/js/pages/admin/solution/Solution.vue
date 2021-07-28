@@ -1,9 +1,8 @@
 <template>
-    <div class="content-wrapper">
+  <div class="content-wrapper">
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -26,12 +25,12 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
-
+import ReactiveLink from '../../../components/ReactiveLink.vue';
 export default {
    data() {
-    return {
-     title: 'Permissions',
-     data: {},
+      return {
+      title: 'Danh sách giải pháp',
+      data: {},
       tableProps: {
           search: '',
           length: 10,
@@ -40,40 +39,71 @@ export default {
       },
       columns: [
           {
-              label: 'ID',
-              name: 'id',
+              label: 'STT',
+              name:'key',
+              orderable: false,
+          },
+           {
+              label: 'Tiêu đề',
+              name:'title',
+              orderable: true,
+              width: 10,
+          },
+           {
+              label: 'Người đăng',
+              name: 'user.name',
+              columnName: 'users.name',
               orderable: true,
           },
           {
-              label: 'Name',
-              name: 'name',
+              label: 'Link demo',
+              name: 'demo_url',
+              component: ReactiveLink,
               orderable: true,
           },
-           {
+          {
+              label: 'Link github',
+              name: 'link_github',
+              component: ReactiveLink,
+              orderable: true,
+          },
+          {
+              label: 'Số bình luận',
+              name: 'feedbacks.length',
+              orderable: false,
+          },
+          {
+              label: 'Thử thách',
+              name: 'challenge.title',
+              columnName: 'challenges.title',
+              orderable: true,
+          },
+          {
               label: 'Action',
-              name: 'edit.permission',
+              name: 'edit.solution',
               orderable: false,
               component: TableButton,
               event: "click",
-              handler: this.deletePermission,
+              handler: this.deleteSolution,
           }
       ]
     };
   },
    components:{
       Footer,
-      TableButton
+      TableButton,
+      ReactiveLink
   },
     created() {
         this.getData();
     },
     methods: {
-      async  getData(url = route("permissions"), options = this.tableProps) {
-           await axios.get(url, {
+        getData(url = route("solutions"), options = this.tableProps) {
+            axios.get(url, {
                 params: options
             })
             .then(response => {
-                var result = response.data;
+               var result = response.data;
                 for(var i in result['data']){
                     result['data'][i].key=Number(i)+1;
                 }
@@ -85,10 +115,10 @@ export default {
             })
         },
         reloadTable(tableProps) {
-            this.getData(route("permissions"), tableProps);
+            this.getData(route("solutions"), tableProps);
         },
-         deletePermission: function (id) {
-             Swal.fire({
+         deleteSolution(id) {
+            Swal.fire({
               title: 'Are you sure?',
               text: "You won't be able to revert this!",
               icon: 'warning',
@@ -100,16 +130,16 @@ export default {
 
               if (result.value) {
                 //Send Request to server
-                this.$store.dispatch('permission/deletePermission', id).then(
-                    this.getData(route("permissions"), this.tableProps)
+                this.$store.dispatch('solution/deleteSolution', id).then(
+                    this.getData(route("solutions"), this.tableProps)
                 )
-              }
-            })
+                }
 
+            })
           }
-    },
-    
+    }
 }
+
 </script>
 
 <style>

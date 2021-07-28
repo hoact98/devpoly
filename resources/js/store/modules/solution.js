@@ -39,5 +39,36 @@ export const actions = {
     fetchOne({ commit }, id) {
         return axios.get(route('showDetailSolution', id))
             .then(res => commit("FETCH_ONE", res.data.data))
-    }
+    },
+    deleteSolution({}, id) {
+        axios
+          .delete(route("delete.solution", id))
+          .then((response)=> {
+            // this.dispatch("solution/fetch")
+            if(response.data.status == 'success'){
+            Swal.fire(
+              'Deleted!',
+              'Solution deleted successfully',
+              'success'
+            )
+            }
+    
+        }).catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+        })
+      },
+      editSolution({}, data) {
+        axios
+          .post(route("update.solution", data.get('id')),data)
+          .then()
+      },
+      addSolution({}, data) {
+        axios
+          .post(route("create.solution"), data)
+          .then()
+      }
 }

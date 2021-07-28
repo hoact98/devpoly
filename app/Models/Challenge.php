@@ -22,7 +22,7 @@ class Challenge extends Model
     ];
     protected $dataTableColumns = [
         'id' => [
-            'searchable' => false,
+            'searchable' => true,
         ],
         'title' => [
             'searchable' => true,
