@@ -89,8 +89,6 @@ Route::group(['prefix' => 'challenge'], function () {
 Route::get('solutions', [SolutionController::class, 'index'])->name('solutions');
 Route::get('category-solutions/{slug}', [SolutionController::class, 'categorySolution'])->name('categorySolutions');
 Route::get('detail-solution/{id}', [SolutionController::class, 'detailSolution'])->name('detailSolution');
-Route::get('get-all-solution', [SolutionController::class, 'getAllSolution'])->name('showSolution');
-Route::get('get-detail-solution/{id}', [SolutionController::class, 'showDetailSolution'])->name('showDetailSolution');
 Route::group(['prefix' => 'solution'], function () {
     Route::post('add', [SolutionController::class, 'create'])->name('create.solution');
     Route::get('all', [SolutionController::class, 'solutions'])->name('all.solution');
@@ -104,6 +102,7 @@ Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks')
 Route::group(['prefix' => 'feedback'], function () {
     Route::middleware('auth:api')->post('add/{parent_id}/{solution_id}', [FeedbackController::class, 'create'])->name('create.feedback');
     Route::get('all', [FeedbackController::class, 'feedbacks'])->name('all.feedback');
+    Route::get('solution-feedback/{solution_id}', [FeedbackController::class, 'solutionFeedback'])->name('solution.feedback');
     Route::post('update-approved/{id}', [FeedbackController::class, 'updateApproved'])->name('approved.feedback');
     Route::get('{id}', [FeedbackController::class, 'show'])->name('show.feedback');
     Route::post('update/{id}', [FeedbackController::class, 'update'])->name('update.feedback');

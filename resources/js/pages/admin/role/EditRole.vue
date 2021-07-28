@@ -27,9 +27,9 @@
                       <div class="tab-content col-9">
                           <div class="tab-pane fade show active" id="tab-9-1">
                               <div class="form-group row">
-                                  <label for="exampleInputName" class="col-sm-2 col-form-label">Name:</label>
+                                  <label for="" class="col-sm-2 col-form-label">Name:</label>
                                   <div class="col-sm-10">
-                                      <input type="text" v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" id="exampleInputName" placeholder="Enter role">
+                                      <input type="text" v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" placeholder="Enter role">
                                         <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')"></div>
                                   </div>
                               </div>

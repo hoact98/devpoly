@@ -4793,19 +4793,19 @@ var mutations = {
 var actions = {
   fetch: function fetch(_ref) {
     var commit = _ref.commit;
-    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('showSolution')).then(function (res) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('solutions')).then(function (res) {
       return commit("FETCH", res.data.data);
     });
   },
   all: function all(_ref2) {
     var commit = _ref2.commit;
-    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('solutions')).then(function (res) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('all.solution')).then(function (res) {
       return commit("ALL", res.data.data);
     });
   },
   fetchOne: function fetchOne(_ref3, id) {
     var commit = _ref3.commit;
-    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('showDetailSolution', id)).then(function (res) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('show.solution', id)).then(function (res) {
       return commit("FETCH_ONE", res.data.data);
     });
   },

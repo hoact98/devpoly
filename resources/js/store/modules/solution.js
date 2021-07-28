@@ -29,15 +29,15 @@ export const mutations = {
     // action
 export const actions = {
     fetch({ commit }) {
-        return axios.get(route('showSolution'))
+        return axios.get(route('solutions'))
             .then(res => commit("FETCH", res.data.data))
     },
     all({ commit }) {
-        return axios.get(route('solutions'))
+        return axios.get(route('all.solution'))
             .then(res => commit("ALL", res.data.data))
     },
     fetchOne({ commit }, id) {
-        return axios.get(route('showDetailSolution', id))
+        return axios.get(route('show.solution', id))
             .then(res => commit("FETCH_ONE", res.data.data))
     },
     deleteSolution({}, id) {

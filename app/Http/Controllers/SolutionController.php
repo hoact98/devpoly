@@ -17,7 +17,7 @@ class SolutionController extends Controller
     {
         $solutions= Solution::all();
         $solutions->load('user');
-        $solutions->load('challenges');
+        $solutions->load('challenge');
         $solutions->load('feedbacks');
         return response()->json([
             'status'=>'success',
@@ -55,7 +55,7 @@ class SolutionController extends Controller
         $solutions = [];
         foreach($challenges as $chall){
             $solutions[$chall->id] = Solution::where('challen_id',$chall->id)->get();
-            $solutions[$chall->id]->load('users');
+            $solutions[$chall->id]->load('user');
             $solutions[$chall->id]->load('feedbacks');
         }
         return response()->json(['status'=>'success','message'=>'Get solution successfully','data'=>$solutions],200);
@@ -81,7 +81,9 @@ class SolutionController extends Controller
     {
         $solution = Solution::find($id);
         $solution->load('user');
-        $solution->load('challenges');
+        $solution->load('challenge');
+        $solution->load('feedbacks');
+        $solution['challenges'] = Challenge::all();
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     } 
 
@@ -101,21 +103,6 @@ class SolutionController extends Controller
         $solution->delete();
 
         return response()->json(['status'=>'success','message'=>'The solution successfully delete','data'=>$solution],200);
-    }
-
-    public function getAllSolution(){
-        $solution = Solution::get();
-        $solution->load('user');
-        $solution->load('challenges');
-        return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
-    }
-
-    public function showDetailSolution($id)
-    {
-        $solution = Solution::find($id);
-        $solution->load('user');
-        $solution->load('challenges');
-        return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);
     }
 
 }

@@ -91,7 +91,20 @@ class FeedbackController extends Controller
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback],200);
    }
-
+   public function solutionFeedback(Request $request,$solution_id)
+   {   
+       $query = Feedback::where('solution_id',$solution_id)->eloquentQuery(
+           $request->input('column'),
+           $request->input('dir'),
+           $request->input('search'),
+           [
+               "users"
+           ],
+          
+       );
+       $data = $query->paginate($request->input('length'));
+       return new DataTableCollectionResource($data);
+   }
    // delete feedback
    public function delete($id)
    {
