@@ -111,8 +111,8 @@ export default {
         },   
         updateApproved(id){
             this.$store.dispatch('feedback/updateApproved', id).then(
-                    this.getData(route("feedbacks"), this.tableProps)
-                )
+                this.getData(route("feedbacks"), this.tableProps)
+            )
         },
         deleteFeedback(id) {
             Swal.fire({

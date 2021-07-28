@@ -102,7 +102,7 @@ Route::group(['prefix' => 'solution'], function () {
 
 Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
 Route::group(['prefix' => 'feedback'], function () {
-    Route::post('add', [FeedbackController::class, 'create'])->name('create.feedback');
+    Route::middleware('auth:api')->post('add/{parent_id}/{solution_id}', [FeedbackController::class, 'create'])->name('create.feedback');
     Route::get('all', [FeedbackController::class, 'feedbacks'])->name('all.feedback');
     Route::post('update-approved/{id}', [FeedbackController::class, 'updateApproved'])->name('approved.feedback');
     Route::get('{id}', [FeedbackController::class, 'show'])->name('show.feedback');

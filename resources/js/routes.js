@@ -199,7 +199,7 @@ const routes = [
         name: 'edit.solution'
     },
     {
-        path: '/admin/feedback-add',
+        path: '/admin/feedback-add/:parent_id/:solution_id',
         meta: {layout: 'admin',middleware: auth},
         component: page("admin/feedback/AddFeedback.vue"),
         name: 'add.feedback'

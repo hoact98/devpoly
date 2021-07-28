@@ -3859,7 +3859,7 @@ var routes = [{
   component: page("admin/solution/EditSolution.vue"),
   name: 'edit.solution'
 }, {
-  path: '/admin/feedback-add',
+  path: '/admin/feedback-add/:parent_id/:solution_id',
   meta: {
     layout: 'admin',
     middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default

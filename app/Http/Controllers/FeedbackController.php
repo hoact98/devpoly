@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class FeedbackController extends Controller
@@ -39,11 +40,27 @@ class FeedbackController extends Controller
    // add feedback
    public function create(Request $request)
    {
+    $rule= [
+        'feedback_content' => 'required|min:2',
+      ];
+      $messages = [
+          'feedback_content.min' => "Ít nhất có 2 ký tự",
+          'feedback_content.required' => "Nhập nội dung",
+      ];
+ 
+      $validator =  Validator::make($request->all(),$rule,$messages);
+        if ($validator->fails()) { 
+          return response()->json(['errors'=>$validator->errors()],422);
+        }
+       $parent_id = 0;
+       if(isset($request->parent_id)){
+        $parent_id = $request->parent_id;
+       }
        $feedback = new Feedback([
            'feedback_content' => $request->feedback_content,
            'user_id' => Auth::id(),  //user logined
            'solution_id' => $request->solution_id,
-           'parent_id' => $request->parent_id,
+           'parent_id' => $parent_id,
        ]);
        $feedback->save();
 
