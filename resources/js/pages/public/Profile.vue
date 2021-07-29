@@ -34,11 +34,11 @@
         <div class="col-12 col-sm-4">
           <div class="profile-user block-style">
             <div class="user-image">
-              <img width="100%" src="images/user_1.png" alt="" />
+              <img width="100%" :src="'/' + inforUser.avatar" alt="" />
             </div>
 
             <div class="user-nickname">
-              <h2>Quang Chien</h2>
+              <h2>{{ inforUser.username }}</h2>
             </div>
 
             <div class="user-github">
@@ -124,7 +124,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    inforUser() {
+      return this.$store.state.auth.infoUser;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -336,9 +342,6 @@ export default {};
 .skill-list-add {
   margin-top: 16px;
   background: var(--background-light);
-}
-
-.skill-list-suggestions {
 }
 
 .skill-list-suggestions button {
