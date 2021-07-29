@@ -211,6 +211,12 @@ const routes = [
         name: 'feedbacks'
     },
     {
+        path: '/admin/chat',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/chat/Chat.vue"),
+        name: 'admin.chat'
+    },
+    {
         path: '/admin/mentors',
         meta: {layout: 'admin'},
         component: page('admin/mentor/Mentor.vue'),

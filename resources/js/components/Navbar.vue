@@ -135,7 +135,7 @@
                     </li>
                     <li class="dropdown dropdown-user" v-if="user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img :src="'/'+user.image" />
+                            <img :src="'/'+user.image"  width="30" height="30"/>
                             <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>

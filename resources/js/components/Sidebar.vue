@@ -90,7 +90,7 @@
                     
                     <li class="heading">PAGES</li>
                      <li>
-                        <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                        <router-link :to="{name: 'admin.chat'}" class="nav-link">
                             <i class="sidebar-item-icon ti-comments"></i>
                                 <span class="nav-label">Trao đổi</span>
                         </router-link>
