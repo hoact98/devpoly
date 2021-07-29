@@ -18,7 +18,7 @@ class CreateChallengeCategoriesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

@@ -43,6 +43,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('all', [UserController::class, 'users'])->name('all.user');
     Route::get('{id}', [UserController::class, 'show'])->name('show.user');
     Route::post('update/{id}', [UserController::class, 'update'])->name('update.user');
+    Route::post('profile/{id}', [UserController::class, 'profile'])->name('profile.user');
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
 });
 

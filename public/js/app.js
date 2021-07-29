@@ -2223,8 +2223,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navbar',
   props: {
@@ -2548,7 +2546,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
@@ -2608,7 +2605,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -3904,6 +3900,14 @@ var routes = [{
   },
   component: page('auth/LoginAdmin.vue'),
   name: 'admin.login'
+}, {
+  path: '/admin/profile',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page('admin/profile/ProfileAdmin.vue'),
+  name: 'admin.profile'
 }, {
   // not found handler
   path: '*',
@@ -70616,33 +70620,44 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("ul", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5),
-                _vm._v(" "),
-                _c("li", { staticClass: "dropdown-divider" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "javascript:;" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.logout.apply(null, arguments)
+              _c(
+                "ul",
+                { staticClass: "dropdown-menu dropdown-menu-right" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { to: { name: "admin.profile" } }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-user mr-3" }),
+                      _vm._v("Profile")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "dropdown-divider" }),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { href: "javascript:;" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.logout.apply(null, arguments)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-power-off" }),
-                    _vm._v("Logout")
-                  ]
-                )
-              ])
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-power-off" }),
+                      _vm._v("Logout")
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           : _vm._e()
       ])
@@ -70931,36 +70946,6 @@ var staticRenderFns = [
         ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-user" }), _vm._v("Profile")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-cog" }), _vm._v("Settings")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "javascript:;" } },
-      [_c("i", { staticClass: "fa fa-support" }), _vm._v("Support")]
-    )
   }
 ]
 render._withStripped = true
@@ -71551,9 +71536,17 @@ var render = function() {
                           "ul",
                           { staticClass: "dropdown-menu dropdown-menu-right" },
                           [
-                            _vm._m(0),
-                            _vm._v(" "),
-                            _vm._m(1),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "profile" } }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-user mr-3" }),
+                                _vm._v("Profile")
+                              ]
+                            ),
                             _vm._v(" "),
                             _c("li", { staticClass: "dropdown-divider" }),
                             _vm._v(" "),
@@ -71576,7 +71569,8 @@ var render = function() {
                                 _vm._v("Logout")
                               ]
                             )
-                          ]
+                          ],
+                          1
                         )
                       ])
                     : _vm._e()
@@ -71597,28 +71591,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-user mr-3" }), _vm._v("Profile")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-cog mr-3" }), _vm._v("Settings")]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -71710,9 +71683,17 @@ var render = function() {
                           "ul",
                           { staticClass: "dropdown-menu dropdown-menu-right" },
                           [
-                            _vm._m(0),
-                            _vm._v(" "),
-                            _vm._m(1),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "profile" } }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-user mr-3" }),
+                                _vm._v("Profile")
+                              ]
+                            ),
                             _vm._v(" "),
                             _c("li", { staticClass: "dropdown-divider" }),
                             _vm._v(" "),
@@ -71735,7 +71716,8 @@ var render = function() {
                                 _vm._v("Logout")
                               ]
                             )
-                          ]
+                          ],
+                          1
                         )
                       ])
                     : _vm._e()
@@ -71760,28 +71742,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-user mr-3" }), _vm._v("Profile")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "dropdown-item", attrs: { href: "profile.html" } },
-      [_c("i", { staticClass: "fa fa-cog mr-3" }), _vm._v("Settings")]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -89469,6 +89430,14 @@ var map = {
 		"./resources/js/pages/admin/permission/Permission.vue",
 		"resources_js_pages_admin_permission_Permission_vue"
 	],
+	"./admin/profile/ProfileAdmin": [
+		"./resources/js/pages/admin/profile/ProfileAdmin.vue",
+		"resources_js_pages_admin_profile_ProfileAdmin_vue"
+	],
+	"./admin/profile/ProfileAdmin.vue": [
+		"./resources/js/pages/admin/profile/ProfileAdmin.vue",
+		"resources_js_pages_admin_profile_ProfileAdmin_vue"
+	],
 	"./admin/role/AddRole": [
 		"./resources/js/pages/admin/role/AddRole.vue",
 		"resources_js_pages_admin_role_AddRole_vue"
@@ -89548,14 +89517,6 @@ var map = {
 	"./auth/LoginAdmin.vue": [
 		"./resources/js/pages/auth/LoginAdmin.vue",
 		"resources_js_pages_auth_LoginAdmin_vue"
-	],
-	"./auth/ProfileAdmin": [
-		"./resources/js/pages/auth/ProfileAdmin.vue",
-		"resources_js_pages_auth_ProfileAdmin_vue"
-	],
-	"./auth/ProfileAdmin.vue": [
-		"./resources/js/pages/auth/ProfileAdmin.vue",
-		"resources_js_pages_auth_ProfileAdmin_vue"
 	],
 	"./auth/Register": [
 		"./resources/js/pages/auth/Register.vue",
@@ -89852,7 +89813,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_ProfileAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -235,6 +235,12 @@ const routes = [
         name: 'admin.login'
     },
     {
+        path: '/admin/profile',
+        meta: {layout: 'admin', middleware: auth},
+        component: page('admin/profile/ProfileAdmin.vue'),
+        name: 'admin.profile'
+    },
+    {
         // not found handler
         path: '*',
         component: page("errors/404.vue"),

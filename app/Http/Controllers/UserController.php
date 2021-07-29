@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class UserController extends Controller
 {
@@ -181,6 +182,73 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function profile($id, Request $request)
+    {
+        $user = User::find($id);
+
+        $rule= [
+            'username' => ['required','min:4',Rule::unique('users')->ignore($user->id)],
+            'name' => ['required','min:4'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id)
+            ],
+            'gender'=>['required'],
+            'address'=>['required'],
+            'phone'=>['required',Rule::unique('users')->ignore($user->id)],
+          ];
+          $messages = [
+            'name.required' => "Hãy nhập họ tên",
+            'name.min' => "Ít nhất có 4 ký tự",
+            'username.required' => "Hãy nhập tên tài khoản",
+            'username.min' => "Ít nhất có 4 ký tự",
+            'email.required' => "Hãy nhập email",
+            'email.email' => "Không đúng định dạng",
+            'email.unique' => "Email đã tồn tại",
+            'username.unique' => "Tên tài khoản đã tồn tại",
+            'gender.required' => "Hãy chọn giới tính",
+            'address.required' => "Hãy nhập địa chỉ",
+            'phone.required' => "Hãy nhập SDT",
+            'phone.unique' => "SDT đã tồn tại",
+          ];
+     
+        $validator =  Validator::make($request->all(),$rule,$messages);
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()],422);
+        }
+        $imageName = $user->image;
+        if ($request->hasFile('image')) {
+            $rule= [
+                'image' => 'image',
+              ];
+              $messages = [
+                  'image.image' => "Phải là một hình ảnh.",
+              ];
+         
+            $validator =  Validator::make($request->all(),$rule,$messages);
+            if ($validator->fails()) { 
+                return response()->json(['errors'=>$validator->errors()],422);
+            }
+            $image = $request->file('image');
+            $images = time().'-'.$image->getClientOriginalName();
+            $image->move(public_path('files'),$images);
+            $imageName = 'files/'.$images;
+            File::delete($user->image);
+        }
+         $user->username = $request->username;
+         $user->email = $request->email;
+         $user->name = $request->name;
+         $user->phone = $request->phone;
+         $user->gender = $request->gender;
+         $user->address = $request->address;
+         $user->image = $imageName;
+         $user->save();
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'The user successfully updated','data'=>$user
+        ], 200);
+    }
     public function changePass(Request $request)
     {
         $rule= [
