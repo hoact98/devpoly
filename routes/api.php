@@ -41,6 +41,7 @@ Route::get('users', [UserController::class, 'index'])->name('users');
 Route::group(['prefix' => 'user'], function () {
     Route::post('add', [UserController::class, 'create'])->name('create.user');
     Route::get('all', [UserController::class, 'users'])->name('all.user');
+    Route::get('chart', [UserController::class, 'chartUser'])->name('chart.user');
     Route::get('{id}', [UserController::class, 'show'])->name('show.user');
     Route::post('update/{id}', [UserController::class, 'update'])->name('update.user');
     Route::post('profile/{id}', [UserController::class, 'profile'])->name('profile.user');

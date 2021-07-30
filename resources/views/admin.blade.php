@@ -46,7 +46,6 @@ $config = [
  <script src="{{asset('assets/vendors/metisMenu/dist/metisMenu.min.js')}}" type="text/javascript"></script>
  <script src="{{asset('assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
  <!-- PAGE LEVEL PLUGINS-->
- <script src="{{asset('assets/vendors/chart.js/dist/Chart.min.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('dist/js/hide-sidebar.js')}}"></script>
  <!-- CORE SCRIPTS-->

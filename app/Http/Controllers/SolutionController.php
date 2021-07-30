@@ -21,7 +21,7 @@ class SolutionController extends Controller
         $solutions->load('feedbacks');
         return response()->json([
             'status'=>'success',
-            'messege' => 'Succsess get list solut$solutions',
+            'messege' => 'Succsess get list solutions',
             'data' => $solutions,
         ], 200);
     }
@@ -104,5 +104,4 @@ class SolutionController extends Controller
 
         return response()->json(['status'=>'success','message'=>'The solution successfully delete','data'=>$solution],200);
     }
-
 }

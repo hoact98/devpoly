@@ -7,6 +7,7 @@ import routes from './routes'
 import App from './App.vue'
 import CKEditor from "ckeditor4-vue";
 import DataTable from 'laravel-vue-datatable';
+import VueApexCharts from 'vue-apexcharts'
 import VueRouteMiddleware from 'vue-route-middleware';
 import MainLayout from "./layouts/main.vue";
 import HomeLayout from "./layouts/home.vue";
@@ -36,6 +37,8 @@ window.Form = Form;
 Vue.use(Vuex);
 Vue.use(CKEditor);
 Vue.use(DataTable);
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 Vue.component('breadcrumb', require('./components/Breadcrumb.vue').default);
 Vue.component('checkbox', require('./components/Checkbox.vue').default);
 Vue.component('v-button', require('./components/Button.vue').default);

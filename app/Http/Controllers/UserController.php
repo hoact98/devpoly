@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveUserRequest;
+use App\Models\Challenge;
 use App\Models\ModelHasPermission;
 use App\Models\ModelHasRole;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Solution;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -182,6 +185,66 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function chartUser()
+    {
+        $countUser = User::select(DB::raw("COUNT(*) as sum"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('sum');
+
+        $months = User::select(DB::raw("Month(created_at) as month"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('month');
+
+        $user = array(0,0,0,0,0,0,0,0,0,0,0,0);
+        foreach($months as $index => $month)
+        {
+            $user[$month-1] = (int)$countUser[$index];
+        }
+
+        $countChall = Challenge::select(DB::raw("COUNT(*) as sum"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('sum');
+
+        $monthsChall = Challenge::select(DB::raw("Month(created_at) as month"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('month');
+
+        $challenge = array(0,0,0,0,0,0,0,0,0,0,0,0);
+        foreach($monthsChall as $index => $month)
+        {
+            $challenge[$month-1] = (int)$countChall[$index];
+        }
+
+        $countSolution = Solution::select(DB::raw("COUNT(*) as sum"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('sum');
+
+        $monthsSolution = Solution::select(DB::raw("Month(created_at) as month"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('month');
+
+        $solution = array(0,0,0,0,0,0,0,0,0,0,0,0);
+        foreach($monthsSolution as $index => $month)
+        {
+            $solution[$month-1] = (int)$countSolution[$index];
+        }
+
+        $data['user']=$user;
+        $data['challenge']=$challenge;
+        $data['solution']=$solution;
+
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => $data,
+        ], 200);
+    }
     public function profile($id, Request $request)
     {
         $user = User::find($id);

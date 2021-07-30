@@ -44,6 +44,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <apexchart width="1000" type="bar" :options="chartOptions" :series="series"></apexchart>
+                </div>
             </div>
             <Footer></Footer>
     </div>
@@ -55,6 +58,61 @@ export default {
     data() {
         return {
         title: 'Dashboard',
+        chartOptions: {
+            chart: {
+                id: 'vuechart-user',
+                height: 350
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+              },
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent']
+            },
+            title: {
+                text: 'Số thử thách, giải pháp và người dùng trong năm',
+                align: 'left'
+            },
+            xaxis: {
+                categories: [1,2,3,4,5,6,7,8,9,10,11,12],
+                title: {
+                    text: 'Tháng'
+                },
+           
+            },
+             yaxis: {
+                // title: {
+                //     text: 'Số lượng'
+                // },
+                min: 0,
+            },
+            fill: {
+              opacity: 1
+            },
+        },
+        series: [
+            {
+            name: 'Tài khoản',
+            data: []
+            },
+            {
+            name: 'Thử thách',
+            data: []
+            },
+            {
+            name: 'Giải pháp',
+            data: []
+            },
+        ]
         };
     },
     computed: mapGetters({
@@ -64,13 +122,33 @@ export default {
         solutions: 'solution/all',
     }),
     created () {
+        this.userChart();
         this.$store.dispatch('user/all');
         this.$store.dispatch('challenge/all');
         this.$store.dispatch('challengecategory/all');
         this.$store.dispatch('solution/all');
     },
   components:{
-      Footer
+      Footer,
+  },
+  methods:{
+     async userChart(){
+          await axios.get(route("chart.user"))
+            .then(response => {
+            var data =response.data.data;
+             this.series = [
+                {
+                    data: data.user
+                },
+                {
+                    data: data.challenge
+                },
+                {
+                    data: data.solution
+                }
+            ]
+        })
+      }
   }
 }
 </script>
