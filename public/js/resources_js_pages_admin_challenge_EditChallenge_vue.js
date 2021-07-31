@@ -159,6 +159,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -169,6 +177,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         description: "",
         language: "",
         link_figma: "",
+        design_on_figma: "",
         level: "",
         cate_challen_id: ""
       }),
@@ -213,9 +222,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.form.description = _this.data.description;
                 _this.form.language = _this.data.language;
                 _this.form.link_figma = _this.data.link_figma;
+                _this.form.design_on_figma = _this.data.design_on_figma;
                 _this.form.level = _this.data.level;
                 _this.form.cate_challen_id = _this.data.cate_challen_id;
-                _context.next = 8;
+                _context.next = 9;
                 return _this.form.post(route("update.challenge", _this.$route.params.id)).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
@@ -232,7 +242,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -782,7 +792,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row" }, [
                   _c("label", { staticClass: "col-sm-2 col-form-label" }, [
-                    _vm._v("Link figma: ")
+                    _vm._v("Link figma nhúng: ")
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -801,7 +811,7 @@ var render = function() {
                       },
                       attrs: {
                         type: "text",
-                        placeholder: "Link figma",
+                        placeholder: "Link figma nhúng",
                         name: "link_figma"
                       },
                       domProps: { value: _vm.data.link_figma },
@@ -820,6 +830,58 @@ var render = function() {
                           staticClass: "text-danger",
                           domProps: {
                             innerHTML: _vm._s(_vm.form.errors.get("link_figma"))
+                          }
+                        })
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                    _vm._v("Thiết kế trên figma: ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.data.design_on_figma,
+                          expression: "data.design_on_figma"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.form.errors.has("design_on_figma")
+                      },
+                      attrs: {
+                        type: "text",
+                        placeholder: "Thiết kế trên figma",
+                        name: "design_on_figma"
+                      },
+                      domProps: { value: _vm.data.design_on_figma },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.data,
+                            "design_on_figma",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.errors.has("design_on_figma")
+                      ? _c("div", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.form.errors.get("design_on_figma")
+                            )
                           }
                         })
                       : _vm._e()

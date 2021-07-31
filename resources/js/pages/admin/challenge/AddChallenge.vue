@@ -35,11 +35,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Link figma: </label>
+                            <label class="col-sm-2 col-form-label">Link figma nhúng: </label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" placeholder="Link figma" name="link_figma" v-model="form.link_figma" :class="{
+                               <input type="text" class="form-control" placeholder="Link figma embed" name="link_figma" v-model="form.link_figma" :class="{
                                   'is-invalid': form.errors.has('link_figma'), }"/>
                               <div class="text-danger" v-if="form.errors.has('link_figma')" v-html="form.errors.get('link_figma')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Thiết kế trên figma: </label>
+                            <div class="col-sm-10">
+                               <input type="text" class="form-control" placeholder="Link thiết kế trên figma" name="design_on_figma" v-model="form.design_on_figma" :class="{
+                                  'is-invalid': form.errors.has('design_on_figma'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('design_on_figma')" v-html="form.errors.get('design_on_figma')" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -113,6 +121,7 @@ export default {
       description: "",
       language: "",
       link_figma: "",
+      design_on_figma:"",
       resources: "",
       image:"",
       level: "",

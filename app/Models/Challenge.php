@@ -15,6 +15,7 @@ class Challenge extends Model
         'description',
         'language',
         'link_figma',
+        'design_on_figma',
         'image',
         'resources',
         'level',

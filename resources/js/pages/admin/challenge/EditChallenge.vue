@@ -35,11 +35,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Link figma: </label>
+                            <label class="col-sm-2 col-form-label">Link figma nhúng: </label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" placeholder="Link figma" name="link_figma" v-model="data.link_figma" :class="{
+                               <input type="text" class="form-control" placeholder="Link figma nhúng" name="link_figma" v-model="data.link_figma" :class="{
                                   'is-invalid': form.errors.has('link_figma'), }"/>
                               <div class="text-danger" v-if="form.errors.has('link_figma')" v-html="form.errors.get('link_figma')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Thiết kế trên figma: </label>
+                            <div class="col-sm-10">
+                               <input type="text" class="form-control" placeholder="Thiết kế trên figma" name="design_on_figma" v-model="data.design_on_figma" :class="{
+                                  'is-invalid': form.errors.has('design_on_figma'), }"/>
+                              <div class="text-danger" v-if="form.errors.has('design_on_figma')" v-html="form.errors.get('design_on_figma')" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -112,6 +120,7 @@ export default {
       description: "",
       language: "",
       link_figma: "",
+      design_on_figma:"",
       level: "",
       cate_challen_id: "",
     }),
@@ -145,6 +154,7 @@ export default {
       this.form.description = this.data.description;
       this.form.language = this.data.language;
       this.form.link_figma = this.data.link_figma;
+      this.form.design_on_figma = this.data.design_on_figma;
       this.form.level = this.data.level;
     this.form.cate_challen_id = this.data.cate_challen_id;
       await this.form

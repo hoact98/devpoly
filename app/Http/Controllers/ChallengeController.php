@@ -25,7 +25,7 @@ class ChallengeController extends Controller
     }
     public function index(Request $request)
     {
-        $query = Challenge::eloquentQuery(
+        $query = Challenge::orderBy('id','desc')->eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),
@@ -76,6 +76,7 @@ class ChallengeController extends Controller
             'description' => $request->description,
             'language' => $request->language,
             'link_figma' => $request->link_figma,
+            'design_on_figma' => $request->design_on_figma,
             'image'=>$imageName,
             'resources'=>$resources,
             'level' => $request->level,
@@ -135,8 +136,8 @@ class ChallengeController extends Controller
            $resources = 'files/'.$sources;
             File::delete($challenge->resources);
         }
-        $slug = Str::slug($request->name,'-');
-        $c = Challenge::where('slug','=', $slug)
+        $slug = Str::slug($request->title,'-');
+        $c = Challenge::where('slug', $slug)
                      ->where('id','!=',$request->id)
                      ->first();
         if($c){
@@ -149,6 +150,7 @@ class ChallengeController extends Controller
         $challenge->description = $request->description;
         $challenge->language = $request->language;
         $challenge->link_figma = $request->link_figma;
+        $challenge->design_on_figma = $request->design_on_figma;
         $challenge->cate_challen_id = $request->cate_challen_id;
         $challenge->level = $request->level;
         $challenge->save();

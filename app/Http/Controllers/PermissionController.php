@@ -26,7 +26,7 @@ class PermissionController extends Controller
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         
-        $query = Permission::eloquentQuery($sortBy, $orderBy, $searchValue);
+        $query = Permission::orderBy('id','desc')->eloquentQuery($sortBy, $orderBy, $searchValue);
 
         $data = $query->paginate($length);
         

@@ -25,7 +25,7 @@ class ChallengeCategoryController extends Controller
 
     public function index(Request $request)
     {
-        $query = ChallengeCategory::eloquentQuery(
+        $query = ChallengeCategory::orderBy('id','desc')->eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),
@@ -54,7 +54,7 @@ class ChallengeCategoryController extends Controller
               return response()->json(['errors'=>$validator->errors()],422);
             }
         $slug = Str::slug($request->name,'-');
-        $c = ChallengeCategory::where('slug','=', $slug)->first();
+        $c = ChallengeCategory::where('slug', $slug)->first();
         if($c){
             $slug = $slug.Str::random(5);
         }
@@ -104,7 +104,7 @@ class ChallengeCategoryController extends Controller
             File::delete($cate->image);
         }
         $slug = Str::slug($request->name,'-');
-        $c = ChallengeCategory::where('slug','=', $slug)
+        $c = ChallengeCategory::where('slug', $slug)
                      ->where('id','!=',$request->id)
                      ->first();
         if($c){

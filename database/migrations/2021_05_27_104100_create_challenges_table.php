@@ -20,8 +20,9 @@ class CreateChallengesTable extends Migration
             $table->text('description');
             $table->string('language');
             $table->string('link_figma')->unique();
+            $table->string('design_on_figma')->nullable()->unique();
             $table->string('image')->nullable();
-            $table->string('resources');
+            $table->string('resources')->nullable();
             $table->tinyInteger('level')->default(1);
             $table->integer('cate_challen_id')->unsigned();
             $table->timestamps();
