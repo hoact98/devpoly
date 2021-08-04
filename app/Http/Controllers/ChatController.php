@@ -7,6 +7,7 @@ use App\Models\ChatMessage;
 use App\Models\ChatRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
+use App\Events\PrivateMessageSent;
 use Illuminate\Support\Facades\Broadcast;
 
 class ChatController extends Controller
@@ -24,7 +25,6 @@ class ChatController extends Controller
     {
         $ChatMessage = ChatMessage::where('chat_room_id', $roomId)
             ->with('user')
-            ->orderBy('created_at', 'DESC')
             ->get();
         return response()->json([
             'status' => 'success',
@@ -32,19 +32,72 @@ class ChatController extends Controller
             'data' => $ChatMessage,
         ], 200);
     }
+    public function privateMessages($id)
+    {
+        $privateCommunication= ChatMessage::with('user')
+        ->where(['user_id'=> Auth::id(), 'receiver_id'=> $id])
+        ->orWhere(function($query) use($id){
+            $query->where(['user_id' => $id, 'receiver_id' => Auth::id()]);
+        })
+        ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'messege' => 'Succsess get messeges',
+            'data' => $privateCommunication,
+        ], 200);
+    }
     public function newMessage(Request $request, $roomId)
     {
-        $newMessage = new ChatMessage;
-        $newMessage->user_id  = Auth::id();
-        $newMessage->chat_room_id = $roomId;
-        $newMessage->message = $request->message;
-        $newMessage->save();
-
+        if(request()->has('file')){
+            $image = time().'-'.$request->file->getClientOriginalName();
+            $request->file->move(public_path('files'),$image);
+            $filename = 'files/'.$image;
+            $newMessage = new ChatMessage;
+            $newMessage->user_id  = Auth::id();
+            $newMessage->chat_room_id = $roomId;
+            $newMessage->image = $filename;
+            $newMessage->save();
+        }else{
+            $newMessage = new ChatMessage;
+            $newMessage->user_id  = Auth::id();
+            $newMessage->chat_room_id = $roomId;
+            $newMessage->message = $request->message;
+            $newMessage->save();
+        }
         broadcast(new NewChatMessage($newMessage))->toOthers();
         return response()->json([
             'status' => 'success',
             'messege' => 'Succsess get new message',
             'data' => $newMessage,
         ], 200);
+    }
+    public function sendPrivateMessage(Request $request, $id)
+    {
+        if(request()->has('file')){
+            $image = time().'-'.$request->file->getClientOriginalName();
+            $request->file->move(public_path('files'),$image);
+            $filename = 'files/'.$image;
+            $message = new ChatMessage;
+            $message->user_id  = Auth::id();
+            $message->receiver_id = $id;
+            $message->image = $filename;
+            $message->save();
+        }else{
+            $message = new ChatMessage;
+            $message->user_id  = Auth::id();
+            $message->receiver_id = $id;
+            $message->message = $request->message;
+            $message->save();
+        }
+
+        broadcast(new PrivateMessageSent($message->load('user')))->toOthers();
+        return response(['status'=>'Message private sent successfully','message'=>$message],200);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'messege' => 'Succsess get new message',
+        //     'data' => $message,
+        // ], 200);
+
     }
 }

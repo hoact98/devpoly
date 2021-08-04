@@ -1,5 +1,5 @@
 <template>
-    <div class="card-body msg_card_body">
+    <div class="card-body" id="msg_card_body">
     <div
       class="d-flex justify-content-start mb-4"
         v-for="(message, index) in messages"

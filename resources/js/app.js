@@ -39,6 +39,8 @@ Vue.use(CKEditor);
 Vue.use(DataTable);
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
+const VueUploadComponent = require('vue-upload-component')
+Vue.component('file-upload', VueUploadComponent)
 Vue.component('breadcrumb', require('./components/Breadcrumb.vue').default);
 Vue.component('checkbox', require('./components/Checkbox.vue').default);
 Vue.component('v-button', require('./components/Button.vue').default);

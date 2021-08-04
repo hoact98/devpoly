@@ -16,24 +16,25 @@
                                 </form>
                                 <ul class="nav nav-tabs tabs-line">
                                     <li class="nav-item">
-                                        <router-link :to="{name:'admin.private-chat'}" class="nav-link"><i class="ti-user"></i> Thành viên</router-link>
+                                        <router-link :to="{name:'admin.private-chat'}" class="nav-link active"><i class="ti-user"></i> Thành viên</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <router-link :to="{name:'admin.chat'}" class="nav-link active"><i class="fa fa-users"></i> Nhóm</router-link>
-                                    </li>
+                                        <router-link :to="{name:'admin.chat'}" class="nav-link"><i class="fa fa-users"></i> Nhóm</router-link>
+                                    </li> 
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active contacts_body">
                                         <ul class="contacts">
-                                             <li v-for="room in chatRooms"
-                                                :key="room.id"
-                                                @click="currentRoom=room">
-                                                <div :class="(room.id==currentRoom.id)?'d-flex bd-highlight active':'d-flex bd-highlight'">
+                                            <li v-for="friend in friends"
+                                                :key="friend.id"
+                                                @click="activeFriend=friend">
+                                                <div :class="(friend.id==activeFriend.id)?'d-flex bd-highlight active':'d-flex bd-highlight'">
                                                     <div class="img_cont">
-                                                        <img :src="'/'+room.image" class="rounded-circle user_img">
+                                                        <img :src="'/'+friend.image" class="rounded-circle user_img">
+                                                        <span :class="(onlineFriends.find(user=>user.id==friend.id))?'online_icon':'online_icon offline'"></span>
                                                     </div>
                                                     <div class="user_info">
-                                                        <span>{{room.name}}</span>
+                                                        <span>{{friend.name}}</span>
                                                         <!-- <p>Taherah left 7 mins ago</p> -->
                                                     </div>
                                                 </div>
@@ -48,28 +49,29 @@
                         <div class="ibox" style="height:700px">
                             <div class="ibox-body">
                                 <div class="nav-tabs">
-                                    <div class="d-flex bd-highlight" v-if="currentRoom">
+                                    <div class="d-flex bd-highlight" v-if="activeFriend">
                                         <div class="img_cont">
-                                            <img  :src="'/'+currentRoom.image" class="rounded-circle user_img">
-                                            <!-- <span class="online_icon"></span> -->
+                                            <img  :src="'/'+activeFriend.image" class="rounded-circle user_img">
+                                            <span :class="(onlineFriends.find(user=>user.id==activeFriend.id))?'online_icon':'online_icon offline'"></span>
                                         </div>
                                         <div class="user_info">
-                                            <span>{{currentRoom.name}}</span>
+                                            <span>{{activeFriend.name}}</span>
+                                            <p>{{activeFriend.roles && activeFriend.roles.length > 0 ? activeFriend.roles[0].name:''}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- message list-->
-                                <message-list :user="user" :all-messages="allMessages"></message-list>
+                                    <message-list :user="user" :all-messages="allMessages"></message-list>
                                 <div class="floating-div">
                                     <picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji…" />
                                 </div>
-                                 <div class="type_msg row">
+                                <div class="type_msg row">
                                      <div class="col-1 mt-1">
                                          <button type="button" @click="toggleEmo" class="btn btn-warning btn-floating-icon">
                                          <i class="ti-face-smile"></i>
-                                     </button>
+                                        </button>
                                      </div>
-                                     <file-upload
+                                    <file-upload
                                     :custom-action="upLoad"
                                     ref='upload'
                                     v-model="files"
@@ -79,7 +81,7 @@
                                        <div class="mt-3 "> <i class="ti-clip" style="font-size: 20px;"></i></div>
                                     </file-upload>
                                     <div class="input_msg_write col-10">
-                                    <input type="text" v-model="message" @keyup.enter="sendMessage" class="write_msg" placeholder="Type a message..." />
+                                    <input type="text" v-model="message"  @keyup.enter="sendMessage" class="write_msg" placeholder="Type a message..." />
                                     <button class="msg_send_btn" @click="sendMessage" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
@@ -87,6 +89,7 @@
                         </div>
                     </div>
                 </div>
+            
         </div>
         <!-- END PAGE CONTENT-->
         <Footer></Footer>
@@ -105,14 +108,15 @@ import Cookies from 'js-cookie';
 export default {
    data:() => ({
         title: 'Trao đổi',
-        // user:null,
         message:null,
-        emoStatus:false,
-        myText:null,
-        allMessages:[],
-        chatRooms: [],
-        currentRoom:{},
         files:[],
+        activeFriend:{},
+        typingFriend:{},
+        onlineFriends:[],
+        allMessages:[],
+        typingClock:null,
+        emoStatus:false,
+        users:[],
         token:document.head.querySelector('meta[name="csrf-token"]').content
   }),
    components:{
@@ -122,80 +126,125 @@ export default {
   },
   computed:{
       user(){
-          return this.$store.state.auth.user;
+           return this.$store.state.auth.user;
       },
-    },
-  created(){
-      this.$store.dispatch('auth/fetchUser');
-      this.getRooms();
-    },
-     watch:{
-      currentRoom(val){
-        this.fetchMessages();
+      friends(){
+        return this.users.filter((user)=>{
+          return user.id !==this.user.id;
+        })
       }
       
     },
+
+    watch:{
+      activeFriend(val){
+        this.fetchMessages();
+      }
+    },
+    created(){
+        this.$store.dispatch('auth/fetchUser');
+        this.fetchUsers();
+        this.startListening();
+    },
     methods: {
-         sendMessage(){
-        //check if there message
-        if(!this.message){
-          return;
-        }
-          axios.post(route("newMessage",this.currentRoom.id), { message: this.message},{headers : {'Accept':'application/json','X-CSRF-TOKEN': this.token,
-        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
-                    this.message=null;
-                    this.emoStatus=false;
-                    this.allMessages.push(response.data.data)
-                    this.scrollToEnd();
-          });
-        },
-        upLoad(file){
-          
-        let data = new FormData();
-        data.append('file',file.file); 
-          axios.post(route("newMessage",this.currentRoom.id), data,{headers : {'Accept':'application/json','Content-Type' : 'image/png',
-        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
-                    this.files=[];
-                    this.allMessages.push(response.data.data)
-                    this.scrollToEnd();
-          });
-      },
-        getRooms() {
-            axios.get(route('rooms'),{headers : {'Accept':'application/json',
-                'Authorization': 'Bearer '+ Cookies.get('token')}})
-                .then((response) => {
-                this.chatRooms = response.data.data;
-                this.setRoom(response.data.data[0]);
+        startListening(){
+            var self = this;
+             Echo.join('lchat')
+            .here((user) => {
+                console.log('online',user);
+                self.onlineFriends=user;
+            })
+            .joining((user) => {
+                self.onlineFriends.push(user);
+                console.log('joining',user.name);
+            })
+            .leaving((user) => {
+                // self.onlineFriends.splice(self.onlineFriends.indexOf(user),1);
+                console.log('leaving',user.name);
+                 const index = self.onlineFriends.findIndex(item => item.id === user.id)
+                if (index > -1) {
+                    self.onlineFriends.splice(index, 1)
+                }
             });
-            
-        },
-        setRoom(room) {
-            this.currentRoom = room;
-            this.connect();
         },
         connect(){
-                Echo.private("chat." + this.currentRoom.id)
-            .listen('NewChatMessage',(e)=>{
+
+             Echo.private('privatechat.'+this.user.id)
+            .listen('PrivateMessageSent',(e)=>{
+                this.activeFriend.id=e.message.user_id;
                 this.allMessages.push(e.message)
                 document.getElementById('ChatAudio').play();
                 this.scrollToEnd();
+
+            })
+            .listenForWhisper('typing', (e) => {
+
+                if(e.user.id==this.activeFriend.id){
+
+                    this.typingFriend=e.user;
+                    
+                if(this.typingClock) clearTimeout();
+
+                    this.typingClock=setTimeout(()=>{
+                        this.typingFriend={};
+                    },9000);
+                }
+                
             });
         },
-        fetchMessages() {
-            // console.log(this.currentRoom)
-            axios.get(route("messages", this.currentRoom.id),{headers : {'Accept':'application/json',
-            'Authorization': 'Bearer '+ Cookies.get('token')}})
-            .then((response) => {
-            this.allMessages = response.data.data;
-            this.scrollToEnd();
-            }) 
+        onTyping(){
+        Echo.private('privatechat.'+this.activeFriend.id).whisper('typing',{
+          user:this.user
+        });
+      },
+      sendMessage(){
+        if(!this.message){
+          return;
+        }
+          axios.post(route('privateMessages.store',this.activeFriend.id), {message: this.message},{headers : {'Accept':'application/json','X-CSRF-TOKEN': this.token,
+        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
+                    this.message=null;
+                    this.allMessages.push(response.data.message)
+                    this.scrollToEnd();
+          });
+      },
+      upLoad(file){
+          
+        let data = new FormData();
+        data.append('file',file.file); 
+          axios.post(route('privateMessages.store',this.activeFriend.id), data,{headers : {'Accept':'application/json','Content-Type' : 'image/png',
+        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
+                    this.files=[];
+                    this.allMessages.push(response.data.message)
+                    this.scrollToEnd();
+          });
+      },
+      fetchMessages() {
+            axios.get(route('privateMessages',this.activeFriend.id),{headers : {'Accept':'application/json',
+        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
+                this.allMessages = response.data.data;
+                this.connect();
+                this.onlineFriends.push(this.user);
+              this.scrollToEnd();
+            });
         },
-        scrollToEnd: function() {
-            setTimeout(function () {
-                document.getElementById('msg_card_body').scrollTo(0,99999);
-            }, 0);
+     fetchUsers() {
+          axios.get(route('all.user')).then(response => {
+                this.users = response.data.data;
+                if(this.friends.length>0){
+                  this.activeFriend=this.friends[0];
+                }
+            });
         },
-        onInput(e){
+      scrollToEnd: function() {
+        setTimeout(function () {
+            document.getElementById('msg_card_body').scrollTo(0,99999);
+        }, 0);
+    },
+      toggleEmo(){
+        this.emoStatus= !this.emoStatus;
+      },
+      onInput(e){
         if(!e){
           return false;
         }
@@ -204,10 +253,8 @@ export default {
         }else{
           this.message=this.message + e.native;
         }
+        this.emoStatus=false;
       },
-       toggleEmo(){
-            this.emoStatus= !this.emoStatus;
-      }
     }
 }
 </script>
@@ -351,7 +398,7 @@ export default {
     .btn-floating-icon i{
         font-size: 17px;
     }
-     ul.contacts li .bd-highlight.active{
+    ul.contacts li .bd-highlight.active{
         background: #f1f1f1;
     }
 </style>

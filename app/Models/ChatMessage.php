@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ChatMessage extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'chat_room_id',
+        'user_id',
+        'message',
+        'image',
+        'receiver_id',
+    ];
     public function room()
     {
         return $this->hasOne('App\Models\ChatRoom', 'id', 'chat_room_id');

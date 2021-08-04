@@ -50,6 +50,9 @@
         </div>
       </div>
     </div>
+    <audio id="ChatAudio">
+        <source src="/files/chat.mp3">
+    </audio>
   </div>
 </template>
 
@@ -85,11 +88,13 @@ export default {
       if (this.currentRoom.id) {
         let vm = this;
         this.getMessages();
-        console.log(Echo.private("chat." + this.currentRoom.id));
+
         window.Echo.private("chat." + this.currentRoom.id).listen(
           "NewChatMessage",
           (e) => {
             vm.getMessages();
+            document.getElementById('ChatAudio').play();
+            this.scrollToEnd();
           }
         );
       }
@@ -120,6 +125,7 @@ export default {
         'Authorization': 'Bearer '+ Cookies.get('token')}})
          .then((response) => {
           this.messages = response.data.data;
+          this.scrollToEnd();
         }) 
         .catch((err) => {
           console.log(err);
@@ -127,6 +133,11 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+      scrollToEnd: function() {
+        setTimeout(function () {
+            document.getElementById('msg_card_body').scrollTo(0,99999);
+        }, 0);
     },
   },
   created() {
@@ -150,7 +161,7 @@ export default {
   overflow-y: auto;
   white-space: nowrap;
 }
-.msg_card_body {
+#msg_card_body {
   overflow-y: auto;
 }
 .card-header {

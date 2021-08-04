@@ -30,7 +30,7 @@ $config = [
 
 <body class="fixed-navbar has-animation bg-silver-300">
   <div id="app">
-
+    
   </div>
 
   {{-- Global configuration object --}}

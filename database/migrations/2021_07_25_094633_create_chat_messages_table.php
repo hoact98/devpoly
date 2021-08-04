@@ -14,10 +14,12 @@ class CreateChatMessagesTable extends Migration
     public function up()
     {
         Schema::create('chat_messages', function (Blueprint $table) {
-            $table->id();
-            $table->integer('chat_room_id')->unsigned();
+            $table->increments('id');
+            $table->integer('chat_room_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->mediumText('message');
+            $table->integer('receiver_id')->unsigned()->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('chat_room_id')->references('id')->on('chat_rooms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

@@ -27,6 +27,7 @@ export default {
   data: function () {
     return {
       message: "",
+      token:document.head.querySelector('meta[name="csrf-token"]').content
     };
   },
   methods: {
@@ -34,8 +35,7 @@ export default {
       if (this.message == "") {
         return;
       }
-      axios.get(route("newMessage", { message: this.message, roomID: this.room.id,
-        }),{headers : {'Accept':'application/json',
+      axios.post(route("newMessage",this.room.id ),{ message: this.message},{headers : {'Accept':'application/json','X-CSRF-TOKEN': this.token,
         'Authorization': 'Bearer '+ Cookies.get('token')}})
         .then((response) => {
           if (response.status == 200) {

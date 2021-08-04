@@ -217,6 +217,12 @@ const routes = [
         name: 'admin.chat'
     },
     {
+        path: '/admin/private-chat',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/chat/PrivateChat.vue"),
+        name: 'admin.private-chat'
+    },
+    {
         path: '/admin/mentors',
         meta: {layout: 'admin'},
         component: page('admin/mentor/Mentor.vue'),

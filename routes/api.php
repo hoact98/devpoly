@@ -114,5 +114,7 @@ Route::group(['prefix' => 'feedback'], function () {
 Route::prefix('chat')->middleware('auth:api')->group(function() {
     Route::get('rooms', [ChatController::class, 'rooms'])->name('rooms');
     Route::get('room/{roomID}/messages', [ChatController::class, 'messages'])->name('messages');
-    Route::get('room/{roomID}/message', [ChatController::class, 'newMessage'])->name('newMessage');
+    Route::post('room/{roomID}/message', [ChatController::class, 'newMessage'])->name('newMessage');
+    Route::get('/private-messages/{id}', [ChatController::class, 'privateMessages'])->name('privateMessages');
+    Route::post('/private-messages/{id}', [ChatController::class, 'sendPrivateMessage'])->name('privateMessages.store');
 });
