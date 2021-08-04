@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 31, 2021 at 11:05 AM
+-- Generation Time: Aug 04, 2021 at 11:06 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.19
 
@@ -29,19 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `challenges` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_figma` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `design_on_figma` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `resources` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(191) NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `description` text NOT NULL,
+  `language` varchar(191) NOT NULL,
+  `link_figma` varchar(191) NOT NULL,
+  `design_on_figma` varchar(191) DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
+  `resources` varchar(191) NOT NULL,
   `level` tinyint(4) NOT NULL DEFAULT '1',
   `cate_challen_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `challenges`
@@ -69,13 +69,13 @@ INSERT INTO `challenges` (`id`, `title`, `slug`, `description`, `language`, `lin
 
 CREATE TABLE `challenge_categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `image` varchar(191) NOT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `challenge_categories`
@@ -97,7 +97,7 @@ CREATE TABLE `challenge_users` (
   `challen_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `challenge_users`
@@ -113,29 +113,15 @@ INSERT INTO `challenge_users` (`user_id`, `challen_id`, `created_at`, `updated_a
 --
 
 CREATE TABLE `chat_messages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `chat_room_id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `chat_room_id` int(10) UNSIGNED DEFAULT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `message` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` mediumtext,
+  `image` varchar(191) DEFAULT NULL,
+  `receiver_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `chat_messages`
---
-
-INSERT INTO `chat_messages` (`id`, `chat_room_id`, `user_id`, `message`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Hihi', '2021-07-25 19:25:48', '2021-07-25 19:25:48'),
-(2, 1, 1, 'hsgsd', '2021-07-25 19:27:17', '2021-07-25 19:27:17'),
-(3, 1, 1, 'ggggf', '2021-07-25 19:27:23', '2021-07-25 19:27:23'),
-(4, 2, 1, 'dd', '2021-07-25 19:27:31', '2021-07-25 19:27:31'),
-(5, 1, 1, 'đsd', '2021-07-28 19:09:30', '2021-07-28 19:09:30'),
-(6, 1, 1, 'đsd', '2021-07-28 19:09:34', '2021-07-28 19:09:34'),
-(7, 1, 1, 'd', '2021-07-28 19:09:38', '2021-07-28 19:09:38'),
-(8, 1, 1, 'd', '2021-07-28 19:09:42', '2021-07-28 19:09:42'),
-(9, 1, 1, 'd', '2021-07-28 19:09:45', '2021-07-28 19:09:45'),
-(10, 1, 4, 'đff', '2021-07-29 23:10:45', '2021-07-29 23:10:45');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -145,18 +131,19 @@ INSERT INTO `chat_messages` (`id`, `chat_room_id`, `user_id`, `message`, `create
 
 CREATE TABLE `chat_rooms` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `image` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `chat_rooms`
 --
 
-INSERT INTO `chat_rooms` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'General', NULL, NULL),
-(2, 'Teck talk', NULL, NULL);
+INSERT INTO `chat_rooms` (`id`, `name`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'General', 'files/1627698467-image.png', NULL, NULL),
+(2, 'Teck talk', 'files/1627698467-image.png', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -166,13 +153,13 @@ INSERT INTO `chat_rooms` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(191) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -182,14 +169,14 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `feedbacks` (
   `id` int(10) UNSIGNED NOT NULL,
-  `feedback_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feedback_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `solution_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `solution_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT '0',
   `is_approved` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `feedbacks`
@@ -202,36 +189,14 @@ INSERT INTO `feedbacks` (`id`, `feedback_content`, `user_id`, `solution_id`, `pa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
---
-
-CREATE TABLE `messages` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `from_user_id` int(11) NOT NULL,
-  `to_user_id` int(11) NOT NULL,
-  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_format` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` date NOT NULL,
-  `time` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `migrations`
@@ -266,9 +231,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `model_has_permissions` (
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `model_has_permissions`
@@ -291,9 +256,9 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) 
 
 CREATE TABLE `model_has_roles` (
   `role_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `model_has_roles`
@@ -301,7 +266,8 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 1),
-(1, 'App\\Models\\User', 4);
+(1, 'App\\Models\\User', 4),
+(1, 'App\\Models\\User', 5);
 
 -- --------------------------------------------------------
 
@@ -313,14 +279,14 @@ CREATE TABLE `notifications` (
   `id` int(10) UNSIGNED NOT NULL,
   `from_user_id` int(11) NOT NULL,
   `to_user_id` int(11) NOT NULL,
-  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL,
-  `time` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_read` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -329,16 +295,16 @@ CREATE TABLE `notifications` (
 --
 
 CREATE TABLE `oauth_access_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `oauth_access_tokens`
@@ -346,16 +312,20 @@ CREATE TABLE `oauth_access_tokens` (
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('0253ef2ff560662929a518f10e80fa63cc0b75c2300fa9b3ec608a9f617a99f405d0e91692f2e3dc', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 11:37:44', '2021-07-18 11:37:44', '2022-07-18 18:37:44'),
+('0598fe762b13b13892d2de3cdb1b0296a8b533a4c00c4f5b1c2b79201d6cfbdfa127048aa773afe3', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-04 09:36:34', '2021-08-04 09:36:34', '2022-08-04 16:36:34'),
 ('064c477fff6f2b14ef6419887836208f09ee7c4987cc71de7c8f09cfbd848a511272e98ddc0cb076', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-28 01:34:22', '2021-07-28 01:34:22', '2022-07-28 08:34:22'),
 ('0bddcad4bc3484c3bf5d145d3b93220a693c16c2bdfb653a5e1513207307ae0bc1668db2f2c778fe', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-26 03:37:44', '2021-07-26 03:37:44', '2022-07-26 10:37:44'),
 ('1183b0702eb369bcaf90325de94bd30b0fcd7de66cb8cbcb58b984001cdc1b22dc086879221bfe2d', 4, 1, 'Personal Access Token', '[]', 0, '2021-07-29 04:03:13', '2021-07-29 04:03:13', '2022-07-29 11:03:13'),
 ('137ef8ac94501132adc9f9ddd7e4c1cdae2e5063d150a3108efe28e8f67579f0039ac575076b122e', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-27 20:28:44', '2021-07-27 20:28:44', '2022-07-28 03:28:44'),
 ('196d0be2c80232607b6d7e84c5a896ceb87fadcec3b9fc597faa6a603d11d1e5dced2f7366372a0e', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-29 03:57:17', '2021-07-29 03:57:17', '2022-07-29 10:57:17'),
+('1c187258f8cd1b810639ef1df88f7ad0d94628e6632b71f70e487d261001641bb1a79b552527f140', 5, 1, 'LaravelPassport', '[]', 0, '2021-08-04 10:50:51', '2021-08-04 10:50:51', '2022-08-04 17:50:51'),
 ('1fc7bc4ab4a0a303f45e92dfad6dae994fbb101e8e9dd4f99150cbbc9aeef64e971c09cf40569007', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 03:12:42', '2021-07-18 03:12:42', '2022-07-18 10:12:42'),
 ('22885d23fba7cf996bdd995447f20f28b259b0faa907a9596fe10ac609b590fab54581052ab85ccb', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 10:31:20', '2021-07-18 10:31:20', '2022-07-18 17:31:20'),
 ('24191d6b26e4de8374e5493cacf2ae6b838304b0a810f309d4e0d2f18b547eaa08540f80503690ee', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 02:41:39', '2021-07-18 02:41:39', '2022-07-18 09:41:39'),
+('252200e9471a3efa43219b83d7a55b4a4d275f255a7fd25cc04ae68a91d0711b2c2a7741912c3211', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-03 01:27:21', '2021-08-03 01:27:21', '2022-08-03 08:27:21'),
 ('279c3c8a47a5e1087aa4fc5a64eb107d9fb6ce2191770ff336740ca471a322d749b5e5dd3859b135', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 02:40:51', '2021-07-18 02:40:51', '2022-07-18 09:40:51'),
 ('27fc317da48d1d7e0aa5de80bc3b860cf9ff60c030c60fe57883d0bd6860a6cfc46422966850e643', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 18:50:18', '2021-07-18 18:50:18', '2022-07-19 01:50:18'),
+('2e4ee5eb72b40f79566cc51694e5371ea52b541a85e2dfc4f96893710f633e29f3aed1429001afa1', 5, 1, 'Personal Access Token', '[]', 0, '2021-08-04 10:51:05', '2021-08-04 10:51:05', '2022-08-04 17:51:05'),
 ('2e88995c511b7bf37d7b4290233e30e86842fc6030e31d6c3e8ebb65c55ef69c42f4d8ba3d7fe0a4', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-29 03:33:43', '2021-07-29 03:33:43', '2022-07-29 10:33:43'),
 ('37c67b282231be735df35164c8ff5cc0d565b3946f3c33fe081415f908094548a6d363607302a845', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-20 06:43:54', '2021-07-20 06:43:54', '2022-07-20 13:43:54'),
 ('3e46d3ac93ae4ea0ebe99bfcaa4b8300e3e4e823d1a7df5784827c16dbbc77738a88007d6a053cfe', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 18:21:30', '2021-07-18 18:21:30', '2022-07-19 01:21:30'),
@@ -364,6 +334,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('4154e8e3c924090cd55c650b9b32bcefee0c35385d0dfc50e46a0c38b2c5fb952af074bdd0eb1ede', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 10:03:35', '2021-07-18 10:03:35', '2022-07-18 17:03:35'),
 ('444ca553e27c921cf5a1713b85516b7da58746bb9eb6fee269d7e083d2025d18b0e49bd51b418473', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 21:04:19', '2021-07-18 21:04:19', '2022-07-19 04:04:19'),
 ('44e01a1fb7f3306b9dfd20fb90c36bc8b1d5c473e50e06cf82e15ac0a8b6dccec79a59b19cacc4d3', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-28 04:17:50', '2021-07-28 04:17:50', '2022-07-28 11:17:50'),
+('45ef85b7754cfd0e47c39d15c4fee8e55770c524b0b9a8112d08755df7ea7a86b1429660b99d97bb', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-02 08:25:54', '2021-08-02 08:25:54', '2022-08-02 15:25:54'),
 ('49b0cbc7556d4347f02eaacc583e85faeb8a420950c4259656aca964a6689bcdd742dbac71f18917', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-30 19:10:32', '2021-07-30 19:10:32', '2022-07-31 02:10:32'),
 ('4a8570a6deb47706a26eb62129643db85f56e940c7b873acb379cf1fe3a2796bc4d79dc9a732e224', 2, 1, 'Personal Access Token', '[]', 1, '2021-07-26 09:10:13', '2021-07-26 09:10:13', '2022-07-26 16:10:13'),
 ('4eeb59bf40a83a45301c04dd53510c33b6fc606a9a1884480293a2e16f3bb66411a6b2962db3639a', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-28 03:51:49', '2021-07-28 03:51:49', '2022-07-28 10:51:49'),
@@ -375,6 +346,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('548cab8a858b23a70b8a578588d3b5bcdccf20c15c060fbe27a6ee64c37a5d06e43f616ec0b11a45', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-29 03:12:25', '2021-07-29 03:12:25', '2022-07-29 10:12:25'),
 ('57afadfe5524522242989010f9f84d20eec7d90876be7a33ca92221bd7e9689d705d8fac68edd26f', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 11:42:04', '2021-07-18 11:42:04', '2022-07-18 18:42:04'),
 ('58ea08894c1a0f928140cb4a46e511e6d6900006f5501e63b47ceeced129736bdd9f7077fc9f7fc2', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-27 20:26:14', '2021-07-27 20:26:14', '2022-07-28 03:26:14'),
+('598a20ac4db15dac776bbb20d0a3b93f58a28a73932b9036548fe5b1ff3893e0099873274ade8ba6', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-02 19:14:12', '2021-08-02 19:14:12', '2022-08-03 02:14:12'),
 ('5d04a65b604e395d9466a62021955dd8ea88f8ce665727649233fcac9c3a11c7460c8b21f387f3e7', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-30 08:36:41', '2021-07-30 08:36:41', '2022-07-30 15:36:41'),
 ('5d0b8282b06b4af301359f1cbb4ed00b8a04327809ef9ac5db0db2aa19b40ed064e1cb12a6da68a9', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-25 03:43:00', '2021-07-25 03:43:00', '2022-07-25 10:43:00'),
 ('60d60e151923322ff775c650004b723e9aee9d0c8b2e8174f566159faa2c7def8aae11902dfbb770', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-28 04:12:00', '2021-07-28 04:12:00', '2022-07-28 11:12:00'),
@@ -386,6 +358,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('6f8d06de3248d192d3c0028c5c8c1a2dde0e5a04d1bc24a67a1b8d9c709006b8cae18ca1611df07e', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-28 03:56:46', '2021-07-28 03:56:46', '2022-07-28 10:56:46'),
 ('71c5987a41d2e3dce40d52e035ad586362b6402b3122dc9f01fb1884037440232e5b5e50761176d2', 2, 1, 'LaravelPassport', '[]', 0, '2021-07-26 08:05:01', '2021-07-26 08:05:01', '2022-07-26 15:05:01'),
 ('72d362e1dc7e4c4d3a9c359fb1428d74b4d0c97913b98a2eb095ffec1a6ebac3ad9f4a3ef325d840', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 03:01:12', '2021-07-18 03:01:12', '2022-07-18 10:01:12'),
+('744e3bdf3fe62ac15c2187ae9b8c56e3c3c394fffb18590c220439873314a0538739d79b1d578fb3', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-02 09:31:08', '2021-08-02 09:31:08', '2022-08-02 16:31:08'),
 ('757b78cfdfe5516831274a605626501215a4291bbf93281f94bcf7c31f05295c7a5e00388feb8c9f', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-26 01:41:20', '2021-07-26 01:41:20', '2022-07-26 08:41:20'),
 ('7687696fe5285fd4c8f81c81c0f6713ff05bc08cc00bf134ce63adb4173f1d30ffd9430d5ec89e61', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-28 03:25:22', '2021-07-28 03:25:22', '2022-07-28 10:25:22'),
 ('7eb56bf55c9d2d912ed6abc5c95ac354e8c5ffd072b3ea4b42712e8fa017165f79f6af5ed78a4b18', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-27 09:08:32', '2021-07-27 09:08:32', '2022-07-27 16:08:32'),
@@ -411,6 +384,8 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('b001bcefed1cdba5d255154d74c0609f26f74ac1feb53654a67ad3b9b15e67792d9990abb7f359aa', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 19:53:07', '2021-07-18 19:53:07', '2022-07-19 02:53:07'),
 ('b109168ebaeca58a6d4fd25af6a45b9c1805355163b939102019cab9aee2cc74a17731a8366b3935', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-26 08:29:03', '2021-07-26 08:29:03', '2022-07-26 15:29:03'),
 ('b4186083725f479b3add50c24b0e3ce87f27b36619655c37cb3610b3571ab89e7f4ac53d234956ad', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-30 19:31:55', '2021-07-30 19:31:55', '2022-07-31 02:31:55'),
+('b8a78f9a18a2572a829625226882e594f31331dc4f8f4b627aa69cf7446f3aee7e779dac6aadf6fa', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-02 23:11:01', '2021-08-02 23:11:01', '2022-08-03 06:11:01'),
+('b8f5d5eec3c60a498c2a9315abff4cc40aa7455dd0f195e865ef65c65824fc2d262234496a4fc88b', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-02 19:07:36', '2021-08-02 19:07:36', '2022-08-03 02:07:36'),
 ('be62f5e244e1b1dffffffdc32ef57ffd1c3bb9f00db24131dab154317740747e0a3c0be2ff4c51db', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-25 18:24:07', '2021-07-25 18:24:07', '2022-07-26 01:24:07'),
 ('c14a1a0332f979670047daeec625ce8419d9b3b28df4583e5c3d84c67d72b98c233b1b48bc705327', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-29 03:35:45', '2021-07-29 03:35:45', '2022-07-29 10:35:45'),
 ('ce39e0c644eeb2940ee6eac75b1ec82eecfd43d5d6466a3820753c432d69cd75f57697a06231dbeb', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 19:52:35', '2021-07-18 19:52:35', '2022-07-19 02:52:35'),
@@ -429,7 +404,9 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('e8e598d9a494e0bdad8ce182833e3825f1f0f7f563b035b11238a0c69cd9a9c39d01bd72f0255e7c', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-18 11:13:59', '2021-07-18 11:13:59', '2022-07-18 18:13:59'),
 ('ec03f95785fb227f93b13781659c5b85d39cd1ee4d399c692b7242035c174121ca2b38edf6365e8f', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 02:26:23', '2021-07-18 02:26:23', '2022-07-18 09:26:23'),
 ('ed019ce5fb1592662c2e5bfff4638f4c290498a4f2ea6c54538c931c314f290c6f44d57a1ddb97fc', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-30 08:16:00', '2021-07-30 08:16:00', '2022-07-30 15:16:00'),
+('f23b8cefcd390c1c7970b6736667489fc9cf83c9d32ed7bce681adf5e69eeb5a9ba17e4e33e1ab26', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-04 09:59:09', '2021-08-04 09:59:09', '2022-08-04 16:59:09'),
 ('f3100ae70a7de9ccfe72455431350ab1bce85062f09dfcac4f6f81401f542ea7fe6aa5bc73082cda', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 02:39:33', '2021-07-18 02:39:33', '2022-07-18 09:39:33'),
+('fd1fab8e7da0352418c0ded982d319fdf79ecf97543b3ca3aeabe63bcc02c06540b14196482c64ea', 4, 1, 'Personal Access Token', '[]', 0, '2021-08-04 09:02:44', '2021-08-04 09:02:44', '2022-08-04 16:02:44'),
 ('fd6ac54b43d79bbec6be817ee92f1210e4e2da4c55976fb6686045c97ebe7974c55fd1cfcaee76f2', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-18 03:11:39', '2021-07-18 03:11:39', '2022-07-18 10:11:39'),
 ('fda6ba44036737a6f23358e275b476a92cd09d44d1f8a42272d29634ee8656c3216ef8af3490c387', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-28 05:31:09', '2021-07-28 05:31:09', '2022-07-28 12:31:09'),
 ('ff4b0fd4513e9b48b85258387f8a3e9d75ffd25b58d5938405838d681dccab0e0f6d12c27d4fa047', 1, 1, 'Personal Access Token', '[]', 1, '2021-07-28 04:17:27', '2021-07-28 04:17:27', '2022-07-28 11:17:27'),
@@ -442,13 +419,13 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 --
 
 CREATE TABLE `oauth_auth_codes` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -459,16 +436,16 @@ CREATE TABLE `oauth_auth_codes` (
 CREATE TABLE `oauth_clients` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `redirect` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `personal_access_client` tinyint(1) NOT NULL,
   `password_client` tinyint(1) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `oauth_clients`
@@ -488,7 +465,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `client_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `oauth_personal_access_clients`
@@ -504,11 +481,11 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 --
 
 CREATE TABLE `oauth_refresh_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -517,10 +494,10 @@ CREATE TABLE `oauth_refresh_tokens` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -530,11 +507,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `permissions` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `permissions`
@@ -556,11 +533,11 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 
 CREATE TABLE `roles` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `roles`
@@ -580,7 +557,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 CREATE TABLE `role_has_permissions` (
   `permission_id` int(10) UNSIGNED NOT NULL,
   `role_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -589,17 +566,17 @@ CREATE TABLE `role_has_permissions` (
 --
 
 CREATE TABLE `solutions` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_github` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `demo_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link_github` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `demo_url` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `challen_id` int(10) UNSIGNED NOT NULL,
   `number_like` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `solutions`
@@ -616,23 +593,23 @@ INSERT INTO `solutions` (`id`, `title`, `description`, `link_github`, `demo_url`
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` int(11) NOT NULL DEFAULT '0',
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `online` tinyint(1) NOT NULL DEFAULT '0',
-  `socket_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `socket_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `verify_token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verify_token` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -640,7 +617,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `gender`, `address`, `phone`, `image`, `online`, `socket_id`, `is_active`, `verify_token`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'admin', 'admin123@gmail.com', 0, 'Hà Nội', '0387897456', 'files/1627378141-5.jpg', 0, NULL, 1, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-07-18 02:00:25', '2021-07-29 03:57:24'),
-(4, 'hoad', 'hoa02', 'hoa02@gmail', 1, 'qqqqqqq', '09566333222', 'files/1627381978-request_image.png', 0, NULL, 0, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-06-27 03:30:10', '2021-07-29 04:03:46');
+(4, 'hoad', 'hoa02', 'hoa02@gmail', 1, 'qqqqqqq', '09566333222', 'files/1627381978-request_image.png', 0, NULL, 0, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-06-27 03:30:10', '2021-07-29 04:03:46'),
+(5, NULL, 'hoact', 'hoact@gmail.com', 0, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, '$2y$10$2owOiuYi5fkTU5R2wdauKOy8/NdJOUaHz7PzHfaCjrCXTGogPBXem', NULL, '2021-08-04 10:50:51', '2021-08-04 10:50:51');
 
 --
 -- Indexes for dumped tables
@@ -700,12 +678,6 @@ ALTER TABLE `feedbacks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `feedbacks_solution_id_foreign` (`solution_id`),
   ADD KEY `feedbacks_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -833,7 +805,7 @@ ALTER TABLE `challenge_categories`
 -- AUTO_INCREMENT for table `chat_messages`
 --
 ALTER TABLE `chat_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
 
 --
 -- AUTO_INCREMENT for table `chat_rooms`
@@ -852,12 +824,6 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `feedbacks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -899,7 +865,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
