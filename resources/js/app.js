@@ -14,6 +14,8 @@ import HomeLayout from "./layouts/home.vue";
 import AdminLayout from "./layouts/admin.vue";
 import AdminLogin from "./layouts/AdminLogin.vue";
 import AuthLayout from "./layouts/Auth.vue";
+import Permissions from './mixins/Permissions';
+
 //Import Sweetalert2
 import Swal from 'sweetalert2'
 window.Swal = Swal
@@ -49,6 +51,7 @@ Vue.component('home-layout',HomeLayout);
 Vue.component('main-layout',MainLayout);
 Vue.component('admin-login-layout',AdminLogin);
 Vue.component('auth-layout',AuthLayout);
+Vue.mixin(Permissions);
 // const router = new VueRouter({
 //   router,
 //   store,

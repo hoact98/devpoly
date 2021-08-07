@@ -3,7 +3,8 @@
             <div id="sidebar-collapse">
                 <div class="admin-block d-flex" v-if="user">
                     <div>
-                        <img :src="'/'+user.image" width="45px" />
+                        <img v-if="user.image" :src="'/'+user.image" width="45px" />
+                        <img v-else :src="user.photo_url" width="45px" />
                     </div>
                     <div class="admin-info">
                         <div class="font-strong">{{user.name}}</div><small>{{user.roles[0].name}}</small>
@@ -37,7 +38,7 @@
                                     </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name: 'add.user'}" class="nav-link">
+                                <router-link v-if="$can('create users')" :to="{name: 'add.user'}" class="nav-link">
                                    Thêm tài khoản
                                     </router-link>
                             </li>

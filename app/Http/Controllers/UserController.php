@@ -40,7 +40,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {   
-        $query = User::orderBy('id','desc')->eloquentQuery(
+        $query = User::eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),

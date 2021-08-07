@@ -26,7 +26,7 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
-import Image from '../../../components/ImageComponent.vue';
+import ImageComponent from '../../../components/ImageComponent.vue';
 
 export default {
   data() {
@@ -37,7 +37,7 @@ export default {
           search: '',
           length: 10,
           column: 'id',
-          dir: 'desc'
+          dir: 'asc'
       },
       columns: [
           {
@@ -54,7 +54,7 @@ export default {
           {
               label: 'Hình ảnh',
               orderable: false,
-              component: Image,
+              component: ImageComponent,
               width: 10,
           },
           {
@@ -76,7 +76,7 @@ export default {
   components:{
     Footer,
     TableButton,
-    Image
+    ImageComponent
   },
   created() {
         this.getData();

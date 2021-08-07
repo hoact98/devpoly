@@ -50,26 +50,32 @@ export default {
   },
     methods: {
         async addPermission () {
-        
-      await this.form.post(route('create.permission'))
-      .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'permissions' })
-            Swal.fire(
-                'Created',
-                'Permission created Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-     
-    },
+            if(Permissions.indexOf('create permissions') == -1){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Bạn không có quyền tạo!',
+                })
+            }else{
+                await this.form.post(route('create.permission'))
+                .then(response => {
+                    if(response.data.status == 'success'){
+                    this.$router.push({ name: 'permissions' })
+                        Swal.fire(
+                            'Created',
+                            'Permission created Successfully',
+                            'success'
+                        );
+                    }
+                }).catch(()=>{
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        })
+                });
+            }
+        },
     }
 }
 </script>

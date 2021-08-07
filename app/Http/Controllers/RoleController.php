@@ -28,7 +28,7 @@ class RoleController extends Controller
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         
-        $query = Role::orderBy('id','desc')->eloquentQuery($sortBy, $orderBy, $searchValue);
+        $query = Role::eloquentQuery($sortBy, $orderBy, $searchValue);
 
         $data = $query->paginate($length);
         

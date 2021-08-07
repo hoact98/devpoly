@@ -135,7 +135,8 @@
                     </li>
                     <li class="dropdown dropdown-user" v-if="user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img :src="'/'+user.image"  width="30" height="30"/>
+                            <img v-if="user.image" :src="'/'+user.image"  width="30" height="30"/>
+                            <img v-else :src="user.photo_url"  width="30" height="30"/>
                             <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <router-link :to="{ name: 'admin.profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Profile</router-link>

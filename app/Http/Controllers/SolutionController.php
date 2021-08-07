@@ -27,7 +27,7 @@ class SolutionController extends Controller
     }
     public function index(Request $request)
     {   
-        $query = Solution::orderBy('id','desc')->eloquentQuery(
+        $query = Solution::eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),

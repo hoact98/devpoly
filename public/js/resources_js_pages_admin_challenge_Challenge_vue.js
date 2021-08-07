@@ -121,7 +121,7 @@ __webpack_require__.r(__webpack_exports__);
         search: '',
         length: 10,
         column: 'id',
-        dir: 'desc'
+        dir: 'asc'
       },
       columns: [{
         label: 'ID',

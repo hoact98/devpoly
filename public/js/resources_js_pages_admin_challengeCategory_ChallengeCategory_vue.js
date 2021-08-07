@@ -48,6 +48,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     data: {},
@@ -146,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
         search: '',
         length: 10,
         column: 'id',
-        dir: 'desc'
+        dir: 'asc'
       },
       columns: [{
         label: 'ID',
@@ -179,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Footer: _components_AdminFooter_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     TableButton: _components_TableButton_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    Image: _components_ImageComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    ImageComponent: _components_ImageComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
   created: function created() {
     this.getData();
@@ -747,10 +750,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("img", {
-    class: _vm.classes,
-    attrs: { src: "/" + _vm.data.image, alt: "" }
-  })
+  return _c("div", [
+    _vm.data.image
+      ? _c("img", {
+          class: _vm.classes,
+          attrs: { src: "/" + _vm.data.image, alt: "" }
+        })
+      : _c("img", {
+          class: _vm.classes,
+          attrs: { src: _vm.data.photo_url, alt: "" }
+        })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

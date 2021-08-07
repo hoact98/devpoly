@@ -3,7 +3,7 @@
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
+          <router-link v-if="$can('create permissions')" :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -36,7 +36,7 @@ export default {
           search: '',
           length: 10,
           column: 'id',
-          dir: 'desc'
+          dir: 'asc'
       },
       columns: [
           {
@@ -97,13 +97,20 @@ export default {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-
-              if (result.value) {
-                //Send Request to server
-                this.$store.dispatch('permission/deletePermission', id).then(
-                    this.getData(route("permissions"), this.tableProps)
-                )
-              }
+                if(Permissions.indexOf('delete permissions') == -1){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bạn không có quyền xoá!',
+                    })
+                }else{
+                    if (result.value) {
+                        //Send Request to server
+                        this.$store.dispatch('permission/deletePermission', id).then(
+                            this.getData(route("permissions"), this.tableProps)
+                        )
+                    }
+                }
             })
 
           }

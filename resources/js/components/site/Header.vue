@@ -18,7 +18,8 @@
          <ul class="nav navbar-toolbar">
               <li class="dropdown dropdown-user" v-if="user">
                   <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                      <img :src="'/'+user.image" width="40" height="40" class="rounded-circle" />
+                      <img v-if="user.image" :src="'/'+user.image" width="40" height="40" class="rounded-circle" />
+                      <img v-else :src="user.photo_url" width="40" height="40" class="rounded-circle" />
                       <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                   <ul class="dropdown-menu dropdown-menu-right">
                       <router-link :to="{ name: 'profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Profile</router-link>

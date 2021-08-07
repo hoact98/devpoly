@@ -25,7 +25,7 @@ class FeedbackController extends Controller
    
    public function index(Request $request)
    {   
-       $query = Feedback::orderBy('id','desc')->eloquentQuery(
+       $query = Feedback::eloquentQuery(
            $request->input('column'),
            $request->input('dir'),
            $request->input('search'),

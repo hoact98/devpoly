@@ -35,7 +35,7 @@ export default {
           search: '',
           length: 10,
           column: 'id',
-          dir: 'desc'
+          dir: 'asc'
       },
       columns: [
           {

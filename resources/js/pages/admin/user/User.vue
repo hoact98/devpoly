@@ -3,7 +3,7 @@
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.user'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
+          <router-link v-if="$can('create users')" :to="{name:'add.user'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -26,7 +26,7 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
-import Image from '../../../components/ImageComponent.vue';
+import ImageComponent from '../../../components/ImageComponent.vue';
 import RoleComponent from '../../../components/RoleComponent.vue';
 export default {
    data() {
@@ -37,7 +37,7 @@ export default {
           search: '',
           length: 10,
           column: 'id',
-          dir: 'desc'
+          dir: 'asc'
       },
       columns: [
           {
@@ -48,7 +48,7 @@ export default {
            {
               label: 'Hình ảnh',
               orderable: false,
-              component: Image,
+              component: ImageComponent,
               width: 10,
           },
           {
@@ -87,7 +87,7 @@ export default {
    components:{
       Footer,
       TableButton,
-      Image,
+      ImageComponent,
       RoleComponent
   },
     created() {
@@ -123,14 +123,20 @@ export default {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-
-              if (result.value) {
-                //Send Request to server
-                this.$store.dispatch('user/deleteUser', id).then(
-                    this.getData(route("users"), this.tableProps)
-                )
+                if(Permissions.indexOf('delete users') == -1){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bạn không có quyền xoá tài khoản!',
+                        })
+                }else{
+                     if (result.value) {
+                        //Send Request to server
+                        this.$store.dispatch('user/deleteUser', id).then(
+                            this.getData(route("users"), this.tableProps)
+                        )
+                    }
                 }
-
             })
           }
     }

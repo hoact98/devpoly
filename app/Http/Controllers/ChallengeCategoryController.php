@@ -25,7 +25,7 @@ class ChallengeCategoryController extends Controller
 
     public function index(Request $request)
     {
-        $query = ChallengeCategory::orderBy('id','desc')->eloquentQuery(
+        $query = ChallengeCategory::eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),

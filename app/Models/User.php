@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 class User extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable,HasRoles,LaravelVueDatatableTrait;
@@ -113,9 +115,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // public function roles(){
-    //     return $this->belongsToMany(Role::class,'user_roles');
-    // }
+
+    protected $appends = [
+        'photo_url',
+    ];
 
     /**
      * Get the profile photo URL attribute.
@@ -126,17 +129,26 @@ class User extends Authenticatable
     {
         return vsprintf('https://www.gravatar.com/avatar/%s.jpg?s=200&d=%s', [
             md5(strtolower($this->email)),
-            $this->username ? urlencode("https://ui-avatars.com/api/$this->username") : 'mp',
+            $this->name ? urlencode("https://ui-avatars.com/api/$this->name") : 'mp',
         ]);
     }
 
+    public function getAllPermissionsAttribute() {
+        $permissions = [];
+          foreach (Permission::all() as $permission) {
+            if (Auth::user()->can($permission->name)) {
+              $permissions[] = $permission->name;
+            }
+          }
+          return $permissions;
+    }
     public function roles()
     {
         return $this->belongsToMany(Role::class,'model_has_roles', 'model_id', 'role_id');
     }
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class,'model_has_permissions', 'model_id', 'permission_id');
+        return $this->belongsToMany('App\Models\Permission','model_has_permissions', 'model_id', 'permission_id');
     }
     public function hasPermission()
     {

@@ -7,7 +7,10 @@ export default async (to, from, next) => {
     if (!store.getters["auth/check"]) {
       Cookies.set("intended_url", to.path);
       next({ name: "admin.login" });
-    } 
+    }
+    if (Permissions.indexOf('login admin') == -1) {
+      next({ name: 'home' })
+    }
   }else{
     next({ name: "admin.login" });
   }

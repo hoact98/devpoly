@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,4 @@ use Illuminate\Support\Facades\Route;
 // })->where('any', '[\/\w\.-]*');
 
 
-Route::get('/{any?}', function () {
-    return view('admin');
-})->where('any', '[\/\w\.-]*');
+Route::get('/{any?}', [HomeController::class,'index'])->where('any', '[\/\w\.-]*');

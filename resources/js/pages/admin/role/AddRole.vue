@@ -106,23 +106,31 @@ export default {
   methods: {
    
     async addRole () {
-     await this.form.post(route('create.role'))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'roles' })
-            Swal.fire(
-                'Created',
-                'Role created Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
+        if(Permissions.indexOf('create roles') == -1){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Bạn không có quyền thêm vai trò!',
             })
-    });
+        }else{
+            await this.form.post(route('create.role'))
+            .then(response => {
+                if(response.data.status == 'success'){
+                this.$router.push({ name: 'roles' })
+                    Swal.fire(
+                        'Created',
+                        'Role created Successfully',
+                        'success'
+                    );
+                }
+            }).catch(()=>{
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    })
+            });
+        }
     },
   }
 }

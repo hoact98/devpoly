@@ -200,26 +200,32 @@ export default {
             }
         },
         async addUser () {
-      
-     await this.form.post(route('create.user'))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Created',
-                'User created Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+       if(Permissions.indexOf('create users') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+              text: 'Bạn không có quyền thêm tài khoản!',
+              })
+        }else{
+            await this.form.post(route('create.user'))
+            .then(response => {
+                if(response.data.status == 'success'){
+                this.$router.push({ name: 'users' })
+                    Swal.fire(
+                        'Created',
+                        'User created Successfully',
+                        'success'
+                    );
+                }
+            }).catch(()=>{
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    })
+            });
       
-     
+        }
     },
     }
 }

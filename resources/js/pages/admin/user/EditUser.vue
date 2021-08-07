@@ -54,7 +54,8 @@
                                 <div class="col-sm-10">
                                   <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
                                   <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
-                                  <img id="previewImg" :src="'/'+data.user.image" alt="" width="200">
+                                  <img id="previewImg" v-if="data.user.image" :src="'/'+data.user.image" alt="" width="200">
+                                  <img id="previewImg" v-else :src="data.user.photo_url" alt="" width="200">
                                 </div>
                             </div>
                              <div class="form-group row">
@@ -213,6 +214,13 @@ export default {
             }
         },
         async updateUser () {
+          if(Permissions.indexOf('edit users') == -1){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Bạn không có quyền sửa tài khoản!',
+              })
+        }else{
           this.form.name = this.data.user.name
           this.form.username = this.data.user.username
           this.form.email = this.data.user.email
@@ -221,44 +229,44 @@ export default {
           this.form.phone = this.data.user.phone
           this.form.gender = this.data.user.gender
           this.form.is_active = this.data.user.is_active
-       await this.form.post(route('update.user',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'User update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+          await this.form.post(route('update.user',this.$route.params.id))
+          .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'users' })
+                Swal.fire(
+                    'Update',
+                    'User update  Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                })
+        });
+      }
     },
     updatePassword(){
-      this.formPass.post(route('change.password',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'Password update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+        this.formPass.post(route('change.password',this.$route.params.id))
+          .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'users' })
+                Swal.fire(
+                    'Update',
+                    'Password update  Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                })
+        });
     }
-      
     }
 }
 </script>

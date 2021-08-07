@@ -25,7 +25,7 @@ class ChallengeController extends Controller
     }
     public function index(Request $request)
     {
-        $query = Challenge::orderBy('id','desc')->eloquentQuery(
+        $query = Challenge::eloquentQuery(
             $request->input('column'),
             $request->input('dir'),
             $request->input('search'),

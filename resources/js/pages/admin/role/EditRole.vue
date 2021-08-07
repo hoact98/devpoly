@@ -24,12 +24,12 @@
                               <a class="nav-link" href="#tab-9-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Quyền hạn</a>
                           </li>
                       </ul>
-                      <div class="tab-content col-9">
+                      <div class="tab-content col-9" v-if="data.role">
                           <div class="tab-pane fade show active" id="tab-9-1">
                               <div class="form-group row">
                                   <label for="" class="col-sm-2 col-form-label">Name:</label>
                                   <div class="col-sm-10">
-                                      <input type="text" v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" placeholder="Enter role">
+                                      <input type="text"  v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" placeholder="Enter role">
                                         <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')"></div>
                                   </div>
                               </div>
@@ -83,10 +83,12 @@ export default {
         
         permission_id (){
           var permission_id = [];
-            this.data.role.role_has_permissions.forEach(function (permission) {
+          if(this.data.role.role_has_permissions.length>0){
+             this.data.role.role_has_permissions.forEach(function (permission) {
                 permission_id.push(permission.permission_id);
             });
-            this.form.permission_id=permission_id;
+          }
+           return this.form.permission_id=permission_id;
         }
    },
   created: function () {
@@ -95,26 +97,34 @@ export default {
   methods: {
   
     async updateRole () {
-      this.form.name = this.data.role.name;
-      // this.form.permission_id = this.permission_id;
-     await this.form.post(route('update.role',this.$route.params.id))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'roles' })
-            Swal.fire(
-                'update',
-                'Role update Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+       if(Permissions.indexOf('edit roles') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-    },
+              text: 'Bạn không có quyền sửa vai trò!',
+              })
+       }else{
+        this.form.name = this.data.role.name;
+        // this.form.permission_id = this.permission_id;
+        await this.form.post(route('update.role',this.$route.params.id))
+        .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'roles' })
+                Swal.fire(
+                    'update',
+                    'Role update Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                })
+        });
+    }
+  }
   }
 }
 </script>

@@ -36,6 +36,10 @@ $config = [
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);
+    @if($auth)
+    window.auth = {!! json_encode($auth); !!};
+    window.Permissions = {!! json_encode($auth->allPermissions, true) !!};
+    @endif
   </script>
 
   {{-- Load the application scripts --}}
