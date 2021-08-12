@@ -3772,9 +3772,10 @@ var routes = [{
   component: page('public/Chanllenge.vue'),
   name: 'chanllenge'
 }, {
-  path: "/payment",
+  path: "/payment/:upgrade_id",
   meta: {
-    layout: 'main'
+    layout: 'main',
+    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Payment.vue"),
   name: "payment"
@@ -3786,6 +3787,20 @@ var routes = [{
   },
   component: page("public/Profile.vue"),
   name: "profile"
+}, {
+  path: '/premium',
+  meta: {
+    layout: 'main'
+  },
+  component: page('public/Premium.vue'),
+  name: 'premium'
+}, {
+  path: '/order/:id',
+  meta: {
+    layout: 'main'
+  },
+  component: page('public/Order.vue'),
+  name: 'order'
 }, {
   path: '/admin',
   meta: {
@@ -4638,6 +4653,92 @@ var actions = {
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/order.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/order.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "actions": () => (/* binding */ actions)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
+
+var state = {
+  orders: [],
+  order: {}
+}; // getters
+
+var getters = {
+  order: function order(state) {
+    return state.order;
+  },
+  orders: function orders(state) {
+    return state.orders;
+  }
+}; // mutations
+
+var mutations = {
+  FETCH: function FETCH(state, orders) {
+    state.orders = orders;
+  },
+  FETCH_ONE: function FETCH_ONE(state, order) {
+    state.order = order;
+  }
+}; // actions
+
+var actions = {
+  fetch: function fetch(_ref) {
+    var commit = _ref.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("orders")).then(function (response) {
+      return commit("FETCH", response.data.data);
+    })["catch"]();
+  },
+  fetchOne: function fetchOne(_ref2, id) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.order", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    })["catch"]();
+  },
+  deleteorder: function deleteorder(_ref3, id) {
+    _objectDestructuringEmpty(_ref3);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.order", id)).then(function (response) {
+      // this.dispatch("order/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'order deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editorder: function editorder(_ref4, data) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.order", data.get('id')), data).then();
+  },
+  addorder: function addorder(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.order"), data).then();
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/permission.js":
 /*!**************************************************!*\
   !*** ./resources/js/store/modules/permission.js ***!
@@ -4930,6 +5031,105 @@ var actions = {
     _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.solution"), data).then();
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/upgrade.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/upgrade.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "actions": () => (/* binding */ actions)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
+
+var state = {
+  upgrades: [],
+  upgrade: {},
+  all: []
+}; // getters
+
+var getters = {
+  upgrade: function upgrade(state) {
+    return state.upgrade;
+  },
+  upgrades: function upgrades(state) {
+    return state.upgrades;
+  },
+  all: function all(state) {
+    return state.all;
+  }
+}; // mutations
+
+var mutations = {
+  FETCH: function FETCH(state, upgrades) {
+    state.upgrades = upgrades;
+  },
+  ALL: function ALL(state, all) {
+    state.all = all;
+  },
+  FETCH_ONE: function FETCH_ONE(state, upgrade) {
+    state.upgrade = upgrade;
+  }
+}; // actions
+
+var actions = {
+  fetch: function fetch(_ref) {
+    var commit = _ref.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("upgrades")).then(function (response) {
+      return commit("FETCH", response.data.data);
+    })["catch"]();
+  },
+  all: function all(_ref2) {
+    var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.upgrade")).then(function (response) {
+      return commit("ALL", response.data.data);
+    })["catch"]();
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.upgrade", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    })["catch"]();
+  },
+  deleteUpgrade: function deleteUpgrade(_ref4, id) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.upgrade", id)).then(function (response) {
+      // this.dispatch("upgrade/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Deleted!', 'upgrade deleted successfully', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    });
+  },
+  editUpgrade: function editUpgrade(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.upgrade", data.get('id')), data).then();
+  },
+  addUpgrade: function addUpgrade(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.upgrade"), data).then();
   }
 };
 
@@ -71837,7 +72037,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 mb-4 pb-4" }, [
             _c("div", { staticClass: "logo-ft" }, [
-              _c("img", { attrs: { src: "images/logo-ft.png", width: "150" } })
+              _c("img", { attrs: { src: "/images/logo-ft.png", width: "150" } })
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "ft-description" }, [
@@ -72456,10 +72656,10 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "payment" } } }, [
+            _c("router-link", { attrs: { to: { name: "premium" } } }, [
               _c("i", { staticClass: "ti-credit-card mr-2" }),
               _vm._v(" "),
-              _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Payment")])
+              _c("span", { staticClass: "hide-on-destop" }, [_vm._v("Premium")])
             ])
           ],
           1
@@ -92196,6 +92396,14 @@ var map = {
 		"./resources/js/pages/public/Home.vue",
 		"resources_js_pages_public_Home_vue"
 	],
+	"./public/Order": [
+		"./resources/js/pages/public/Order.vue",
+		"resources_js_pages_public_Order_vue"
+	],
+	"./public/Order.vue": [
+		"./resources/js/pages/public/Order.vue",
+		"resources_js_pages_public_Order_vue"
+	],
 	"./public/Overview": [
 		"./resources/js/pages/public/Overview.vue",
 		"resources_js_pages_public_Overview_vue"
@@ -92211,6 +92419,14 @@ var map = {
 	"./public/Payment.vue": [
 		"./resources/js/pages/public/Payment.vue",
 		"resources_js_pages_public_Payment_vue"
+	],
+	"./public/Premium": [
+		"./resources/js/pages/public/Premium.vue",
+		"resources_js_pages_public_Premium_vue"
+	],
+	"./public/Premium.vue": [
+		"./resources/js/pages/public/Premium.vue",
+		"resources_js_pages_public_Premium_vue"
 	],
 	"./public/Profile": [
 		"./resources/js/pages/public/Profile.vue",
@@ -92269,9 +92485,11 @@ var map = {
 	"./challengecategory.js": "./resources/js/store/modules/challengecategory.js",
 	"./feedback.js": "./resources/js/store/modules/feedback.js",
 	"./message.js": "./resources/js/store/modules/message.js",
+	"./order.js": "./resources/js/store/modules/order.js",
 	"./permission.js": "./resources/js/store/modules/permission.js",
 	"./role.js": "./resources/js/store/modules/role.js",
 	"./solution.js": "./resources/js/store/modules/solution.js",
+	"./upgrade.js": "./resources/js/store/modules/upgrade.js",
 	"./user.js": "./resources/js/store/modules/user.js"
 };
 
@@ -92404,7 +92622,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

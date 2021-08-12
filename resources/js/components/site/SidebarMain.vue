@@ -76,9 +76,9 @@
         </li>
 
         <li>
-          <router-link :to="{ name: 'payment' }">
+          <router-link :to="{ name: 'premium' }">
                   <i class="ti-credit-card mr-2"></i>
-            <span class="hide-on-destop">Payment</span></router-link
+            <span class="hide-on-destop">Premium</span></router-link
           >
         </li>
       </ul>

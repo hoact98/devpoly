@@ -11,7 +11,15 @@ return [
                 'accessKey' => '0YQLC9Ofd1qq6zwh',
                 'secretKey' => 'YB8LswXQzNsvSsnaLvVUIn7DBE8AHhAu',
                 'partnerCode' => 'MOMOJ10W20210701',
-                'testMode' => false,
+                'testMode' => true,
+            ],
+        ],
+        'VNPay' => [
+            'driver' => 'VNPay',
+            'options' => [
+                'vnpTmnCode' => 'TAROE778',
+                'vnpHashSecret' => 'GCJEBWEJZXQDWJCFBNBESTJGHHOSRMWD',
+                'testMode' => true,
             ],
         ],
     ],

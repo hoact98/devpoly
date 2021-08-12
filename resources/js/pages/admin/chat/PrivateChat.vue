@@ -30,7 +30,8 @@
                                                 @click="activeFriend=friend">
                                                 <div :class="(friend.id==activeFriend.id)?'d-flex bd-highlight active':'d-flex bd-highlight'">
                                                     <div class="img_cont">
-                                                        <img :src="'/'+friend.image" class="rounded-circle user_img">
+                                                        <img v-if="friend.image" :src="'/'+friend.image" class="rounded-circle user_img">
+                                                        <img v-else :src="friend.photo_url" class="rounded-circle user_img">
                                                         <span :class="(onlineFriends.find(user=>user.id==friend.id))?'online_icon':'online_icon offline'"></span>
                                                     </div>
                                                     <div class="user_info">
@@ -51,7 +52,8 @@
                                 <div class="nav-tabs">
                                     <div class="d-flex bd-highlight" v-if="activeFriend">
                                         <div class="img_cont">
-                                            <img  :src="'/'+activeFriend.image" class="rounded-circle user_img">
+                                            <img v-if="activeFriend.image" :src="'/'+activeFriend.image" class="rounded-circle user_img">
+                                            <img v-else :src="activeFriend.photo_url" class="rounded-circle user_img">
                                             <span :class="(onlineFriends.find(user=>user.id==activeFriend.id))?'online_icon':'online_icon offline'"></span>
                                         </div>
                                         <div class="user_info">

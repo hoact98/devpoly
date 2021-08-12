@@ -12,23 +12,24 @@
           <h3>Chọn hình thức thanh toán</h3>
           <div class="payment-list">
             <div class="payment-item payment-with-bank">
-              <img src="images/bank-icon.png" width="30" />
+              <img src="/images/bank-icon.png" width="30" />
               <p>Thanh toán qua chuyển khoản ngân hàng</p>
             </div>
 
             <div class="payment-item payment-with-momo">
-              <img src="images/momo_logo.png" width="30" />
-              <p>Thanh toán qua ví điện tử MOMO</p>
+              <img src="/images/momo_logo.png" width="30" />
+                <p><button type="button" style="border: none; cursor: pointer;background: transparent;"
+                @click="checkout()">Thanh toán qua ví điện tử MOMO</button></p>
             </div>
           </div>
         </div>
 
         <div class="col-5">
           <h3>Thông tin khách hàng</h3>
-          <div class="info-user-payment">
-            <p><b>Họ và tên:</b> Nguyen Quang Chien</p>
-            <p><b>Số điện thoại:</b> 0352 860 701</p>
-            <p><b>Email:</b> quangchien01.it@gmail.com</p>
+          <div class="info-user-payment" v-if="auth">
+            <p><b>Họ và tên:</b> {{auth.name}}</p>
+            <p><b>Số điện thoại:</b> {{auth.phone}}</p>
+            <p><b>Email:</b> {{auth.email}}</p>
           </div>
         </div>
       </div>
@@ -37,7 +38,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      auth: window.auth,
+    };
+  },
+  methods:{
+    checkout(){
+       axios.post(route('order.purchase',this.$route.params.upgrade_id)).then(response => {
+             var result = response.data.data;
+             console.log(result)
+             window.location.href =result;
+          })
+          // eslint-disable-next-line
+          .catch(errors => {
+              //Handle Errors
+          })
+    }
+  }
+};
 </script>
 
 <style scoped>

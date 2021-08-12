@@ -10,6 +10,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\OmnipayController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UpgradeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,4 +120,26 @@ Route::prefix('chat')->middleware('auth:api')->group(function() {
     Route::post('room/{roomID}/message', [ChatController::class, 'newMessage'])->name('newMessage');
     Route::get('/private-messages/{id}', [ChatController::class, 'privateMessages'])->name('privateMessages');
     Route::post('/private-messages/{id}', [ChatController::class, 'sendPrivateMessage'])->name('privateMessages.store');
+});
+
+Route::get('orders', [OrderController::class, 'index'])->name('orders');
+Route::prefix('order')->group(function() {
+    Route::post('purchase/{upgrade_id}', [OmnipayController::class, 'purchase'])->name('order.purchase');
+    Route::any('complete-purchase', [OmnipayController::class, 'completePurchase'])->name('completePurchase');
+    Route::any('notification', [OmnipayController::class, 'notification'])->name('order.notification');
+    Route::get('/query-transaction', [OmnipayController::class, 'queryTransaction'])->name('queryTransaction');
+    Route::get('all', [OrderController::class, 'orders'])->name('all.order');
+    Route::post('add', [OrderController::class, 'create'])->name('create.order');
+    Route::get('{id}', [OrderController::class, 'show'])->name('show.order');
+    Route::post('update/{id}', [OrderController::class, 'update'])->name('update.order');
+    Route::delete('delete/{id}', [OrderController::class, 'delete'])->name('delete.order');
+});
+
+Route::get('upgrades', [UpgradeController::class, 'index'])->name('upgrades');
+Route::prefix('upgrade')->group(function() {
+    Route::get('all', [UpgradeController::class, 'upgrades'])->name('all.upgrade');
+    Route::post('add', [UpgradeController::class, 'create'])->name('create.upgrade');
+    Route::get('{id}', [UpgradeController::class, 'show'])->name('show.upgrade');
+    Route::post('update/{id}', [UpgradeController::class, 'update'])->name('update.upgrade');
+    Route::delete('delete/{id}', [UpgradeController::class, 'delete'])->name('delete.upgrade');
 });

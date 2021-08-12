@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6 mb-4 pb-4">
           <div class="logo-ft">
-            <img src="images/logo-ft.png" width="150" />
+            <img src="/images/logo-ft.png" width="150" />
           </div>
 
           <p class="ft-description">

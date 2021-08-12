@@ -78,8 +78,8 @@ const routes = [
         name: 'chanllenge',
     },
     {
-        path: "/payment",
-        meta: {layout: 'main'},
+        path: "/payment/:upgrade_id",
+        meta: {layout: 'main',middleware: auth_client},
         component: page("public/Payment.vue"),
         name: "payment"
     },
@@ -88,6 +88,18 @@ const routes = [
         meta: {layout: 'main', middleware: auth_client},
         component: page("public/Profile.vue"),
         name: "profile"
+    },
+    {
+        path: '/premium',
+        meta: {layout: 'main'},
+        component: page('public/Premium.vue'),
+        name: 'premium',
+    },
+    {
+        path: '/order/:id',
+        meta: {layout: 'main'},
+        component: page('public/Order.vue'),
+        name: 'order',
     },
     {
         path: '/admin',
