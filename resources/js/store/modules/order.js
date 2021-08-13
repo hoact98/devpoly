@@ -36,7 +36,7 @@ export const actions = {
       .then(response => commit("FETCH_ONE", response.data.data))
       .catch();
   },
-  deleteorder({}, id) {
+  deleteOrder({}, id) {
     axios
       .delete(route("delete.order", id))
       .then((response)=> {
@@ -57,12 +57,12 @@ export const actions = {
         })
     })
   },
-  editorder({}, data) {
+  editOrder({}, data) {
     axios
       .post(route("update.order", data.get('id')),data)
       .then()
   },
-  addorder({}, data) {
+  addOrder({}, data) {
     axios
       .post(route("create.order"), data)
       .then()

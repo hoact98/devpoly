@@ -10,6 +10,7 @@ class ChatMessage extends Model
     use HasFactory;
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
     protected $fillable = [
         'chat_room_id',
@@ -17,6 +18,7 @@ class ChatMessage extends Model
         'message',
         'image',
         'receiver_id',
+        'time'
     ];
     public function room()
     {

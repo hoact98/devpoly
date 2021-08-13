@@ -2432,29 +2432,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'sidebar',
   props: {
@@ -4008,6 +3985,46 @@ var routes = [{
   component: page('admin/profile/ProfileAdmin.vue'),
   name: 'admin.profile'
 }, {
+  path: '/admin/orders',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/order/Order.vue"),
+  name: 'admin.orders'
+}, {
+  path: '/admin/order-edit/:id',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/order/EditOrder.vue"),
+  name: 'edit.order'
+}, {
+  path: '/admin/upgrades',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/upgrade/Upgrade.vue"),
+  name: 'admin.upgrades'
+}, {
+  path: '/admin/upgrade-add',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/upgrade/AddUpgrade.vue"),
+  name: 'add.upgrade'
+}, {
+  path: '/admin/upgrade-edit/:id',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/upgrade/EditUpgrade.vue"),
+  name: 'edit.upgrade'
+}, {
   // not found handler
   path: '*',
   component: page("errors/404.vue")
@@ -4709,7 +4726,7 @@ var actions = {
       return commit("FETCH_ONE", response.data.data);
     })["catch"]();
   },
-  deleteorder: function deleteorder(_ref3, id) {
+  deleteOrder: function deleteOrder(_ref3, id) {
     _objectDestructuringEmpty(_ref3);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.order", id)).then(function (response) {
@@ -4725,12 +4742,12 @@ var actions = {
       });
     });
   },
-  editorder: function editorder(_ref4, data) {
+  editOrder: function editOrder(_ref4, data) {
     _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.order", data.get('id')), data).then();
   },
-  addorder: function addorder(_ref5, data) {
+  addOrder: function addOrder(_ref5, data) {
     _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.order"), data).then();
@@ -71860,11 +71877,45 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(3),
+        _c(
+          "li",
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "nav-link",
+                attrs: { to: { name: "admin.orders" } }
+              },
+              [
+                _c("i", { staticClass: "sidebar-item-icon ti-receipt" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "nav-label" }, [_vm._v("Hoá đơn")])
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _vm._m(4),
+        _c(
+          "li",
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "nav-link",
+                attrs: { to: { name: "admin.upgrades" } }
+              },
+              [
+                _c("i", { staticClass: "sidebar-item-icon ti-package" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "nav-label" }, [_vm._v("Gói vip")])
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(3)
       ])
     ])
   ])
@@ -71901,69 +71952,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("span", { staticClass: "nav-label" }, [_vm._v("Thử thách")]),
       _c("i", { staticClass: "fa fa-angle-left arrow" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "calendar.html" } }, [
-        _c("i", { staticClass: "sidebar-item-icon fa fa-calendar" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "nav-label" }, [_vm._v("Calendar")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "javascript:;" } }, [
-        _c("i", { staticClass: "sidebar-item-icon fa fa-file-text" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "nav-label" }, [_vm._v("Pages")]),
-        _c("i", { staticClass: "fa fa-angle-left arrow" })
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav-2-level collapse" }, [
-        _c("li", [
-          _c("a", { attrs: { href: "invoice.html" } }, [_vm._v("Invoice")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "profile.html" } }, [_vm._v("Profile")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "login.html" } }, [_vm._v("Login")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "register.html" } }, [_vm._v("Register")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "lockscreen.html" } }, [
-            _vm._v("Lockscreen")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "forgot_password.html" } }, [
-            _vm._v("Forgot password")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "error_404.html" } }, [_vm._v("404 error")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "error_500.html" } }, [_vm._v("500 error")])
-        ])
-      ])
     ])
   },
   function() {
@@ -92196,6 +92184,22 @@ var map = {
 		"./resources/js/pages/admin/mentor/Mentor.vue",
 		"resources_js_pages_admin_mentor_Mentor_vue"
 	],
+	"./admin/order/EditOrder": [
+		"./resources/js/pages/admin/order/EditOrder.vue",
+		"resources_js_pages_admin_order_EditOrder_vue"
+	],
+	"./admin/order/EditOrder.vue": [
+		"./resources/js/pages/admin/order/EditOrder.vue",
+		"resources_js_pages_admin_order_EditOrder_vue"
+	],
+	"./admin/order/Order": [
+		"./resources/js/pages/admin/order/Order.vue",
+		"resources_js_pages_admin_order_Order_vue"
+	],
+	"./admin/order/Order.vue": [
+		"./resources/js/pages/admin/order/Order.vue",
+		"resources_js_pages_admin_order_Order_vue"
+	],
 	"./admin/permission/AddPermission": [
 		"./resources/js/pages/admin/permission/AddPermission.vue",
 		"resources_js_pages_admin_permission_AddPermission_vue"
@@ -92267,6 +92271,30 @@ var map = {
 	"./admin/solution/Solution.vue": [
 		"./resources/js/pages/admin/solution/Solution.vue",
 		"resources_js_pages_admin_solution_Solution_vue"
+	],
+	"./admin/upgrade/AddUpgrade": [
+		"./resources/js/pages/admin/upgrade/AddUpgrade.vue",
+		"resources_js_pages_admin_upgrade_AddUpgrade_vue"
+	],
+	"./admin/upgrade/AddUpgrade.vue": [
+		"./resources/js/pages/admin/upgrade/AddUpgrade.vue",
+		"resources_js_pages_admin_upgrade_AddUpgrade_vue"
+	],
+	"./admin/upgrade/EditUpgrade": [
+		"./resources/js/pages/admin/upgrade/EditUpgrade.vue",
+		"resources_js_pages_admin_upgrade_EditUpgrade_vue"
+	],
+	"./admin/upgrade/EditUpgrade.vue": [
+		"./resources/js/pages/admin/upgrade/EditUpgrade.vue",
+		"resources_js_pages_admin_upgrade_EditUpgrade_vue"
+	],
+	"./admin/upgrade/Upgrade": [
+		"./resources/js/pages/admin/upgrade/Upgrade.vue",
+		"resources_js_pages_admin_upgrade_Upgrade_vue"
+	],
+	"./admin/upgrade/Upgrade.vue": [
+		"./resources/js/pages/admin/upgrade/Upgrade.vue",
+		"resources_js_pages_admin_upgrade_Upgrade_vue"
 	],
 	"./admin/user/AddUser": [
 		"./resources/js/pages/admin/user/AddUser.vue",
@@ -92622,7 +92650,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

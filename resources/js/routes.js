@@ -153,7 +153,6 @@ const routes = [
     {
         path: '/admin/permission-add',
         meta: {layout: 'admin',middleware: auth},
-
         component: page("admin/permission/AddPermission.vue"),
         name: 'add.permission',
     },
@@ -257,6 +256,36 @@ const routes = [
         meta: {layout: 'admin', middleware: auth},
         component: page('admin/profile/ProfileAdmin.vue'),
         name: 'admin.profile'
+    },
+    {
+        path: '/admin/orders',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/order/Order.vue"),
+        name: 'admin.orders',
+    },
+    {
+        path: '/admin/order-edit/:id',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/order/EditOrder.vue"),
+        name: 'edit.order',
+    },
+    {
+        path: '/admin/upgrades',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/upgrade/Upgrade.vue"),
+        name: 'admin.upgrades',
+    },
+    {
+        path: '/admin/upgrade-add',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/upgrade/AddUpgrade.vue"),
+        name: 'add.upgrade',
+    },
+    {
+        path: '/admin/upgrade-edit/:id',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/upgrade/EditUpgrade.vue"),
+        name: 'edit.upgrade',
     },
     {
         // not found handler

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
@@ -67,12 +68,25 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
+        $order->load('user');
+        $order->load('upgrade');
         return response()->json(['status'=>'success','message'=>'Succsess get order','data'=>$order],200);
     }
 
     // update order
     public function update($id, Request $request)
     {
+        $rule= [
+            'status' => 'required',
+          ];
+          $messages = [
+              'status.required' => "Hãy nhận trạng thái.",
+          ];
+     
+          $validator =  Validator::make($request->all(),$rule,$messages);
+            if ($validator->fails()) { 
+              return response()->json(['errors'=>$validator->errors()],422);
+            }
         $order = Order::find($id);
         $order->update($request->all());
 

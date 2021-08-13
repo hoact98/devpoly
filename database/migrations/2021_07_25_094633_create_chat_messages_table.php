@@ -20,6 +20,7 @@ class CreateChatMessagesTable extends Migration
             $table->mediumText('message');
             $table->integer('receiver_id')->unsigned()->nullable();
             $table->string('image')->nullable();
+            $table->dateTime('time');
             $table->timestamps();
             $table->foreign('chat_room_id')->references('id')->on('chat_rooms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveUpgradeRequest;
 use App\Models\Upgrade;
 use Illuminate\Http\Request;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
@@ -32,7 +33,7 @@ class UpgradeController extends Controller
         return new DataTableCollectionResource($data);
     }
      // add upgrade
-     public function create(Request $request)
+     public function create(SaveUpgradeRequest $request)
      {
          $upgrade = new Upgrade([
              'name' => $request->name,
@@ -53,7 +54,7 @@ class UpgradeController extends Controller
      }
  
      // update upgrade
-     public function update($id, Request $request)
+     public function update($id, SaveUpgradeRequest $request)
      {
          $upgrade = Upgrade::find($id);
          $upgrade->update($request->all());

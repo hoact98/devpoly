@@ -6,7 +6,7 @@
                     <span v-if="message.message">{{message.message}}</span>
                     
                     <img v-if="message.image"  :src="'/'+message.image" alt="" width="500">
-                    <span class="msg_time_send">{{message.created_at}}</span>
+                    <span class="msg_time_send">{{message.time}}</span>
                 </div>
                 <div class="img_cont_msg">
                     <img v-if="user.image" :src="'/'+user.image" class="rounded-circle user_img_msg">
@@ -19,7 +19,7 @@
                 <div class="msg_cotainer">
                     <span v-if="message.message">{{message.message}}</span>
                      <img v-if="message.image"  :src="'/'+message.image" alt="" width="500">
-                    <span class="msg_time">{{message.created_at}}</span>
+                    <span class="msg_time">{{message.time}}</span>
                 </div>
             </div>
         </div>
