@@ -48,12 +48,13 @@ class SolutionController extends Controller
             'description' => $request->description,
             'link_github' => $request->link_github,
             'demo_url' => $request->demo_url,
-            'user_id' => $request->user_id,
+            'user_id' => auth('api')->user()->id,
             'challen_id' => $request->challen_id,
         ]);
+
         $solution->save();
         $solution_user = new SolutionUser([
-            'user_id' => Auth::id(), //user logined
+            'user_id' =>auth('api')->user()->id, //user logined
             'solution_id'=> $solution->id,
         ]);
         $solution_user->save();

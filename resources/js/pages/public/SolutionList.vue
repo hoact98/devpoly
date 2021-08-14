@@ -16,10 +16,10 @@
             >
               <div class="solution-author">
                 <div class="author-avatar">
-                  <img :src="'/' + solution.users.avatar" alt="" />
+                  <img :src="'/' + solution.users[0].avatar" alt="" />
                 </div>
                 <span class="author-nickname" style="color: black">
-                  {{ solution.users.username }}
+                  {{ solution.users[0].username }}
                 </span>
               </div>
               <div class="solution-title">

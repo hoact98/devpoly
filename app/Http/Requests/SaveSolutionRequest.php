@@ -29,7 +29,6 @@ class SaveSolutionRequest extends FormRequest
                 'required',
                 'min:2'
             ],
-            'language' => 'required',
             'description' => ['required','min:4'],
             'link_github' => ['required',
             Rule::unique('solutions')->ignore($this->id)],
@@ -43,7 +42,6 @@ class SaveSolutionRequest extends FormRequest
         return [
             'title.required' => "Hãy nhập tên giải pháp",
             'title.min' => "Ít nhất có 2 ký tự",
-            'language.required' => "Hãy nhập ngôn ngữ",
             'link_github.required' => "Hãy nhập link github",
             'link_github.unique' => "Link github đã tồn tại",
             'demo_url.required' => "Hãy nhập link demo",

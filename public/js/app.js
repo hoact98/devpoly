@@ -2349,6 +2349,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     inforUser: function inforUser() {
@@ -2373,6 +2388,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3063,8 +3091,8 @@ vue__WEBPACK_IMPORTED_MODULE_7__.default.component('v-button', __webpack_require
 vue__WEBPACK_IMPORTED_MODULE_7__.default.config.productionTip = false;
 vue__WEBPACK_IMPORTED_MODULE_7__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_8__.default);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__.default({
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__.default // mode: 'history',
-
+  routes: _routes__WEBPACK_IMPORTED_MODULE_1__.default,
+  mode: 'history'
 });
 (0,_helpers_general__WEBPACK_IMPORTED_MODULE_4__.initialize)(_store_index__WEBPACK_IMPORTED_MODULE_0__.default, router);
 new vue__WEBPACK_IMPORTED_MODULE_7__.default({
@@ -3177,7 +3205,7 @@ function register(credential) {
     axios.post(route('register'), credential).then(function (result) {
       res(result.data);
     })["catch"](function (err) {
-      rej("Wrong email or password");
+      console.log(err.response.data); // rej("Wrong email or password");
     });
   });
 }
@@ -3365,6 +3393,14 @@ var routes = [{
       guest: true
     },
     name: "feedback"
+  }, {
+    path: "/add_solution/:slug",
+    alias: "",
+    component: page("public/AddSolution.vue"),
+    meta: {
+      guest: true
+    },
+    name: "add_solution"
   }, {
     path: "/chanllenge/:slug",
     alias: "",
@@ -8850,7 +8886,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.login[data-v-f2993a0c] {\n  font-size: 18px;\n}\n.img-user[data-v-f2993a0c] {\n  max-width: 70px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.login[data-v-f2993a0c] {\n  font-size: 18px;\n}\n.img-user[data-v-f2993a0c] {\n  max-width: 70px;\n}\n.info[data-v-f2993a0c] {\n  display: flex;\n  justify-content: flex-end;\n  padding: 1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8874,7 +8910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.login[data-v-dd1b715a] {\n  font-size: 18px;\n}\n.img-user[data-v-dd1b715a] {\n  max-width: 70px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.login[data-v-dd1b715a] {\n  font-size: 18px;\n}\n.img-user[data-v-dd1b715a] {\n  max-width: 70px;\n}\n.info[data-v-dd1b715a] {\n  display: flex;\n  justify-content: flex-end;\n  padding: 1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51622,10 +51658,39 @@ var render = function() {
             [
               _vm.inforUser != null
                 ? _c("router-link", { attrs: { to: { name: "profile" } } }, [
-                    _c("img", {
-                      staticClass: "img-user",
-                      attrs: { src: "/" + _vm.inforUser.avatar, alt: "" }
-                    })
+                    _c("div", { staticClass: "info" }, [
+                      _vm.inforUser != null
+                        ? _c("img", {
+                            staticClass: "img-user",
+                            attrs: {
+                              src: "/" + _vm.inforUser.avatar,
+                              alt: "",
+                              height: "30",
+                              width: "30"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.inforUser != null
+                        ? _c(
+                            "h2",
+                            {
+                              staticStyle: {
+                                "margin-left": "1rem",
+                                "text-decoration": "none",
+                                color: "dodgerblue"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                Welcome " +
+                                  _vm._s(_vm.inforUser.username) +
+                                  "\n              "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
                   ])
                 : _c("router-link", { attrs: { to: { name: "login" } } }, [
                     _c("button", { staticClass: "login" }, [_vm._v("Login")])
@@ -51699,10 +51764,41 @@ var render = function() {
             { staticClass: "col-9 col-sm-12 login-and-setting" },
             [
               _vm.inforUser != null
-                ? _c("img", {
-                    staticClass: "img-user",
-                    attrs: { src: "/" + _vm.inforUser.avatar, alt: "" }
-                  })
+                ? _c("router-link", { attrs: { to: { name: "profile" } } }, [
+                    _c("div", { staticClass: "info" }, [
+                      _vm.inforUser != null
+                        ? _c("img", {
+                            staticClass: "img-user",
+                            attrs: {
+                              src: "/" + _vm.inforUser.avatar,
+                              alt: "",
+                              height: "30",
+                              width: "30"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.inforUser != null
+                        ? _c(
+                            "h2",
+                            {
+                              staticStyle: {
+                                "margin-left": "1rem",
+                                "text-decoration": "none",
+                                color: "dodgerblue"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(_vm.inforUser.username) +
+                                  "\n              "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
                 : _c("router-link", { attrs: { to: { name: "login" } } }, [
                     _c("button", { staticClass: "login" }, [_vm._v("Login")])
                   ])
@@ -69347,6 +69443,14 @@ var map = {
 		"./resources/js/pages/errors/404.vue",
 		"resources_js_pages_errors_404_vue"
 	],
+	"./public/AddSolution": [
+		"./resources/js/pages/public/AddSolution.vue",
+		"resources_js_pages_public_AddSolution_vue"
+	],
+	"./public/AddSolution.vue": [
+		"./resources/js/pages/public/AddSolution.vue",
+		"resources_js_pages_public_AddSolution_vue"
+	],
 	"./public/Chanllenge": [
 		"./resources/js/pages/public/Chanllenge.vue",
 		"resources_js_pages_public_Chanllenge_vue"
@@ -69627,7 +69731,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
