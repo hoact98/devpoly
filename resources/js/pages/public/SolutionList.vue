@@ -9,42 +9,49 @@
 
       <div class="row content-list">
         <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-          <div class="content-item" v-for="solution in solutions" :key="solution.id">
+          {{ solutions.data }}
+          <div class="content-item" v-for="solution in solutions.data" :key="solution.id">
             <router-link
               :to="{ name: 'showDetailSolution', params: { id: solution.id } }"
               style="color: #fff; text-decoration: none"
             >
               <div class="solution-author">
                 <div class="author-avatar">
-                  <img src="images/avatar-1.png" alt="" />
+                  <img :src="'/' + solution.users.avatar" alt="" />
                 </div>
-                <span class="author-nickname"> nameUser </span>
+                <span class="author-nickname" style="color: black">
+                  {{ solution.users.username }}
+                </span>
               </div>
               <div class="solution-title">
-                <h3>{{ solution.title }}</h3>
+                <h3 style="color: black">{{ solution.title }}</h3>
               </div>
               <div class="solution-help">
-                <p class="help-message">I would love to hear your feedback</p>
+                <p class="help-message" style="color: black">
+                  I would love to hear your feedback
+                </p>
                 <span>No one reviewed this solution. Be the first one</span>
               </div>
+
               <div class="solution-challenge">
                 <div class="row">
                   <div class="col-5">
                     <div class="challenge-name">
-                      <p>{{ solution.challenges.title }}</p>
+                      <p style="color: black">{{ solution.challenges.title }}</p>
                     </div>
 
                     <div class="challenge-level">
-                      <span>{{ solution.challenges.level }}</span>
+                      <span style="color: black">{{ solution.challenges.level }}</span>
                     </div>
                   </div>
                   <div class="col-7">
                     <div class="challenge-img">
-                      <img src="images/challenge-img-1.png" alt="" />
+                      <img :src="'/' + solution.challenges.challenge_image" alt="" />
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="solution-action">
                 <div class="upvote button-block">
                   <div class="icon">
