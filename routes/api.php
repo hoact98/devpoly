@@ -42,11 +42,18 @@ Route::group(['middleware' => 'api'], function () {
 // });
 Route::post('change-password/{id}',[UserController::class, 'changePass'])->name('change.password');
 Route::get('users', [UserController::class, 'index'])->name('users');
+Route::get('getChallenge', [UserController::class, 'getChallenge'])->name('getChallenge.user');
 Route::group(['prefix' => 'user'], function () {
     Route::post('add', [UserController::class, 'create'])->name('create.user');
     Route::get('{id}', [UserController::class, 'show'])->name('show.user');
     Route::post('update/{id}', [UserController::class, 'update'])->name('update.user');
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
+});
+Route::get('mentors', [UserController::class, 'getAllMentors'])->name('mentors');
+Route::group(['prefix' => 'mentor'], function () {
+    Route::post('add', [UserController::class, 'AddMentor'])->name('create.mentor');
+    Route::get('{id}', [UserController::class, 'getOneMentor'])->name('getOne.mentor');
+    Route::post('update/{id}', [UserController::class, 'updatedMentor'])->name('update.mentor');
 });
 
 Route::get('roles', [RoleController::class, 'index'])->name('roles');
@@ -78,6 +85,8 @@ Route::group(['prefix' => 'challengecategory'], function () {
 
 Route::get('challenges', [ChallengeController::class, 'index'])->name('challenges');
 Route::get('get_One_Challenge/{slug}', [ChallengeController::class, 'get_One_Challenge'])->name('get_One.challenge');
+Route::post('add_Challenge_To_User/{id}', [ChallengeController::class, 'addChallengeToUser'])->name('addChallengeToUser.challenge');
+Route::get('get_Challenge_To_User/{slug}', [ChallengeController::class, 'getChallengeToUser'])->name('getChallengeToUser.challenge');
 Route::group(['prefix' => 'challenge'], function () {
     Route::post('add', [ChallengeController::class, 'create'])->name('create.challenge');
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');

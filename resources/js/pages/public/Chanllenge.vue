@@ -52,22 +52,27 @@
               <li>Check designs on Figma</li>
               <li>Have fun coding!!</li>
             </ol>
+            <a
+              v-if="checkBtnDownload"
+              v-on:click="addChallengeToUser"
+              :href="'/' + data.soucre"
+              download
+            >
+              <button class="button-block button-download">
+                <svg
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"
+                  ></path>
+                </svg>
 
-            <button class="button-block button-download">
-              <svg
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"
-                ></path>
-              </svg>
-              <a :href="'/'+data.soucre" download>
                 <span>Start and download</span>
-              </a>
-            </button>
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -82,14 +87,50 @@ import axios from "axios";
 export default {
   data: () => ({
     title: " Challenge",
+    checkBtnDownload: true,
   }),
   computed: mapGetters({
     data: "challenge/challenge",
   }),
   created() {
     this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);
+    this.getChallengeToUser();
   },
-  methods: {},
+  methods: {
+    async addChallengeToUser() {
+      const id = this.data.id;
+      axios
+        .post(
+          route("addChallengeToUser.challenge", {
+            id,
+          })
+        )
+        .then((response) => {
+          this.checkBtnDownload = false;
+        })
+        .catch(() => {});
+    },
+    async getChallengeToUser() {
+      const slug = this.$route.params.slug;
+      axios
+        .get(
+          route("getChallengeToUser.challenge", {
+            slug,
+          })
+        )
+        .then((response) => {
+          if (response.data.data == this.data.id) {
+             this.checkBtnDownload = false;
+           
+          } else {
+            this.checkBtnDownload = true;
+          }
+        })
+        .catch(() => {
+          console.log("Not Data");
+        });
+    },
+  },
 };
 </script>
 
