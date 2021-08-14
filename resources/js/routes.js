@@ -123,6 +123,15 @@ const routes = [{
                 name: "feedback"
             },
             {
+                path: "/add_solution/:slug",
+                alias: "",
+                component: page("public/AddSolution.vue"),
+                meta: {
+                    guest: true
+                },
+                name: "add_solution"
+            },
+            {
                 path: "/chanllenge/:slug",
                 alias: "",
                 component: page("public/Chanllenge.vue"),

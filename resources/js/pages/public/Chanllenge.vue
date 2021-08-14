@@ -73,6 +73,15 @@
                 <span>Start and download</span>
               </button>
             </a>
+            <router-link
+              v-else
+              :to="{ name: 'add_solution', params: { slug: data.slug } }"
+            >
+              <button class="button-block ">
+
+                <span>Submit Solution</span>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -120,8 +129,7 @@ export default {
         )
         .then((response) => {
           if (response.data.data == this.data.id) {
-             this.checkBtnDownload = false;
-           
+            this.checkBtnDownload = false;
           } else {
             this.checkBtnDownload = true;
           }

@@ -27,7 +27,12 @@ export function register(credential) {
                 res(result.data);
             })
             .catch(err => {
+<<<<<<< HEAD
                 rej(err);
+=======
+                console.log(err.response.data);
+                // rej("Wrong email or password");
+>>>>>>> 33382f0 (new code)
             })
     })
 }

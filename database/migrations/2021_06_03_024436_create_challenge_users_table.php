@@ -16,8 +16,9 @@ class CreateChallengeUsersTable extends Migration
         Schema::create('challenge_users', function (Blueprint $table) {
             $table->uuid('user_id');
             $table->integer('challen_id')->unsigned();
+            $table->integer('status')->unsigned();
             $table->timestamps();
-            $table->primary(['user_id', 'challen_id']);
+            $table->primary(['user_id', 'challen_id','status']);
             $table->foreign('challen_id')->references('id')->on('challenges')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });

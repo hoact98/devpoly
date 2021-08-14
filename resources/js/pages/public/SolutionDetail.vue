@@ -7,9 +7,9 @@
             <div class="col-12">
               <div class="author">
                 <div class="author-avatar">
-                  <img src="images/avatar-1.png" alt="" />
+                  <img :src="'/' + solution.users[0].avatar" alt="" />
                 </div>
-                <span class="author-nickname">  </span>
+                <span class="author-nickname">      {{ solution.users[0].username }} </span>
               </div>
 
               <div class="solution-title">
@@ -25,7 +25,7 @@
               </div>
 
               <div class="solution-detail-des">
-                <p>{{ solution.description }}</p>
+                <p v-html="solution.description"></p>
               </div>
             </div>
           </div>
@@ -37,12 +37,21 @@
                   <h2>Preview</h2>
 
                   <div class="demo-code-block">
-                    <button class="btn-demo">Demo</button>
-                    <button class="btn-view-code">Code</button>
+                    <button class="btn-demo"><a :href="solution.demo_url" target="_blank">Demo</a></button>
+                    <button class="btn-view-code">  <a :href="solution.link_github" target="_blank">Code</a></button>
                   </div>
                 </div>
 
-                <div class="preview-content-body"></div>
+                <div class="preview-content-body">
+                  <iframe
+                    :src="solution.demo_url"
+                      width="100%"
+                    height= "100%"
+                    frameborder="0" 
+                    >
+
+                  </iframe>
+                </div>
               </div>
             </div>
           </div>

@@ -122,6 +122,7 @@ class ChallengeController extends Controller
         $challengeUser =  new ChallengeUser([
             'user_id' => auth('api')->user()->id,
             'challen_id' => $id,
+            'status' => 0,
         ]);
         $challengeUser->save();
 
