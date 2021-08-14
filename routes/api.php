@@ -32,6 +32,7 @@ Route::middleware('auth:api')->group(function() {
 Route::group(['middleware' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
+   
 });
 
 // Route::group(['middleware' => 'auth:api'], function () {

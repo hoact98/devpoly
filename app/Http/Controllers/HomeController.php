@@ -31,7 +31,7 @@ class HomeController extends Controller
         // dd(Auth::user());
         // dd(Auth::user()->allPermissions);
         return view('admin', [
-            'auth' => Auth::user()
+            'auth' => Auth::user(),
         ]);
     }
 }

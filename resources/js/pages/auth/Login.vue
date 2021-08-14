@@ -46,9 +46,14 @@
                         <span class="btn auth-form__controls-back">
                                 <router-link :to="{ name: 'home' }">Trở lại</router-link>
                         </span>
+                        <button  class="btn btn-dark m-auto" type="button" @click="loginGithub">
+                            Đăng nhập với
+                             <i class="fa fa-github"></i>
+                        </button>
                         <button type="submit" class="btn btn-primary" style="cursor: pointer;">Đăng nhập</button>
                     </div>
                 </form>
+                
             </div>
         </div>
         <!-- end login -->
@@ -77,6 +82,9 @@ export default {
       await this.$store.dispatch('auth/fetchUser')
       // Redirect home.
       this.redirect()
+    },
+    async loginGithub () {
+     window.location.href =route('redirect.github');
     },
     redirect () {
       const intendedUrl = Cookies.get('intended_url')

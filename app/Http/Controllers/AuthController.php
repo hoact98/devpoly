@@ -9,15 +9,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class AuthController extends Controller 
 {
+  use AuthenticatesUsers;
   /** 
    * Login API 
    * 
    * @return \Illuminate\Http\Response 
    */ 
-  
- 
+
   public function login(Request $request)
   {
      $rule= [
@@ -74,7 +77,7 @@ class AuthController extends Controller
       if ($validator->fails()) { 
         return response()->json(['errors'=>$validator->errors()],422);
       }
-      $checkEmail =User::where('email',$request->email)->get();
+      $checkEmail = User::where('email',$request->email)->get();
       if(count($checkEmail)>0){
         return response()->json(['errors' => ['email'=> ['Email đã được đăng ký!']]],422);
       }
@@ -104,4 +107,52 @@ class AuthController extends Controller
   {
     return response()->json($request->user()->load('roles'),200);
   }
+  public function redirect()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+ 
+    public function callback()
+    {
+      $user = Socialite::driver('github')->user();
+      $authUser = $this->findOrCreateUser($user, 'github');
+      Auth::login($authUser, true);
+
+      $tokenResult = $authUser->createToken('Personal Access Token');
+      $token = $tokenResult->token;
+      $token->save();
+      
+      return view('home', [
+          'access_token' => $tokenResult->accessToken,
+      ]);
+    }
+    function findOrCreateUser($user){
+ 
+      $authUser = User::where('provider_id', $user->id)->orWhere('email',$user->email)->first();
+      if ($authUser) {
+          return $authUser;
+      }
+      if($user->avatar){
+        $nImage = 'avatar-'.$user->id.'.jpg';
+        $fp = public_path('files/').$nImage;
+        file_put_contents( $fp, file_get_contents($user->avatar) );
+        $imageName = 'files/'.$nImage;  
+      }
+      $githubUser = User::create([
+        'name'     => $user->name??$user->nickname,
+        'email'    => $user->email,
+        'image'    => $imageName??$user->avatar,
+        'provider' => 'github',
+        'provider_id' => $user->id,
+        'github_url' => $user->user['html_url']
+      ]);
+
+      $userRole = new ModelHasRole([
+        'role_id'=> 1,
+        'model_type'=> User::class,
+        'model_id' => $githubUser->id,
+      ]);
+      $userRole->save();
+      return $githubUser;
+    }
 }

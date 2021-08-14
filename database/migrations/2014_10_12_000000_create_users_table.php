@@ -22,12 +22,13 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable()->unique();
             $table->string('image')->nullable();
-            $table->boolean('online')->default(false);
-            $table->string('socket_id')->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->boolean('is_active')->default(false);
             $table->string('verify_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('github_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

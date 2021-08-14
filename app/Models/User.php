@@ -31,7 +31,10 @@ class User extends Authenticatable
         'gender',
         'phone' ,
         'socket_id',
-        'is_active'
+        'is_active',
+        'provider',
+        'provider_id',
+        'github_url'
     ];
 
     protected $guard_name = 'api';
