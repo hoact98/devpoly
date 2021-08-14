@@ -9,70 +9,71 @@
           >
         </div>
 
-    <form   @submit.prevent="authenticate"
-                @keydown="form.onKeydown($event)">
-            <div class="auth-form__form">
-          <div class="auth-form__group">
-            <input
-              v-model="form.username"
-              :class="{ 'is-invalid': form.errors.has('username') }"
-              type="username"
-              name="username"
-              placeholder="username"
-              id="username"
-              class="auth-form__input"
-            />
+        <form @submit.prevent="authenticate" @keydown="form.onKeydown($event)">
+          <div class="auth-form__form">
+            <div class="auth-form__group">
+              <input
+                v-model="form.username"
+                type="username"
+                name="username"
+                placeholder="username"
+                id="username"
+                class="auth-form__input"
+              />
+              <div class="alert alert-danger" v-if="errors && errors['username']">
+                {{ errors["username"][0] }}
+              </div>
+            </div>
+            <div class="auth-form__group">
+              <input
+                v-model="form.email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                id="email"
+                class="auth-form__input"
+              />
+              <div class="alert alert-danger" v-if="errors && errors['email']">
+                {{ errors["email"][0] }}
+              </div>
+            </div>
+            <div class="auth-form__group">
+              <input
+                v-model="form.password"
+                type="password"
+                name="password"
+                placeholder="******"
+                id="password"
+                class="auth-form__input"
+              />
+              <div class="alert alert-danger" v-if="errors && errors['password']">
+                {{ errors["password"][0] }}
+              </div>
+            </div>
+            <div class="auth-form__group">
+              <input
+                v-model="form.password_confirmation"
+                type="password"
+                name="password_confirmation"
+                placeholder="******"
+                id="password_confirmation"
+                class="auth-form__input"
+              />
+            </div>
           </div>
-          <div class="auth-form__group">
-            <input
-              v-model="form.email"
-              :class="{ 'is-invalid': form.errors.has('email') }"
-              type="email"
-              name="email"
-              placeholder="Email"
-              id="email"
-              class="auth-form__input"
-            />
+          <div class="auth-form__aside">
+            <p class="auth-form__policy-text">
+              Bằng việc đăng ký, bạn đã đồng ý với DevFpoly về
+              <a href="#" class="auth-form__policy-link">Điều khoản dịch vụ</a> &
+              <a href="#" class="auth-form__policy-link">Chính sách bảo mật</a>
+            </p>
           </div>
-          <div class="auth-form__group">
-            <input
-              v-model="form.password"
-              :class="{ 'is-invalid': form.errors.has('password') }"
-              type="password"
-              name="password"
-              placeholder="******"
-              id="password"
-              class="auth-form__input"
-            />
-          </div>
-          <div class="auth-form__group">
-            <input
-              v-model="form.password_confirmation"
-              :class="{
-                'is-invalid': form.errors.has('password_confirmation'),
-              }"
-              type="password"
-              name="password_confirmation"
-              placeholder="******"
-              id="password_confirmation"
-              class="auth-form__input"
-            />
-          </div>
-        </div>
 
-        <div class="auth-form__aside">
-          <p class="auth-form__policy-text">
-            Bằng việc đăng ký, bạn đã đồng ý với DevFpoly về
-            <a href="#" class="auth-form__policy-link">Điều khoản dịch vụ</a> &
-            <a href="#" class="auth-form__policy-link">Chính sách bảo mật</a>
-          </p>
-        </div>
-
-        <div class="auth-form__controls">
-          <button class="btn auth-form__controls-back">Trở lại</button>
-          <button class="btn btn--primary">Đăng ký</button>
-        </div>
-    </form>
+          <div class="auth-form__controls">
+            <button class="btn auth-form__controls-back">Trở lại</button>
+            <button class="btn btn--primary">Đăng ký</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -87,6 +88,7 @@ export default {
       password: "",
       password_confirmation: "",
     }),
+    errors: {},
   }),
   methods: {
     authenticate() {
@@ -95,14 +97,11 @@ export default {
           this.$router.push({ name: "login" });
         })
         .catch((err) => {
-          console.log(err);
-          //   this.showAlert(this.authError, "error");
+          console.log(err.response.status);
+          if (err.response.status == 400) {
+            this.errors = err.response.data;
+          }
         });
-    },
-  },
-  mputed: {
-    authError() {
-      return this.$store.getters.AUTH_ERROR;
     },
   },
 };

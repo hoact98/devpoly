@@ -5,7 +5,7 @@ export function login(credential) {
                 res(result.data);
             })
             .catch(err => {
-                rej("Wrong email or password");
+                rej(err);
             })
     })
 }
@@ -16,7 +16,7 @@ export function userProfile() {
                 res(result.data);
             })
             .catch(err => {
-                rej("Wrong email or password");
+                rej(err);
             })
     })
 }
@@ -27,7 +27,7 @@ export function register(credential) {
                 res(result.data);
             })
             .catch(err => {
-                rej("Wrong email or password");
+                rej(err);
             })
     })
 }

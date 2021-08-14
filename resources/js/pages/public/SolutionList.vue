@@ -9,7 +9,6 @@
 
       <div class="row content-list">
         <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-          {{ solutions.data }}
           <div class="content-item" v-for="solution in solutions.data" :key="solution.id">
             <router-link
               :to="{ name: 'showDetailSolution', params: { id: solution.id } }"

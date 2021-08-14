@@ -1,6 +1,5 @@
 <template>
   <div class="login-wrapper">
-    <!-- login form -->
     <div class="auth-form">
       <div class="auth-form__container">
         <div class="auth-form__header">
@@ -10,47 +9,54 @@
           >
         </div>
 
-        <form id="login-form"  @submit.prevent="authenticate"
-                @keydown="form.onKeydown($event)">
-               <div class="auth-form__form">
-          <div class="auth-form__group">
-               <input
-            v-model="form.email"
-            :class="{ 'is-invalid': form.errors.has('email') }"
-            type="email"
-            name="email"
-            placeholder="Email"
-            id="email"
-            class="auth-form__input"
-          />
+        <form
+          id="login-form"
+          @submit.prevent="authenticate"
+          @keydown="form.onKeydown($event)"
+        >
+          <div class="auth-form__form">
+            <div class="auth-form__group">
+              <input
+                v-model="form.email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                id="email"
+                class="auth-form__input"
+              />
+              <div class="alert alert-danger" v-if="errors && errors.email">
+                {{ errors.email[0] }}
+              </div>
+            </div>
+            <div class="auth-form__group">
+              <input
+                v-model="form.password"
+                type="password"
+                name="password"
+                placeholder="******"
+                id="password"
+                class="auth-form__input"
+              />
+              <div class="alert alert-danger" v-if="errors && errors.password">
+                {{ errors.password[0] }}
+              </div>
+            </div>
           </div>
-          <div class="auth-form__group">
-           <input
-            v-model="form.password"
-            :class="{ 'is-invalid': form.errors.has('password') }"
-            type="password"
-            name="password"
-            placeholder="******"
-            id="password"
-            class="auth-form__input"
-          />
-          </div>
-        </div>
 
-        <div class="auth-form__aside">
-          <div class="auth-form-help">
-            <a href="#" class="auth-form__help-link auth-form-help-fogot"
-              >Quên mật khẩu</a
-            >
-            <span class="auth-form-help-separate"> </span>
-            <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
+          <div class="auth-form__aside">
+            <div class="auth-form-help">
+              <a href="#" class="auth-form__help-link auth-form-help-fogot"
+                >Quên mật khẩu</a
+              >
+              <span class="auth-form-help-separate"> </span>
+              <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
+            </div>
           </div>
-        </div>
 
-        <div class="auth-form__controls">
-          <button class="btn auth-form__controls-back">Trở lại</button>
-          <button class="btn btn--primary">Đăng nhập</button>
-        </div>
+          <div class="auth-form__controls">
+            <button class="btn auth-form__controls-back">Trở lại</button>
+            <button class="btn btn--primary">Đăng nhập</button>
+          </div>
         </form>
       </div>
     </div>
@@ -65,6 +71,7 @@ export default {
       email: "",
       password: "",
     }),
+    errors: {},
   }),
   methods: {
     authenticate() {
@@ -72,19 +79,22 @@ export default {
       login(this.form)
         .then((res) => {
           this.$store.commit("auth/LOGIN_SUCCESS", { res });
-           this.$router.push({ name: 'home' })
+          this.$router.push({ name: "home" });
         })
         .catch((err) => {
-          this.$store.commit("auth/LOGIN_FAILED", { err });
+          //this.$store.commit("auth/LOGIN_FAILED", { err });
+          if (err.response.status == 422) {
+            this.errors = err.response.data;
+          }
           //   this.showAlert(this.authError, "error");
         });
     },
   },
-  mputed: {
-    authError() {
-      return this.$store.getters.AUTH_ERROR;
-    },
-  },
+  // mputed: {
+  //   authError() {
+  //     return this.$store.getters.AUTH_ERROR;
+  //   },
+  // },
 };
 </script>
 <style scoped>

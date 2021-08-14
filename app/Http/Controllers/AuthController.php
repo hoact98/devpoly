@@ -69,7 +69,7 @@ class AuthController extends Controller
         ]);
         $information->save();
         $userRole = new ModelHasRole([
-            'role_id' =>9,
+            'role_id' =>1,
             'model_type' => User::class,
             'model_id' => $user->id,
         ]);
