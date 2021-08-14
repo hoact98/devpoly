@@ -88,7 +88,7 @@ class SolutionController extends Controller
     }
 
     public function getAllSolution(){
-        $solution = Solution::latest()->paginate(10);
+        $solution = Solution::latest()->paginate(20);
         $solution->load('users');
         $solution->load('challenges');
         return response()->json(['status'=>'success','message'=>'get the solution successfully','data'=>$solution],200);

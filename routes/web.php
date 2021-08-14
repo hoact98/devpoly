@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('home');
 // })->where('any', '[\/\w\.-]*');
 
-Route::get('/', function () {
+Route::get('/{any?}', function () {
     return view('home');
-})->where('any', '[\/\w\.-]*');
+})->where('any', '(.*)');
 
 Route::get('/admin/{any?}', function () {
     return view('admin');

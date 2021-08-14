@@ -17,7 +17,22 @@
         <div class="col-9 col-sm-12 login-and-setting">
           <div class="col-9 col-sm-12 login-and-setting">
             <router-link :to="{ name: 'profile' }" v-if="inforUser != null">
-              <img :src="'/' + inforUser.avatar" alt="" class="img-user" />
+              <div class="info">
+                <img
+                  v-if="inforUser != null"
+                  :src="'/' + inforUser.avatar"
+                  alt=""
+                  class="img-user"
+                  height="30"
+                  width="30"
+                />
+                <h2
+                  v-if="inforUser != null"
+                  style="margin-left: 1rem; text-decoration: none; color: dodgerblue"
+                >
+                  Welcome {{ inforUser.username }}
+                </h2>
+              </div>
             </router-link>
             <router-link :to="{ name: 'login' }" v-else>
               <button class="login">Login</button>
@@ -49,5 +64,10 @@ export default {
 }
 .img-user {
   max-width: 70px;
+}
+.info {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
 }
 </style>
