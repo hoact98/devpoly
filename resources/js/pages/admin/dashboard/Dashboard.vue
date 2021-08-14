@@ -45,7 +45,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <apexchart width="1000" type="bar" :options="chartOptions" :series="series"></apexchart>
+                    <div class="col-6">
+                        <apexchart type="area" width="100%" :options="areaOptions" :series="areaSeries"></apexchart>
+                    </div>
+                    <div class="col-6">
+                        <apexchart type="polarArea" width="100%" :options="polarAreaOptions" :series="polarAreaSeries"></apexchart>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <apexchart width="100%" type="bar" :options="chartOptions" :series="series"></apexchart>
+                    </div>
                 </div>
             </div>
             <Footer></Footer>
@@ -58,6 +68,45 @@ export default {
     data() {
         return {
         title: 'Dashboard',
+        areaSeries: [{
+            name: "Số tiền",
+            data: []
+          }],
+        areaOptions: {
+            chart: {
+              type: 'area',
+              height: 400,
+              zoom: {
+                enabled: false
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'smooth'
+            },
+            title: {
+              text: 'Doanh thu trong năm',
+              align: 'left'
+            },
+            subtitle: {
+              text: 'Đơn vị (VNĐ)',
+              align: 'left'
+            },
+            xaxis: {
+              categories: [],
+              title: {
+                    text: 'Tháng'
+                },
+            },
+            yaxis: {
+              opposite: true
+            },
+            legend: {
+              horizontalAlign: 'left'
+            }
+          },
         chartOptions: {
             chart: {
                 id: 'vuechart-user',
@@ -87,7 +136,6 @@ export default {
                 title: {
                     text: 'Tháng'
                 },
-           
             },
              yaxis: {
                 // title: {
@@ -112,7 +160,38 @@ export default {
             name: 'Giải pháp',
             data: []
             },
-        ]
+        ],
+        polarAreaSeries: [1,2,3],
+        polarAreaOptions: {
+            chart: {
+              type: 'polarArea',
+            },
+             dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                return Math.round(val * 100)/100 + "%"
+                },
+                
+            },
+            stroke: {
+              colors: ['#fff']
+            },
+            fill: {
+              opacity: 0.8
+            },
+            labels: [],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          },
         };
     },
     computed: mapGetters({
@@ -122,7 +201,9 @@ export default {
         solutions: 'solution/all',
     }),
     created () {
+        this.chartCate();
         this.userChart();
+        this.chartRevenue();
         this.$store.dispatch('user/all');
         this.$store.dispatch('challenge/all');
         this.$store.dispatch('challengecategory/all');
@@ -148,7 +229,33 @@ export default {
                 }
             ]
         })
-      }
+    },
+     async chartRevenue(){
+          await axios.get(route("chart.order"))
+            .then(response => {
+            var data =response.data.data;
+             this.areaSeries = [
+                {
+                    data: data.amount
+                }
+            ];
+            this.areaOptions= {...this.areaOptions, ...{
+                xaxis: {
+                    categories: data.month
+                }
+            }};
+        })
+    },
+     async chartCate(){
+          await axios.get(route("chart.challengecategory"))
+            .then(response => {
+            var data =response.data.data;
+            this.polarAreaSeries = data.amount;
+            this.polarAreaOptions= {...this.polarAreaOptions, ...{
+                labels: data.cate
+            }};
+        })
+    }
   }
 }
 </script>

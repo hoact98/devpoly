@@ -16,7 +16,7 @@
                 <h2>{{upgrade.price}} VNĐ</h2>
               </div>
               <div class="content-item-des">
-                <p>{{upgrade.description}}</p>
+                <p v-html="upgrade.description"></p>
               </div>
               <div>
                 <router-link :to="{name:'payment',params: { upgrade_id: upgrade.id }}" ><button type="button" class="btn btn-success">Mua ngay</button></router-link>

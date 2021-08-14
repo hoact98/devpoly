@@ -15,6 +15,7 @@ class Order extends Model
         'upgrade_id',
         'user_id',
         'expiration',
+        'amount',
         'status'
     ];
     protected $dataTableColumns = [

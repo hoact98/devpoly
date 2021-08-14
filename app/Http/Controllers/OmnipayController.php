@@ -31,6 +31,7 @@ class OmnipayController extends Controller
             'order_nr' => strtoupper(date('dmy').$order_id. Str::random(5)),
             'upgrade_id'=>$upgrade_id,
             'user_id'=>Auth::id(),
+            'amount' => $upgrade->price,
             'status'=>'Chờ thanh toán',
             'expiration'=> Carbon::now()->addMonths($period),
         ]);
@@ -40,6 +41,7 @@ class OmnipayController extends Controller
             'returnUrl' => 'https://devpoly.dev/api/order/complete-purchase', //redirect từ MoMo về web
             'notifyUrl' => 'https://devpoly.dev/api/order/notification', //redirect từ MoMo về web
             'orderId' => $order->order_nr,
+            'orderInfo'=> 'Thanh toán hoá đơn '.$order->order_nr,
             'requestId' => time(). Str::random(4),
         ])->send();
         // dd($response);

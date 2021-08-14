@@ -16,9 +16,9 @@ class CreateUpgradesTable extends Migration
         Schema::create('upgrades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description');
-            $table->integer('price');
-            $table->integer('period');
+            $table->text('description')->nullable();
+            $table->integer('price')->default(1000);
+            $table->integer('period')->default(1);
             $table->timestamps();
         });
     }

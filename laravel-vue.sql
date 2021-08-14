@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
   `message` mediumtext,
   `image` varchar(191) DEFAULT NULL,
   `receiver_id` int(10) unsigned DEFAULT NULL,
+  `time` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -120,11 +121,16 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
   KEY `chat_messages_user_id_foreign` (`user_id`),
   CONSTRAINT `chat_messages_chat_room_id_foreign` FOREIGN KEY (`chat_room_id`) REFERENCES `chat_rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chat_messages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.chat_messages: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.chat_messages: ~4 rows (approximately)
 DELETE FROM `chat_messages`;
 /*!40000 ALTER TABLE `chat_messages` DISABLE KEYS */;
+INSERT INTO `chat_messages` (`id`, `chat_room_id`, `user_id`, `message`, `image`, `receiver_id`, `time`, `created_at`, `updated_at`) VALUES
+	(4, 1, 1, 'he', NULL, NULL, '2021-08-13 00:00:58', '2021-08-13 00:00:58', '2021-08-13 00:00:58'),
+	(5, NULL, 1, 'hi', NULL, 4, '2021-08-13 00:03:00', '2021-08-13 00:03:00', '2021-08-13 00:03:00'),
+	(6, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:03:22', '2021-08-13 00:03:22', '2021-08-13 00:03:22'),
+	(7, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:06:12', '2021-08-13 00:06:12', '2021-08-13 00:06:12');
 /*!40000 ALTER TABLE `chat_messages` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.chat_rooms
@@ -198,9 +204,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.migrations: ~19 rows (approximately)
+-- Dumping data for table laravel-vue.migrations: ~21 rows (approximately)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -222,7 +228,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(26, '2016_06_01_000004_create_oauth_clients_table', 2),
 	(27, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2),
 	(30, '2021_07_25_094500_create_chat_rooms_table', 3),
-	(31, '2021_07_25_094633_create_chat_messages_table', 3);
+	(31, '2021_07_25_094633_create_chat_messages_table', 3),
+	(35, '2021_08_11_160509_create_upgrades_table', 4),
+	(36, '2021_08_11_160901_create_orders_table', 4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.model_has_permissions
@@ -236,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.model_has_permissions: ~9 rows (approximately)
+-- Dumping data for table laravel-vue.model_has_permissions: ~29 rows (approximately)
 DELETE FROM `model_has_permissions`;
 /*!40000 ALTER TABLE `model_has_permissions` DISABLE KEYS */;
 INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) VALUES
@@ -246,6 +254,26 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) 
 	(6, 'App\\Models\\User', 1),
 	(7, 'App\\Models\\User', 1),
 	(8, 'App\\Models\\User', 1),
+	(9, 'App\\Models\\User', 1),
+	(10, 'App\\Models\\User', 1),
+	(11, 'App\\Models\\User', 1),
+	(12, 'App\\Models\\User', 1),
+	(13, 'App\\Models\\User', 1),
+	(14, 'App\\Models\\User', 1),
+	(15, 'App\\Models\\User', 1),
+	(16, 'App\\Models\\User', 1),
+	(17, 'App\\Models\\User', 1),
+	(18, 'App\\Models\\User', 1),
+	(19, 'App\\Models\\User', 1),
+	(20, 'App\\Models\\User', 1),
+	(21, 'App\\Models\\User', 1),
+	(22, 'App\\Models\\User', 1),
+	(23, 'App\\Models\\User', 1),
+	(24, 'App\\Models\\User', 1),
+	(25, 'App\\Models\\User', 1),
+	(26, 'App\\Models\\User', 1),
+	(27, 'App\\Models\\User', 1),
+	(28, 'App\\Models\\User', 1),
 	(2, 'App\\Models\\User', 4),
 	(22, 'App\\Models\\User', 6),
 	(23, 'App\\Models\\User', 6);
@@ -308,12 +336,21 @@ CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   KEY `oauth_access_tokens_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.oauth_access_tokens: ~3 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_access_tokens: ~12 rows (approximately)
 DELETE FROM `oauth_access_tokens`;
 /*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 	('1358acc3d8aaf7c00fde7cfaf4afecff0bc6a778fd3d9bbeaf4965a5e7c716ad80597d9cc8670fba', 6, 1, 'Personal Access Token', '[]', 0, '2021-08-08 00:16:51', '2021-08-08 00:16:51', '2022-08-08 00:16:51'),
+	('38d5df0cd80a6afaafabefd6505ce2646294e38335ebb1ae13a91f98c29ccdbbf7cded1b07084986', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-11 19:38:49', '2021-08-11 19:38:49', '2022-08-11 19:38:49'),
+	('3e2ccaa71609f0e8e1f14ddd8d2c5bb63aeb12d04d2b151719fdc0150bedaa29abf3b14c41b2a11c', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 15:35:20', '2021-08-12 15:35:20', '2022-08-12 15:35:20'),
+	('5622c7db8aa8b7e7405bdb4fe5b2349abb87da7342f6d05e445746f068950c8958ca76a83af2dc85', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:21:05', '2021-08-13 22:21:05', '2022-08-13 22:21:05'),
+	('616ae9a0d24a80fe4ce44f3ab2a84c6794f630349b5e42290d122bd7383c5ed6382bf4a0a18bec2b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 23:46:32', '2021-08-12 23:46:32', '2022-08-12 23:46:32'),
 	('6272041fad52d357824fbd1f751809e2aaa03c7ae8fc494a2a8e2f84e35030115e184f49dd95a5e1', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-08 00:15:35', '2021-08-08 00:15:35', '2022-08-08 00:15:35'),
+	('62fe08e2b4a7615504b16ab1f6d02bd093cceda4fa91c7e222b99df64bc636d1ecda299e1b5392bf', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:23:35', '2021-08-13 22:23:35', '2022-08-13 22:23:35'),
+	('6db413b2c1ede2d05d2281ce666f4837699aba3f7fddb40c7e7adcceb76a0b82870a66094b373cf8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:22:10', '2021-08-12 22:22:10', '2022-08-12 22:22:10'),
+	('7787e9ea29a6698896c19c1a4f953477ecef465ccc39a3393a4dc821de2bfb144637f6909008c6d0', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-12 20:32:29', '2021-08-12 20:32:29', '2022-08-12 20:32:29'),
+	('ad4c749a5dd9dd865a7816aacd105e85a87a4e7783326c19c7b091df1c7570a1da996522b45a7cc1', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:25:19', '2021-08-12 22:25:19', '2022-08-12 22:25:19'),
+	('da14162db41066dd9e49558dfb46d1f79ae0c7d35dedac7eb6e8af0947851650730e3cb6606171bd', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:26:16', '2021-08-13 22:26:16', '2022-08-13 22:26:16'),
 	('ffdab722fe005e3eae0a5cb6d552e9d3bf0b98cf2a30029c2c1759e9b3f1ece2f676748f1fdb6361', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-19 02:24:35', '2021-07-19 02:24:35', '2022-07-19 02:24:35');
 /*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
 
@@ -393,6 +430,33 @@ DELETE FROM `oauth_refresh_tokens`;
 /*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
 
+-- Dumping structure for table laravel-vue.orders
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `order_nr` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `upgrade_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `amount` int(11) NOT NULL DEFAULT '1000',
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` datetime NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  KEY `orders_upgrade_id_foreign` (`upgrade_id`),
+  CONSTRAINT `orders_upgrade_id_foreign` FOREIGN KEY (`upgrade_id`) REFERENCES `upgrades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel-vue.orders: ~2 rows (approximately)
+DELETE FROM `orders`;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` (`id`, `order_nr`, `upgrade_id`, `user_id`, `amount`, `status`, `expiration`, `created_at`, `updated_at`) VALUES
+	(1, '1308211OEAVN', 1, 1, 1000, 'thành công', '2021-09-13 23:26:56', '2021-08-13 23:26:56', '2021-08-13 23:53:16'),
+	(2, '1308211TJERE', 1, 1, 1000, 'Chờ thanh toán', '2021-09-13 23:30:56', '2021-08-13 23:30:56', '2021-08-13 23:30:56');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+
 -- Dumping structure for table laravel-vue.password_resets
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -417,9 +481,9 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.permissions: ~21 rows (approximately)
+-- Dumping data for table laravel-vue.permissions: ~26 rows (approximately)
 DELETE FROM `permissions`;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -443,7 +507,12 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(20, 'edit solutions', 'api', '2021-08-06 15:39:14', '2021-08-06 15:39:14'),
 	(21, 'delete solutions', 'api', '2021-08-06 15:39:24', '2021-08-06 15:39:24'),
 	(22, 'chat', 'api', '2021-08-06 15:42:03', '2021-08-06 15:42:03'),
-	(23, 'create solutions', 'api', '2021-08-06 15:42:43', '2021-08-06 15:42:43');
+	(23, 'create solutions', 'api', '2021-08-06 15:42:43', '2021-08-06 15:42:43'),
+	(24, 'create upgrades', 'api', '2021-08-12 21:34:23', '2021-08-12 21:34:34'),
+	(25, 'delete upgrades', 'api', '2021-08-12 21:54:09', '2021-08-12 21:54:09'),
+	(26, 'edit upgrades', 'api', '2021-08-12 21:55:02', '2021-08-12 21:55:02'),
+	(27, 'edit orders', 'api', '2021-08-12 21:56:30', '2021-08-12 21:56:30'),
+	(28, 'delete orders', 'api', '2021-08-12 22:01:02', '2021-08-12 22:01:02');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.roles
@@ -478,7 +547,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.role_has_permissions: ~35 rows (approximately)
+-- Dumping data for table laravel-vue.role_has_permissions: ~40 rows (approximately)
 DELETE FROM `role_has_permissions`;
 /*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
@@ -505,6 +574,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(21, 2),
 	(22, 2),
 	(23, 2),
+	(24, 2),
+	(25, 2),
+	(26, 2),
+	(27, 2),
+	(28, 2),
 	(1, 3),
 	(2, 3),
 	(5, 3),
@@ -547,6 +621,26 @@ DELETE FROM `solutions`;
 INSERT INTO `solutions` (`id`, `title`, `description`, `link_github`, `demo_url`, `user_id`, `challen_id`, `number_like`, `created_at`, `updated_at`) VALUES
 	('1', 'upload images', '<p>Đ&oacute; l&agrave; một dự &aacute;n tuyệt vời để l&agrave;m việc.&nbsp;Do l&uacute;c đầu, t&ocirc;i nghĩ rằng n&oacute; sẽ kh&oacute; khăn nhưng t&ocirc;i thấy n&oacute; rất vui v&agrave; t&ocirc;i đ&atilde; học được rất nhiều điều trong qu&aacute; tr&igrave;nh thực hiện n&oacute;.</p>\n\n<p>C&ocirc;ng nghệ: T&ocirc;i đ&atilde; sử dụng bộ nhớ firebase l&agrave;m m&aacute;y chủ của m&igrave;nh</p>\n\n<p>Farmwork: React.js Material UI</p>\n\n<p>Th&aacute;ch thức: Đ&oacute; l&agrave; th&aacute;ch thức khi kết nối phản ứng v&agrave; cơ sở lửa.</p>', 'https://github.com/FayVik/Image-uploader', 'https://image-uploader-one.vercel.app/', 4, 1, 0, '2021-07-27 22:57:30', '2021-07-29 09:47:30');
 /*!40000 ALTER TABLE `solutions` ENABLE KEYS */;
+
+-- Dumping structure for table laravel-vue.upgrades
+DROP TABLE IF EXISTS `upgrades`;
+CREATE TABLE IF NOT EXISTS `upgrades` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `price` int(11) NOT NULL DEFAULT '1000',
+  `period` int(11) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel-vue.upgrades: ~1 rows (approximately)
+DELETE FROM `upgrades`;
+/*!40000 ALTER TABLE `upgrades` DISABLE KEYS */;
+INSERT INTO `upgrades` (`id`, `name`, `description`, `price`, `period`, `created_at`, `updated_at`) VALUES
+	(1, 'Premium 1 tháng', '<p>Premium 1 th&aacute;ng</p>', 1000, 1, '2021-08-13 23:24:22', '2021-08-13 23:24:22');
+/*!40000 ALTER TABLE `upgrades` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.users
 DROP TABLE IF EXISTS `users`;

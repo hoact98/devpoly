@@ -75,10 +75,10 @@ Route::get('get_One_Challenge_Category/{slug}', [ChallengeCategoryController::cl
 Route::group(['prefix' => 'challengecategory'], function () {
     Route::post('add', [ChallengeCategoryController::class, 'create'])->name('create.challengecategory');
     Route::get('all', [ChallengeCategoryController::class, 'categories'])->name('all.challengecategory');
+    Route::get('chart', [ChallengeCategoryController::class, 'handleChart'])->name('chart.challengecategory');
     Route::get('{id}', [ChallengeCategoryController::class, 'show'])->name('show.challengecategory');
     Route::post('update/{id}', [ChallengeCategoryController::class, 'update'])->name('update.challengecategory');
     Route::delete('delete/{id}', [ChallengeCategoryController::class, 'delete'])->name('delete.challengecategory');
-
 });
 
 Route::get('challenges', [ChallengeController::class, 'index'])->name('challenges');
@@ -130,6 +130,7 @@ Route::prefix('order')->group(function() {
     Route::get('/query-transaction', [OmnipayController::class, 'queryTransaction'])->name('queryTransaction');
     Route::get('all', [OrderController::class, 'orders'])->name('all.order');
     Route::post('add', [OrderController::class, 'create'])->name('create.order');
+    Route::get('chart', [OrderController::class, 'handleChart'])->name('chart.order');
     Route::get('{id}', [OrderController::class, 'show'])->name('show.order');
     Route::post('update/{id}', [OrderController::class, 'update'])->name('update.order');
     Route::delete('delete/{id}', [OrderController::class, 'delete'])->name('delete.order');

@@ -7,6 +7,7 @@ use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Challenge;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
@@ -146,4 +147,32 @@ class ChallengeCategoryController extends Controller
         }
         return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$ChallengeCategory],200);
     }
+    public function handleChart()
+    {
+        $cate = ChallengeCategory::select(DB::raw("name"))
+        ->pluck('name');
+        
+        $amount = Challenge::select(DB::raw("COUNT(*) as sum"))
+        ->groupBy(DB::raw("cate_challen_id"))
+        ->pluck('sum');
+
+        $amountArr=[];
+        $cateArr=[];
+        foreach($cate as $index => $y)
+        {
+            $cateArr[$index] = $cate[$index];
+        }
+        foreach($amount as $index => $year)
+        {
+            $amountArr[$index] = $amount[$index];
+        }
+        $data['amount']=$amountArr;
+        $data['cate']=$cateArr;
+        // dd($data);
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get data',
+            'data' => $data,
+        ], 200);
+    }  
 }

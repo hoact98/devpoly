@@ -30,12 +30,12 @@
                                 <p>{{order.upgrade.name}}</p>
                             </div>
                         </div>
-                        <div class="row" v-if="order.upgrade">
+                        <div class="row">
                             <div class="col-sm-2">
                                 <p>Số tiền</p>
                             </div>
                             <div class="col-sm-10">
-                                <p>{{order.upgrade.price}} VNĐ</p>
+                                <p>{{order.amount}} VNĐ</p>
                             </div>
                         </div>
                         <div class="row">

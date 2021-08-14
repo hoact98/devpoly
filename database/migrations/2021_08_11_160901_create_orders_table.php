@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_nr');
             $table->integer('upgrade_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('amount')->default(1000);
             $table->string('status');
             $table->dateTime('expiration');
             $table->timestamps();
