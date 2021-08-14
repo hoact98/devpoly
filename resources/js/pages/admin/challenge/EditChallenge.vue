@@ -18,6 +18,7 @@
               <form
                 @submit.prevent="updateChallenge"
                 @keydown="form.onKeydown($event)"
+                enctype="multipart/form-data"
               >
                 <div class="card-body">
                   <div class="form-group">
@@ -202,6 +203,7 @@ export default {
       link_figma: "",
       level: "",
       cate_challen_id: "",
+
     }),
     title: "Edit Challenge",
   }),
@@ -213,6 +215,7 @@ export default {
   },
   methods: {
      uploadSource(event) {
+       console.log(this.form.soucre);
       this.form.soucre = event.target.files[0];
     },
     uploadImage(event) {

@@ -251,6 +251,11 @@ const routes = [{
                 path: "mentor-add",
                 component: page("admin/mentor/AddMentor.vue"),
                 name: "add.mentor"
+            },
+            {
+                path: "mentor-edit/:id",
+                component: page("admin/mentor/EditMentor.vue"),
+                name: "edit.mentor"
             }
         ]
     },

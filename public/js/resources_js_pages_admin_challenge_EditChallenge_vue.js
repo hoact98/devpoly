@@ -222,6 +222,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -247,6 +248,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     uploadSource: function uploadSource(event) {
+      console.log(this.form.soucre);
       this.form.soucre = event.target.files[0];
     },
     uploadImage: function uploadImage(event) {
@@ -1162,6 +1164,7 @@ var render = function() {
                 _c(
                   "form",
                   {
+                    attrs: { enctype: "multipart/form-data" },
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
