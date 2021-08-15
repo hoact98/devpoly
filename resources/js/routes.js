@@ -64,6 +64,13 @@ const routes = [
         name: 'showDetailSolution',
     },
     {
+        path: '/add-solution/:slug',
+        alias: '',
+        meta: {layout: 'main'},
+        component: page('public/AddSolution.vue'),
+        name: 'addSolution',
+    },
+    {
         path: '/feedback',
         alias: '',
         meta: {layout: 'main'},

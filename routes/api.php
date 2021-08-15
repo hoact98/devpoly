@@ -90,6 +90,8 @@ Route::group(['prefix' => 'challenge'], function () {
     Route::get('{id}', [ChallengeController::class, 'show'])->name('show.challenge');
     Route::post('update/{id}', [ChallengeController::class, 'update'])->name('update.challenge');
     Route::delete('delete/{id}', [ChallengeController::class, 'delete'])->name('delete.challenge');
+    Route::post('challUser/{id}', [ChallengeController::class, 'challUser'])->name('challUser.challenge');
+    Route::get('check/{slug}', [ChallengeController::class, 'checkChallUser'])->name('check.challenge');
 });
 
 Route::get('solutions', [SolutionController::class, 'index'])->name('solutions');

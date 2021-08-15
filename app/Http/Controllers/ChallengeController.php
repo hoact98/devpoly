@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveChallengeRequest;
 use App\Models\Challenge;
 use App\Models\ChallengeCategory;
+use App\Models\ChallengeUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class ChallengeController extends Controller
 {
+    public function __construct()
+    {
+        if (Cookie::get('token') != null) {
+            $this->middleware(['header_api','auth:api']);
+        }
+    }
     // all challenges
     public function challenges()
     {
@@ -166,11 +175,33 @@ class ChallengeController extends Controller
 
         return response()->json(['status'=>'success','message'=>'The challenge successfully deleted'],200);
     }
-      // show one challenge
-      public function get_One_Challenge($slug)
-      {
-          $challenge =  Challenge::where('slug','=', $slug)->first();
-          $challenge->load('category');
-          return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
-      }
+    // show one challenge
+    public function get_One_Challenge($slug)
+    {
+        $challenge =  Challenge::where('slug','=', $slug)->first();
+        $challenge->load('category');
+        return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$challenge],200);
+    }
+    
+    public function challUser($id)
+    {
+        $challenge_user = new ChallengeUser([
+            'challen_id'=> $id,
+            'user_id'=> Auth::id(),
+            'status' => 0
+        ]);
+        $challenge_user->save();
+        return response()->json(['status'=>'success','message'=>'Success get challenge_user','data'=>true],201);
+    }
+    public function checkChallUser($slug)
+    {
+        $chall =  Challenge::where('slug','=', $slug)->first();
+        $challenge =  ChallengeUser::where('challen_id','=', $chall->id)->where('user_id','=',Auth::id())->first();
+        if($challenge){
+            $check=true;
+        }else{
+            $check=false;  
+        }
+        return response()->json(['status'=>'success','message'=>'Success get challenge','data'=>$check],200);
+    }
 }

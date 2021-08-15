@@ -8,10 +8,17 @@ use App\Models\ChallengeCategory;
 use App\Models\Solution;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class SolutionController extends Controller
 {
+    public function __construct()
+    {
+        if (Cookie::get('token') != null) {
+            $this->middleware(['header_api','auth:api']);
+        }
+    }
     // all Solutions
     public function solutions()
     {
@@ -68,7 +75,7 @@ class SolutionController extends Controller
             'description' => $request->description,
             'link_github' => $request->link_github,
             'demo_url' => $request->demo_url,
-            'user_id' => $request->user_id,
+            'user_id' => Auth::id(),
             'challen_id' => $request->challen_id,
         ]);
         $solution->save();
