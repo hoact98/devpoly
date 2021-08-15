@@ -5,12 +5,12 @@ import AuthLayout from "./layouts/auth.vue";
 
 function page(path) {
     return () =>
-        import(`./pages/${path}`).then(m => m.default || m);
+        import (`./pages/${path}`).then(m => m.default || m);
 }
 
 // Routes
 const routes = [{
-        path: "/",
+        path: "/poly",
         component: HomeLayout,
         children: [{
                 path: "/",
@@ -30,16 +30,6 @@ const routes = [{
                 },
                 name: "homeDashboard"
             },
-            {
-                path: "/register",
-                alias: "",
-                component: page("auth/Register.vue"),
-                name: "register",
-                meta: {
-                    guest: true
-                },
-                name: "register"
-            }
         ]
     },
     {
@@ -78,7 +68,7 @@ const routes = [{
                 name: "paths"
             },
             {
-                path: "/chat",
+                path: "chat",
                 alias: "",
                 component: page("public/Chat/container.vue"),
                 meta: {

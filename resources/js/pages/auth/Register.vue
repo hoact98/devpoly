@@ -20,8 +20,8 @@
                 id="username"
                 class="auth-form__input"
               />
-              <div class="alert alert-danger" v-if="errors && errors['username']">
-                {{ errors["username"][0] }}
+              <div class="alert alert-danger" v-if="errors && errors.username">
+                {{ errors.username[0] }}
               </div>
             </div>
             <div class="auth-form__group">
@@ -33,8 +33,8 @@
                 id="email"
                 class="auth-form__input"
               />
-              <div class="alert alert-danger" v-if="errors && errors['email']">
-                {{ errors["email"][0] }}
+              <div class="alert alert-danger" v-if="errors && errors.email">
+                {{ errors.email[0] }}
               </div>
             </div>
             <div class="auth-form__group">
@@ -46,8 +46,8 @@
                 id="password"
                 class="auth-form__input"
               />
-              <div class="alert alert-danger" v-if="errors && errors['password']">
-                {{ errors["password"][0] }}
+              <div class="alert alert-danger" v-if="errors && errors.password">
+                {{ errors.password }}[0] }}
               </div>
             </div>
             <div class="auth-form__group">
