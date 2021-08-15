@@ -6,6 +6,41 @@
     margin-bottom: 30px;
 }
 
+.listing-challenges {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .item-challenge {
+        a {
+            display: flex;
+            text-decoration: none;
+            margin-bottom: 20px;
+
+            img {
+                width: 80px;
+                border-radius: 10px;
+                height: 50px;
+                object-fit: cover;
+            }
+
+            .challenge-desc {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .challenge-name {
+                    font-size: 12px;
+    margin-left: 10px;
+    color: #333333;
+                }
+            }
+        }
+    }
+}
 
 /* ============================== */
 

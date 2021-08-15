@@ -70,7 +70,7 @@
           </div>
 
           <div class="auth-form__controls">
-            <button class="btn auth-form__controls-back">Trở lại</button>
+            <button class="btn auth-form__controls-back"><router-link :to="{ name: 'home' }">Trở lại</router-link></button>
             <button class="btn btn--primary">Đăng ký</button>
           </div>
         </form>

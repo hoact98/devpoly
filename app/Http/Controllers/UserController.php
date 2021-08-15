@@ -331,6 +331,7 @@ class UserController extends Controller
     {
         $user = User::where('id', auth('api')->user()->id)->first();
         $user->load('challenges');
+        $user->load('challengesUser');
         return response()->json([
             'status' => 'success',
             'data' => $user

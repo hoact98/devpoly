@@ -9,7 +9,7 @@ use App\Models\Solution;
 use App\Models\SolutionUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\ChallengeUser;
 class SolutionController extends Controller
 {
     // all Solutions
@@ -43,6 +43,7 @@ class SolutionController extends Controller
     // add Solution
     public function create(SaveSolutionRequest $request)
     {
+
         $solution = new Solution([
             'title' => $request->title,
             'description' => $request->description,
@@ -58,6 +59,10 @@ class SolutionController extends Controller
             'solution_id'=> $solution->id,
         ]);
         $solution_user->save();
+        // $challengeUser =  ChallengeUser::where('user_id','=', auth('api')->user()->id)
+        // ->where('challen_id','=',$request->challen_id)->get();
+        // $challengeUser[0]->status = 1;
+        // $challengeUser[0]->update();
         return response()->json(['status'=>'success','message'=>'The solution successfully added','data'=>$solution],201);
     }
 

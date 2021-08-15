@@ -1,4 +1,6 @@
-import { currentUser } from "../../helpers/auth";
+import {
+    currentUser
+} from "../../helpers/auth";
 const user = currentUser();
 
 

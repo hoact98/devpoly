@@ -54,7 +54,7 @@
           </div>
 
           <div class="auth-form__controls">
-            <button class="btn auth-form__controls-back">Trở lại</button>
+            <button class="btn auth-form__controls-back"><router-link :to="{ name: 'home' }">Trở lại</router-link></button>
             <button class="btn btn--primary">Đăng nhập</button>
           </div>
         </form>
@@ -79,14 +79,14 @@ export default {
       login(this.form)
         .then((res) => {
           this.$store.commit("auth/LOGIN_SUCCESS", { res });
-          this.$router.push({ name: "home" });
+          window.location.href = '/';
         })
         .catch((err) => {
-          //this.$store.commit("auth/LOGIN_FAILED", { err });
+          this.$store.commit("auth/LOGIN_FAILED", { err });
+
           if (err.response.status == 422) {
-            this.errors = err.response.data;
+            this.errors = err.response.data.errors;
           }
-          //   this.showAlert(this.authError, "error");
         });
     },
   },

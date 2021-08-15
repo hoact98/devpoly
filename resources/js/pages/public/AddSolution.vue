@@ -118,7 +118,7 @@ export default {
         await this.form
           .post(route("create.solution"))
           .then((response) => {
-            console.log(response);
+            this.$router.push({name: 'showDetailSolution', params: { id: response.data.data.id }});
           })
           .catch(() => {
             Swal.fire({
@@ -134,5 +134,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../sass/challenge.scss";
+@import "../../../sass/addSolution.scss";
 </style>

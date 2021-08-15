@@ -7,6 +7,7 @@ use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Challenge;
+use App\Models\ChallengeUser;
 class ChallengeCategoryController extends Controller
 {
 
@@ -96,10 +97,12 @@ class ChallengeCategoryController extends Controller
     }
     public function get_One_Challenge_Category($slug){
         $ChallengeCategory = ChallengeCategory::where('slug','=', $slug)->first();
-        $ChallengeCategoryID = $ChallengeCategory->id;
+        $ChallengeUser  =  ChallengeUser::where('user_id', '=', auth('api')->user()->id)
+        ->where('user_id', '=', auth('api')->user()->id)
+        ->get();
         if($ChallengeCategory != null){
-           $ChallengeCategory->load('challenges');
+            $ChallengeCategory->load('challenges');
         }
-        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$ChallengeCategory],200);
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','challengeCategory'=>$ChallengeCategory,'challengeUser'=>$ChallengeUser],200);
     }
 }

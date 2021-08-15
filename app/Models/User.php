@@ -104,6 +104,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Challenge::class,'challenge_users', 'user_id', 'challen_id');
     }
+    public function challengesUser()
+    {
+        return $this->hasMany(ChallengeUser::class, 'user_id',);
+    }
     public function solutions()
     {
         return $this->belongsToMany(Solution::class,'solution_users', 'user_id', 'solution_id');

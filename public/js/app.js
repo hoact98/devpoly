@@ -2741,114 +2741,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -3091,8 +2983,7 @@ vue__WEBPACK_IMPORTED_MODULE_7__.default.component('v-button', __webpack_require
 vue__WEBPACK_IMPORTED_MODULE_7__.default.config.productionTip = false;
 vue__WEBPACK_IMPORTED_MODULE_7__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_8__.default);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__.default({
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__.default,
-  mode: 'history'
+  routes: _routes__WEBPACK_IMPORTED_MODULE_1__.default
 });
 (0,_helpers_general__WEBPACK_IMPORTED_MODULE_4__.initialize)(_store_index__WEBPACK_IMPORTED_MODULE_0__.default, router);
 new vue__WEBPACK_IMPORTED_MODULE_7__.default({
@@ -3187,7 +3078,7 @@ function login(credential) {
     axios.post(route('login'), credential).then(function (result) {
       res(result.data);
     })["catch"](function (err) {
-      rej("Wrong email or password");
+      rej(err);
     });
   });
 }
@@ -3196,7 +3087,7 @@ function userProfile() {
     axios.get(route('userProfile')).then(function (result) {
       res(result.data);
     })["catch"](function (err) {
-      rej("Wrong email or password");
+      rej(err);
     });
   });
 }
@@ -3205,7 +3096,7 @@ function register(credential) {
     axios.post(route('register'), credential).then(function (result) {
       res(result.data);
     })["catch"](function (err) {
-      console.log(err.response.data); // rej("Wrong email or password");
+      rej(err);
     });
   });
 }
@@ -3278,8 +3169,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_main_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/main.vue */ "./resources/js/layouts/main.vue");
 /* harmony import */ var _layouts_home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/home.vue */ "./resources/js/layouts/home.vue");
 /* harmony import */ var _layouts_auth_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/auth.vue */ "./resources/js/layouts/auth.vue");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3313,15 +3202,7 @@ var routes = [{
       guest: true
     },
     name: "homeDashboard"
-  }, _defineProperty({
-    path: "/register",
-    alias: "",
-    component: page("auth/Register.vue"),
-    name: "register",
-    meta: {
-      guest: true
-    }
-  }, "name", "register")]
+  }]
 }, {
   path: "/login",
   component: _layouts_auth_vue__WEBPACK_IMPORTED_MODULE_3__.default,
@@ -3354,7 +3235,7 @@ var routes = [{
     },
     name: "paths"
   }, {
-    path: "/chat",
+    path: "chat",
     alias: "",
     component: page("public/Chat/container.vue"),
     meta: {
@@ -3822,7 +3703,7 @@ var actions = {
   get_One_Data: function get_One_Data(_ref4, slug) {
     var commit = _ref4.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
-      return commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data);
+      return commit("GET_ONE_DATA_TO_OVERVIEW", response.data);
     });
   },
   deletechallengecategory: function deletechallengecategory(_ref5, id) {
@@ -8862,7 +8743,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".container-content {\n  padding: 16px;\n  /* border: 1px solid #454f59; */\n  border-radius: 0.25rem;\n  background: var(--background-light);\n}\n.description {\n  /* =========== */\n  padding: 12px;\n}\n.description .desc-title h1 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 2.6rem;\n  font-weight: 500;\n  color: var(--primary-color);\n}\n.description .desc-time {\n  font-size: 1.2rem;\n  font-family: 'Lato', sans-serif;\n  color: var(--black);\n}\n.description .short-desc {\n  font-size: 1.6rem;\n}\n.description #desc-box {\n  margin-top: 16px;\n  padding: 16px;\n}\n.description #desc-box .box-title h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.description #desc-box #box-list {\n  font-size: 1.4rem;\n}\n.description #desc-box #box-list li {\n  margin-bottom: 8px;\n}\n.description .desc-box1 {\n  border: 1px solid #bba9fb;\n  border-radius: 0.25rem;\n}\n.description .desc-box2 {\n  border: 1px solid #ffda4d;\n  border-radius: 0.25rem;\n}\n\n/* ============================== */\n.require {\n  /* =========== */\n  padding: 16px;\n}\n.require .require-image img {\n  width: 100%;\n  height: 100%;\n  border-radius: 0.25rem;\n  margin-bottom: 16px;\n}\n.require .require-title h5,\n.require .progres h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.list-require {\n  font-size: 1.4rem;\n}\n.list-require li {\n  margin-bottom: 8px;\n}\n.progres {\n  margin-top: 28px;\n}\n.require .progres p {\n  font-size: 1.3rem;\n  margin-bottom: 4px;\n  font-weight: 400;\n  color: var(--grey-color);\n}\n.require .progres .progres-level {\n  display: flex;\n  margin-bottom: 20px;\n}\n.require .progres .progres-level .progres-level-item {\n  background-color: var(--primary-color);\n  height: 6px;\n  width: 40px;\n  margin: 0 4px 0 0;\n  border-radius: 0.225rem;\n}\n.require .apply-button button {\n  padding: 12px;\n  width: 100%;\n  background: linear-gradient(to right, #6d2fff, #6f42c1);\n  border: 1px solid #454f59;\n  font-size: 1.4rem;\n  font-weight: 500;\n  color: var(--white);\n  font-family: 'Poppins', sans-serif;\n  border-radius: var(--border-radius-main);\n}\n.list-product {\n  margin-bottom: 30px;\n}\n\n/* ======================================== */\n.product a {\n  text-decoration: none;\n  color: #0b0f32;\n}\n\n/* .product a:hover .product-content {\n    border: 1px solid #c5c8cc;\n} */\n.product-title h2 {\n  font-size: 20px;\n  font-family: 'Poppins', sans-serif;\n  margin-top: 10px;\n}\n.product-item {\n  padding: 12px;\n}\n.product-item .product-content {\n  background-color: var(--background-light);\n  border: 1px solid #ccc;\n  border-radius: var(--border-radius-main);\n  padding: 16px;\n}\n.product-content .product-image img {\n  width: 100%;\n  border-radius: 0.25rem;\n}\n.product-content .product-content-title {\n  padding-top: 16px;\n  margin-bottom: 12px;\n  font-size: 1.8rem;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  color: var(--primary-color);\n}\n.product-content .product-desc {\n  line-height: 175%;\n  margin-bottom: 22px;\n  font-size: 1.4rem;\n}\n.product-content .product-level {\n  padding: 12px;\n  background-color: var(--white);\n  border-radius: 0.25rem;\n}\n.product-content .product-level .product-level-name p {\n  color: #737f8b;\n  font-size: 11px;\n  font-family: 'Lato', sans-serif;\n  margin-bottom: 8px;\n}\n.product-content .product-level .product-level-main {\n  display: flex;\n}\n.product-content .product-level .product-level-item {\n  background-color: #e5eaf0;\n  width: 51px;\n  height: 6px;\n  border-radius: 0.125rem;\n  margin: 0 4px 0 0;\n}\n.product-content .product-level .product-level-item:first-child {\n  background-color: var(--primary-color);\n}\n\n/* ======================================= */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".container-content {\n  padding: 16px;\n  /* border: 1px solid #454f59; */\n  border-radius: 0.25rem;\n  background: var(--background-light);\n}\n.description {\n  /* =========== */\n  padding: 12px;\n}\n.description .desc-title h1 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 2.6rem;\n  font-weight: 500;\n  color: var(--primary-color);\n}\n.description .desc-time {\n  font-size: 1.2rem;\n  font-family: 'Lato', sans-serif;\n  color: var(--black);\n}\n.description .short-desc {\n  font-size: 1.6rem;\n}\n.description #desc-box {\n  margin-top: 16px;\n  padding: 16px;\n}\n.description #desc-box .box-title h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.description #desc-box #box-list {\n  font-size: 1.4rem;\n}\n.description #desc-box #box-list li {\n  margin-bottom: 8px;\n}\n.description .desc-box1 {\n  border: 1px solid #bba9fb;\n  border-radius: 0.25rem;\n}\n.description .desc-box2 {\n  border: 1px solid #ffda4d;\n  border-radius: 0.25rem;\n}\n\n/* ============================== */\n.require {\n  /* =========== */\n  padding: 16px;\n}\n.require .require-image img {\n  width: 100%;\n  height: 100%;\n  border-radius: 0.25rem;\n  margin-bottom: 16px;\n}\n.require .require-title h5,\n.require .progres h5 {\n  font-family: 'Poppins', sans-serif;\n  font-size: 1.6rem;\n  font-weight: 500;\n}\n.list-require {\n  font-size: 1.4rem;\n}\n.list-require li {\n  margin-bottom: 8px;\n}\n.progres {\n  margin-top: 28px;\n}\n.require .progres p {\n  font-size: 1.3rem;\n  margin-bottom: 4px;\n  font-weight: 400;\n  color: var(--grey-color);\n}\n.require .progres .progres-level {\n  display: flex;\n  margin-bottom: 20px;\n}\n.require .progres .progres-level .progres-level-item {\n  background-color: var(--primary-color);\n  height: 6px;\n  width: 40px;\n  margin: 0 4px 0 0;\n  border-radius: 0.225rem;\n}\n.require .progres .progres-level .progres-level-item-active {\n  background-color: #454f59;\n  height: 6px;\n  width: 40px;\n  margin: 0 4px 0 0;\n  border-radius: 0.225rem;\n}\n.require .apply-button button {\n  padding: 12px;\n  width: 100%;\n  background: linear-gradient(to right, #6d2fff, #6f42c1);\n  border: 1px solid #454f59;\n  font-size: 1.4rem;\n  font-weight: 500;\n  color: var(--white);\n  font-family: 'Poppins', sans-serif;\n  border-radius: var(--border-radius-main);\n}\n.list-product {\n  margin-bottom: 30px;\n}\n\n/* ======================================== */\n.product a {\n  text-decoration: none;\n  color: #0b0f32;\n}\n\n/* .product a:hover .product-content {\n    border: 1px solid #c5c8cc;\n} */\n.product-title h2 {\n  font-size: 20px;\n  font-family: 'Poppins', sans-serif;\n  margin-top: 10px;\n}\n.product-item {\n  padding: 12px;\n}\n.product-item .product-content {\n  background-color: var(--background-light);\n  border: 1px solid #ccc;\n  border-radius: var(--border-radius-main);\n  padding: 16px;\n}\n.product-content .product-image img {\n  width: 100%;\n  height: 250px;\n  border-radius: 0.25rem;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.product-content .product-content-title {\n  padding-top: 16px;\n  margin-bottom: 12px;\n  font-size: 1.8rem;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  color: var(--primary-color);\n}\n.product-content .product-desc {\n  line-height: 175%;\n  margin-bottom: 22px;\n  font-size: 1.4rem;\n}\n.product-content .product-level {\n  padding: 12px;\n  background-color: var(--white);\n  border-radius: 0.25rem;\n}\n.product-content .product-level .product-level-name p {\n  color: #737f8b;\n  font-size: 11px;\n  font-family: 'Lato', sans-serif;\n  margin-bottom: 8px;\n}\n.product-content .product-level .product-level-main {\n  display: flex;\n}\n.product-content .product-level .product-level-item {\n  background-color: #e5eaf0;\n  width: 51px;\n  height: 6px;\n  border-radius: 0.125rem;\n  margin: 0 4px 0 0;\n}\n.product-content .product-level .product-level-item:first-child {\n  background-color: var(--primary-color);\n}\n\n/* ======================================= */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52319,203 +52200,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "social" }, [
-    _c("div", { staticClass: "container" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-discord" }, [
-              _c(
-                "svg",
-                {
-                  attrs: {
-                    height: "50",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 245 240",
-                    fill: "#fff"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(1)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-yt" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-tw" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(3)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-tw" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(4)
-          ])
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("h2", {}, [_vm._v("Stay Update")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Discord")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Join other developers to ask for help or help others.\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Thu Nghiem Youtube")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Watch coding tutorials and listen to my stories\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [
-        _vm._v("DevChallenges Twitter")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Get updates on DevChallenges and other users\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Thu Nghiem Twitter")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              See what I am up to and let's connect\n            "
-        )
-      ])
+    return _c("section", { staticClass: "social" }, [
+      _c("div", { staticClass: "container" })
     ])
   }
 ]

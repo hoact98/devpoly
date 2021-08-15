@@ -10,7 +10,7 @@ function page(path) {
 
 // Routes
 const routes = [{
-        path: "/poly",
+        path: "/",
         component: HomeLayout,
         children: [{
                 path: "/",

@@ -15,13 +15,11 @@
                 <img src="svg/img-home-1.svg" alt="" />
               </div>
               <div class="content-item-title">
-                <h3>Step 1: Choose a challenge</h3>
+                <h3>Step 1: Chọn một thử thách</h3>
               </div>
               <div class="content-item-des">
                 <p>
-                  Choose a challenge, read the description carefully. Paths help you
-                  navigate, and you can earn a certificate after completing all challenges
-                  in the path
+                 Chọn một thử thách, đọc kỹ mô tả. Đường dẫn giúp bạn điều hướng và bạn có thể kiếm được chứng chỉ sau khi hoàn thành tất cả các thử thách trong đường dẫn
                 </p>
               </div>
             </div>
@@ -33,13 +31,11 @@
                 <img src="svg/img-home-1.svg" alt="" />
               </div>
               <div class="content-item-title">
-                <h3>Step 2: Work by yourself or with a team</h3>
+                <h3>Step 2: Làm việc một mình hoặc với một nhóm</h3>
               </div>
               <div class="content-item-des">
                 <p>
-                  Choose a challenge, read the description carefully. Paths help you
-                  navigate, and you can earn a certificate after completing all challenges
-                  in the path
+                  Chọn một thử thách, đọc kỹ mô tả. Đường dẫn giúp bạn điều hướng và bạn có thể kiếm được chứng chỉ sau khi hoàn thành tất cả các thử thách trong đường dẫn
                 </p>
               </div>
             </div>
@@ -51,14 +47,14 @@
                 <img src="svg/img-home-1.svg" alt="" />
               </div>
               <div class="content-item-title">
-                <h3>Step 3: Submit your solutions and give feedback</h3>
+                <h3>Step 3: Gửi các giải pháp của bạn và đưa ra phản hồi</h3>
               </div>
               <div class="content-item-des">
                 <p>
-                  Choose a challenge, read the description carefully. Paths help you
-                  navigate, and you can earn a certificate after completing all challenges
-                  in the path you can earn a certificate after completing all challenges
-                  in the path
+                  Chọn một thử thách, đọc kỹ mô tả. Đường dẫn giúp bạn
+                  điều hướng và bạn có thể kiếm được chứng chỉ sau khi hoàn thành tất cả các thử thách
+                  trong con đường, bạn có thể kiếm được chứng chỉ sau khi hoàn thành tất cả các thử thách
+                  trong con đường
                 </p>
               </div>
             </div>
@@ -113,10 +109,13 @@ export default {
     challengecategories() {
       return this.$store.state.challengecategory.challengecategories;
     },
+    
   },
     created() {
       this.$store.dispatch("challengecategory/get_All_Data");
   },
+  methods: {
+  }
 };
 </script>
 

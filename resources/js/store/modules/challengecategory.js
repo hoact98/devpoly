@@ -58,7 +58,7 @@ export const actions = {
     }, slug) {
         axios
             .get(route("get_One.challengecategory", slug))
-            .then(response => commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data))
+            .then(response => commit("GET_ONE_DATA_TO_OVERVIEW", response.data))
     },
     deletechallengecategory({}, id) {
         axios

@@ -6,7 +6,7 @@
       </div>
       <div class="row">
         <div class="select-box col-lg-4">
-          <div v-if="(currentChallenges == 0)" class="select-box-content">
+          <div v-if="currentChallenges == 0" class="select-box-content">
             <div class="image">
               <img src="images/solutions.png" alt="" />
             </div>
@@ -14,18 +14,34 @@
               You have no onging projects
             </div>
             <div class="select-button text-center">
-              <button>Select a Challenges</button>
+              <button>
+                <router-link :to="{ name: 'home' }"
+                  >Select a Challenges
+                </router-link>
+              </button>
             </div>
           </div>
           <div v-else class="select-box-content">
             <h4>Ongoing projects</h4>
             <div class="listing-challenges">
-              <div v-for="(challenge,index) in dataChallenges" :key="index" class="item-challenge">
-                <router-link :to="{name: 'chanllenge',params:{ slug:challenge.slug}}">
-                <div class="challenge-image"><img :src="'/' + challenge.challenge_image" alt="" width="100"></div>
-                <div class="challenge-desc"> 
-                  <div class="challenge-name">{{ challenge.title }}</div>
-                </div>
+              <div
+                v-for="(challenge, index) in dataChallenges"
+                :key="index"
+                class="item-challenge"
+              >
+                <router-link
+                  :to="{ name: 'chanllenge', params: { slug: challenge.slug } }"
+                >
+                  <div class="challenge-image">
+                    <img
+                      :src="'/' + challenge.challenge_image"
+                      alt=""
+                      width="100"
+                    />
+                  </div>
+                  <div class="challenge-desc">
+                    <div class="challenge-name">{{ challenge.title }}</div>
+                  </div>
                 </router-link>
               </div>
             </div>
@@ -54,45 +70,48 @@
             </div>
           </div>
         </div>
-        <div class="latest-tutorials col-lg-4">
-          <div class="lastest-tutorial-content">
-            <div class="tutorial-title">
-              <h4>Latest Tutorials</h4>
+        <!-- <div class="select-box col-lg-4">
+          <div v-if="currentChallenges == 0" class="select-box-content">
+            <div class="image">
+              <img src="images/solutions.png" alt="" />
             </div>
-            <a href="#">
-              <div class="tutorial-row">
-                <div class="tutorial-title">Css animation</div>
-                <div class="tutorial-image">
-                  <img src="images/item.PNG" alt="" />
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div class="tutorial-row">
-                <div class="tutorial-title">Media queries</div>
-                <div class="tutorial-image">
-                  <img src="images/item.PNG" alt="" />
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div class="tutorial-row">
-                <div class="tutorial-title">CSS position</div>
-                <div class="tutorial-image">
-                  <img src="images/item.PNG" alt="" />
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div class="tutorial-row">
-                <div class="tutorial-title">promise, Async/Await</div>
-                <div class="tutorial-image">
-                  <img src="images/item.PNG" alt="" />
-                </div>
-              </div>
-            </a>
+            <div class="desc-select text-center">
+              You have no onging projects
+            </div>
+            <div class="select-button text-center">
+              <button>
+                <router-link :to="{ name: 'home' }"
+                  >Select a Challenges
+                </router-link>
+              </button>
+            </div>
           </div>
-        </div>
+          <div v-else class="select-box-content">
+            <h4>Ongoing projects</h4>
+            <div class="listing-challenges">
+              <div
+                v-for="(challenge, index) in dataChallenges"
+                :key="index"
+                class="item-challenge"
+              >
+                <router-link
+                  :to="{ name: 'chanllenge', params: { slug: challenge.slug } }"
+                >
+                  <div class="challenge-image">
+                    <img
+                      :src="'/' + challenge.challenge_image"
+                      alt=""
+                      width="100"
+                    />
+                  </div>
+                  <div class="challenge-desc">
+                    <div class="challenge-name">{{ challenge.title }}</div>
+                  </div>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -103,7 +122,7 @@ import axios from "axios";
 export default {
   data: () => ({
     title: " Challenge",
-    currentChallenges: null,
+    currentChallenges: 0,
     dataChallenges: [],
   }),
   created() {
@@ -115,7 +134,13 @@ export default {
         .get(route("getChallenge.user"))
         .then((response) => {
           this.currentChallenges = response.data.data.challenges.length;
-          this.dataChallenges = response.data.data.challenges;
+
+          response.data.data.challenges_user.forEach((challengesItem) => {
+            if (challengesItem.status == 0) {
+              this.dataChallenges=response.data.data.challenges;
+            }
+          });
+
         })
         .catch(() => {
           console.log("Not Data");
