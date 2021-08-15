@@ -3,12 +3,7 @@
     <div class="container">
       <div class="row figma-wrapper">
         <div class="col-12">
-          <iframe
-            class="figma"
-            v-if="data"
-            :src="data.link_figma"
-            allowfullscreen
-          />
+          <iframe class="figma" v-if="data" :src="data.link_figma" allowfullscreen />
         </div>
       </div>
 
@@ -24,20 +19,18 @@
 
           <div class="challenge-require challenge-block">
             <p>
-              Once you completed, submit your solutions by providing URLs for
-              both GitHub repository and live app on any hosting platform (<a
-                href="/"
+              Once you completed, submit your solutions by providing URLs for both GitHub
+              repository and live app on any hosting platform (<a href="/"
                 >5 Free Hosting Platform</a
               >) and explain briefly what you have done.
             </p>
             <p>
-              As long as you fulfill all the user stories, you can give your
-              personal touches by adding transition, using your own images,
-              changing colors,...
+              As long as you fulfill all the user stories, you can give your personal
+              touches by adding transition, using your own images, changing colors,...
             </p>
             <p>
-              Remember to put your name on the footer to prevent other from
-              submitting your solutions.
+              Remember to put your name on the footer to prevent other from submitting
+              your solutions.
             </p>
             <p>You can check others’ solutions and give them feedbacks.</p>
           </div>
@@ -52,8 +45,24 @@
               <li>Check designs on Figma</li>
               <li>Have fun coding!!</li>
             </ol>
+            <a v-if="checkBtnDownload && check == false">
+              <button class="button-block" disabled>
+                <svg
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"
+                  ></path>
+                </svg>
+
+                <span disabled>Start and download</span>
+              </button>
+            </a>
             <a
-              v-if="checkBtnDownload"
+              v-else-if="checkBtnDownload && check == true"
               v-on:click="addChallengeToUser"
               :href="'/' + data.soucre"
               download
@@ -73,12 +82,12 @@
                 <span>Start and download</span>
               </button>
             </a>
+
             <router-link
               v-else
               :to="{ name: 'add_solution', params: { slug: data.slug } }"
             >
-              <button class="button-block ">
-
+              <button class="button-block">
                 <span>Submit Solution</span>
               </button>
             </router-link>
@@ -88,7 +97,6 @@
     </div>
   </section>
 </template>
-
 
 <script>
 import { mapGetters } from "vuex";
@@ -100,6 +108,7 @@ export default {
   }),
   computed: mapGetters({
     data: "challenge/challenge",
+    check: "auth/IS_LOGGEND_IN",
   }),
   created() {
     this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);

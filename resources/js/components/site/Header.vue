@@ -30,13 +30,20 @@
                   v-if="inforUser != null"
                   style="margin-left: 1rem; text-decoration: none; color: dodgerblue"
                 >
-                  Welcome {{ inforUser.username }}
+                  Xin chào {{ inforUser.username }}
                 </h2>
               </div>
             </router-link>
             <router-link :to="{ name: 'login' }" v-else>
-              <button class="login">Login</button>
+              <button class="login">Đăng nhập</button>
             </router-link>
+            <button
+              @click="isLoggedIn"
+              v-if="inforUser != null"
+              style="margin-left: 1rem; text-decoration: none; color: black"
+            >
+              Đăng xuất
+            </button>
           </div>
         </div>
       </div>
@@ -50,8 +57,10 @@ export default {
     inforUser() {
       return this.$store.state.auth.infoUser;
     },
-
+  },
+  methods: {
     isLoggedIn() {
+      console.log(this.$store.state.auth.isLoggedIn);
       return this.$store.state.auth.isLoggedIn;
     },
   },
