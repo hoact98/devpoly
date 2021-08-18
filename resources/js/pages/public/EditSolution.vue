@@ -40,7 +40,7 @@
                     class="form-control"
                     placeholder="Title"
                     name="title"
-                    v-model="form.title"
+                    v-model="solution.title"
                     :class="{
                       'is-invalid': form.errors.has('title'),
                     }"
@@ -55,7 +55,7 @@
                   <label for="">Chi tiết:</label>
                   <ckeditor
                     name="description"
-                    v-model="form.description"
+                    v-model="solution.description"
                     :class="{ 'is-invalid': form.errors.has('description') }"
                   ></ckeditor>
                    <div
@@ -72,7 +72,7 @@
                     class="form-control"
                     placeholder="Link GitHub"
                     name="link_github"
-                    v-model="form.link_github"
+                    v-model="solution.link_github"
                     :class="{ 'is-invalid': form.errors.has('link_github') }"
                   />
                   <div
@@ -88,7 +88,7 @@
                     class="form-control"
                     placeholder="Link Demo"
                     name="demo_url"
-                    v-model="form.demo_url"
+                    v-model="solution.demo_url"
                     :class="{ 'is-invalid': form.errors.has('demo_url') }"
                   />
                   <div
@@ -123,21 +123,28 @@ export default {
       link_github: "",
       demo_url: "",
       challen_id: "",
+      id:''
     }),
     title: "Gửi giải pháp",
   }),
   computed: mapGetters({
     challenge: "challenge/challenge",
+    solution: "solution/solution"
   }),
   created() {
     this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);
+    this.$store.dispatch("solution/solutionChall", this.$route.params.slug);
   },
   methods: {
     async submitSolution() {
+      this.form.title = this.solution.title;
+      this.form.description = this.solution.description;
+      this.form.link_github = this.solution.link_github;
+      this.form.demo_url = this.solution.demo_url;
       this.form.challen_id = this.challenge.id;
-      if (this.form.challen_id != "") {
+      this.form.id = this.solution.id;
         await this.form
-          .post(route("create.solution"))
+          .post(route("edit.solution",this.$route.params.slug))
           .then((response) => {
             console.log(response);
             this.$router.push({ name: "showDetailSolution", params: { id: response.data.data.id }});
@@ -149,7 +156,6 @@ export default {
               text: "Something went wrong!",
             });
           });
-      }
     },
   },
 };

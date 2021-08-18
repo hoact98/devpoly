@@ -40,6 +40,10 @@ export const actions = {
         return axios.get(route('show.solution', id))
             .then(res => commit("FETCH_ONE", res.data.data))
     },
+    solutionChall({ commit }, slug_chall) {
+        return axios.get(route('check.solution', slug_chall))
+            .then(res => commit("FETCH_ONE", res.data.data))
+    },
     deleteSolution({}, id) {
         axios
           .delete(route("delete.solution", id))

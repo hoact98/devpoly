@@ -59,4 +59,8 @@ class Feedback extends Model
     {
     return $this->belongsTo(User::class, 'user_id');
     }
+    public function upvote()
+    {
+        return $this->hasMany(UpvoteFeedback::class,'feedback_id');
+    }
 }

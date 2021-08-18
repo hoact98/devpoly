@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\UpvoteFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class FeedbackController extends Controller
 {
+    public function __construct()
+    {
+        if (Cookie::get('token') != null) {
+            $this->middleware(['header_api','auth:api']);
+        }
+    }
    // all feedbacks
    public function feedbacks()
    {
@@ -91,7 +99,7 @@ class FeedbackController extends Controller
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback],200);
    }
-   public function solutionFeedback(Request $request,$solution_id)
+   public function solutionFeedbackTable(Request $request,$solution_id)
    {   
        $query = Feedback::where('solution_id',$solution_id)->eloquentQuery(
            $request->input('column'),
@@ -113,4 +121,54 @@ class FeedbackController extends Controller
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully deleted','data'=>$feedback],200);
    }
+   public function feedbackSolutions($solution_id)
+   {   
+       $feedback = Feedback::orderByDesc('id')->where('solution_id',$solution_id)->where('is_approved','=',1)->get();
+       $feedback->load('users');
+       $feedback->load('upvote');
+      $data= $this->data_tree($feedback);
+       return response()->json(['status'=>'sudataess','message'=>'The feedback successfully','data'=>$data],200);
+   }
+   public function data_tree($data, $parent_id = 0, $level = 0){
+    $result = [];
+    foreach($data as $key => $item){
+        if($item['parent_id'] == $parent_id){
+            $item['level'] = $level;
+            $result[] = $item;
+            unset($data[$item[$key]]);
+            $child = $this->data_tree($data, $item['id'], $level + 1 );
+            $result = array_merge($result, $child);
+        }
+    }
+    return $result;
+    }
+    public function upvote($id)
+    {
+        $upvote = UpvoteFeedback::where('feedback_id','=',$id)->where('user_id','=',Auth::id())->first(); 
+        if($upvote){
+            UpvoteFeedback::where('feedback_id','=',$id)->where('user_id','=',Auth::id())->delete();
+        }else{
+            $upvote = new UpvoteFeedback([
+                'feedback_id' => $id,
+                'user_id' => Auth::id(),
+            ]);
+            $upvote->save();
+        }
+        return response()->json(['status'=>'success','message'=>'The upvote successfully updated','data'=>$upvote],200);
+    }
+    //get all feedbacks with category
+    public function feedbackGetByCate($slug)
+    {
+        $feedbacks = Feedback::select('feedbacks.*','users.image as avatar','challenges.image','users.name')
+        ->join('solutions', 'feedbacks.solution_id', '=', 'solutions.id')
+        ->join('challenges', 'solutions.challen_id', '=', 'challenges.id')
+        ->join('users', 'solutions.user_id', '=', 'users.id')
+        ->join('challenge_categories', 'challenges.cate_challen_id', '=', 'challenge_categories.id')
+        ->where('challenge_categories.slug',$slug)
+        ->with('users')
+        ->with('solutions')
+        ->with('upvote')
+        ->get();
+        return response()->json(['status'=>'success','message'=>'Get solution successfully','data'=>$feedbacks],200);
+    }
 }

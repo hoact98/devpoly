@@ -38,7 +38,7 @@
             <span class="hide-on-destop">Home</span></router-link
           >
         </li>
-        <li>
+        <li v-if="auth">
           <router-link :to="{ name: 'homeDashboard' }">
              <i class="ti-layout-grid2-alt mr-2"></i>
           <span class="hide-on-destop">Dashboard</span></router-link
@@ -48,6 +48,18 @@
           <a href="#">
               <i class="ti-book mr-2"></i>
             <span class="hide-on-destop">Learn</span></a>
+        </li>
+        <li>
+          <router-link :to="{ name: 'chat' }">
+                 <i class="ti-comments mr-2"></i>
+            <span class="hide-on-destop">Trao đổi hỏi đáp</span></router-link
+          >
+        </li>
+        <li>
+          <router-link :to="{ name: 'premium' }">
+                  <i class="ti-credit-card mr-2"></i>
+            <span class="hide-on-destop">Premium</span></router-link
+          >
         </li>
         <li>
           <a href="#">
@@ -63,7 +75,18 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex'
+
+export default {
+   computed: mapGetters({
+    auth: 'auth/user'
+  }),
+  
+  created () {
+    this.$store.dispatch('auth/fetchUser');
+  },
+  
+};
 </script>
 
 <style></style>

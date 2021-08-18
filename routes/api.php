@@ -100,21 +100,29 @@ Route::get('detail-solution/{id}', [SolutionController::class, 'detailSolution']
 Route::group(['prefix' => 'solution'], function () {
     Route::post('add', [SolutionController::class, 'create'])->name('create.solution');
     Route::get('all', [SolutionController::class, 'solutions'])->name('all.solution');
+    Route::get('challenge-user', [SolutionController::class, 'challengeUser'])->name('challengeUser.solution');
     Route::get('{id}', [SolutionController::class, 'show'])->name('show.solution');
     Route::post('update/{id}', [SolutionController::class, 'update'])->name('update.solution');
     Route::delete('delete/{id}', [SolutionController::class, 'delete'])->name('delete.solution');
+    Route::get('check-solution/{slug}', [SolutionController::class, 'checkSolutionChall'])->name('check.solution');
+    Route::post('edit-solution/{slug}', [SolutionController::class, 'editSolutionChall'])->name('edit.solution');
+    Route::post('upvote/{id}', [SolutionController::class, 'upvote'])->name('upvote.solution');
+    Route::get('check-vote/{id}', [SolutionController::class, 'checkUpvote'])->name('checkUpvote.solution');
 });
 
 
 Route::get('feedbacks', [FeedbackController::class, 'index'])->name('feedbacks');
+Route::get('category-feedback/{slug}', [FeedbackController::class, 'feedbackGetByCate'])->name('feedback.byCate');
 Route::group(['prefix' => 'feedback'], function () {
     Route::middleware('auth:api')->post('add/{parent_id}/{solution_id}', [FeedbackController::class, 'create'])->name('create.feedback');
     Route::get('all', [FeedbackController::class, 'feedbacks'])->name('all.feedback');
-    Route::get('solution-feedback/{solution_id}', [FeedbackController::class, 'solutionFeedback'])->name('solution.feedback');
+    Route::get('solution-feedback/{solution_id}', [FeedbackController::class, 'solutionFeedbackTable'])->name('solution.feedback');
+    Route::get('solutions/{solution_id}', [FeedbackController::class, 'feedbackSolutions'])->name('solutionFeedback.feedback');
     Route::post('update-approved/{id}', [FeedbackController::class, 'updateApproved'])->name('approved.feedback');
     Route::get('{id}', [FeedbackController::class, 'show'])->name('show.feedback');
     Route::post('update/{id}', [FeedbackController::class, 'update'])->name('update.feedback');
     Route::delete('delete/{id}', [FeedbackController::class, 'delete'])->name('delete.feedback');
+    Route::post('upvote/{id}', [FeedbackController::class, 'upvote'])->name('upvote.feedback');
 });
 
 Route::prefix('chat')->middleware('auth:api')->group(function() {

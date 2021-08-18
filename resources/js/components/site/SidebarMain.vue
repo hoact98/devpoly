@@ -35,7 +35,7 @@
         <li>
           <router-link :to="{ name: 'home' }">
             <i class="ti-arrow-left mr-2"></i>
-            <span class="hide-on-destop">Home</span></router-link>
+            <span class="hide-on-destop">Trang chủ</span></router-link>
 
           <a href="" class="block-path">
             <img
@@ -53,34 +53,22 @@
         <li>
           <router-link :to="{ name: 'overview' }">
                 <i class="ti-wallet mr-2"></i>
-            <span class="hide-on-destop">Overview</span></router-link
+            <span class="hide-on-destop">Tổng quan</span></router-link
           >
         </li>
         <li>
           <router-link :to="{ name: 'solution' }">
                 <i class="ti-light-bulb mr-2"></i>
-            <span class="hide-on-destop">Solutions</span></router-link
+            <span class="hide-on-destop">Giải pháp</span></router-link
           >
         </li>
         <li>
           <router-link :to="{ name: 'feedback' }">
                 <i class="ti-comments-smiley mr-2"></i>
-            <span class="hide-on-destop">Feedback</span></router-link
+            <span class="hide-on-destop">Phản hồi</span></router-link
           >
         </li>
-        <li>
-          <router-link :to="{ name: 'chat' }">
-                 <i class="ti-comments mr-2"></i>
-            <span class="hide-on-destop">Trao đổi hỏi đáp</span></router-link
-          >
-        </li>
-
-        <li>
-          <router-link :to="{ name: 'premium' }">
-                  <i class="ti-credit-card mr-2"></i>
-            <span class="hide-on-destop">Premium</span></router-link
-          >
-        </li>
+        
       </ul>
     </nav>
   </aside>

@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: '/home-dashboard',
-        meta: {layout: 'home'},
+        meta: {layout: 'home', middleware: auth_client},
         component: page('public/Dashboard.vue'),
         name: 'homeDashboard',
     },
@@ -65,10 +65,15 @@ const routes = [
     },
     {
         path: '/add-solution/:slug',
-        alias: '',
-        meta: {layout: 'main'},
+        meta: {layout: 'main',middleware: auth_client},
         component: page('public/AddSolution.vue'),
         name: 'addSolution',
+    },
+    {
+        path: '/edit-solution/:slug',
+        meta: {layout: 'main',middleware: auth_client},
+        component: page('public/EditSolution.vue'),
+        name: 'editSolution',
     },
     {
         path: '/feedback',

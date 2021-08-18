@@ -169,5 +169,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Feedback::class,'user_id');
     }
-
+    public function upvote()
+    {
+        return $this->hasMany(Upvote::class,'user_id');
+    }
 }

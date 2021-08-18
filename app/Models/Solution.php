@@ -19,7 +19,7 @@ class Solution extends Model
         'link_github',
         'demo_url',
         'user_id',
-        'challen_id'     
+        'challen_id'
     ];
     protected $dataTableColumns = [
         'id' => [
@@ -83,5 +83,9 @@ class Solution extends Model
     public function challenge()
     {
     return $this->belongsTo(Challenge::class, 'challen_id');
+    }
+    public function upvote()
+    {
+        return $this->hasMany(Upvote::class,'solution_id');
     }
 }

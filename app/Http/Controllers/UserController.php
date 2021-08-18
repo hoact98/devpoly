@@ -31,6 +31,8 @@ class UserController extends Controller
     {
         $users= User::all();
         $users->load('roles');
+        $users->load('challenges');
+        $users->load('solutions');
         return response()->json([
             'status'=>'success',
             'messege' => 'Succsess get list users',
