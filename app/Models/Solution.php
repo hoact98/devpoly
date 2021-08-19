@@ -70,6 +70,16 @@ class Solution extends Model
                     ],
                 ],
             ],
+            'upvote' => [
+                "model" => Upvote::class,
+                'foreign_key' => 'solution_id',
+                'columns' => [
+                    'user_id' => [
+                        'searchable' => true,
+                        'orderable' => true,
+                    ],
+                ],
+            ],
         ],
     ];
     public function user()

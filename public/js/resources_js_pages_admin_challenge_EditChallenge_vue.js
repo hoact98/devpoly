@@ -167,6 +167,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1014,15 +1017,27 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("Easy")
+                          _vm._v("Beginner")
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "2" } }, [
-                          _vm._v("Normal")
+                          _vm._v("Elementary")
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "3" } }, [
-                          _vm._v("Dificult")
+                          _vm._v("Intermediate")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("Upper intermediate")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("Advanced")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "6" } }, [
+                          _vm._v("Proficient")
                         ])
                       ]
                     ),

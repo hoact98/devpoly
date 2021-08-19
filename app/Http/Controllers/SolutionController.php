@@ -42,7 +42,7 @@ class SolutionController extends Controller
             $request->input('dir'),
             $request->input('search'),
             [
-                "feedbacks","challenge","user"
+                "feedbacks","challenge","user","upvote"
             ],
            
         );

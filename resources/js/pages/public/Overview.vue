@@ -116,6 +116,7 @@ export default {
   created() {
     this.$store.dispatch("challenge/fetchByCate", this.$route.params.slug);
     this.$store.dispatch("challengecategory/get_One_Data", this.$route.params.slug);
+
   },
   methods: {
   },

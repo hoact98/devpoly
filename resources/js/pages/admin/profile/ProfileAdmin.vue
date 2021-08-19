@@ -82,6 +82,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                      <label for="" class="col-sm-2 col-form-label">Github:</label>
+                                      <div class="col-sm-10">
+                                          <p v-if="user.github_url" v-html="user.github_url"></p>
+                                          <p v-else>Link github</p>
+                                      </div>
+                                  </div>
+                                    <div class="form-group row">
                                     <div class="col-sm-10 ml-sm-auto">
                                         <button class="btn btn-info" type="submit">Submit</button>
                                     </div>

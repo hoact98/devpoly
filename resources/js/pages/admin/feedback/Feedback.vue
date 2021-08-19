@@ -70,6 +70,11 @@ export default {
               event: "click",
               handler: this.updateApproved,
           },
+           {
+              label: 'Lượt thích',
+              name: 'upvote.length',
+              orderable: false,
+          },
           {
               label: 'Action',
               name: 'add.feedback',

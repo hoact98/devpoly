@@ -26,6 +26,7 @@
 <script>
 import Footer from '../../../components/AdminFooter.vue';
 import TableButton from '../../../components/TableButton.vue';
+import ShowLevelComponent from '../../../components/ShowLevelComponent.vue';
 export default {
   data() {
     return {
@@ -63,6 +64,7 @@ export default {
               label: 'Cấp độ',
               name: 'level',
               orderable: true,
+              component: ShowLevelComponent,
           },
           {
               label: 'Action',
@@ -77,7 +79,8 @@ export default {
   },
    components:{
       Footer,
-      TableButton
+      TableButton,
+      ShowLevelComponent
   },
   created() {
      this.getData();

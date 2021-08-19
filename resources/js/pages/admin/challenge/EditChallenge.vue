@@ -72,9 +72,12 @@
                             <div class="col-sm-10">
                                <select class="form-control select2" aria-label="Default select example" name="level"  v-model="data.level" :class="{ 'is-invalid': form.errors.has('level') }">
                                   <option value="">Chọn độ khó</option>
-                                  <option value="1">Easy</option>
-                                  <option value="2">Normal</option>
-                                  <option value="3">Dificult</option>
+                                  <option value="1">Beginner</option>
+                                  <option value="2">Elementary</option>
+                                  <option value="3">Intermediate</option>
+                                  <option value="4">Upper intermediate</option>
+                                  <option value="5">Advanced</option>
+                                  <option value="6">Proficient</option>
                                 </select>
                                 <div class="text-danger" v-if="form.errors.has('level')" v-html="form.errors.get('level')" />
                             </div>

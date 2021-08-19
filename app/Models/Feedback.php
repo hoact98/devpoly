@@ -50,6 +50,18 @@ class Feedback extends Model
                 ],
             ],
         ],
+        "hasMany" => [
+            'upvote' => [
+                "model" => UpvoteFeedback::class,
+                'foreign_key' => 'feedback_id',
+                'columns' => [
+                    'user_id' => [
+                        'searchable' => true,
+                        'orderable' => true,
+                    ],
+                ],
+            ],
+        ],
     ];
     public function solutions()
     {

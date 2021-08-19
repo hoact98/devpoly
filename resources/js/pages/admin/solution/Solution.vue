@@ -79,6 +79,11 @@ export default {
               orderable: true,
           },
           {
+              label: 'Lượt thích',
+              name: 'upvote.length',
+              orderable: false,
+          },
+          {
               label: 'Action',
               name: 'edit.solution',
               orderable: false,

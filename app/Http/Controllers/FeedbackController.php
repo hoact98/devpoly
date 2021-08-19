@@ -38,7 +38,7 @@ class FeedbackController extends Controller
            $request->input('dir'),
            $request->input('search'),
            [
-               "solutions","users"
+               "solutions","users","upvote"
            ],
           
        );

@@ -64,7 +64,8 @@
                <div class="form-group row">
                   <label for="" class="col-sm-2 col-form-label">Github:</label>
                   <div class="col-sm-10">
-                      <p v-html="auth.github_url"></p>
+                      <p v-if="auth.github_url" v-html="auth.github_url"></p>
+                      <p v-else>Link github</p>
                   </div>
               </div>
               <div class="form-group row">
