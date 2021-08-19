@@ -38,8 +38,8 @@ class OmnipayController extends Controller
         $order->save();
         $response = MoMoAIO::purchase([
             'amount' => $upgrade->price,
-            'returnUrl' => 'https://devpoly.dev/api/order/complete-purchase', //redirect từ MoMo về web
-            'notifyUrl' => 'https://devpoly.dev/api/order/notification', //redirect từ MoMo về web
+            'returnUrl' => env('APP_URL').'/api/order/complete-purchase', //redirect từ MoMo về web
+            'notifyUrl' => env('APP_URL').'/api/order/notification', //redirect từ MoMo về web
             'orderId' => $order->order_nr,
             'orderInfo'=> 'Thanh toán hoá đơn '.$order->order_nr,
             'requestId' => time(). Str::random(4),

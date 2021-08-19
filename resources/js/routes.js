@@ -38,7 +38,7 @@ const routes = [
     {
         path: '/chat',
         alias: '',
-        meta: {layout: 'main',middleware: auth_client},
+        meta: {layout: 'home',middleware: auth_client},
         component: page("public/Chat/container.vue"),
         name: 'chat',
     },
@@ -50,7 +50,7 @@ const routes = [
         name: 'overview',
     },
     {
-        path: '/solution',
+        path: '/solution/:slug',
         alias: '',
         meta: {layout: 'main'},
         component: page('public/SolutionList.vue'),
@@ -76,7 +76,7 @@ const routes = [
         name: 'editSolution',
     },
     {
-        path: '/feedback',
+        path: '/feedback/:slug',
         alias: '',
         meta: {layout: 'main'},
         component: page('public/Feedback.vue'),
@@ -91,25 +91,31 @@ const routes = [
     },
     {
         path: "/payment/:upgrade_id",
-        meta: {layout: 'main',middleware: auth_client},
+        meta: {layout: 'home',middleware: auth_client},
         component: page("public/Payment.vue"),
         name: "payment"
     },
     {
         path: "/profile",
-        meta: {layout: 'main', middleware: auth_client},
+        meta: {layout: 'home', middleware: auth_client},
         component: page("public/Profile.vue"),
         name: "profile"
     },
     {
+        path: "/settings",
+        meta: {layout: 'home', middleware: auth_client},
+        component: page("public/Setting.vue"),
+        name: "settings"
+    },
+    {
         path: '/premium',
-        meta: {layout: 'main'},
+        meta: {layout: 'home'},
         component: page('public/Premium.vue'),
         name: 'premium',
     },
     {
         path: '/order/:id',
-        meta: {layout: 'main'},
+        meta: {layout: 'home'},
         component: page('public/Order.vue'),
         name: 'order',
     },

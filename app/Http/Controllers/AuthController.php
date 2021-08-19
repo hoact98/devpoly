@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller 
 {
@@ -127,17 +128,24 @@ class AuthController extends Controller
       ]);
     }
     function findOrCreateUser($user){
- 
-      $authUser = User::where('provider_id', $user->id)->orWhere('email',$user->email)->first();
-      if ($authUser) {
-          return $authUser;
-      }
       if($user->avatar){
-        $nImage = 'avatar-'.$user->id.'.jpg';
+        $nImage = 'avatar-'.time().$user->id.'.jpg';
         $fp = public_path('files/').$nImage;
         file_put_contents( $fp, file_get_contents($user->avatar) );
         $imageName = 'files/'.$nImage;  
       }
+      $authUser = User::where('provider_id', $user->id)->orWhere('email',$user->email)->first();
+      if ($authUser) {
+        File::delete($authUser->image);
+        $authUser->provider = 'github';
+        $authUser->name = $user->name??$user->nickname;
+        $authUser->provider_id = $user->id;
+        $authUser->github_url = $user->user['html_url'];
+        $authUser->image = $imageName??$user->avatar;
+        $authUser->save();
+          return $authUser;
+      }
+      
       $githubUser = User::create([
         'name'     => $user->name??$user->nickname,
         'email'    => $user->email,

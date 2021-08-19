@@ -3713,7 +3713,7 @@ var routes = [{
   path: '/chat',
   alias: '',
   meta: {
-    layout: 'main',
+    layout: 'home',
     middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Chat/container.vue"),
@@ -3727,7 +3727,7 @@ var routes = [{
   component: page('public/Overview.vue'),
   name: 'overview'
 }, {
-  path: '/solution',
+  path: '/solution/:slug',
   alias: '',
   meta: {
     layout: 'main'
@@ -3759,7 +3759,7 @@ var routes = [{
   component: page('public/EditSolution.vue'),
   name: 'editSolution'
 }, {
-  path: '/feedback',
+  path: '/feedback/:slug',
   alias: '',
   meta: {
     layout: 'main'
@@ -3777,7 +3777,7 @@ var routes = [{
 }, {
   path: "/payment/:upgrade_id",
   meta: {
-    layout: 'main',
+    layout: 'home',
     middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Payment.vue"),
@@ -3785,22 +3785,30 @@ var routes = [{
 }, {
   path: "/profile",
   meta: {
-    layout: 'main',
+    layout: 'home',
     middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
   component: page("public/Profile.vue"),
   name: "profile"
 }, {
+  path: "/settings",
+  meta: {
+    layout: 'home',
+    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  component: page("public/Setting.vue"),
+  name: "settings"
+}, {
   path: '/premium',
   meta: {
-    layout: 'main'
+    layout: 'home'
   },
   component: page('public/Premium.vue'),
   name: 'premium'
 }, {
   path: '/order/:id',
   meta: {
-    layout: 'main'
+    layout: 'home'
   },
   component: page('public/Order.vue'),
   name: 'order'
@@ -4552,7 +4560,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 var state = {
   feedbacks: [],
   feedback: {},
-  all: []
+  all: [],
+  feedbackByCate: []
 }; // getters
 
 var getters = {
@@ -4564,6 +4573,9 @@ var getters = {
   },
   all: function all(state) {
     return state.all;
+  },
+  feedbackByCate: function feedbackByCate(state) {
+    return state.feedbackByCate;
   }
 }; // mutations
 
@@ -4573,6 +4585,9 @@ var mutations = {
   },
   ALL: function ALL(state, all) {
     state.all = all;
+  },
+  BY_CATE: function BY_CATE(state, feedbackByCate) {
+    state.feedbackByCate = feedbackByCate;
   },
   FETCH_ONE: function FETCH_ONE(state, feedback) {
     state.feedback = feedback;
@@ -4598,8 +4613,14 @@ var actions = {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deleteFeedback: function deleteFeedback(_ref4, id) {
-    _objectDestructuringEmpty(_ref4);
+  byCate: function byCate(_ref4, slug) {
+    var commit = _ref4.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("feedback.byCate", slug)).then(function (response) {
+      return commit("BY_CATE", response.data.data);
+    });
+  },
+  deleteFeedback: function deleteFeedback(_ref5, id) {
+    _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.feedback", id)).then(function (response) {
       // this.dispatch("feedback/fetch")
@@ -4614,13 +4635,13 @@ var actions = {
       });
     });
   },
-  editFeedback: function editFeedback(_ref5, data) {
-    _objectDestructuringEmpty(_ref5);
+  editFeedback: function editFeedback(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.feedback", data.get('id')), data).then();
   },
-  updateApproved: function updateApproved(_ref6, id) {
-    _objectDestructuringEmpty(_ref6);
+  updateApproved: function updateApproved(_ref7, id) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("approved.feedback", id)).then(function (response) {
       // this.dispatch("feedback/fetch")
@@ -4635,8 +4656,8 @@ var actions = {
       });
     });
   },
-  addFeedback: function addFeedback(_ref7, data) {
-    _objectDestructuringEmpty(_ref7);
+  addFeedback: function addFeedback(_ref8, data) {
+    _objectDestructuringEmpty(_ref8);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.feedback"), data).then();
   }
@@ -5003,7 +5024,8 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 var state = {
   solutions: [],
   solution: {},
-  all: []
+  all: [],
+  solutionByCate: []
 }; // getters
 
 var getters = {
@@ -5015,6 +5037,9 @@ var getters = {
   },
   all: function all(state) {
     return state.all;
+  },
+  solutionByCate: function solutionByCate(state) {
+    return state.solutionByCate;
   }
 }; // mutation 
 
@@ -5024,6 +5049,9 @@ var mutations = {
   },
   ALL: function ALL(state, all) {
     state.all = all;
+  },
+  BY_CATE: function BY_CATE(state, solutionByCate) {
+    state.solutionByCate = solutionByCate;
   },
   FETCH_ONE: function FETCH_ONE(state, solution) {
     state.solution = solution;
@@ -5043,20 +5071,26 @@ var actions = {
       return commit("ALL", res.data.data);
     });
   },
-  fetchOne: function fetchOne(_ref3, id) {
+  byCate: function byCate(_ref3, slug) {
     var commit = _ref3.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('categorySolutions', slug)).then(function (res) {
+      return commit("BY_CATE", res.data.data);
+    });
+  },
+  fetchOne: function fetchOne(_ref4, id) {
+    var commit = _ref4.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('show.solution', id)).then(function (res) {
       return commit("FETCH_ONE", res.data.data);
     });
   },
-  solutionChall: function solutionChall(_ref4, slug_chall) {
-    var commit = _ref4.commit;
+  solutionChall: function solutionChall(_ref5, slug_chall) {
+    var commit = _ref5.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('check.solution', slug_chall)).then(function (res) {
       return commit("FETCH_ONE", res.data.data);
     });
   },
-  deleteSolution: function deleteSolution(_ref5, id) {
-    _objectDestructuringEmpty(_ref5);
+  deleteSolution: function deleteSolution(_ref6, id) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.solution", id)).then(function (response) {
       // this.dispatch("solution/fetch")
@@ -5071,13 +5105,13 @@ var actions = {
       });
     });
   },
-  editSolution: function editSolution(_ref6, data) {
-    _objectDestructuringEmpty(_ref6);
+  editSolution: function editSolution(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.solution", data.get('id')), data).then();
   },
-  addSolution: function addSolution(_ref7, data) {
-    _objectDestructuringEmpty(_ref7);
+  addSolution: function addSolution(_ref8, data) {
+    _objectDestructuringEmpty(_ref8);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.solution"), data).then();
   }
@@ -92520,6 +92554,14 @@ var map = {
 		"./resources/js/pages/public/Profile.vue",
 		"resources_js_pages_public_Profile_vue"
 	],
+	"./public/Setting": [
+		"./resources/js/pages/public/Setting.vue",
+		"resources_js_pages_public_Setting_vue"
+	],
+	"./public/Setting.vue": [
+		"./resources/js/pages/public/Setting.vue",
+		"resources_js_pages_public_Setting_vue"
+	],
 	"./public/SolutionDetail": [
 		"./resources/js/pages/public/SolutionDetail.vue",
 		"resources_js_pages_public_SolutionDetail_vue"
@@ -92706,7 +92748,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

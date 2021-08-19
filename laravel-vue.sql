@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `challenge_users` (
 DELETE FROM `challenge_users`;
 /*!40000 ALTER TABLE `challenge_users` DISABLE KEYS */;
 INSERT INTO `challenge_users` (`user_id`, `challen_id`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 1, 0, NULL, NULL),
 	(1, 2, 0, '2021-08-15 15:41:35', '2021-08-15 15:41:35'),
-	(1, 7, 0, '2021-08-15 15:43:38', '2021-08-15 15:43:38'),
-	(1, 12, 0, '2021-08-15 22:03:56', '2021-08-15 22:03:56');
+	(1, 7, 1, '2021-08-15 15:43:38', '2021-08-15 15:43:38'),
+	(1, 12, 0, '2021-08-15 22:03:56', '2021-08-15 22:03:56'),
+	(4, 1, 1, NULL, NULL);
 /*!40000 ALTER TABLE `challenge_users` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.chat_messages
@@ -193,14 +193,17 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   KEY `feedbacks_user_id_foreign` (`user_id`),
   CONSTRAINT `feedbacks_solution_id_foreign` FOREIGN KEY (`solution_id`) REFERENCES `solutions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `feedbacks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.feedbacks: ~2 rows (approximately)
+-- Dumping data for table laravel-vue.feedbacks: ~5 rows (approximately)
 DELETE FROM `feedbacks`;
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
 INSERT INTO `feedbacks` (`id`, `feedback_content`, `user_id`, `solution_id`, `parent_id`, `is_approved`, `created_at`, `updated_at`) VALUES
-	(1, 'ok', 1, '1', 0, 1, '2021-07-27 22:59:13', '2021-07-28 05:28:45'),
-	(2, '<p>dfffdfđfd</p>', 1, '1', 1, 1, '2021-07-28 08:54:57', '2021-07-28 08:56:35');
+	(1, 'ok', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 1, '2021-07-27 22:59:13', '2021-07-28 05:28:45'),
+	(2, '<p>dfffdfđfd</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 1, 1, '2021-07-28 08:54:57', '2021-07-28 08:56:35'),
+	(3, '<p>đaaasaasas</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 1, '2021-08-17 14:43:59', '2021-08-17 14:43:59'),
+	(4, '<p>đaaasaasas</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 0, '2021-08-17 14:43:59', '2021-08-17 14:43:59'),
+	(5, '<p>dđssss</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 0, '2021-08-17 14:45:57', '2021-08-17 14:45:57');
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.migrations
@@ -210,9 +213,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.migrations: ~21 rows (approximately)
+-- Dumping data for table laravel-vue.migrations: ~23 rows (approximately)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -236,7 +239,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(30, '2021_07_25_094500_create_chat_rooms_table', 3),
 	(31, '2021_07_25_094633_create_chat_messages_table', 3),
 	(35, '2021_08_11_160509_create_upgrades_table', 4),
-	(36, '2021_08_11_160901_create_orders_table', 4);
+	(36, '2021_08_11_160901_create_orders_table', 4),
+	(37, '2021_08_16_082359_create_upvotes_table', 5),
+	(39, '2021_08_17_180012_create_upvote_feedbacks_table', 6);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.model_has_permissions
@@ -296,14 +301,15 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.model_has_roles: ~4 rows (approximately)
+-- Dumping data for table laravel-vue.model_has_roles: ~5 rows (approximately)
 DELETE FROM `model_has_roles`;
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(2, 'App\\Models\\User', 1),
 	(1, 'App\\Models\\User', 4),
 	(3, 'App\\Models\\User', 6),
-	(1, 'App\\Models\\User', 14);
+	(1, 'App\\Models\\User', 14),
+	(1, 'App\\Models\\User', 15);
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.notifications
@@ -343,16 +349,22 @@ CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   KEY `oauth_access_tokens_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table laravel-vue.oauth_access_tokens: ~37 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_access_tokens: ~58 rows (approximately)
 DELETE FROM `oauth_access_tokens`;
 /*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+	('04f94ed09ce7030a6a0db0645f640eb98fc3f68241f4513557d5374c615e128288db9e7b8a602274', 6, 1, 'Personal Access Token', '[]', 0, '2021-08-16 23:55:08', '2021-08-16 23:55:08', '2022-08-16 23:55:08'),
 	('0a9b695c9c946603147f6d9184592b9d270a4c59dc6b7bcba410d877e593cba7c4e2ab3f7953dc99', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:23:59', '2021-08-14 21:23:59', '2022-08-14 21:23:59'),
+	('0bba21c75c92865279d3d5c1cd67dbdb1bdecddfe44de78dff184bd1564d38325880781749e85521', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
 	('0cbf50ea24868655caac780756cc37fc2dc6f6dad5cef0338c27cc598ca0b971fb22d79d447d27a2', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-15 13:54:38', '2021-08-15 13:54:38', '2022-08-15 13:54:38'),
 	('1358acc3d8aaf7c00fde7cfaf4afecff0bc6a778fd3d9bbeaf4965a5e7c716ad80597d9cc8670fba', 6, 1, 'Personal Access Token', '[]', 0, '2021-08-08 00:16:51', '2021-08-08 00:16:51', '2022-08-08 00:16:51'),
 	('175041ee024faed43b06366c9bf9f79db5382f6ab06ca1cc2d37e01dac8fa94d7c9eed852167a7bc', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:52:21', '2021-08-14 21:52:21', '2022-08-14 21:52:21'),
+	('1904fda26595bbd0d480eb86407782eabbd03f283dcf55da57593518b127a449a7e106cdd6afd787', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 17:03:22', '2021-08-17 17:03:22', '2022-08-17 17:03:22'),
+	('1b0d80356c2901341e1f51e935bc758ed6d297aea75e6870ed5c83540da98b00bc973954814b428f', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-18 14:46:14', '2021-08-18 14:46:14', '2022-08-18 14:46:14'),
 	('2b01507e67e808995777601ad22cd7171fc10818feb34486e638584d010d347494953a7825158b8f', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:30:02', '2021-08-14 21:30:02', '2022-08-14 21:30:02'),
 	('2f37d6fb4314de8c29fa8532611158b87835d0a38da8b93db9a7232752b020f8a949b5e4ef5decb2', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:15', '2021-08-14 21:24:15', '2022-08-14 21:24:15'),
+	('343bc2f0eb4cd02fe94cbb7a95155a672fe9d1dcb5de273d598da1e7a1476a814ba5f4c70bde67c8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
+	('3662186d361aae917019b9df6106dcaf5687b1df2eb42f773961ed444c2b715b2cd6850fcc34fb93', 14, 1, 'Personal Access Token', '[]', 0, '2021-08-18 17:30:00', '2021-08-18 17:30:00', '2022-08-18 17:30:00'),
 	('3719760568cfa84dabc064aad326a3bf9eb18e3f740bbe5fe79304403431a866a8327ea2fa8db0fe', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:02', '2021-08-14 21:24:02', '2022-08-14 21:24:02'),
 	('383a17350d1ca436f95b88fe6b5a932e424dcc978207b67535e63609f6c8bf77586bca730de314c0', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:50:45', '2021-08-14 21:50:45', '2022-08-14 21:50:45'),
 	('38ced18c407ff9deff68eb7d7dca88f354dbabd5e788f7188835caacb8e2523c6f19c0d6cbba0f04', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-15 22:06:13', '2021-08-15 22:06:13', '2022-08-15 22:06:13'),
@@ -362,6 +374,8 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 	('48fa82772023dd6dd87b7906b2dc847a6cc5742c2427e2d7a7388c8ede116912dc0169fda1b5e710', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:05:32', '2021-08-14 21:05:32', '2022-08-14 21:05:32'),
 	('50e4da2f0469dbe6a4e1d50c8915eb7e4306ab6bf8cd20a1a2195ad7d21d989b9a3a0e0fec4ab0b2', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:46:00', '2021-08-14 21:46:00', '2022-08-14 21:46:00'),
 	('5622c7db8aa8b7e7405bdb4fe5b2349abb87da7342f6d05e445746f068950c8958ca76a83af2dc85', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:21:05', '2021-08-13 22:21:05', '2022-08-13 22:21:05'),
+	('5e52c9361f3a092daf5ee4f6d942cb28fe57640e129ccfcae57b92e7ce732b1db3f1c174a048029a', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
+	('5f7c1763d262ae655d441c5278e45eb19b7447c12819b011795f5262b659599dbe019d221147bdb5', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-16 16:31:45', '2021-08-16 16:31:45', '2022-08-16 16:31:45'),
 	('60054ecf90690b0ef6f3abaf2616b64b23a7e6cac2d50748ec1fa309671a9a8d3ccc4822e2974c38', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 13:54:38', '2021-08-15 13:54:38', '2022-08-15 13:54:38'),
 	('616ae9a0d24a80fe4ce44f3ab2a84c6794f630349b5e42290d122bd7383c5ed6382bf4a0a18bec2b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 23:46:32', '2021-08-12 23:46:32', '2022-08-12 23:46:32'),
 	('6272041fad52d357824fbd1f751809e2aaa03c7ae8fc494a2a8e2f84e35030115e184f49dd95a5e1', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-08 00:15:35', '2021-08-08 00:15:35', '2022-08-08 00:15:35'),
@@ -369,18 +383,31 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 	('6a247434dbe7da42ad5b950d32baeabfe4d81ad053c26e82043a48492b9975d602df711a1d063707', 10, 1, 'Personal Access Token', '[]', 0, '2021-08-14 20:25:21', '2021-08-14 20:25:21', '2022-08-14 20:25:21'),
 	('6aa82fb2b131837e6226d3c2576b9cc7559219a64026d2488a2da922fa24556cf61f98b7c88b049b', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:23:53', '2021-08-14 21:23:53', '2022-08-14 21:23:53'),
 	('6db413b2c1ede2d05d2281ce666f4837699aba3f7fddb40c7e7adcceb76a0b82870a66094b373cf8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:22:10', '2021-08-12 22:22:10', '2022-08-12 22:22:10'),
+	('6e4fdc1c55fe5642d5211d1c21bcb1ce7f93183fb3207f328f91808822e70b5a590e7f97041c26cd', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
+	('6f3ab7be812827365f92047b2c2362fcfcf19a28f3d9384fd6ddda1c48b168e35cd5832ddfbe2cf6', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
 	('7787e9ea29a6698896c19c1a4f953477ecef465ccc39a3393a4dc821de2bfb144637f6909008c6d0', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-12 20:32:29', '2021-08-12 20:32:29', '2022-08-12 20:32:29'),
+	('778fe1d8c6aa4ab97523edaef0c4bf576a42d3cdbd70d8b5ec7503ea3ca5dfcb4bc3038c9b7387bc', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 16:47:30', '2021-08-18 16:47:30', '2022-08-18 16:47:30'),
 	('7bbd9332e7303c4a35c139b727f6adee15befa5acebdce47b1ad55c44e72696fd7e89524d590da6d', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:05:31', '2021-08-14 21:05:31', '2022-08-14 21:05:31'),
 	('814fe031a54076c6c7985ff6464192a2591e95acaf72b6fcb471c73c8e3f75f937daeeb8d6fc1058', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:23:56', '2021-08-14 21:23:56', '2022-08-14 21:23:56'),
+	('842ef6ad83f2a613780c06d9c96d96f115d11a68d1a9f11aaf295273754344aa6abbfdc8d544bb5d', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 17:39:35', '2021-08-17 17:39:35', '2022-08-17 17:39:35'),
+	('8699478a5f527f61d2f442a32eb0f87121b3225cfdf94a14243ee8b4f89bbf0787910dcea38a20b1', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-16 17:03:01', '2021-08-16 17:03:01', '2022-08-16 17:03:01'),
 	('88dd5af83834e3a56d9cfa79f195e88ad316c1676b32e7e2ba1235ca34017ff3852292f92e90c877', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:08', '2021-08-14 21:24:08', '2022-08-14 21:24:08'),
 	('8c2c755f73e8aacddc1a681651ffef04b400ec9dfdd70c39c90f3a7c3f73435d85cddf6bf0ece041', 12, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:24:11', '2021-08-14 21:24:11', '2022-08-14 21:24:11'),
+	('921869dd7be53a63ccd3e53b6f7b63fdd02526d3ddb2d39919720ec5f2061f9c6b7dfbab0a2e02c9', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 16:27:20', '2021-08-18 16:27:20', '2022-08-18 16:27:20'),
 	('9862b16b9310f375b79b770029bdbe82f1c68cca10701dc1da37705616ad4556dadb3c4f32181e82', 7, 1, 'Personal Access Token', '[]', 0, '2021-08-14 18:32:17', '2021-08-14 18:32:17', '2022-08-14 18:32:17'),
 	('ad4c749a5dd9dd865a7816aacd105e85a87a4e7783326c19c7b091df1c7570a1da996522b45a7cc1', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:25:19', '2021-08-12 22:25:19', '2022-08-12 22:25:19'),
 	('aecd9cf6399b7ff98cc47f059b730a856208f1601fd58bf84650f955f1eec4fabd190f8e9ae175ce', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:05', '2021-08-14 21:24:05', '2022-08-14 21:24:05'),
+	('b20662f978c960023f924157e607e6fa5d7cce7b6397636128f240256e9fc3e1302a52b9de20d7c4', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
+	('b732d271d81936bf0e20a4aebbf828065db2b16d95a9598004f3de033ee548bf47526c2e7d968c60', 15, 1, 'Personal Access Token', '[]', 0, '2021-08-18 20:33:12', '2021-08-18 20:33:12', '2022-08-18 20:33:12'),
+	('c8b7e060dfd032b3d6748505e98a652f2e6724bd05816f82ccce7f7f2679043f13f55d4f5c22ef12', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 17:03:22', '2021-08-17 17:03:22', '2022-08-17 17:03:22'),
+	('ca36b840a49152350a61cffcb32402ab6022cd1bbd823fd883d58d41ac7fb9dcb21f48c1586385f1', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 22:17:59', '2021-08-15 22:17:59', '2022-08-15 22:17:59'),
 	('cac01fe9f80c6a1b9a5e0bf9089f70f7dd233cb9823b459febc84d6c8a12b0d11cfcb8079d733865', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 14:46:03', '2021-08-15 14:46:03', '2022-08-15 14:46:03'),
 	('d26a518e3b4f720bd768d0f1d472fa32a1af7cfc36c31e3cd2487e218146f1b4614689e701f33410', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:48:57', '2021-08-14 21:48:57', '2022-08-14 21:48:57'),
+	('d52e73c861a393d1205bc9d570de8a828adaaf2c5603a709045964ad94994311969bfc7a09512ee9', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 20:36:48', '2021-08-17 20:36:48', '2022-08-17 20:36:48'),
+	('d7209ba7d2489739e0d8dc09ce62a89c3e7bb0df97b8e6d7321179261db64eff843a699c08f64e51', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 20:26:02', '2021-08-18 20:26:02', '2022-08-18 20:26:02'),
 	('da14162db41066dd9e49558dfb46d1f79ae0c7d35dedac7eb6e8af0947851650730e3cb6606171bd', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-13 22:26:16', '2021-08-13 22:26:16', '2022-08-13 22:26:16'),
 	('e1ab0b3574a3ef77b786b3a372f6806d26ee687539b83cfb9d77129b2d714ec54ef5e94619ee3301', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:17:33', '2021-08-14 21:17:33', '2022-08-14 21:17:33'),
+	('e81418b305136fb138fbe34dedc9ce2320c6e1983615a401c0ed33cda544d7d866baec5e130208df', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 17:27:20', '2021-08-18 17:27:20', '2022-08-18 17:27:20'),
 	('eb30308f9764f085ce69a97f489611800a5ccef55701f2f8f2d8b308465b0e1d1980a2367f0aaf01', 13, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:42:16', '2021-08-14 21:42:16', '2022-08-14 21:42:16'),
 	('ec33c34e3a9f62c17591a9a7a33bad7698e47d42142034c482c0dc7ed253b8df2341b86e69b42ccd', 10, 1, 'Personal Access Token', '[]', 1, '2021-08-14 18:34:20', '2021-08-14 18:34:20', '2022-08-14 18:34:20'),
 	('ffdab722fe005e3eae0a5cb6d552e9d3bf0b98cf2a30029c2c1759e9b3f1ece2f676748f1fdb6361', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-19 02:24:35', '2021-07-19 02:24:35', '2022-07-19 02:24:35');
@@ -638,7 +665,6 @@ CREATE TABLE IF NOT EXISTS `solutions` (
   `demo_url` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `challen_id` int(10) unsigned NOT NULL,
-  `number_like` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -653,9 +679,9 @@ CREATE TABLE IF NOT EXISTS `solutions` (
 -- Dumping data for table laravel-vue.solutions: ~2 rows (approximately)
 DELETE FROM `solutions`;
 /*!40000 ALTER TABLE `solutions` DISABLE KEYS */;
-INSERT INTO `solutions` (`id`, `title`, `description`, `link_github`, `demo_url`, `user_id`, `challen_id`, `number_like`, `created_at`, `updated_at`) VALUES
-	('1', 'upload images', '<p>Đ&oacute; l&agrave; một dự &aacute;n tuyệt vời để l&agrave;m việc.&nbsp;Do l&uacute;c đầu, t&ocirc;i nghĩ rằng n&oacute; sẽ kh&oacute; khăn nhưng t&ocirc;i thấy n&oacute; rất vui v&agrave; t&ocirc;i đ&atilde; học được rất nhiều điều trong qu&aacute; tr&igrave;nh thực hiện n&oacute;.</p>\n\n<p>C&ocirc;ng nghệ: T&ocirc;i đ&atilde; sử dụng bộ nhớ firebase l&agrave;m m&aacute;y chủ của m&igrave;nh</p>\n\n<p>Farmwork: React.js Material UI</p>\n\n<p>Th&aacute;ch thức: Đ&oacute; l&agrave; th&aacute;ch thức khi kết nối phản ứng v&agrave; cơ sở lửa.</p>', 'https://github.com/FayVik/Image-uploader', 'https://image-uploader-one.vercel.app/', 4, 1, 0, '2021-07-27 22:57:30', '2021-07-29 09:47:30'),
-	('af6e736b-e161-4593-a9e0-1d889a9e4712', 'Input component', '<p>Input component</p>', 'https://github.com/Hoa98/devpoly/edit/main/resources/js/pages/public/AddSolution.vue', 'https://themify.me/themify-icons', 1, 7, 0, '2021-08-15 18:04:21', '2021-08-15 18:04:21');
+INSERT INTO `solutions` (`id`, `title`, `description`, `link_github`, `demo_url`, `user_id`, `challen_id`, `created_at`, `updated_at`) VALUES
+	('1', 'upload images', '<p>Đ&oacute; l&agrave; một dự &aacute;n tuyệt vời để l&agrave;m việc.&nbsp;Do l&uacute;c đầu, t&ocirc;i nghĩ rằng n&oacute; sẽ kh&oacute; khăn nhưng t&ocirc;i thấy n&oacute; rất vui v&agrave; t&ocirc;i đ&atilde; học được rất nhiều điều trong qu&aacute; tr&igrave;nh thực hiện n&oacute;.</p>\n\n<p>C&ocirc;ng nghệ: T&ocirc;i đ&atilde; sử dụng bộ nhớ firebase l&agrave;m m&aacute;y chủ của m&igrave;nh</p>\n\n<p>Farmwork: React.js Material UI</p>\n\n<p>Th&aacute;ch thức: Đ&oacute; l&agrave; th&aacute;ch thức khi kết nối phản ứng v&agrave; cơ sở lửa.</p>', 'https://github.com/FayVik/Image-uploader', 'https://image-uploader-one.vercel.app/', 4, 1, '2021-07-27 22:57:30', '2021-07-29 09:47:30'),
+	('af6e736b-e161-4593-a9e0-1d889a9e4712', 'Input component', '<p>Input component fffd</p>', 'https://github.com/Hoa98/devpoly/edit/main/resources/js/pages/public/AddSolution.vue', 'https://themify.me/themify-icons', 4, 7, '2021-08-15 18:04:21', '2021-08-16 10:15:53');
 /*!40000 ALTER TABLE `solutions` ENABLE KEYS */;
 
 -- Dumping structure for table laravel-vue.upgrades
@@ -678,14 +704,53 @@ INSERT INTO `upgrades` (`id`, `name`, `description`, `price`, `period`, `created
 	(1, 'Premium 1 tháng', '<p>Premium 1 th&aacute;ng</p>', 1000, 1, '2021-08-13 23:24:22', '2021-08-13 23:24:22');
 /*!40000 ALTER TABLE `upgrades` ENABLE KEYS */;
 
+-- Dumping structure for table laravel-vue.upvotes
+DROP TABLE IF EXISTS `upvotes`;
+CREATE TABLE IF NOT EXISTS `upvotes` (
+  `user_id` int(10) unsigned NOT NULL,
+  `solution_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`solution_id`),
+  KEY `upvotes_solution_id_foreign` (`solution_id`),
+  CONSTRAINT `upvotes_solution_id_foreign` FOREIGN KEY (`solution_id`) REFERENCES `solutions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `upvotes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel-vue.upvotes: ~2 rows (approximately)
+DELETE FROM `upvotes`;
+/*!40000 ALTER TABLE `upvotes` DISABLE KEYS */;
+INSERT INTO `upvotes` (`user_id`, `solution_id`, `created_at`, `updated_at`) VALUES
+	(1, '1', '2021-08-17 21:05:15', '2021-08-17 21:05:15'),
+	(1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', '2021-08-17 17:34:15', '2021-08-17 17:34:15');
+/*!40000 ALTER TABLE `upvotes` ENABLE KEYS */;
+
+-- Dumping structure for table laravel-vue.upvote_feedbacks
+DROP TABLE IF EXISTS `upvote_feedbacks`;
+CREATE TABLE IF NOT EXISTS `upvote_feedbacks` (
+  `user_id` int(10) unsigned NOT NULL,
+  `feedback_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`feedback_id`),
+  KEY `upvote_feedbacks_feedback_id_foreign` (`feedback_id`),
+  CONSTRAINT `upvote_feedbacks_feedback_id_foreign` FOREIGN KEY (`feedback_id`) REFERENCES `feedbacks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `upvote_feedbacks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table laravel-vue.upvote_feedbacks: ~0 rows (approximately)
+DELETE FROM `upvote_feedbacks`;
+/*!40000 ALTER TABLE `upvote_feedbacks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `upvote_feedbacks` ENABLE KEYS */;
+
 -- Dumping structure for table laravel-vue.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` int(11) DEFAULT '0',
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` int(11) DEFAULT '1',
   `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -703,7 +768,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_phone_unique` (`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table laravel-vue.users: ~4 rows (approximately)
 DELETE FROM `users`;
@@ -712,7 +777,7 @@ INSERT INTO `users` (`id`, `username`, `name`, `email`, `gender`, `address`, `ph
 	(1, 'admin', 'Quản trị viên', 'admin123@gmail.com', 0, 'Hà Nội', '0387897456', 'files/1627378141-5.jpg', '0', NULL, NULL, 1, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-07-18 09:00:25', '2021-08-15 00:08:34'),
 	(4, 'hoact', 'hoa02', 'hoa02@gmail', 1, 'qqqqqqq', '09566333222', 'files/1627381978-request_image.png', '0', NULL, NULL, 0, NULL, NULL, '$2y$10$44L.iEIIrxQrdh0TkN.c6OpenQoONSoc5sV9e1Jk5wOUr0KGmstrK', NULL, '2021-06-27 10:30:10', '2021-08-07 18:03:34'),
 	(6, 'mentor', 'mentor', 'mentor@gmail.com', 0, 'mentor', '34342144', NULL, '0', NULL, NULL, 1, NULL, NULL, '$2y$10$3oniatozTDmNV1Fj6Sxni.4Jd.iR2l2MO7FJPlgo91ZKEU01KCUXq', NULL, '2021-08-07 15:44:02', '2021-08-07 15:54:25'),
-	(14, NULL, 'Hoa98', 'chuthihoa98bgg@gmail.com', 0, NULL, NULL, 'files/avatar-59728705.jpg', 'github', 'https://github.com/Hoa98', '59728705', 0, NULL, NULL, NULL, 'eayEe6tYDepeGMhTGUgDqXbkkm5gQKBwQc64QCjHdajcu4tNg5niOSjakmWI', '2021-08-14 21:45:59', '2021-08-14 21:45:59');
+	(15, NULL, 'Hoa98', 'chuthihoa98bgg@gmail.com', 1, NULL, NULL, 'files/avatar-162929359159728705.jpg', 'github', 'https://github.com/Hoa98', '59728705', 0, NULL, NULL, NULL, 'LY0GB3NIQTl5jpV8m9u95OwGo0wVLSRbamyBxxqP0wlahjACMGThFS28gGBt', '2021-08-18 20:33:12', '2021-08-18 20:33:12');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

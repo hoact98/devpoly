@@ -5,7 +5,8 @@ import axios from "axios"
 export const state = {
     solutions: [],
     solution: {},
-    all:[]
+    all:[],
+    solutionByCate: []
 }
 
 // getters
@@ -13,6 +14,7 @@ export const getters = {
         solutions: state => state.solutions,
         solution: state => state.solution,
         all: state => state.all,
+        solutionByCate: state => state.solutionByCate,
     }
     // mutation 
 export const mutations = {
@@ -21,6 +23,9 @@ export const mutations = {
         },
         ALL(state, all) {
             state.all = all
+        },
+        BY_CATE(state, solutionByCate) {
+            state.solutionByCate = solutionByCate
         },
         FETCH_ONE(state, solution) {
             state.solution = solution
@@ -35,6 +40,10 @@ export const actions = {
     all({ commit }) {
         return axios.get(route('all.solution'))
             .then(res => commit("ALL", res.data.data))
+    },
+    byCate({ commit },slug) {
+        return axios.get(route('categorySolutions',slug))
+            .then(res => commit("BY_CATE", res.data.data))
     },
     fetchOne({ commit }, id) {
         return axios.get(route('show.solution', id))

@@ -72,7 +72,7 @@
             </div>
           </div>
 
-          <div class="feedback-wrapper">
+          <div class="feedback-wrapper" v-if="feedbacks.length>0">
             <div class="row">
               <div class="col-12" v-for="(feedback,index) in feedbacks" :key="index">
               <div v-if="feedback.parent_id==0">
@@ -82,8 +82,14 @@
                       
                       <div v-if="auth">
                         <div v-if="feedback.upvote.length>0">
-                            <div v-for="upvote in feedback.upvote" :key="upvote.id">
-                                <button v-if="upvote.user_id==auth.id && upvote.feedback_id==feedback.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                            <div v-for="(upvote,index) in feedback.upvote" :key="index">
+                                <button v-if="upvote.user_id==auth.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                                    <div class="icon">
+                                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                  </div>
+                                  <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                </button>
+                                <button v-if="upvote.user_id!=auth.id && feedback.upvote.length==index+1" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
                                     <div class="icon">
                                   <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                                   </div>
@@ -162,8 +168,14 @@
                         <div class="col-lg-3 col-md-12">
                              <div v-if="auth">
                                   <div v-if="feedback.upvote.length>0">
-                                      <div v-for="upvote in feedback.upvote" :key="upvote.id">
-                                          <button v-if="upvote.user_id==auth.id && upvote.feedback_id==feedback.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                                      <div v-for="(upvote,index) in feedback.upvote" :key="index">
+                                          <button v-if="upvote.user_id==auth.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                                              <div class="icon">
+                                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                            </div>
+                                            <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                          </button>
+                                          <button v-else-if="upvote.user_id!=auth.id && feedback.upvote.length==index+1" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
                                               <div class="icon">
                                             <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                                             </div>
@@ -177,7 +189,7 @@
                                     </div>
                                     <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
                                   </button>
-                                </div>
+                             </div>
                             <div v-else>
                               <div class="button-block">
                                 <div class="icon">
@@ -320,6 +332,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row" v-else>
+            <div class="col-12"><p> Bạn cần đăng nhập mới có thể gửi phản hồi!</p></div>
           </div>
         </div>
 

@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-12 profile-share-customize">
           <button class="btn-share btn-block bg-button">
-            <i class="ti-twitter-alt"></i> Share
+            <i class="ti-twitter-alt"></i> Chia sẻ
           </button>
-         <router-link :to="{name:'register'}">
+         <router-link :to="{name:'settings'}">
             <button class="btn-customize btn-block bg-button">
             <svg
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
@@ -17,7 +17,7 @@
               <path
                 d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34a.9959.9959 0 00-1.41 0L9 12.25 11.75 15l8.96-8.96c.39-.39.39-1.02 0-1.41z"
               ></path></svg
-            >Customize
+            >Tuỳ chỉnh
           </button>
          </router-link>
         </div>
@@ -27,7 +27,8 @@
         <div class="col-12 col-sm-4">
           <div class="profile-user block-style">
             <div class="user-image">
-              <img width="100%" :src="'/'+auth.image" alt="" />
+              <img width="100%" v-if="auth.image" :src="'/'+auth.image" alt="" />
+              <img width="100%" v-else :src="auth.photo_url" alt="" />
             </div>
 
             <div class="user-nickname">
@@ -117,12 +118,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data() {
-    return {
-      auth: window.auth,
-    };
+   computed: mapGetters({
+    auth: 'auth/user'
+  }),
+  
+  created () {
+    this.$store.dispatch('auth/fetchUser');
   },
+  methods: {
+    
+  }
 };
 </script>
 

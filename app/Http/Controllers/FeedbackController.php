@@ -126,7 +126,7 @@ class FeedbackController extends Controller
        $feedback = Feedback::orderByDesc('id')->where('solution_id',$solution_id)->where('is_approved','=',1)->get();
        $feedback->load('users');
        $feedback->load('upvote');
-      $data= $this->data_tree($feedback);
+       $data= $this->data_tree($feedback);
        return response()->json(['status'=>'sudataess','message'=>'The feedback successfully','data'=>$data],200);
    }
    public function data_tree($data, $parent_id = 0, $level = 0){
@@ -159,7 +159,7 @@ class FeedbackController extends Controller
     //get all feedbacks with category
     public function feedbackGetByCate($slug)
     {
-        $feedbacks = Feedback::select('feedbacks.*','users.image as avatar','challenges.image','users.name')
+        $feedbacks = Feedback::orderByDesc('id')->select('feedbacks.*','users.image as avatar','challenges.image','users.name')
         ->join('solutions', 'feedbacks.solution_id', '=', 'solutions.id')
         ->join('challenges', 'solutions.challen_id', '=', 'challenges.id')
         ->join('users', 'solutions.user_id', '=', 'users.id')
@@ -168,7 +168,9 @@ class FeedbackController extends Controller
         ->with('users')
         ->with('solutions')
         ->with('upvote')
+        ->where('is_approved','=',1)
         ->get();
-        return response()->json(['status'=>'success','message'=>'Get solution successfully','data'=>$feedbacks],200);
+        $data= $this->data_tree($feedbacks);
+        return response()->json(['status'=>'success','message'=>'Get solution successfully','data'=>$data],200);
     }
 }

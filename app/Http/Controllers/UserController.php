@@ -252,29 +252,22 @@ class UserController extends Controller
         $user = User::find($id);
 
         $rule= [
-            'username' => ['required','min:4',Rule::unique('users')->ignore($user->id)],
-            'name' => ['required','min:4'],
+            'name' => ['required','min:2'],
             'email' => [
                 'required',
                 'email',
                 Rule::unique('users')->ignore($user->id)
             ],
             'gender'=>['required'],
-            'address'=>['required'],
-            'phone'=>['required',Rule::unique('users')->ignore($user->id)],
+            'phone'=>[Rule::unique('users')->ignore($user->id)],
           ];
           $messages = [
             'name.required' => "Hãy nhập họ tên",
-            'name.min' => "Ít nhất có 4 ký tự",
-            'username.required' => "Hãy nhập tên tài khoản",
-            'username.min' => "Ít nhất có 4 ký tự",
+            'name.min' => "Ít nhất có 2 ký tự",
             'email.required' => "Hãy nhập email",
             'email.email' => "Không đúng định dạng",
             'email.unique' => "Email đã tồn tại",
-            'username.unique' => "Tên tài khoản đã tồn tại",
             'gender.required' => "Hãy chọn giới tính",
-            'address.required' => "Hãy nhập địa chỉ",
-            'phone.required' => "Hãy nhập SDT",
             'phone.unique' => "SDT đã tồn tại",
           ];
      

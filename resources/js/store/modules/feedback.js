@@ -4,14 +4,16 @@ import axios from "axios";
 export const state = {
   feedbacks: [],
   feedback: {},
-  all: []
+  all: [],
+  feedbackByCate: [],
 };
 
 // getters
 export const getters = {
   feedback: state => state.feedback,
   feedbacks: state => state.feedbacks,
-  all: state => state.all
+  all: state => state.all,
+  feedbackByCate: state => state.feedbackByCate,
 };
 
 // mutations
@@ -21,6 +23,9 @@ export const mutations = {
   },
   ALL(state, all) {
     state.all = all;
+  },
+  BY_CATE(state, feedbackByCate) {
+    state.feedbackByCate = feedbackByCate;
   },
   FETCH_ONE(state, feedback) {
     state.feedback = feedback;
@@ -43,6 +48,11 @@ export const actions = {
     axios
       .get(route("show.feedback", id))
       .then(response => commit("FETCH_ONE", response.data.data))
+  },
+  byCate({ commit }, slug) {
+    axios
+      .get(route("feedback.byCate", slug))
+      .then(response => commit("BY_CATE", response.data.data))
   },
   deleteFeedback({}, id) {
     axios

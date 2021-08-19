@@ -9,17 +9,17 @@
 
       <div class="row content-list">
         <div class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
-          <div class="content-item" v-for="solution in solutions.data" :key="solution.id">
+          <div class="content-item" v-for="solution in solutions" :key="solution.id">
             <router-link
               :to="{ name: 'showDetailSolution', params: { id: solution.id } }"
               style="color: #fff; text-decoration: none"
             >
               <div class="solution-author">
                 <div class="author-avatar">
-                  <img :src="'/' + solution.users[0].avatar" alt="" />
+                  <img :src="'/' + solution.user.image" alt="" />
                 </div>
                 <span class="author-nickname" style="color: black">
-                  {{ solution.users[0].username }}
+                  {{ solution.user.name }}
                 </span>
               </div>
               <div class="solution-title">
@@ -36,55 +36,67 @@
                 <div class="row">
                   <div class="col-5">
                     <div class="challenge-name">
-                      <p style="color: black">{{ solution.challenges.title }}</p>
+                      <p style="color: black">{{ solution.challenge.title }}</p>
                     </div>
 
                     <div class="challenge-level">
-                      <span style="color: black">{{ solution.challenges.level }}</span>
+                        <span style="color: black" v-if="solution.challenge.level==1">Beginner</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==2">Elementary</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==3">Intermediate</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==4">Upper intermediate</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==5">Advanced</span>
+                        <span style="color: black" v-else>Proficient</span>
                     </div>
                   </div>
                   <div class="col-7">
                     <div class="challenge-img">
-                      <img :src="'/' + solution.challenges.challenge_image" alt="" />
+                      <img :src="'/' + solution.challenge.image" alt="" />
                     </div>
                   </div>
                 </div>
               </div>
+            </router-link>
 
               <div class="solution-action">
-                <div class="upvote button-block">
-                  <div class="icon">
-                    <svg
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                      ></path>
-                    </svg>
+                <div v-if="auth">
+                  <div v-if="solution.upvote.length>0">
+                      <div v-for="(upvote,index) in solution.upvote" :key="index">
+                          <button v-if="upvote.user_id==auth.id" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                              <div class="icon">
+                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                            </div>
+                            <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                          </button>
+                          <button v-else-if="upvote.user_id!=auth.id && solution.upvote.length==index+1" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%;">
+                              <div class="icon">
+                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                            </div>
+                            <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                          </button>
+                      </div>
                   </div>
-                  <span>upvote</span>
+                  <button v-else @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%;">
+                      <div class="icon">
+                    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                    </div>
+                    <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                  </button>
                 </div>
-
-                <div class="feedback button-block">
+                <div v-else class="button-block">
                   <div class="icon">
-                    <svg
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M22 4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <span>feedback</span>
+                    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                  </div> 
+                  <span v-if="solution.upvote">{{solution.upvote.length==0?'Thích':solution.upvote.length}}</span>
                 </div>
+                <router-link
+              :to="{ name: 'showDetailSolution', params: { id: solution.id } }" style="width:48%; margin-left: 10px;"
+            >
+                 <div class="feedback button-block" style="width: 100%;">
+                      <i class="ti-comment"></i>
+                    <span v-if="solution.feedbacks" v-html="solution.feedbacks.length"></span>
+                  </div>
+                </router-link>
               </div>
-            </router-link>
           </div>
         </div>
       </div>
@@ -95,16 +107,36 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     solutions() {
-      return this.$store.state.solution.solutions;
+      return this.$store.state.solution.solutionByCate;
     },
+     auth(){
+      return this.$store.state.auth.user;
+    }
   },
   created: function () {
-    this.$store.dispatch("solution/fetch");
+    this.$store.dispatch("solution/byCate",this.$route.params.slug);
+    this.$store.dispatch('auth/fetchUser');
   },
+  methods:{
+    upvoteSolution(id){
+        axios.post(route('upvote.solution',id))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.$store.dispatch("solution/byCate",this.$route.params.slug);
+          }
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+   
+  }
 };
 </script>
 
