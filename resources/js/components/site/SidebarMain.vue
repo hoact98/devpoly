@@ -36,34 +36,32 @@
           <router-link :to="{ name: 'home' }">
             <i class="ti-arrow-left mr-2"></i>
             <span class="hide-on-destop">Trang chủ</span></router-link>
-
-          <a href="" class="block-path">
+            <router-link class="block-path" :to="{ name: 'overview' , params: { slug: category.slug }}">
             <img
               style="display: block"
               class="path-banner"
-              src="/svg/banner.svg"
+              :src="'/'+category.image"
               alt="banner-home"
             />
             <div class="hide-on-destop">
-              <span class="path-heading">Path</span><br />
-              <span class="path-description">Reponsive Web Deverloper</span>
+              <span class="path-description">{{category.name}}</span>
             </div>
-          </a>
+            </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'overview' }">
+          <router-link :to="{ name: 'overview' , params: { slug: category.slug }}">
                 <i class="ti-wallet mr-2"></i>
             <span class="hide-on-destop">Tổng quan</span></router-link
           >
         </li>
         <li>
-          <router-link :to="{ name: 'solution' }">
+          <router-link :to="{ name: 'solution' , params: { slug: category.slug }}">
                 <i class="ti-light-bulb mr-2"></i>
             <span class="hide-on-destop">Giải pháp</span></router-link
           >
         </li>
         <li>
-          <router-link :to="{ name: 'feedback' }">
+          <router-link :to="{ name: 'feedback' , params: { slug: category.slug }}">
                 <i class="ti-comments-smiley mr-2"></i>
             <span class="hide-on-destop">Phản hồi</span></router-link
           >
@@ -75,7 +73,13 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex'
+
+export default {
+   computed: mapGetters({
+    category: 'challengecategory/challengecategory'
+  }),
+};
 </script>
 
 <style></style>

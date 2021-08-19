@@ -542,6 +542,7 @@ export default {
         axios.get(route('solutionFeedback.feedback',this.$route.params.id))
         .then(response => {
           var result = response.data.data;
+          this.$store.dispatch("challengecategory/fetchOne", this.solution.challenge.cate_challen_id);
           this.feedbacks = result;
         })
         // eslint-disable-next-line

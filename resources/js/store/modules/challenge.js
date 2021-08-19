@@ -22,9 +22,6 @@ export const mutations = {
     FETCH_ONE(state, challenge) {
         state.challenge = challenge;
     },
-    GET_ONE_DATA_CHALLENGE(state, challenge) {
-        state.challenge = challenge;
-    },
     ALL(state, all) {
         state.all = all;
     }
@@ -45,7 +42,12 @@ export const actions = {
     fet_One_Data({ commit }, slug) {
         axios
             .get(route("get_One.challenge", slug))
-            .then(response => commit("GET_ONE_DATA_CHALLENGE", response.data.data))
+            .then(response => commit("FETCH_ONE", response.data.data))
+    },
+    fetchByCate({ commit }, slug) {
+        axios
+            .get(route("get_One.challengecategory", slug))
+            .then(response => commit("FETCH_ONE", response.data.data))
     },
     all({ commit }) {
         return axios

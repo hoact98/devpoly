@@ -10,10 +10,17 @@ use App\Models\Challenge;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 class ChallengeCategoryController extends Controller
 {
-
+    public function __construct()
+    {
+        if (Cookie::get('token') != null) {
+            $this->middleware(['header_api','auth:api']);
+        }
+    }
     // all categories
     public function categories()
     {
@@ -140,12 +147,20 @@ class ChallengeCategoryController extends Controller
         ], 200);
     }
     public function get_One_Challenge_Category($slug){
-        $ChallengeCategory = ChallengeCategory::where('slug','=', $slug)->first();
-        $ChallengeCategoryID = $ChallengeCategory->id;
-        if($ChallengeCategory != null){
-           $ChallengeCategory->load('challenges');
-        }
-        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$ChallengeCategory],200);
+        $data['category'] = ChallengeCategory::where('slug','=', $slug)->first();
+        $chall = Challenge::join('challenge_users', 'challenges.id', '=', 'challenge_users.challen_id')
+        ->select('challenges.*')
+        ->where('challenge_users.user_id','=',Auth::id())
+        ->where('challenge_users.status','=',1)
+        ->where('challenges.cate_challen_id','=',$data['category']->id)
+        ->get();
+        $data['number_solution'] = count($chall);
+        $data['challenges']= Challenge::where('cate_challen_id',$data['category']->id)->get();
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$data],200);
+    }
+    public function getOneBySlug($slug){
+        $category = ChallengeCategory::where('slug','=', $slug)->first();
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$category],200);
     }
     public function handleChart()
     {

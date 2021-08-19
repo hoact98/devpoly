@@ -73,6 +73,7 @@ Route::group(['prefix' => 'permission'], function () {
 Route::get('challengecategories', [ChallengeCategoryController::class, 'index'])->name('challengecategories');
 Route::get('get_All_Challenge_Category', [ChallengeCategoryController::class, 'get_All_Challenge_Category'])->name('get_All.challengecategory');
 Route::get('get_One_Challenge_Category/{slug}', [ChallengeCategoryController::class, 'get_One_Challenge_Category'])->name('get_One.challengecategory');
+Route::get('get-one-by-slug/{slug}', [ChallengeCategoryController::class, 'getOneBySlug'])->name('bySlug.challengecategory');
 Route::group(['prefix' => 'challengecategory'], function () {
     Route::post('add', [ChallengeCategoryController::class, 'create'])->name('create.challengecategory');
     Route::get('all', [ChallengeCategoryController::class, 'categories'])->name('all.challengecategory');

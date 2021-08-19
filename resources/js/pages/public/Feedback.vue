@@ -188,6 +188,7 @@ export default {
     created: function(){
         this.$store.dispatch('feedback/byCate',this.$route.params.slug);
         this.$store.dispatch('auth/fetchUser');
+        this.$store.dispatch("challengecategory/get_One_Data", this.$route.params.slug);
     },
     methods:{
          upvoteFeedback(id){

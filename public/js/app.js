@@ -2551,6 +2551,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
@@ -2610,6 +2614,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -2798,6 +2806,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2872,9 +2881,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    category: 'challengecategory/challengecategory'
+  })
+});
 
 /***/ }),
 
@@ -4357,9 +4369,6 @@ var mutations = {
   FETCH_ONE: function FETCH_ONE(state, challenge) {
     state.challenge = challenge;
   },
-  GET_ONE_DATA_CHALLENGE: function GET_ONE_DATA_CHALLENGE(state, challenge) {
-    state.challenge = challenge;
-  },
   ALL: function ALL(state, all) {
     state.all = all;
   }
@@ -4381,17 +4390,23 @@ var actions = {
   fet_One_Data: function fet_One_Data(_ref3, slug) {
     var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challenge", slug)).then(function (response) {
-      return commit("GET_ONE_DATA_CHALLENGE", response.data.data);
+      return commit("FETCH_ONE", response.data.data);
     });
   },
-  all: function all(_ref4) {
+  fetchByCate: function fetchByCate(_ref4, slug) {
     var commit = _ref4.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    });
+  },
+  all: function all(_ref5) {
+    var commit = _ref5.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("all.challenge")).then(function (response) {
       return commit("ALL", response.data.data);
     });
   },
-  deletechallenge: function deletechallenge(_ref5, id) {
-    _objectDestructuringEmpty(_ref5);
+  deletechallenge: function deletechallenge(_ref6, id) {
+    _objectDestructuringEmpty(_ref6);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challenge", id)).then(function (response) {
       // this.dispatch("challenge/fetch")
@@ -4406,13 +4421,13 @@ var actions = {
       });
     });
   },
-  editchallenge: function editchallenge(_ref6, data) {
-    _objectDestructuringEmpty(_ref6);
+  editchallenge: function editchallenge(_ref7, data) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challenge", data.get('id')), data).then();
   },
-  addchallenge: function addchallenge(_ref7, data) {
-    _objectDestructuringEmpty(_ref7);
+  addchallenge: function addchallenge(_ref8, data) {
+    _objectDestructuringEmpty(_ref8);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challenge"), data).then();
   }
@@ -4465,12 +4480,6 @@ var mutations = {
   FETCH_ONE: function FETCH_ONE(state, challengecategory) {
     state.challengecategory = challengecategory;
   },
-  GET_DATA_TO_HOME: function GET_DATA_TO_HOME(state, challengecategories) {
-    state.challengecategories = challengecategories;
-  },
-  GET_ONE_DATA_TO_OVERVIEW: function GET_ONE_DATA_TO_OVERVIEW(state, challengecategory) {
-    state.challengecategory = challengecategory;
-  },
   ALL: function ALL(state, all) {
     state.all = all;
   }
@@ -4492,7 +4501,7 @@ var actions = {
   get_All_Data: function get_All_Data(_ref3) {
     var commit = _ref3.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_All.challengecategory")).then(function (response) {
-      return commit("GET_DATA_TO_HOME", response.data.data);
+      return commit("FETCH", response.data.data);
     });
   },
   fetchOne: function fetchOne(_ref4, id) {
@@ -4503,8 +4512,8 @@ var actions = {
   },
   get_One_Data: function get_One_Data(_ref5, slug) {
     var commit = _ref5.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("get_One.challengecategory", slug)).then(function (response) {
-      return commit("GET_ONE_DATA_TO_OVERVIEW", response.data.data);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("bySlug.challengecategory", slug)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
     });
   },
   deletechallengecategory: function deletechallengecategory(_ref6, id) {
@@ -72241,7 +72250,37 @@ var render = function() {
                               },
                               [
                                 _c("i", { staticClass: "fa fa-user mr-3" }),
-                                _vm._v("Profile")
+                                _vm._v("Thông tin")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "homeDashboard" } }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ti-layout-grid2-alt mr-3"
+                                }),
+                                _vm._v("Bảng điều khiển")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "settings" } }
+                              },
+                              [
+                                _c("i", { staticClass: "ti-settings mr-3" }),
+                                _vm._v("Cài đặt")
                               ]
                             ),
                             _vm._v(" "),
@@ -72397,7 +72436,37 @@ var render = function() {
                               },
                               [
                                 _c("i", { staticClass: "fa fa-user mr-3" }),
-                                _vm._v("Profile")
+                                _vm._v("Thông tin")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "homeDashboard" } }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ti-layout-grid2-alt mr-3"
+                                }),
+                                _vm._v("Bảng điều khiển")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "settings" } }
+                              },
+                              [
+                                _c("i", { staticClass: "ti-settings mr-3" }),
+                                _vm._v("Cài đặt")
                               ]
                             ),
                             _vm._v(" "),
@@ -72680,7 +72749,28 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c(
+              "router-link",
+              {
+                staticClass: "block-path",
+                attrs: {
+                  to: { name: "overview", params: { slug: _vm.category.slug } }
+                }
+              },
+              [
+                _c("img", {
+                  staticClass: "path-banner",
+                  staticStyle: { display: "block" },
+                  attrs: { src: "/" + _vm.category.image, alt: "banner-home" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "hide-on-destop" }, [
+                  _c("span", { staticClass: "path-description" }, [
+                    _vm._v(_vm._s(_vm.category.name))
+                  ])
+                ])
+              ]
+            )
           ],
           1
         ),
@@ -72688,13 +72778,21 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "overview" } } }, [
-              _c("i", { staticClass: "ti-wallet mr-2" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "hide-on-destop" }, [
-                _vm._v("Tổng quan")
-              ])
-            ])
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: { name: "overview", params: { slug: _vm.category.slug } }
+                }
+              },
+              [
+                _c("i", { staticClass: "ti-wallet mr-2" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "hide-on-destop" }, [
+                  _vm._v("Tổng quan")
+                ])
+              ]
+            )
           ],
           1
         ),
@@ -72702,13 +72800,21 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "solution" } } }, [
-              _c("i", { staticClass: "ti-light-bulb mr-2" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "hide-on-destop" }, [
-                _vm._v("Giải pháp")
-              ])
-            ])
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: { name: "solution", params: { slug: _vm.category.slug } }
+                }
+              },
+              [
+                _c("i", { staticClass: "ti-light-bulb mr-2" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "hide-on-destop" }, [
+                  _vm._v("Giải pháp")
+                ])
+              ]
+            )
           ],
           1
         ),
@@ -72716,13 +72822,21 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "feedback" } } }, [
-              _c("i", { staticClass: "ti-comments-smiley mr-2" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "hide-on-destop" }, [
-                _vm._v("Phản hồi")
-              ])
-            ])
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: { name: "feedback", params: { slug: _vm.category.slug } }
+                }
+              },
+              [
+                _c("i", { staticClass: "ti-comments-smiley mr-2" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "hide-on-destop" }, [
+                  _vm._v("Phản hồi")
+                ])
+              ]
+            )
           ],
           1
         )
@@ -72750,27 +72864,6 @@ var staticRenderFns = [
         staticClass: "hide-on-mobile hide-on-destop-large hide-on-destop",
         attrs: { src: "/images/logo.png", width: "150" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "block-path", attrs: { href: "" } }, [
-      _c("img", {
-        staticClass: "path-banner",
-        staticStyle: { display: "block" },
-        attrs: { src: "/svg/banner.svg", alt: "banner-home" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "hide-on-destop" }, [
-        _c("span", { staticClass: "path-heading" }, [_vm._v("Path")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("span", { staticClass: "path-description" }, [
-          _vm._v("Reponsive Web Deverloper")
-        ])
-      ])
     ])
   }
 ]

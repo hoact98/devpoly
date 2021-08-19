@@ -131,6 +131,7 @@ export default {
   }),
   created() {
     this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);
+
   },
   methods: {
     async submitSolution() {

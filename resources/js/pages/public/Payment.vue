@@ -38,11 +38,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data() {
-    return {
-      auth: window.auth,
-    };
+  computed: mapGetters({
+    auth: 'auth/user'
+  }),
+  
+  created () {
+    this.$store.dispatch('auth/fetchUser');
   },
   methods:{
     checkout(){

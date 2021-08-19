@@ -3,14 +3,14 @@
                 <div class="container">
                     <div class="overview row">
                         <div class="description col-xl-8 col-lg-6">
-                            <div class="container-content">
+                            <div class="container-content" v-if="data.category">
                                 <div class="desc-time">
                                     Latest Update: February 10, 2021
                                 </div>
                                 <div class="desc-title">
-                                    <h1>{{data.name}}</h1>
+                                    <h1>{{data.category.name}}</h1>
                                 </div>
-                                <div class="short-desc" v-if="data" v-html="data.description">
+                                <div class="short-desc" v-if="data" v-html="data.category.description">
 
                                 </div>
                                 <!-- <div id="desc-box" class="desc-box1">
@@ -37,29 +37,22 @@
                                 </div>
                             </div>
                         </div>  
-                        <div class="require col-xl-4 col-lg-6">
+                        <div class="require col-xl-4 col-lg-6" v-if="data.challenges">
                             <div class="container-content">
                                 <div class="require-image">
-                                    <img v-if="data"  :src="'/'+data.image" alt="error">
+                                    <img v-if="data.category"  :src="'/'+data.category.image" alt="error">
                                 </div>
                                 <div class="require-title">
                                     <h5>Yêu cầu chứng chỉ</h5>
                                 </div>
                                 <ul class="list-require">
-                                    <li>Đã hoàn thành 8 thử thách</li>
+                                    <li>Đã hoàn thành {{data.challenges.length}} thử thách</li>
                                 </ul>
                                 <div class="progres">
                                     <h5>Progress</h5>
-                                    <p>0 / 8 completed</p>
+                                    <p>{{data.number_solution}} / {{data.challenges.length}} completed</p>
                                     <div class="progres-level">
-                                        <div class="progres-level-item" style="background-color:#6d2fff;"></div>
-                                        <div class="progres-level-item" style="background-color:#e5eaf0;"></div>
-                                        <div class="progres-level-item"></div>
-                                        <div class="progres-level-item"></div>
-                                        <div class="progres-level-item"></div>
-                                        <div class="progres-level-item"></div>
-                                        <div class="progres-level-item"></div>
-                                        <div class="progres-level-item"></div>
+                                        <div v-for="n in data.challenges.length" :key="n" :style="n < data.number_solution+1?'background-color:#6d2fff;':'background-color:#e5eaf0;'" class="progres-level-item"></div>
                                     </div>
                                 </div>
 
@@ -117,10 +110,11 @@ export default {
     title: "Chi Tiet Danh Muc Thu Thach",
   }),
   computed: mapGetters({
-    data: "challengecategory/challengecategory",
+    data: "challenge/challenge",
 
   }),
   created() {
+    this.$store.dispatch("challenge/fetchByCate", this.$route.params.slug);
     this.$store.dispatch("challengecategory/get_One_Data", this.$route.params.slug);
   },
   methods: {
