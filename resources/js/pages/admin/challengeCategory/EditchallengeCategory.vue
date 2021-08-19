@@ -27,6 +27,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Quy tắc: </label>
+                            <div class="col-sm-10">
+                                <ckeditor v-model="data.rule" :class="{'is-invalid': form.errors.has('rule'),}" name="rule"></ckeditor>
+                                <div  class="text-danger" v-if="form.errors.has('rule')"
+                                  v-html="form.errors.get('rule')"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Ảnh: </label>
                             <div class="col-sm-10">
                                <input type="file" @change="upload($event)"
@@ -59,6 +67,7 @@ export default {
     form: new Form({
       name: "",
       description: "",
+      rule: "",
       image: "",
     }),
     title: "Cập nhật danh mục",
@@ -85,6 +94,7 @@ export default {
     },
     async updateChallengeCategory() {
       this.form.name = this.data.name;
+      this.form.rule = this.data.rule;
       this.form.description = this.data.description;
       await this.form
         .post(route("update.challengecategory", this.$route.params.id))

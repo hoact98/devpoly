@@ -15,6 +15,7 @@ class ChallengeCategory extends Model
         'slug',
         'image',
         'description',
+        'rule',
     ];
     protected $dataTableColumns = [
         'id' => [

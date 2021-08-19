@@ -10,30 +10,15 @@
                                 <div class="desc-title">
                                     <h1>{{data.category.name}}</h1>
                                 </div>
-                                <div class="short-desc" v-if="data" v-html="data.category.description">
+                                <div class="short-desc" v-html="data.category.description">
 
                                 </div>
-                                <!-- <div id="desc-box" class="desc-box1">
-                                    <div class="box-title">
-                                        <h5>For those who want to:</h5>
-                                    </div>
-                                    <ul id="box-list" class="box1-list">
-                                        <li>Start with <strong>Coding</strong></li>
-                                        <li>Practice <strong>HTML, CSS, and basic JavaScript</strong></li>
-                                        <li>Building websites with <strong> real-life practices.</strong></li>
-                                    </ul>
-                                </div> -->
+                              
                                 <div id="desc-box" class="desc-box2">
                                     <div class="box-title">
-                                        <h5>Rules:</h5>
+                                        <h5>Quy tắc:</h5>
                                     </div>
-                                    <ul id="box-list" class="box2-list">
-                                        <li>✅<strong> Recommend</strong> to use only HTML, CSS, and JavaScript</li>
-                                        <li>✅<strong> Fulfill</strong> all the user stories
-                                        </li>
-                                        <li>✅<strong> Follow the design,</strong> you can add animations, change images,...</li>
-                                        <li>🚫<strong> Do not copy</strong> existing solutions</li>
-                                    </ul>
+                                   <div  v-html="data.category.rule"></div>
                                 </div>
                             </div>
                         </div>  

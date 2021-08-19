@@ -108,6 +108,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -116,6 +124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new Form({
         name: "",
         description: "",
+        rule: "",
         image: ""
       }),
       title: "Cập nhật danh mục"
@@ -153,8 +162,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this.form.name = _this.data.name;
+                _this.form.rule = _this.data.rule;
                 _this.form.description = _this.data.description;
-                _context.next = 4;
+                _context.next = 5;
                 return _this.form.post(route("update.challengecategory", _this.$route.params.id)).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
@@ -171,7 +181,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -661,6 +671,40 @@ var render = function() {
                               innerHTML: _vm._s(
                                 _vm.form.errors.get("description")
                               )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                    _vm._v("Quy tắc: ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [
+                      _c("ckeditor", {
+                        class: { "is-invalid": _vm.form.errors.has("rule") },
+                        attrs: { name: "rule" },
+                        model: {
+                          value: _vm.data.rule,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "rule", $$v)
+                          },
+                          expression: "data.rule"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("rule")
+                        ? _c("div", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              innerHTML: _vm._s(_vm.form.errors.get("rule"))
                             }
                           })
                         : _vm._e()

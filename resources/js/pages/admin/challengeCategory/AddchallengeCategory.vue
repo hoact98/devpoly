@@ -22,8 +22,14 @@
                             <label class="col-sm-2 col-form-label">Mô tả: </label>
                             <div class="col-sm-10">
                                <ckeditor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></ckeditor>
-                                <!-- <input v-model="form.name" type="text" :class="{ 'is-invalid': form.errors.has('name') }" name="name" class="form-control" id="exampleInputName" placeholder="Enter name"> -->
                                 <div class="text-danger" v-if="form.errors.has('description')" v-html="form.errors.get('description')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Quy tắc: </label>
+                            <div class="col-sm-10">
+                               <ckeditor v-model="form.rule" :class="{ 'is-invalid': form.errors.has('rule') }" name="rule"></ckeditor>
+                                <div class="text-danger" v-if="form.errors.has('rule')" v-html="form.errors.get('rule')" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -56,6 +62,7 @@ export default {
     form: new Form({
       name: '',
       description: '',
+      rule: '',
       image: ''
     }),
     title: 'Thêm Danh Mục Thử Thách',

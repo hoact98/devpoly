@@ -105,6 +105,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -112,6 +118,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new Form({
         name: '',
         description: '',
+        rule: '',
         image: ''
       }),
       title: 'Thêm Danh Mục Thử Thách'
@@ -654,6 +661,40 @@ var render = function() {
                               innerHTML: _vm._s(
                                 _vm.form.errors.get("description")
                               )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                    _vm._v("Quy tắc: ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [
+                      _c("ckeditor", {
+                        class: { "is-invalid": _vm.form.errors.has("rule") },
+                        attrs: { name: "rule" },
+                        model: {
+                          value: _vm.form.rule,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "rule", $$v)
+                          },
+                          expression: "form.rule"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("rule")
+                        ? _c("div", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              innerHTML: _vm._s(_vm.form.errors.get("rule"))
                             }
                           })
                         : _vm._e()

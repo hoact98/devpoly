@@ -37,11 +37,9 @@ $config = [
   <script>
     window.config = @json($config);
     @if($auth)
-    window.auth = {!! json_encode($auth); !!};
     window.Permissions = {!! json_encode($auth->allPermissions, true) !!};
     @else
     window.Permissions = [];
-    window.auth = null;
     @endif
   </script>
 

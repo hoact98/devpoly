@@ -29,7 +29,8 @@ class SaveCategoryRequest extends FormRequest
                 'min:2',
                 Rule::unique('challenge_categories')->ignore($this->id)
             ],
-            'description' => ['required','min:4']
+            'description' => ['required','min:4'],
+            'rule' => ['required','min:4'],
         ];
     }
 
@@ -41,6 +42,8 @@ class SaveCategoryRequest extends FormRequest
             'name.unique' => "Tên danh mục đã tồn tại",
             'description.required' => "Hãy nhập mô tả",
             'description.min' => "Ít nhất có 2 ký tự",
+            'rule.required' => "Hãy nhập quy tắc",
+            'rule.min' => "Ít nhất có 2 ký tự",
         ];
     }
 }

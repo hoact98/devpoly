@@ -76,6 +76,7 @@ class ChallengeCategoryController extends Controller
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->input('description'),
+            'rule' => $request->input('rule'),
             'image'=>$imageName
         ]);
         $cate->save();
@@ -121,6 +122,7 @@ class ChallengeCategoryController extends Controller
         $cate->name = $request->name;
         $cate->slug = $slug;
         $cate->description = $request->description;
+        $cate->rule = $request->rule;
         $cate->image = $imageName;
         $cate->save();
 
