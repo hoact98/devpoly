@@ -8,8 +8,6 @@ use App\Models\ChatRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
 use App\Events\PrivateMessageSent;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Broadcast;
 
 class ChatController extends Controller
 {
@@ -58,14 +56,12 @@ class ChatController extends Controller
             $newMessage->user_id  = Auth::id();
             $newMessage->chat_room_id = $roomId;
             $newMessage->image = $filename;
-            $newMessage->time = Carbon::now();
             $newMessage->save();
         }else{
             $newMessage = new ChatMessage;
             $newMessage->user_id  = Auth::id();
             $newMessage->chat_room_id = $roomId;
             $newMessage->message = $request->message;
-            $newMessage->time = Carbon::now();
             $newMessage->save();
         }
         broadcast(new NewChatMessage($newMessage))->toOthers();
@@ -85,14 +81,12 @@ class ChatController extends Controller
             $message->user_id  = Auth::id();
             $message->receiver_id = $id;
             $message->image = $filename;
-            $message->time = Carbon::now();
             $message->save();
         }else{
             $message = new ChatMessage;
             $message->user_id  = Auth::id();
             $message->receiver_id = $id;
             $message->message = $request->message;
-            $message->time = Carbon::now();
             $message->save();
         }
 

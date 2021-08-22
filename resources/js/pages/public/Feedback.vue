@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                         <div class="feedback-time">
-                                            <span>an hour ago</span>
+                                            <span v-if="feedback.time">{{feedback.time}}</span>
                                         </div>
                                     </div>
                                     <div v-if="feedback.parent_id>0">
@@ -138,7 +138,7 @@
                                         </div>
                                     </div>
                                      <div class="feedback-time">
-                                        <span>54 minutes ago</span>
+                                        <span v-if="feedback.time">{{feedback.time}}</span>
                                     </div>
                                     </div>
                                 </div>

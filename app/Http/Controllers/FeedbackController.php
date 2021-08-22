@@ -117,6 +117,7 @@ class FeedbackController extends Controller
    public function delete($id)
    {
        $feedback = Feedback::find($id);
+       $feedbacks = Feedback::where('parent_id','=',$feedback->id)->delete();
        $feedback->delete();
 
        return response()->json(['status'=>'success','message'=>'The feedback successfully deleted','data'=>$feedback],200);

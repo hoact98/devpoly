@@ -4516,8 +4516,14 @@ var actions = {
       return commit("FETCH_ONE", response.data.data);
     });
   },
-  deletechallengecategory: function deletechallengecategory(_ref6, id) {
-    _objectDestructuringEmpty(_ref6);
+  getOneByChall: function getOneByChall(_ref6, slug) {
+    var commit = _ref6.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("bySlugChall.challengecategory", slug)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    });
+  },
+  deletechallengecategory: function deletechallengecategory(_ref7, id) {
+    _objectDestructuringEmpty(_ref7);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.challengecategory", id)).then(function (response) {
       // this.dispatch("challengecategory/fetch")
@@ -4532,13 +4538,13 @@ var actions = {
       });
     });
   },
-  editchallengecategory: function editchallengecategory(_ref7, data) {
-    _objectDestructuringEmpty(_ref7);
+  editchallengecategory: function editchallengecategory(_ref8, data) {
+    _objectDestructuringEmpty(_ref8);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.challengecategory", data.get('id')), data).then();
   },
-  addChallengeCategory: function addChallengeCategory(_ref8, data) {
-    _objectDestructuringEmpty(_ref8);
+  addChallengeCategory: function addChallengeCategory(_ref9, data) {
+    _objectDestructuringEmpty(_ref9);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.challengecategory"), data).then();
   }

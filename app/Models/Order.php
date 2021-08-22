@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Carbon\CarbonImmutable;
 
 
 class Order extends Model
@@ -57,6 +58,13 @@ class Order extends Model
             ],
         ],
     ];
+    protected $appends = [
+        'time',
+    ];
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

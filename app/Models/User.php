@@ -11,6 +11,8 @@ use Spatie\Permission\Traits\HasRoles;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use Carbon\CarbonImmutable;
+
 class User extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable,HasRoles,LaravelVueDatatableTrait;
@@ -121,7 +123,14 @@ class User extends Authenticatable
 
     protected $appends = [
         'photo_url',
+        'time',
+
     ];
+   
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
 
     /**
      * Get the profile photo URL attribute.

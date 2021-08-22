@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
@@ -19,7 +20,7 @@ class Challenge extends Model
         'image',
         'resources',
         'level',
-        'cate_challen_id'
+        'cate_challen_id',
     ];
     protected $dataTableColumns = [
         'id' => [
@@ -49,6 +50,13 @@ class Challenge extends Model
             ],
         ],
     ];
+    protected $appends = [
+        'time',
+    ];
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
     public function category()
     {
         return $this->belongsTo(ChallengeCategory::class, 'cate_challen_id');

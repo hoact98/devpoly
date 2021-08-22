@@ -29,11 +29,10 @@
               </div>
               
               <div>
-                <span class="solution-time"> in 4 hours </span>
+                <span class="solution-time" v-if="solution.time"> {{solution.time}}</span>
                 <span style="display: inline-block; margin-left: 8px; margin-right: 8px"
                   >.</span
                 >
-                <span class="solution-edit"> edited </span>
               </div>
               
               <div class="solution-detail-des">
@@ -126,30 +125,27 @@
                           </div>
                       </div>
                        <div class="mt-3" v-if="auth">
-                            <button v-if="auth.id == feedback.user_id" @click="editFeeback($event)" type="button" class="edit rounded btn btn-secondary mr-2" style="background-color:#6d2fff">
+                            <button v-if="auth.id == feedback.user_id" ref="btnEdit" @click="editFeedback(index)" type="button" class="edit rounded btn btn-secondary mr-2" style="background-color:#6d2fff">
                               <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
                             <span>Sửa</span>
                             </button>
-                            <button v-if="auth.id == feedback.user_id" type="button" @click="saveFeedback($event)" class="edit rounded btn btn-secondary mr-2 d-none" style="background-color:#6d2fff">
+                            <button v-if="auth.id == feedback.user_id" ref="btnSave" type="button" @click="saveFeedback(index,feedback.id)" class="edit rounded btn btn-secondary mr-2 d-none" style="background-color:#6d2fff">
                                 <i class="ti-save"></i> <span> Lưu</span>
                             </button>
-                            <button v-if="auth.id == feedback.user_id" @click="editFeeback($event)" type="button" class="edit rounded btn btn-secondary">
+                            <button v-if="auth.id == feedback.user_id" @click="removeFeedback(feedback.id)" type="button" class="edit rounded btn btn-secondary">
                               <i class="ti-trash"></i>
                             </button>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-12">
                       <div class="feedback-detail">
-                        <p v-html="feedback.feedback_content"></p>
+                        <p  ref="feedbackContent" v-html="feedback.feedback_content"></p>
                         <div v-if="auth">
-                          <form action="" v-if="auth.id == feedback.user_id" class="d-none">
-                          <textarea
-                            placeholder="Enter your reply"
-                            name=""
-                            class="reply-feedback-content"
-                            cols="30"
-                            rows="4"
-                          ></textarea>
+                          <form action="" ref="formSave" v-if="auth.id == feedback.user_id" class="d-none">
+                         <ckeditor 
+                                  ref="content"
+                                  v-model="feedback.feedback_content"
+                                ></ckeditor>
                         </form>
                         </div>
                       </div>
@@ -157,7 +153,7 @@
                   </div>
                 </div>
                 <div class="feedback-time">
-                  <span>an hour ago</span>
+                  <span v-if="feedback.time">{{feedback.time}}</span>
                 </div>
               </div>
               <div v-if="feedback.parent_id>0">
@@ -212,14 +208,14 @@
                               </div>
                             </div>
                             <div v-if="auth">
-                              <button v-if="auth.id == feedback.user_id" @click="editFeeback($event)" type="button" class="edit button-block">
+                              <button v-if="auth.id == feedback.user_id" ref="btnEdit" @click="editFeedback(index)" type="button" class="edit button-block">
                                 <div class="icon">
                                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
                               </div>
                               <span>Sửa</span>
                               </button>
 
-                            <button v-if="auth.id == feedback.user_id" type="button" @click="saveFeedback($event)" class="edit button-block d-none">
+                            <button v-if="auth.id == feedback.user_id" ref="btnSave" type="button" @click="saveFeedback(index,feedback.id)" class="edit button-block d-none">
                                 <div class="icon">
                                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.59 3.59c-.38-.38-.89-.59-1.42-.59H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.83c0-.53-.21-1.04-.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-.9-2-2s.9-2 2-2h6c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
                                 </div>
@@ -230,16 +226,14 @@
 
                         <div class="col-lg-9 col-md-12">
                           <div class="reply-feedback-detail">
-                              <p v-html="feedback.feedback_content"></p>
+                              <p ref="feedbackContent" v-html="feedback.feedback_content"></p>
                               <div v-if="auth">
-                                <form action="" v-if="auth.id == feedback.user_id" class="d-none">
-                                <textarea
-                                  placeholder="Enter your reply"
-                                  name=""
-                                  class="reply-feedback-content"
-                                  cols="30"
-                                  rows="4"
-                                ></textarea>
+                                <form action="" ref="formSave" v-if="auth.id == feedback.user_id" class="d-none">
+                                
+                                <ckeditor
+                                  ref="content"
+                                  v-model="feedback.feedback_content"
+                                ></ckeditor>
                               </form>
                               </div>
                                
@@ -249,7 +243,7 @@
                     </div>
                   </div>
                   <div class="feedback-time">
-                    <span>54 minutes ago</span>
+                      <span v-if="feedback.time">{{feedback.time}}</span>
                   </div>
               </div>
               <!-- Thêm feedback theo parent_id -->
@@ -260,13 +254,9 @@
                   <div class="col-11">
                     <div class="row">
                       <div class="col-12">
-                        <form  @submit.prevent="replyFeedback"
+                        <form  @submit.prevent="replyFeedback(index,feedback.parent_id==0 ? feedback.id: feedback.parent_id)"
                           @keydown="form.onKeydown($event)">
-                          <ckeditor
-                          name="feedback_content"
-                          v-model="form.feedback_content"
-                          :class="{ 'is-invalid': form.errors.has('feedback_content') }"
-                        ></ckeditor>
+                              <textarea class="form-control" ref="feedback_content" style="height: 100px"></textarea>
                         <div
                           class="text-danger"
                           v-if="form.errors.has('feedback_content')"
@@ -286,13 +276,10 @@
                 <div class="col-11">
                   <div class="row">
                     <div class="col-12">
-                      <form  @submit.prevent="replyFeedback"
+                      <form  @submit.prevent="replyFeedback(index,feedback.parent_id==0 ? feedback.id: feedback.parent_id)"
                         @keydown="form.onKeydown($event)">
-                        <ckeditor
-                        name="feedback_content"
-                        v-model="form.feedback_content"
-                        :class="{ 'is-invalid': form.errors.has('feedback_content') }"
-                      ></ckeditor>
+                       
+                      <textarea class="form-control" ref="feedback_content" style="height: 100px"></textarea>
                       <div
                         class="text-danger"
                         v-if="form.errors.has('feedback_content')"
@@ -554,6 +541,7 @@ export default {
         await this.form.post(route('create.feedback',[0,this.$route.params.id]))
         .then(response => {
           if(response.data.status == 'success'){
+            this.getFeedback()
             this.form.feedback_content="";
                 Swal.fire(
                     'Thành công',
@@ -570,8 +558,29 @@ export default {
             });
           });
     },
-    async replyFeedback() {
-        
+    async replyFeedback(index,id) {
+       this.form.feedback_content = this.$refs.feedback_content[index].value;
+       console.log(this.$refs.feedback_content[index].value);
+       console.log('id',id);
+        await this.form.post(route('create.feedback',[id,this.$route.params.id]))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.getFeedback()
+            this.form.feedback_content="";
+                Swal.fire(
+                    'Thành công',
+                    'Bình luận đang chờ duyệt.',
+                    'success'
+                );
+            }
+        })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          });
     },
     upvoteSolution(){
         axios.post(route('upvote.solution',this.$route.params.id))
@@ -586,12 +595,42 @@ export default {
             //Handle Errors
         })
     },
-    saveFeedback(event){
-      // event.srcElement.style = 'display: none';console.log(event)
-      // document.getElementById('foo').style = 'display: none';
+    saveFeedback(index,id){
+       this.$refs.btnEdit[index].classList.remove("d-none");
+       this.$refs.feedbackContent[index].classList.remove("d-none");
+       this.$refs.btnSave[index].style.display = "none";
+       this.$refs.btnSave[index].classList.add('d-none');
+       this.$refs.formSave[index].classList.add('d-none');
+       this.form.feedback_content = this.$refs.content[index].value;
+       this.form.post(route('update.feedback',id))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.form.feedback_content="";
+                Swal.fire(
+                    'Thành công',
+                    'Sửa bình luận thành công.',
+                    'success'
+                );
+            }
+        })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Đã xảy ra lỗi!",
+            });
+          });
     },
-    editFeeback(event){
-    //  document.getElementById('foo').style = 'display: none';
+    editFeedback(index){
+       this.$refs.btnEdit[index].classList.add('d-none');
+       this.$refs.feedbackContent[index].classList.add('d-none');
+       this.$refs.btnSave[index].classList.remove("d-none");
+       this.$refs.formSave[index].classList.remove("d-none");
+    },
+   async removeFeedback(id){
+      this.$store.dispatch('feedback/deleteFeedback', id).then(
+         await this.getFeedback()
+      )
     },
     checkUpvote(){
       axios.get(route('checkUpvote.solution',this.$route.params.id))
@@ -623,4 +662,5 @@ export default {
 
 <style lang="scss">
 @import "../../../sass/solution-detail.scss";
+
 </style>

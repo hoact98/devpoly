@@ -192,4 +192,10 @@ class ChallengeCategoryController extends Controller
             'data' => $data,
         ], 200);
     }  
+    public function getCategoryByChall($slug)
+    {   
+        $chall = Challenge::where('slug','=', $slug)->first();
+        $cate = ChallengeCategory::find($chall->cate_challen_id);
+        return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$cate],200);
+    }
 }

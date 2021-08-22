@@ -4,8 +4,8 @@
                     <div class="overview row">
                         <div class="description col-xl-8 col-lg-6">
                             <div class="container-content" v-if="data.category">
-                                <div class="desc-time">
-                                    Latest Update: February 10, 2021
+                                <div class="desc-time" v-if="data.category.time">
+                                   Cập nhật mới nhất: {{data.category.time}}
                                 </div>
                                 <div class="desc-title">
                                     <h1>{{data.category.name}}</h1>

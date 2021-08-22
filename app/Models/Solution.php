@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Carbon\CarbonImmutable;
 
 class Solution extends Model
 {
@@ -82,6 +83,13 @@ class Solution extends Model
             ],
         ],
     ];
+    protected $appends = [
+        'time',
+    ];
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');

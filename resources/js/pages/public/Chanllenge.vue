@@ -120,7 +120,7 @@ export default {
     this.$store.dispatch("challenge/fet_One_Data", this.$route.params.slug);
     this.$store.dispatch('auth/fetchUser');
     this.checkUserChall();
-
+    this.$store.dispatch("challengecategory/getOneByChall",  this.$route.params.slug);
   },
   methods: {
     downloadResource(){
@@ -135,7 +135,6 @@ export default {
     checkUserChall(){
       axios.get(route('check.challenge',this.$route.params.slug)).then(response => {
         this.check = response.data.data;
-        this.$store.dispatch("challengecategory/fetchOne", this.data.cate_challen_id);
         })
         // eslint-disable-next-line
         .catch(errors => {

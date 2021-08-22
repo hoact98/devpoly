@@ -54,6 +54,11 @@ export const actions = {
             .get(route("bySlug.challengecategory", slug))
             .then(response => commit("FETCH_ONE", response.data.data))
     },
+    getOneByChall({ commit }, slug) {
+        axios
+            .get(route("bySlugChall.challengecategory", slug))
+            .then(response => commit("FETCH_ONE", response.data.data))
+    },
     deletechallengecategory({}, id) {
         axios
             .delete(route("delete.challengecategory", id))

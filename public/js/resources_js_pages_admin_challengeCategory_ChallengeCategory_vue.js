@@ -86,6 +86,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     data: {},
@@ -790,20 +794,43 @@ var render = function() {
     [
       _vm.name == "add.feedback"
         ? _c(
-            "router-link",
-            {
-              staticClass: "btn btn-info",
-              attrs: {
-                to: {
-                  name: _vm.name,
-                  params: {
-                    parent_id: _vm.data.id,
-                    solution_id: _vm.data.solution_id
-                  }
-                }
-              }
-            },
-            [_vm._v("Trả lời\n     ")]
+            "span",
+            [
+              _vm.data.parent_id == 0
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: {
+                        to: {
+                          name: _vm.name,
+                          params: {
+                            parent_id: _vm.data.id,
+                            solution_id: _vm.data.solution_id
+                          }
+                        }
+                      }
+                    },
+                    [_vm._v("Trả lời\n         ")]
+                  )
+                : _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: {
+                        to: {
+                          name: _vm.name,
+                          params: {
+                            parent_id: _vm.data.parent_id,
+                            solution_id: _vm.data.solution_id
+                          }
+                        }
+                      }
+                    },
+                    [_vm._v("Trả lời\n         ")]
+                  )
+            ],
+            1
           )
         : _c(
             "router-link",

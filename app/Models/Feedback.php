@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Carbon\CarbonImmutable;
 
 class Feedback extends Model
 {
@@ -25,6 +26,9 @@ class Feedback extends Model
         ],
         'is_approved' => [
             'searchable' => true,
+        ],
+        'parent_id' => [
+            'searchable' => false,
         ]
     ];
     protected $dataTableRelationships = [
@@ -63,6 +67,13 @@ class Feedback extends Model
             ],
         ],
     ];
+    protected $appends = [
+        'time',
+    ];
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
     public function solutions()
     {
     return $this->belongsTo(Solution::class, 'solution_id');
