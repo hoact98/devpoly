@@ -39,8 +39,15 @@ const routes = [
         path: '/chat',
         alias: '',
         meta: {layout: 'home',middleware: auth_client},
-        component: page("public/Chat/container.vue"),
+        component: page("public/chat/Chat.vue"),
         name: 'chat',
+    },
+    {
+        path: '/private-chat',
+        alias: '',
+        meta: {layout: 'home',middleware: auth_client},
+        component: page("public/chat/PrivateChat.vue"),
+        name: 'private.chat',
     },
     {
         path: '/overview/:slug',

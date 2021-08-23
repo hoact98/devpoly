@@ -3728,8 +3728,17 @@ var routes = [{
     layout: 'home',
     middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  component: page("public/Chat/container.vue"),
+  component: page("public/chat/Chat.vue"),
   name: 'chat'
+}, {
+  path: '/private-chat',
+  alias: '',
+  meta: {
+    layout: 'home',
+    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  component: page("public/chat/PrivateChat.vue"),
+  name: 'private.chat'
 }, {
   path: '/overview/:slug',
   alias: '',
@@ -92541,46 +92550,6 @@ var map = {
 		"./resources/js/pages/public/Chanllenge.vue",
 		"resources_js_pages_public_Chanllenge_vue"
 	],
-	"./public/Chat/chatRoomSelection": [
-		"./resources/js/pages/public/Chat/chatRoomSelection.vue",
-		"resources_js_pages_public_Chat_chatRoomSelection_vue"
-	],
-	"./public/Chat/chatRoomSelection.vue": [
-		"./resources/js/pages/public/Chat/chatRoomSelection.vue",
-		"resources_js_pages_public_Chat_chatRoomSelection_vue"
-	],
-	"./public/Chat/container": [
-		"./resources/js/pages/public/Chat/container.vue",
-		"resources_js_pages_public_Chat_container_vue"
-	],
-	"./public/Chat/container.vue": [
-		"./resources/js/pages/public/Chat/container.vue",
-		"resources_js_pages_public_Chat_container_vue"
-	],
-	"./public/Chat/inputMessage": [
-		"./resources/js/pages/public/Chat/inputMessage.vue",
-		"resources_js_pages_public_Chat_inputMessage_vue"
-	],
-	"./public/Chat/inputMessage.vue": [
-		"./resources/js/pages/public/Chat/inputMessage.vue",
-		"resources_js_pages_public_Chat_inputMessage_vue"
-	],
-	"./public/Chat/messageContainer": [
-		"./resources/js/pages/public/Chat/messageContainer.vue",
-		"resources_js_pages_public_Chat_messageContainer_vue"
-	],
-	"./public/Chat/messageContainer.vue": [
-		"./resources/js/pages/public/Chat/messageContainer.vue",
-		"resources_js_pages_public_Chat_messageContainer_vue"
-	],
-	"./public/Chat/messageItem": [
-		"./resources/js/pages/public/Chat/messageItem.vue",
-		"resources_js_pages_public_Chat_messageItem_vue"
-	],
-	"./public/Chat/messageItem.vue": [
-		"./resources/js/pages/public/Chat/messageItem.vue",
-		"resources_js_pages_public_Chat_messageItem_vue"
-	],
 	"./public/Dashboard": [
 		"./resources/js/pages/public/Dashboard.vue",
 		"resources_js_pages_public_Dashboard_vue"
@@ -92676,6 +92645,30 @@ var map = {
 	"./public/SolutionList.vue": [
 		"./resources/js/pages/public/SolutionList.vue",
 		"resources_js_pages_public_SolutionList_vue"
+	],
+	"./public/chat/Chat": [
+		"./resources/js/pages/public/chat/Chat.vue",
+		"resources_js_pages_public_chat_Chat_vue"
+	],
+	"./public/chat/Chat.vue": [
+		"./resources/js/pages/public/chat/Chat.vue",
+		"resources_js_pages_public_chat_Chat_vue"
+	],
+	"./public/chat/Message": [
+		"./resources/js/pages/public/chat/Message.vue",
+		"resources_js_pages_public_chat_Message_vue"
+	],
+	"./public/chat/Message.vue": [
+		"./resources/js/pages/public/chat/Message.vue",
+		"resources_js_pages_public_chat_Message_vue"
+	],
+	"./public/chat/PrivateChat": [
+		"./resources/js/pages/public/chat/PrivateChat.vue",
+		"resources_js_pages_public_chat_PrivateChat_vue"
+	],
+	"./public/chat/PrivateChat.vue": [
+		"./resources/js/pages/public/chat/PrivateChat.vue",
+		"resources_js_pages_public_chat_PrivateChat_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -92847,7 +92840,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Chat_chatRoomSelection_vue":1,"resources_js_pages_public_Chat_container_vue":1,"resources_js_pages_public_Chat_inputMessage_vue":1,"resources_js_pages_public_Chat_messageContainer_vue":1,"resources_js_pages_public_Chat_messageItem_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
