@@ -18,7 +18,7 @@ class CreateChallengeUsersTable extends Migration
             $table->integer('challen_id')->unsigned();
             $table->boolean('status')->default(false);
             $table->timestamps();
-            $table->primary(['user_id', 'challen_id']);
+            $table->string('id')->primary();
             $table->foreign('challen_id')->references('id')->on('challenges')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
