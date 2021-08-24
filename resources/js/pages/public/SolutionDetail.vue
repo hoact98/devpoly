@@ -72,9 +72,9 @@
           </div>
 
           <div class="feedback-wrapper" v-if="feedbacks.length>0">
-            <div class="row">
+            <div class="row feedback-row">
               <div class="col-12" v-for="(feedback,index) in feedbacks" :key="index">
-              <div v-if="feedback.parent_id==0">
+              <div v-if="feedback.parent_id==0"> 
                 <div class="feedback-content">
                   <div class="row">
                     <div class="col-lg-3 col-md-12 col-md-12">
@@ -353,37 +353,34 @@
                   </div>
                 </div>
 
-                <div class="solution-action">
-                  <div v-if="auth">
-                    <button v-if="checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
-                      <div class="icon">
-                    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
-                    </div>
-                    <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
-                  </button>
-                    <button v-if="!checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%;">
-                      <div class="icon">
-                    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
-                    </div>
-                    <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
-                  </button>
+                <div v-if="auth">
+                  <button v-if="checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                    <div class="icon">
+                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                   </div>
-                  <div v-else>
-                    <div class="button-block">
-                      <div class="icon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
-                    </div> 
-                          <span v-if="solution.upvote">{{solution.upvote.length==0?'Thích':solution.upvote.length}}</span>
-                    </div>
+                  <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                </button>
+                  <button v-if="!checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%;">
+                    <div class="icon">
+                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                   </div>
-                    <a href="#feedback">
-                      <div class="feedback button-block mt-2">
-                      <i class="ti-comment"></i>
-                    <span v-if="solution.feedbacks" v-html="solution.feedbacks.length == 0 ?'Phản hồi':solution.feedbacks.length"></span>
-                  </div>
-
-                    </a>
+                  <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                </button>
                 </div>
+                <div v-else>
+                  <div class="button-block">
+                    <div class="icon">
+                      <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                  </div> 
+                        <span v-if="solution.upvote">{{solution.upvote.length==0?'Thích':solution.upvote.length}}</span>
+                  </div>
+                </div>
+                  <a href="#feedback">
+                    <div class="feedback button-block mt-2">
+                    <i class="ti-comment"></i>
+                  <span class="pl-2" v-if="solution.feedbacks" v-html="solution.feedbacks.length == 0 ?' Phản hồi': solution.feedbacks.length"></span>
+                </div>
+                  </a>
               </div>
             </div>
           </div>

@@ -61,13 +61,13 @@
                 <div v-if="auth">
                   <div v-if="solution.upvote.length>0">
                       <div v-for="(upvote,index) in solution.upvote" :key="index">
-                          <button v-if="upvote.user_id==auth.id" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                          <button v-if="upvote.user_id==auth.id" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block-solution" style="width:100%; background: #1bb21b;">
                               <div class="icon">
                             <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                             </div>
                             <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
                           </button>
-                          <button v-else-if="upvote.user_id!=auth.id && solution.upvote.length==index+1" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%;">
+                          <button v-else-if="upvote.user_id!=auth.id && solution.upvote.length==index+1" @click="upvoteSolution(solution.id)" type="button" class="upvote button-block-solution" style="width:100%;">
                               <div class="icon">
                             <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                             </div>
@@ -75,14 +75,14 @@
                           </button>
                       </div>
                   </div>
-                  <button v-else @click="upvoteSolution(solution.id)" type="button" class="upvote button-block" style="width:100%;">
+                  <button v-else @click="upvoteSolution(solution.id)" type="button" class="upvote button-block-solution" style="width:100%;">
                       <div class="icon">
                     <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                     </div>
                     <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
                   </button>
                 </div>
-                <div v-else class="button-block">
+                <div v-else class="button-block-solution">
                   <div class="icon">
                     <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                   </div> 
@@ -91,9 +91,9 @@
                 <router-link
               :to="{ name: 'showDetailSolution', params: { id: solution.id } }" style="width:48%; margin-left: 10px;"
             >
-                 <div class="feedback button-block" style="width: 100%;">
+                 <div class="button-block-solution" style="width: 100%;">
                       <i class="ti-comment"></i>
-                    <span v-if="solution.feedbacks" v-html="solution.feedbacks.length"></span>
+                    <span class="pl-2" v-if="solution.feedbacks" v-html="solution.feedbacks.length"></span>
                   </div>
                 </router-link>
               </div>

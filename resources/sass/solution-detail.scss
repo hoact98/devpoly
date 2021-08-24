@@ -106,6 +106,10 @@
     border-radius: var(--border-radius-main);
 }
 
+.feedback-row {
+    width: 100%;
+}
+
 .button-block {
     font-weight: 600;
     border: 1px solid var(--border-color-grey);
@@ -232,12 +236,6 @@
     color: var(--grey-color);
 }
 
-.challenge-info {
-    padding: 16px;
-    border-radius: var(--border-radius-main);
-    background-color: var(--black-bold);
-}
-
 .author-info {
     height: 100%;
 }
@@ -258,11 +256,6 @@
     width: 100%;
     border-radius: var(--border-radius-main);
     margin: 16px 0;
-}
-
-.challenge-title p {
-    font-size: 1.4rem;
-    font-family: 'Poppins', sans-serif;
 }
 
 .author-info {
@@ -459,8 +452,7 @@
     transition: 0.3s;
 }
 
-.upvote:hover,
-.feedback:hover {
+.upvote:hover {
     cursor: pointer;
     background-color: #32353a;
     border: 1px solid #8d99a7;

@@ -49,13 +49,13 @@
             </ol>
             
             <a v-if="data.design_on_figma" :href="data.design_on_figma" target="_blank">
-              <button class="button-block" style="background: #8d99a7;">
+              <button class="button-block-chall" style="background: #8d99a7;">
                 <img src="/images/figma.png" alt="" width="16">
               <span>Thiết kế</span>
             </button>
             </a>
             <router-link :to="{name: 'addSolution',params:{ id:data.slug}}">
-               <button class="button-block mt-2">
+               <button class="button-block-chall mt-2">
               <span>Gửi giải pháp</span>
             </button>
             </router-link>
@@ -70,7 +70,7 @@
             </ol>
             
             <a v-if="auth" :href="data.resources" download="">
-              <button class="button-block button-download" @click="downloadResource">
+              <button class="button-block-chall button-download" @click="downloadResource">
               <svg
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
                 focusable="false"
@@ -84,7 +84,7 @@
               <span>Bắt đầu và tải xuống</span>
             </button>
             </a>
-            <button v-else class="button-block button-download" style="background-color:#868e96">
+            <button v-else class="button-block-chall button-download" style="background-color:#868e96">
               <svg
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
                 focusable="false"
