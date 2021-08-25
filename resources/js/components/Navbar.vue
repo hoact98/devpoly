@@ -21,112 +21,24 @@
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
-                    <li class="dropdown dropdown-inbox">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <span class="badge badge-primary envelope-badge">9</span>
-                        </a>
+                    <li class="dropdown dropdown-notification" v-if="notification.notifi_new">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o rel" ><span v-if="notification.notifi_new.length>0" class="notify-signal"></span></i></a>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
                             <li class="dropdown-menu-header">
                                 <div>
-                                    <span><strong>9 New</strong> Messages</span>
-                                    <a class="pull-right" href="mailbox.html">view all</a>
+                                    <span><strong>{{notification.notifi_new.length}} </strong> Thông báo mới</span>
+                                    <router-link :to="{ name: 'admin.notification' }" class="pull-right">Xem tất cả</router-link>
                                 </div>
                             </li>
                             <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
                                 <div>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"> </div>Jeanne Gonzalez<small class="text-muted float-right">Just now</small>
-                                                <div class="font-13">Your proposal interested me.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Becky Brooks<small class="text-muted float-right">18 mins</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Frank Cruz<small class="text-muted float-right">18 mins</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="" />
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-strong"></div>Rose Pearson<small class="text-muted float-right">3 hrs</small>
-                                                <div class="font-13">Lorem Ipsum is simply.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown dropdown-notification">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o rel"><span class="notify-signal"></span></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
-                            <li class="dropdown-menu-header">
-                                <div>
-                                    <span><strong>5 New</strong> Notifications</span>
-                                    <a class="pull-right" href="javascript:;">view all</a>
-                                </div>
-                            </li>
-                            <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
-                                <div>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">4 task compiled</div><small class="text-muted">22 mins</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-default badge-big"><i class="fa fa-shopping-basket"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">You have 12 new orders</div><small class="text-muted">40 mins</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <span class="badge badge-danger badge-big"><i class="fa fa-bolt"></i></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-13">Server #7 rebooted</div><small class="text-muted">2 hrs</small></div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item">
+                                    <a class="list-group-item" v-for="noti in notification.notifi_new" :key="noti.id">
                                         <div class="media">
                                             <div class="media-img">
                                                 <span class="badge badge-success badge-big"><i class="fa fa-user"></i></span>
                                             </div>
                                             <div class="media-body">
-                                                <div class="font-13">New user registered</div><small class="text-muted">2 hrs</small></div>
+                                                <div class="font-13">{{noti.title}}</div><small class="text-muted">{{noti.time}}</small></div>
                                         </div>
                                     </a>
                                 </div>
@@ -139,9 +51,10 @@
                             <img v-else :src="user.photo_url"  width="30" height="30"/>
                             <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <router-link :to="{ name: 'admin.profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Profile</router-link>
+                            <router-link :to="{ name: 'admin.profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Hồ sơ</router-link>
+                            <router-link :to="{ name: 'admin.notification' }" class="dropdown-item"><i class="ti-comments mr-3"></i>Thông báo</router-link>
                             <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="javascript:;" @click.prevent="logout"><i class="fa fa-power-off"></i>Logout</a>
+                            <a class="dropdown-item" href="javascript:;" @click.prevent="logout"><i class="fa fa-power-off"></i>Đăng xuất</a>
                         </ul>
                     </li>
                 </ul>
@@ -151,10 +64,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'navbar',
    props: {
         user: {},
+    },
+    computed: mapGetters({
+      notification: 'notification/notification_by_user'
+    }),
+    created () {
+    this.$store.dispatch('notification/notificationByUser');
+    
     },
   methods: {
     async logout () {

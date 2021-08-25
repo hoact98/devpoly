@@ -127,6 +127,12 @@ const routes = [
         name: 'order',
     },
     {
+        path: '/notification',
+        meta: {layout: 'home'},
+        component: page('public/Notification.vue'),
+        name: 'notification',
+    },
+    {
         path: '/admin',
         meta: {layout: 'admin', middleware: auth},
         component: page("admin/dashboard/Dashboard.vue"),
@@ -311,6 +317,30 @@ const routes = [
         meta: {layout: 'admin',middleware: auth},
         component: page("admin/upgrade/EditUpgrade.vue"),
         name: 'edit.upgrade',
+    },
+    {
+        path: '/admin/notifications',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/notification/Notification.vue"),
+        name: 'admin.notifications',
+    },
+    {
+        path: '/admin/notification',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/profile/Notification.vue"),
+        name: 'admin.notification',
+    },
+    {
+        path: '/admin/notification-add',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/notification/AddNotification.vue"),
+        name: 'add.notification',
+    },
+    {
+        path: '/admin/notification-edit/:id',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/notification/EditNotification.vue"),
+        name: 'edit.notification',
     },
     {
         // not found handler

@@ -19,6 +19,8 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <router-link :to="{ name: 'profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Thông tin</router-link>
                                 <li class="dropdown-divider"></li>
+                                <router-link :to="{ name: 'notification' }" class="dropdown-item"><i class="ti-comments mr-3"></i>Thông báo</router-link>
+                                <li class="dropdown-divider"></li>
                                 <router-link :to="{ name: 'homeDashboard' }" class="dropdown-item"><i class="ti-layout-grid2-alt mr-3"></i>Bảng điều khiển</router-link>
                                 <li class="dropdown-divider"></li>
                                 <router-link :to="{ name: 'settings' }" class="dropdown-item"><i class="ti-settings mr-3"></i>Cài đặt</router-link>

@@ -2091,6 +2091,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2162,97 +2163,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navbar',
   props: {
     user: {}
+  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    notification: 'notification/notification_by_user'
+  }),
+  created: function created() {
+    this.$store.dispatch('notification/notificationByUser');
   },
   methods: {
     logout: function logout() {
@@ -2296,11 +2217,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2555,13 +2471,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
-    user: 'auth/user'
+    user: 'auth/user',
+    notification: 'notification/notification_by_user'
   }),
   created: function created() {
     this.$store.dispatch('auth/fetchUser');
+    this.$store.dispatch('notification/notificationByUser');
   },
   methods: {
     logout: function logout() {
@@ -2614,6 +2537,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -3834,6 +3759,13 @@ var routes = [{
   component: page('public/Order.vue'),
   name: 'order'
 }, {
+  path: '/notification',
+  meta: {
+    layout: 'home'
+  },
+  component: page('public/Notification.vue'),
+  name: 'notification'
+}, {
   path: '/admin',
   meta: {
     layout: 'admin',
@@ -4079,6 +4011,38 @@ var routes = [{
   },
   component: page("admin/upgrade/EditUpgrade.vue"),
   name: 'edit.upgrade'
+}, {
+  path: '/admin/notifications',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/notification/Notification.vue"),
+  name: 'admin.notifications'
+}, {
+  path: '/admin/notification',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/profile/Notification.vue"),
+  name: 'admin.notification'
+}, {
+  path: '/admin/notification-add',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/notification/AddNotification.vue"),
+  name: 'add.notification'
+}, {
+  path: '/admin/notification-edit/:id',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/notification/EditNotification.vue"),
+  name: 'edit.notification'
 }, {
   // not found handler
   path: '*',
@@ -4736,6 +4700,105 @@ var actions = {
     _objectDestructuringEmpty(_ref2);
 
     return axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('sendChat'), data).then();
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/notification.js":
+/*!****************************************************!*\
+  !*** ./resources/js/store/modules/notification.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "actions": () => (/* binding */ actions)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+ // state
+
+var state = {
+  notifications: [],
+  notification_by_user: [],
+  notification: {}
+}; // getters
+
+var getters = {
+  notification: function notification(state) {
+    return state.notification;
+  },
+  notifications: function notifications(state) {
+    return state.notifications;
+  },
+  notification_by_user: function notification_by_user(state) {
+    return state.notification_by_user;
+  }
+}; // mutations
+
+var mutations = {
+  FETCH: function FETCH(state, notifications) {
+    state.notifications = notifications;
+  },
+  BY_USER: function BY_USER(state, notification_by_user) {
+    state.notification_by_user = notification_by_user;
+  },
+  FETCH_ONE: function FETCH_ONE(state, notification) {
+    state.notification = notification;
+  }
+}; // actions
+
+var actions = {
+  fetch: function fetch(_ref) {
+    var commit = _ref.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("notifications")).then(function (response) {
+      return commit("FETCH", response.data.data);
+    })["catch"]();
+  },
+  notificationByUser: function notificationByUser(_ref2) {
+    var commit = _ref2.commit;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("byUser.notification")).then(function (response) {
+      return commit("BY_USER", response.data.data);
+    })["catch"]();
+  },
+  fetchOne: function fetchOne(_ref3, id) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.notification", id)).then(function (response) {
+      return commit("FETCH_ONE", response.data.data);
+    })["catch"]();
+  },
+  deleteNotification: function deleteNotification(_ref4, id) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().delete(route("delete.notification", id)).then(function (response) {
+      // this.dispatch("notification/fetch")
+      if (response.data.status == 'success') {
+        Swal.fire('Đã xoá!', 'Xoá thông báo thành công', 'success');
+      }
+    })["catch"](function () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Đã xảy ra lỗi!'
+      });
+    });
+  },
+  editNotification: function editNotification(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.notification", data.get('id')), data).then();
+  },
+  addNotification: function addNotification(_ref6, data) {
+    _objectDestructuringEmpty(_ref6);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.notification"), data).then();
   }
 };
 
@@ -71318,9 +71381,93 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("ul", { staticClass: "nav navbar-toolbar" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
+        _vm.notification.notifi_new
+          ? _c("li", { staticClass: "dropdown dropdown-notification" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link dropdown-toggle",
+                  attrs: { "data-toggle": "dropdown" }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-bell-o rel" }, [
+                    _vm.notification.notifi_new.length > 0
+                      ? _c("span", { staticClass: "notify-signal" })
+                      : _vm._e()
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
+                {
+                  staticClass:
+                    "dropdown-menu dropdown-menu-right dropdown-menu-media"
+                },
+                [
+                  _c("li", { staticClass: "dropdown-menu-header" }, [
+                    _c(
+                      "div",
+                      [
+                        _c("span", [
+                          _c("strong", [
+                            _vm._v(
+                              _vm._s(_vm.notification.notifi_new.length) + " "
+                            )
+                          ]),
+                          _vm._v(" Thông báo mới")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "pull-right",
+                            attrs: { to: { name: "admin.notification" } }
+                          },
+                          [_vm._v("Xem tất cả")]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "list-group list-group-divider scroller",
+                      attrs: { "data-height": "240px", "data-color": "#71808f" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        _vm._l(_vm.notification.notifi_new, function(noti) {
+                          return _c(
+                            "a",
+                            { key: noti.id, staticClass: "list-group-item" },
+                            [
+                              _c("div", { staticClass: "media" }, [
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media-body" }, [
+                                  _c("div", { staticClass: "font-13" }, [
+                                    _vm._v(_vm._s(noti.title))
+                                  ]),
+                                  _c("small", { staticClass: "text-muted" }, [
+                                    _vm._v(_vm._s(noti.time))
+                                  ])
+                                ])
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm.user
           ? _c("li", { staticClass: "dropdown dropdown-user" }, [
@@ -71365,7 +71512,19 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "fa fa-user mr-3" }),
-                      _vm._v("Profile")
+                      _vm._v("Hồ sơ")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: { to: { name: "admin.notification" } }
+                    },
+                    [
+                      _c("i", { staticClass: "ti-comments mr-3" }),
+                      _vm._v("Thông báo")
                     ]
                   ),
                   _vm._v(" "),
@@ -71385,7 +71544,7 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "fa fa-power-off" }),
-                      _vm._v("Logout")
+                      _vm._v("Đăng xuất")
                     ]
                   )
                 ],
@@ -71412,272 +71571,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "dropdown dropdown-inbox" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link dropdown-toggle",
-          attrs: { "data-toggle": "dropdown" }
-        },
-        [
-          _c("i", { staticClass: "fa fa-envelope-o" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "badge badge-primary envelope-badge" }, [
-            _vm._v("9")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "ul",
-        {
-          staticClass: "dropdown-menu dropdown-menu-right dropdown-menu-media"
-        },
-        [
-          _c("li", { staticClass: "dropdown-menu-header" }, [
-            _c("div", [
-              _c("span", [
-                _c("strong", [_vm._v("9 New")]),
-                _vm._v(" Messages")
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "pull-right", attrs: { href: "mailbox.html" } },
-                [_vm._v("view all")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "list-group list-group-divider scroller",
-              attrs: { "data-height": "240px", "data-color": "#71808f" }
-            },
-            [
-              _c("div", [
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c("img", { attrs: { src: "" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-strong" }),
-                      _vm._v("Jeanne Gonzalez"),
-                      _c("small", { staticClass: "text-muted float-right" }, [
-                        _vm._v("Just now")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("Your proposal interested me.")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c("img", { attrs: { src: "" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-strong" }),
-                      _vm._v("Becky Brooks"),
-                      _c("small", { staticClass: "text-muted float-right" }, [
-                        _vm._v("18 mins")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("Lorem Ipsum is simply.")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c("img", { attrs: { src: "" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-strong" }),
-                      _vm._v("Frank Cruz"),
-                      _c("small", { staticClass: "text-muted float-right" }, [
-                        _vm._v("18 mins")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("Lorem Ipsum is simply.")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c("img", { attrs: { src: "" } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-strong" }),
-                      _vm._v("Rose Pearson"),
-                      _c("small", { staticClass: "text-muted float-right" }, [
-                        _vm._v("3 hrs")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("Lorem Ipsum is simply.")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "dropdown dropdown-notification" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link dropdown-toggle",
-          attrs: { "data-toggle": "dropdown" }
-        },
-        [
-          _c("i", { staticClass: "fa fa-bell-o rel" }, [
-            _c("span", { staticClass: "notify-signal" })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "ul",
-        {
-          staticClass: "dropdown-menu dropdown-menu-right dropdown-menu-media"
-        },
-        [
-          _c("li", { staticClass: "dropdown-menu-header" }, [
-            _c("div", [
-              _c("span", [
-                _c("strong", [_vm._v("5 New")]),
-                _vm._v(" Notifications")
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "pull-right", attrs: { href: "javascript:;" } },
-                [_vm._v("view all")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "list-group list-group-divider scroller",
-              attrs: { "data-height": "240px", "data-color": "#71808f" }
-            },
-            [
-              _c("div", [
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c(
-                        "span",
-                        { staticClass: "badge badge-success badge-big" },
-                        [_c("i", { staticClass: "fa fa-check" })]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("4 task compiled")
-                      ]),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("22 mins")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c(
-                        "span",
-                        { staticClass: "badge badge-default badge-big" },
-                        [_c("i", { staticClass: "fa fa-shopping-basket" })]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("You have 12 new orders")
-                      ]),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("40 mins")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c(
-                        "span",
-                        { staticClass: "badge badge-danger badge-big" },
-                        [_c("i", { staticClass: "fa fa-bolt" })]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("Server #7 rebooted")
-                      ]),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("2 hrs")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-img" }, [
-                      _c(
-                        "span",
-                        { staticClass: "badge badge-success badge-big" },
-                        [_c("i", { staticClass: "fa fa-user" })]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c("div", { staticClass: "font-13" }, [
-                        _vm._v("New user registered")
-                      ]),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("2 hrs")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]
-      )
+    return _c("div", { staticClass: "media-img" }, [
+      _c("span", { staticClass: "badge badge-success badge-big" }, [
+        _c("i", { staticClass: "fa fa-user" })
+      ])
     ])
   }
 ]
@@ -72005,7 +71902,49 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(3)
+        _c("li", [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav-2-level collapse" }, [
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "admin.notifications" } }
+                  },
+                  [
+                    _vm._v(
+                      "\n                               Danh sách\n                               "
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "add.notification" } }
+                  },
+                  [
+                    _vm._v(
+                      "\n                               Thêm thông báo\n                               "
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ])
       ])
     ])
   ])
@@ -72048,36 +71987,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "javascript:;" } }, [
-        _c("i", { staticClass: "sidebar-item-icon fa fa-sitemap" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "nav-label" }, [_vm._v("Menu Levels")]),
-        _c("i", { staticClass: "fa fa-angle-left arrow" })
-      ]),
+    return _c("a", { attrs: { href: "javascript:;" } }, [
+      _c("i", { staticClass: "sidebar-item-icon ti-comments" }),
       _vm._v(" "),
-      _c("ul", { staticClass: "nav-2-level collapse" }, [
-        _c("li", [
-          _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("Level 2")])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "javascript:;" } }, [
-            _c("span", { staticClass: "nav-label" }, [_vm._v("Level 2")]),
-            _c("i", { staticClass: "fa fa-angle-left arrow" })
-          ]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "nav-3-level collapse" }, [
-            _c("li", [
-              _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("Level 3")])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "javascript:;" } }, [_vm._v("Level 3")])
-            ])
-          ])
-        ])
-      ])
+      _c("span", { staticClass: "nav-label" }, [_vm._v("Thông báo")]),
+      _c("i", { staticClass: "fa fa-angle-left arrow" })
     ])
   }
 ]
@@ -72220,6 +72134,28 @@ var render = function() {
               },
               [
                 _c("ul", { staticClass: "nav navbar-toolbar" }, [
+                  _c(
+                    "li",
+                    { staticClass: "dropdown dropdown-user" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: { name: "notification" } }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-bell-o rel" }, [
+                            _vm.notification.notifi_new.length > 0
+                              ? _c("span", { staticClass: "notify-signal" })
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
                   _vm.user
                     ? _c("li", { staticClass: "dropdown dropdown-user" }, [
                         _c(
@@ -72266,6 +72202,20 @@ var render = function() {
                               [
                                 _c("i", { staticClass: "fa fa-user mr-3" }),
                                 _vm._v("Thông tin")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "notification" } }
+                              },
+                              [
+                                _c("i", { staticClass: "ti-comments mr-3" }),
+                                _vm._v("Thông báo")
                               ]
                             ),
                             _vm._v(" "),
@@ -72452,6 +72402,20 @@ var render = function() {
                               [
                                 _c("i", { staticClass: "fa fa-user mr-3" }),
                                 _vm._v("Thông tin")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { to: { name: "notification" } }
+                              },
+                              [
+                                _c("i", { staticClass: "ti-comments mr-3" }),
+                                _vm._v("Thông báo")
                               ]
                             ),
                             _vm._v(" "),
@@ -92342,29 +92306,29 @@ var map = {
 		"./resources/js/pages/admin/feedback/Feedback.vue",
 		"resources_js_pages_admin_feedback_Feedback_vue"
 	],
-	"./admin/mentor/AddMentor": [
-		"./resources/js/pages/admin/mentor/AddMentor.vue",
-		"resources_js_pages_admin_mentor_AddMentor_vue"
+	"./admin/notification/AddNotification": [
+		"./resources/js/pages/admin/notification/AddNotification.vue",
+		"resources_js_pages_admin_notification_AddNotification_vue"
 	],
-	"./admin/mentor/AddMentor.vue": [
-		"./resources/js/pages/admin/mentor/AddMentor.vue",
-		"resources_js_pages_admin_mentor_AddMentor_vue"
+	"./admin/notification/AddNotification.vue": [
+		"./resources/js/pages/admin/notification/AddNotification.vue",
+		"resources_js_pages_admin_notification_AddNotification_vue"
 	],
-	"./admin/mentor/EditMentor": [
-		"./resources/js/pages/admin/mentor/EditMentor.vue",
-		"resources_js_pages_admin_mentor_EditMentor_vue"
+	"./admin/notification/EditNotification": [
+		"./resources/js/pages/admin/notification/EditNotification.vue",
+		"resources_js_pages_admin_notification_EditNotification_vue"
 	],
-	"./admin/mentor/EditMentor.vue": [
-		"./resources/js/pages/admin/mentor/EditMentor.vue",
-		"resources_js_pages_admin_mentor_EditMentor_vue"
+	"./admin/notification/EditNotification.vue": [
+		"./resources/js/pages/admin/notification/EditNotification.vue",
+		"resources_js_pages_admin_notification_EditNotification_vue"
 	],
-	"./admin/mentor/Mentor": [
-		"./resources/js/pages/admin/mentor/Mentor.vue",
-		"resources_js_pages_admin_mentor_Mentor_vue"
+	"./admin/notification/Notification": [
+		"./resources/js/pages/admin/notification/Notification.vue",
+		"resources_js_pages_admin_notification_Notification_vue"
 	],
-	"./admin/mentor/Mentor.vue": [
-		"./resources/js/pages/admin/mentor/Mentor.vue",
-		"resources_js_pages_admin_mentor_Mentor_vue"
+	"./admin/notification/Notification.vue": [
+		"./resources/js/pages/admin/notification/Notification.vue",
+		"resources_js_pages_admin_notification_Notification_vue"
 	],
 	"./admin/order/EditOrder": [
 		"./resources/js/pages/admin/order/EditOrder.vue",
@@ -92405,6 +92369,14 @@ var map = {
 	"./admin/permission/Permission.vue": [
 		"./resources/js/pages/admin/permission/Permission.vue",
 		"resources_js_pages_admin_permission_Permission_vue"
+	],
+	"./admin/profile/Notification": [
+		"./resources/js/pages/admin/profile/Notification.vue",
+		"resources_js_pages_admin_profile_Notification_vue"
+	],
+	"./admin/profile/Notification.vue": [
+		"./resources/js/pages/admin/profile/Notification.vue",
+		"resources_js_pages_admin_profile_Notification_vue"
 	],
 	"./admin/profile/ProfileAdmin": [
 		"./resources/js/pages/admin/profile/ProfileAdmin.vue",
@@ -92582,6 +92554,14 @@ var map = {
 		"./resources/js/pages/public/Home.vue",
 		"resources_js_pages_public_Home_vue"
 	],
+	"./public/Notification": [
+		"./resources/js/pages/public/Notification.vue",
+		"resources_js_pages_public_Notification_vue"
+	],
+	"./public/Notification.vue": [
+		"./resources/js/pages/public/Notification.vue",
+		"resources_js_pages_public_Notification_vue"
+	],
 	"./public/Order": [
 		"./resources/js/pages/public/Order.vue",
 		"resources_js_pages_public_Order_vue"
@@ -92703,6 +92683,7 @@ var map = {
 	"./challengecategory.js": "./resources/js/store/modules/challengecategory.js",
 	"./feedback.js": "./resources/js/store/modules/feedback.js",
 	"./message.js": "./resources/js/store/modules/message.js",
+	"./notification.js": "./resources/js/store/modules/notification.js",
 	"./order.js": "./resources/js/store/modules/order.js",
 	"./permission.js": "./resources/js/store/modules/permission.js",
 	"./role.js": "./resources/js/store/modules/role.js",
@@ -92840,7 +92821,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_notification_AddNotification_vue":1,"resources_js_pages_admin_notification_EditNotification_vue":1,"resources_js_pages_admin_notification_Notification_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_Notification_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Notification_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

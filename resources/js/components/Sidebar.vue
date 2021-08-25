@@ -109,23 +109,18 @@
                         </router-link>
                     </li>
                     <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-sitemap"></i>
-                            <span class="nav-label">Menu Levels</span><i class="fa fa-angle-left arrow"></i></a>
+                        <a href="javascript:;"><i class="sidebar-item-icon ti-comments"></i>
+                            <span class="nav-label">Thông báo</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="javascript:;">Level 2</a>
+                                <router-link :to="{name: 'admin.notifications'}" class="nav-link">
+                                Danh sách
+                                </router-link>
                             </li>
                             <li>
-                                <a href="javascript:;">
-                                    <span class="nav-label">Level 2</span><i class="fa fa-angle-left arrow"></i></a>
-                                <ul class="nav-3-level collapse">
-                                    <li>
-                                        <a href="javascript:;">Level 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">Level 3</a>
-                                    </li>
-                                </ul>
+                               <router-link :to="{name: 'add.notification'}" class="nav-link">
+                                Thêm thông báo
+                                </router-link>
                             </li>
                         </ul>
                     </li>

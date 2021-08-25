@@ -12,12 +12,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for dev-poly
-DROP DATABASE IF EXISTS `dev-poly`;
-CREATE DATABASE IF NOT EXISTS `dev-poly` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `dev-poly`;
+-- Dumping database structure for laravel-vue
+DROP DATABASE IF EXISTS `laravel-vue`;
+CREATE DATABASE IF NOT EXISTS `laravel-vue` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `laravel-vue`;
 
--- Dumping structure for table dev-poly.challenges
+-- Dumping structure for table laravel-vue.challenges
 DROP TABLE IF EXISTS `challenges`;
 CREATE TABLE IF NOT EXISTS `challenges` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `challenges` (
   CONSTRAINT `challenges_cate_challen_id_foreign` FOREIGN KEY (`cate_challen_id`) REFERENCES `challenge_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.challenges: ~12 rows (approximately)
+-- Dumping data for table laravel-vue.challenges: ~12 rows (approximately)
 DELETE FROM `challenges`;
 /*!40000 ALTER TABLE `challenges` DISABLE KEYS */;
 INSERT INTO `challenges` (`id`, `title`, `slug`, `description`, `language`, `link_figma`, `design_on_figma`, `image`, `resources`, `level`, `cate_challen_id`, `created_at`, `updated_at`) VALUES
@@ -57,10 +57,10 @@ INSERT INTO `challenges` (`id`, `title`, `slug`, `description`, `language`, `lin
 	(9, 'Todo app', 'todo-app', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo một ứng dụng todo theo c&aacute;c thiết kế đ&atilde; cho.&nbsp;Sử dụng c&aacute;c thư viện Front-end như React hoặc Vue.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng dưới đ&acirc;y:</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể th&ecirc;m một nhiệm vụ mới</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể ho&agrave;n th&agrave;nh một nhiệm vụ</li>\n	<li><strong>Sử dụng c&acirc;u chuyện:</strong>&nbsp;T&ocirc;i c&oacute; thể chuyển đổi giữa&nbsp;<code>All</code>,&nbsp;<code>Active&nbsp;</code>v&agrave;&nbsp;<code>Completed</code></li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể x&oacute;a một hoặc tất cả c&aacute;c nhiệm vụ trong&nbsp;<code>Completed</code>tab</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng (t&ugrave;y chọn):</strong>&nbsp;Lưu trữ dữ liệu trong bộ nhớ cục bộ m&agrave; khi t&ocirc;i l&agrave;m mới trang, t&ocirc;i vẫn c&oacute; thể thấy tiến tr&igrave;nh của m&igrave;nh</li>\n</ul>\n\n<p><strong>Biểu tượng:&nbsp;</strong><a href="https://google.github.io/material-design-icons/">https://google.github.io/material-design-icons/</a></p>', 'React hoặc Vue', 'https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FSClDA1weEGA3Mo8Is8Sbf2%2F404-page%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION', 'https://www.figma.com/file/SClDA1weEGA3Mo8Is8Sbf2/todo?node-id=0%3A1', 'files/1627551485-image.png', 'files/1627551485-todo-app-master.zip', 2, 4, '2021-07-29 09:38:05', '2021-07-31 02:51:45'),
 	(10, 'Trình tạo báo giá ngẫu nhiên', 'trinh-tao-bao-gia-ngau-nhien', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo một ứng dụng tạo b&aacute;o gi&aacute;.&nbsp;Sử dụng c&aacute;c thư viện Front-end như React hoặc Vue.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng dưới đ&acirc;y:</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thấy một tr&iacute;ch dẫn ngẫu nhi&ecirc;n</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i tạo một tr&iacute;ch dẫn ngẫu nhi&ecirc;n mới</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;Khi t&ocirc;i chọn t&aacute;c giả tr&iacute;ch dẫn, t&ocirc;i c&oacute; thể xem danh s&aacute;ch c&aacute;c tr&iacute;ch dẫn từ họ</li>\n	<li><strong>Truyện người d&ugrave;ng:</strong>&nbsp;M&igrave;nh c&oacute; thể xem thể loại quote dưới t&aacute;c giả</li>\n</ul>\n\n<p><strong>Biểu tượng:&nbsp;</strong><a href="https://google.github.io/material-design-icons/">https://google.github.io/material-design-icons/</a></p>\n\n<p><strong>API:&nbsp;</strong><a href="https://pprathameshmore.github.io/QuoteGarden/">https://pprathameshmore.github.io/QuoteGarden/</a></p>', 'React hoặc Vue', 'https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FFFxqnf1cEDiHhvFpN6u4hV%2F404-page%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION', 'https://www.figma.com/file/FFxqnf1cEDiHhvFpN6u4hV/quote?node-id=0%3A1', 'files/1627551584-image.png', 'files/1627551584-quote-generator-master.zip', 2, 4, '2021-07-29 09:39:44', '2021-07-31 02:51:55'),
 	(11, 'Câu đố quốc gia', 'cau-do-quoc-gia', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo ứng dụng c&acirc;u đố quốc gia bằng API.&nbsp;Sử dụng c&aacute;c thư viện Front-end như React hoặc Vue.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng dưới đ&acirc;y:</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thấy &iacute;t nhất 2 loại c&acirc;u hỏi:&nbsp;<code>a city is the capital of..</code>hoặc<code>a flag belong to country..</code></li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể chọn một c&acirc;u trả lời</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể xem c&acirc;u trả lời của m&igrave;nh l&agrave; đ&uacute;ng hay sai</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;Khi t&ocirc;i trả lời đ&uacute;ng, t&ocirc;i c&oacute; thể chuyển sang c&acirc;u hỏi tiếp theo</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;Khi t&ocirc;i trả lời sai, t&ocirc;i c&oacute; thể xem kết quả của m&igrave;nh v&agrave; thử lại</li>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thử lại</li>\n</ul>\n\n<p><strong>Biểu tượng:&nbsp;</strong><a href="https://google.github.io/material-design-icons/">https://google.github.io/material-design-icons/</a></p>\n\n<p><strong>API:&nbsp;</strong><a href="https://restcountries.eu/">https://restcountries.eu/</a>&nbsp;.&nbsp;Sử dụng dữ liệu từ API để tạo c&acirc;u hỏi v&agrave; c&acirc;u trả lời.</p>', 'React hoặc Vue', 'https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FGw0ZNBbYN8asqFlZWy3jG1%2F404-page%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION', 'https://www.figma.com/file/Gw0ZNBbYN8asqFlZWy3jG1/Country-Quiz', 'files/1627551710-image.png', 'files/1627551710-country-quiz-master.zip', 3, 4, '2021-08-01 09:41:50', '2021-08-01 02:52:00'),
-	(12, 'Nhóm của tôi', 'nhom-cua-toi', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo trang nh&oacute;m của t&ocirc;i theo thiết kế.&nbsp;Trang phải đ&aacute;p ứng.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng b&ecirc;n dưới</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thấy một trang theo thiết kế đ&atilde; cho</li>\n</ul>', 'HTML/CSS JS', 'https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FF8d1qJsorEdY47N74HLxQ4%2F404-page%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION', 'https://www.figma.com/file/F8d1qJsorEdY47N74HLxQ4/team-page-challenge', 'files/1627551817-image.png', 'files/1627551817-my-team-page-master.zip', 2, 5, '2021-08-01 09:43:37', '2021-08-01 02:52:07');
+	(12, 'Nhóm của tôi', 'nhom-cua-toi', '<p><strong>Th&aacute;ch thức:</strong>&nbsp;Tạo trang nh&oacute;m của t&ocirc;i theo thiết kế.&nbsp;Trang phải đ&aacute;p ứng.&nbsp;Đừng nh&igrave;n v&agrave;o giải ph&aacute;p hiện c&oacute;.&nbsp;Thực hiện c&aacute;c c&acirc;u chuyện của người d&ugrave;ng b&ecirc;n dưới</p>\n\n<ul>\n	<li><strong>C&acirc;u chuyện của người d&ugrave;ng:</strong>&nbsp;T&ocirc;i c&oacute; thể thấy một trang theo thiết kế đ&atilde; cho</li>\n</ul>', 'HTML/CSS JS', 'https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FF8d1qJsorEdY47N74HLxQ4%2F404-page%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION', 'https://www.figma.com/file/F8d1qJsorEdY47N74HLxQ4/team-page-challenge', 'files/1627551817-image.png', 'files/1627551817-my-team-page-master.zip', 2, 5, '2021-08-20 19:43:37', '2021-08-01 02:52:07');
 /*!40000 ALTER TABLE `challenges` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.challenge_categories
+-- Dumping structure for table laravel-vue.challenge_categories
 DROP TABLE IF EXISTS `challenge_categories`;
 CREATE TABLE IF NOT EXISTS `challenge_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `challenge_categories` (
   `slug` varchar(191) NOT NULL,
   `image` varchar(191) NOT NULL,
   `description` text NOT NULL,
+  `rule` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -75,16 +76,16 @@ CREATE TABLE IF NOT EXISTS `challenge_categories` (
   UNIQUE KEY `challenge_categories_slug_unique` (`slug`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.challenge_categories: ~3 rows (approximately)
+-- Dumping data for table laravel-vue.challenge_categories: ~3 rows (approximately)
 DELETE FROM `challenge_categories`;
 /*!40000 ALTER TABLE `challenge_categories` DISABLE KEYS */;
-INSERT INTO `challenge_categories` (`id`, `name`, `slug`, `image`, `description`, `created_at`, `updated_at`) VALUES
-	(1, 'Lập trình viên full stack', 'lap-trinh-vien-full-stack', 'files/1627548596-image.svg', '<p>Trở th&agrave;nh nh&agrave; ph&aacute;t triển Full-stack bằng c&aacute;ch x&acirc;y dựng 8 ứng dụng web full-stack n&acirc;ng cao</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>c&aacute;c thư viện Front-end v&agrave; x&acirc;y dựng c&aacute;c ứng dụng ho&agrave;n chỉnh</strong></p>\n	</li>\n	<li>\n	<p>Trở th&agrave;nh&nbsp;<strong>nh&agrave; ph&aacute;t triển Full-stack</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong></p>\n	</li>\n</ul>', NULL, '2021-07-29 08:49:56'),
-	(4, 'Nhà phát triển Front-end', 'nha-phat-trien-front-end', 'files/1627548551-image.svg', '<p>Trở th&agrave;nh Nh&agrave; ph&aacute;t triển Front-end bằng c&aacute;ch x&acirc;y dựng 8 dự &aacute;n thực tế, bạn c&oacute; thể sử dụng bất kỳ khu&ocirc;n khổ Front-end n&agrave;o</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>React, Vue hoặc c&aacute;c thư viện front-end kh&aacute;c</strong></p>\n	</li>\n	<li>\n	<p>Trở th&agrave;nh&nbsp;<strong>nh&agrave; ph&aacute;t triển Front-end</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong></p>\n	</li>\n</ul>', '2021-07-29 08:49:11', '2021-07-29 08:49:11'),
-	(5, 'Nhà phát triển web đáp ứng', 'nha-phat-trien-web-dap-ung', 'files/1627548686-image.svg', '<p>T&igrave;m hiểu v&agrave; Thực h&agrave;nh Ph&aacute;t triển Web Đ&aacute;p ứng bằng c&aacute;ch x&acirc;y dựng 8 Trang web với c&aacute;c thiết kế cho sẵn</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Bắt đầu với&nbsp;<strong>m&atilde; h&oacute;a</strong></p>\n	</li>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>HTML, CSS v&agrave; JavaScript cơ bản</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong>&nbsp;.</p>\n	</li>\n</ul>', '2021-07-29 08:51:26', '2021-07-29 08:51:26');
+INSERT INTO `challenge_categories` (`id`, `name`, `slug`, `image`, `description`, `rule`, `created_at`, `updated_at`) VALUES
+	(1, 'Lập trình viên full stack', 'lap-trinh-vien-full-stack', 'files/1627548596-image.svg', '<p>Trở th&agrave;nh nh&agrave; ph&aacute;t triển Full-stack bằng c&aacute;ch x&acirc;y dựng 8 ứng dụng web full-stack n&acirc;ng cao</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>c&aacute;c thư viện Front-end v&agrave; x&acirc;y dựng c&aacute;c ứng dụng ho&agrave;n chỉnh</strong></p>\n	</li>\n	<li>\n	<p>Trở th&agrave;nh&nbsp;<strong>nh&agrave; ph&aacute;t triển Full-stack</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong></p>\n	</li>\n</ul>', '<ul>\n	<li>\n	<p>✅&nbsp;<strong>Sử dụng Khung giao diện người d&ugrave;ng</strong>&nbsp;v&agrave; chọn bất kỳ Khung hoặc Thư viện n&agrave;o</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>X&acirc;y dựng API của ri&ecirc;ng bạn</strong></p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>Ho&agrave;n th&agrave;nh</strong>&nbsp;tất cả c&aacute;c c&acirc;u chuyện của người d&ugrave;ng</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>L&agrave;m theo thiết kế</strong>&nbsp;, bạn c&oacute; thể th&ecirc;m h&igrave;nh ảnh động, trang mới, trạng th&aacute;i trống, ...</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>Kh&ocirc;ng sao ch&eacute;p</strong>&nbsp;c&aacute;c giải ph&aacute;p hiện c&oacute;</p>\n	</li>\n</ul>', NULL, '2021-08-20 00:19:00'),
+	(4, 'Nhà phát triển Front-end', 'nha-phat-trien-front-end', 'files/1627548551-image.svg', '<p>Trở th&agrave;nh Nh&agrave; ph&aacute;t triển Front-end bằng c&aacute;ch x&acirc;y dựng 8 dự &aacute;n thực tế, bạn c&oacute; thể sử dụng bất kỳ khu&ocirc;n khổ Front-end n&agrave;o</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>React, Vue hoặc c&aacute;c thư viện front-end kh&aacute;c</strong></p>\n	</li>\n	<li>\n	<p>Trở th&agrave;nh&nbsp;<strong>nh&agrave; ph&aacute;t triển Front-end</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong></p>\n	</li>\n</ul>', '<ul>\n	<li>\n	<p>✅&nbsp;<strong>Sử dụng Khung giao diện người d&ugrave;ng</strong>&nbsp;v&agrave; chọn bất kỳ Khung hoặc Thư viện n&agrave;o</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>Ho&agrave;n th&agrave;nh</strong>&nbsp;tất cả c&aacute;c c&acirc;u chuyện của người d&ugrave;ng</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>L&agrave;m theo thiết kế</strong>&nbsp;, bạn c&oacute; thể th&ecirc;m h&igrave;nh ảnh động, trang mới, trạng th&aacute;i trống, ...</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>Kh&ocirc;ng sao ch&eacute;p</strong>&nbsp;c&aacute;c giải ph&aacute;p hiện c&oacute;</p>\n	</li>\n</ul>', '2021-07-29 08:49:11', '2021-08-20 00:16:11'),
+	(5, 'Nhà phát triển web đáp ứng', 'nha-phat-trien-web-dap-ung', 'files/1627548686-image.svg', '<p>T&igrave;m hiểu v&agrave; Thực h&agrave;nh Ph&aacute;t triển Web Đ&aacute;p ứng bằng c&aacute;ch x&acirc;y dựng 8 Trang web với c&aacute;c thiết kế cho sẵn</p>\n\n<p>D&agrave;nh cho những ai muốn:</p>\n\n<ul>\n	<li>\n	<p>Bắt đầu với&nbsp;<strong>m&atilde; h&oacute;a</strong></p>\n	</li>\n	<li>\n	<p>Thực h&agrave;nh&nbsp;<strong>HTML, CSS v&agrave; JavaScript cơ bản</strong></p>\n	</li>\n	<li>\n	<p>X&acirc;y dựng trang web với&nbsp;<strong>c&aacute;c hoạt động thực tế</strong>&nbsp;.</p>\n	</li>\n</ul>', '<ul>\n	<li>\n	<p>✅ <strong>Khuyến nghị</strong> chỉ sử dụng HTML, CSS &nbsp;v&agrave; JavaScript</p>\n	</li>\n	<li>\n	<p>✅ <strong>Ho&agrave;n th&agrave;nh</strong> tất cả c&aacute;c y&ecirc;u cầu của người d&ugrave;ng</p>\n	</li>\n	<li>\n	<p>✅<strong> L&agrave;m theo thiết kế</strong>, bạn c&oacute; thể th&ecirc;m chức năng thay đổi h&igrave;nh ảnh</p>\n	</li>\n	<li>\n	<p>✅&nbsp;<strong>Kh&ocirc;ng sao ch&eacute;p</strong>&nbsp;c&aacute;c giải ph&aacute;p hiện c&oacute;</p>\n	</li>\n</ul>', '2021-07-29 08:51:26', '2021-08-20 00:20:09');
 /*!40000 ALTER TABLE `challenge_categories` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.challenge_users
+-- Dumping structure for table laravel-vue.challenge_users
 DROP TABLE IF EXISTS `challenge_users`;
 CREATE TABLE IF NOT EXISTS `challenge_users` (
   `user_id` int(10) unsigned NOT NULL,
@@ -98,17 +99,18 @@ CREATE TABLE IF NOT EXISTS `challenge_users` (
   CONSTRAINT `challenge_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.challenge_users: ~4 rows (approximately)
+-- Dumping data for table laravel-vue.challenge_users: ~4 rows (approximately)
 DELETE FROM `challenge_users`;
 /*!40000 ALTER TABLE `challenge_users` DISABLE KEYS */;
 INSERT INTO `challenge_users` (`user_id`, `challen_id`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 1, 0, '2021-08-19 16:58:46', '2021-08-19 16:58:46'),
 	(1, 2, 0, '2021-08-15 15:41:35', '2021-08-15 15:41:35'),
 	(1, 7, 1, '2021-08-15 15:43:38', '2021-08-15 15:43:38'),
 	(1, 12, 0, '2021-08-15 22:03:56', '2021-08-15 22:03:56'),
 	(4, 1, 1, NULL, NULL);
 /*!40000 ALTER TABLE `challenge_users` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.chat_messages
+-- Dumping structure for table laravel-vue.chat_messages
 DROP TABLE IF EXISTS `chat_messages`;
 CREATE TABLE IF NOT EXISTS `chat_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -117,7 +119,6 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
   `message` mediumtext,
   `image` varchar(191) DEFAULT NULL,
   `receiver_id` int(10) unsigned DEFAULT NULL,
-  `time` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -125,21 +126,24 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
   KEY `chat_messages_user_id_foreign` (`user_id`),
   CONSTRAINT `chat_messages_chat_room_id_foreign` FOREIGN KEY (`chat_room_id`) REFERENCES `chat_rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chat_messages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.chat_messages: ~6 rows (approximately)
+-- Dumping data for table laravel-vue.chat_messages: ~9 rows (approximately)
 DELETE FROM `chat_messages`;
 /*!40000 ALTER TABLE `chat_messages` DISABLE KEYS */;
-INSERT INTO `chat_messages` (`id`, `chat_room_id`, `user_id`, `message`, `image`, `receiver_id`, `time`, `created_at`, `updated_at`) VALUES
-	(4, 1, 1, 'he', NULL, NULL, '2021-08-13 00:00:58', '2021-08-13 00:00:58', '2021-08-13 00:00:58'),
-	(5, NULL, 1, 'hi', NULL, 4, '2021-08-13 00:03:00', '2021-08-13 00:03:00', '2021-08-13 00:03:00'),
-	(6, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:03:22', '2021-08-13 00:03:22', '2021-08-13 00:03:22'),
-	(7, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:06:12', '2021-08-13 00:06:12', '2021-08-13 00:06:12'),
-	(8, NULL, 1, 'dd', NULL, 4, '2021-08-15 22:01:13', '2021-08-15 22:01:13', '2021-08-15 22:01:13'),
-	(9, NULL, 1, 'dd', NULL, 4, '2021-08-15 22:01:22', '2021-08-15 22:01:22', '2021-08-15 22:01:22');
+INSERT INTO `chat_messages` (`id`, `chat_room_id`, `user_id`, `message`, `image`, `receiver_id`, `created_at`, `updated_at`) VALUES
+	(4, 1, 1, 'he', NULL, NULL, '2021-08-13 00:00:58', '2021-08-13 00:00:58'),
+	(5, NULL, 1, 'hi', NULL, 4, '2021-08-13 00:03:00', '2021-08-13 00:03:00'),
+	(6, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:03:22', '2021-08-13 00:03:22'),
+	(7, 1, 1, 'hi', NULL, NULL, '2021-08-13 00:06:12', '2021-08-13 00:06:12'),
+	(8, NULL, 1, 'dd', NULL, 4, '2021-08-15 22:01:13', '2021-08-15 22:01:13'),
+	(9, NULL, 1, 'dd', NULL, 4, '2021-08-15 22:01:22', '2021-08-15 22:01:22'),
+	(10, 1, 1, 'xin chào', NULL, NULL, '2021-08-21 21:58:07', '2021-08-21 21:58:07'),
+	(11, 1, 1, 'hi', NULL, NULL, '2021-08-23 16:40:20', '2021-08-23 16:40:20'),
+	(12, 1, 1, 'hello', NULL, NULL, '2021-08-23 16:41:01', '2021-08-23 16:41:01');
 /*!40000 ALTER TABLE `chat_messages` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.chat_rooms
+-- Dumping structure for table laravel-vue.chat_rooms
 DROP TABLE IF EXISTS `chat_rooms`;
 CREATE TABLE IF NOT EXISTS `chat_rooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -150,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `chat_rooms` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.chat_rooms: ~2 rows (approximately)
+-- Dumping data for table laravel-vue.chat_rooms: ~2 rows (approximately)
 DELETE FROM `chat_rooms`;
 /*!40000 ALTER TABLE `chat_rooms` DISABLE KEYS */;
 INSERT INTO `chat_rooms` (`id`, `name`, `image`, `created_at`, `updated_at`) VALUES
@@ -158,7 +162,7 @@ INSERT INTO `chat_rooms` (`id`, `name`, `image`, `created_at`, `updated_at`) VAL
 	(2, 'Teck talk', 'files/1627698467-image.png', NULL, NULL);
 /*!40000 ALTER TABLE `chat_rooms` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.failed_jobs
+-- Dumping structure for table laravel-vue.failed_jobs
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -172,12 +176,12 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.failed_jobs: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.failed_jobs: ~0 rows (approximately)
 DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.feedbacks
+-- Dumping structure for table laravel-vue.feedbacks
 DROP TABLE IF EXISTS `feedbacks`;
 CREATE TABLE IF NOT EXISTS `feedbacks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -193,29 +197,28 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   KEY `feedbacks_user_id_foreign` (`user_id`),
   CONSTRAINT `feedbacks_solution_id_foreign` FOREIGN KEY (`solution_id`) REFERENCES `solutions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `feedbacks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.feedbacks: ~5 rows (approximately)
+-- Dumping data for table laravel-vue.feedbacks: ~4 rows (approximately)
 DELETE FROM `feedbacks`;
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
 INSERT INTO `feedbacks` (`id`, `feedback_content`, `user_id`, `solution_id`, `parent_id`, `is_approved`, `created_at`, `updated_at`) VALUES
-	(1, 'ok', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 1, '2021-07-27 22:59:13', '2021-07-28 05:28:45'),
-	(2, '<p>dfffdfđfd</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 1, 1, '2021-07-28 08:54:57', '2021-07-28 08:56:35'),
-	(3, '<p>đaaasaasas</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 1, '2021-08-17 14:43:59', '2021-08-17 14:43:59'),
-	(4, '<p>đaaasaasas</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 0, '2021-08-17 14:43:59', '2021-08-17 14:43:59'),
-	(5, '<p>dđssss</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 0, '2021-08-17 14:45:57', '2021-08-17 14:45:57');
+	(10, '<p>Gải ph&aacute;p</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 0, '2021-08-22 16:48:45', '2021-08-22 16:48:45'),
+	(11, '<p>Ahiiiffffff</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', 0, 1, '2021-08-22 17:06:06', '2021-08-22 17:12:14'),
+	(12, '<p>sdsdsds</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4732', 0, 1, '2021-08-22 17:13:44', '2021-08-22 17:13:53'),
+	(13, '<p>dffđfdfd</p>', 1, 'af6e736b-e161-4593-a9e0-1d889a9e4732', 12, 0, '2021-08-22 17:19:35', '2021-08-22 17:19:35');
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.migrations
+-- Dumping structure for table laravel-vue.migrations
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.migrations: ~23 rows (approximately)
+-- Dumping data for table laravel-vue.migrations: ~20 rows (approximately)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -226,7 +229,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(10, '2021_05_27_104151_create_solutions_table', 1),
 	(11, '2021_05_27_104257_create_feedbacks_table', 1),
 	(12, '2021_05_29_091858_create_messages_table', 1),
-	(13, '2021_05_29_092229_create_notifications_table', 1),
 	(14, '2021_06_01_014607_create_failed_jobs_table', 1),
 	(15, '2021_06_03_024436_create_challenge_users_table', 1),
 	(16, '2021_06_07_070717_create_permission_tables', 1),
@@ -241,10 +243,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(35, '2021_08_11_160509_create_upgrades_table', 4),
 	(36, '2021_08_11_160901_create_orders_table', 4),
 	(37, '2021_08_16_082359_create_upvotes_table', 5),
-	(39, '2021_08_17_180012_create_upvote_feedbacks_table', 6);
+	(39, '2021_08_17_180012_create_upvote_feedbacks_table', 6),
+	(40, '2021_05_29_092229_create_notifications_table', 7);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.model_has_permissions
+-- Dumping structure for table laravel-vue.model_has_permissions
 DROP TABLE IF EXISTS `model_has_permissions`;
 CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   `permission_id` int(10) unsigned NOT NULL,
@@ -255,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.model_has_permissions: ~29 rows (approximately)
+-- Dumping data for table laravel-vue.model_has_permissions: ~29 rows (approximately)
 DELETE FROM `model_has_permissions`;
 /*!40000 ALTER TABLE `model_has_permissions` DISABLE KEYS */;
 INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) VALUES
@@ -290,7 +293,7 @@ INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) 
 	(23, 'App\\Models\\User', 6);
 /*!40000 ALTER TABLE `model_has_permissions` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.model_has_roles
+-- Dumping structure for table laravel-vue.model_has_roles
 DROP TABLE IF EXISTS `model_has_roles`;
 CREATE TABLE IF NOT EXISTS `model_has_roles` (
   `role_id` int(10) unsigned NOT NULL,
@@ -301,39 +304,39 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.model_has_roles: ~5 rows (approximately)
+-- Dumping data for table laravel-vue.model_has_roles: ~4 rows (approximately)
 DELETE FROM `model_has_roles`;
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(2, 'App\\Models\\User', 1),
 	(1, 'App\\Models\\User', 4),
 	(3, 'App\\Models\\User', 6),
-	(1, 'App\\Models\\User', 14),
 	(1, 'App\\Models\\User', 15);
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.notifications
+-- Dumping structure for table laravel-vue.notifications
 DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `from_user_id` int(11) NOT NULL,
-  `to_user_id` int(11) NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` date NOT NULL,
-  `time` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_read` tinyint(1) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `notifications_user_id_foreign` (`user_id`),
+  CONSTRAINT `notifications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table dev-poly.notifications: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.notifications: ~1 rows (approximately)
 DELETE FROM `notifications`;
 /*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` (`id`, `user_id`, `title`, `content`, `is_read`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Nâng cấp tài khoản thành công', '<p>N&acirc;ng cấp t&agrave;i khoản th&agrave;nh c&ocirc;ng bạn sẽ được nhận th&ecirc;m nhiều thử th&aacute;ch kh&oacute; hơn</p>', 1, '2021-08-25 16:58:01', '2021-08-25 18:09:13');
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.oauth_access_tokens
+-- Dumping structure for table laravel-vue.oauth_access_tokens
 DROP TABLE IF EXISTS `oauth_access_tokens`;
 CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -349,18 +352,23 @@ CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   KEY `oauth_access_tokens_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.oauth_access_tokens: ~62 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_access_tokens: ~86 rows (approximately)
 DELETE FROM `oauth_access_tokens`;
 /*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+	('040d81680953d4d2f5701c71fdda7e82089c82e4e051a571548a1cc255a1e27b4d9d39c34a60cfa3', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-25 17:16:02', '2021-08-25 17:16:02', '2022-08-25 17:16:02'),
 	('04f94ed09ce7030a6a0db0645f640eb98fc3f68241f4513557d5374c615e128288db9e7b8a602274', 6, 1, 'Personal Access Token', '[]', 0, '2021-08-16 23:55:08', '2021-08-16 23:55:08', '2022-08-16 23:55:08'),
+	('074d6cde929886953d4171b0c4d1141c51cf9be4f6871a14b07a3f648fb5067121802276eb89aa68', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-21 23:33:26', '2021-08-21 23:33:26', '2022-08-21 23:33:26'),
 	('0a9b695c9c946603147f6d9184592b9d270a4c59dc6b7bcba410d877e593cba7c4e2ab3f7953dc99', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:23:59', '2021-08-14 21:23:59', '2022-08-14 21:23:59'),
 	('0bba21c75c92865279d3d5c1cd67dbdb1bdecddfe44de78dff184bd1564d38325880781749e85521', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
 	('0cbf50ea24868655caac780756cc37fc2dc6f6dad5cef0338c27cc598ca0b971fb22d79d447d27a2', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-15 13:54:38', '2021-08-15 13:54:38', '2022-08-15 13:54:38'),
 	('1358acc3d8aaf7c00fde7cfaf4afecff0bc6a778fd3d9bbeaf4965a5e7c716ad80597d9cc8670fba', 6, 1, 'Personal Access Token', '[]', 0, '2021-08-08 00:16:51', '2021-08-08 00:16:51', '2022-08-08 00:16:51'),
 	('175041ee024faed43b06366c9bf9f79db5382f6ab06ca1cc2d37e01dac8fa94d7c9eed852167a7bc', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:52:21', '2021-08-14 21:52:21', '2022-08-14 21:52:21'),
+	('1825e6f735e057c2c0fb379d8d6aac8ef0d17086c6d497980280bbe62a997049dd55604301c200ef', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-23 16:51:49', '2021-08-23 16:51:49', '2022-08-23 16:51:49'),
 	('1904fda26595bbd0d480eb86407782eabbd03f283dcf55da57593518b127a449a7e106cdd6afd787', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 17:03:22', '2021-08-17 17:03:22', '2022-08-17 17:03:22'),
+	('1a4d6c75ea34e21c32fb29339f15263f8b503e087226d312ee651b2ddde1357266b2b6ddcd0a0807', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 23:11:05', '2021-08-22 23:11:05', '2022-08-22 23:11:05'),
 	('1b0d80356c2901341e1f51e935bc758ed6d297aea75e6870ed5c83540da98b00bc973954814b428f', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-18 14:46:14', '2021-08-18 14:46:14', '2022-08-18 14:46:14'),
+	('27cd5a1a8dca329418352697c8e6fa5f09d5cc2a926fd0bedb560b41cbe768bdd0b5e435b09fbc18', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 22:52:49', '2021-08-22 22:52:49', '2022-08-22 22:52:49'),
 	('2b01507e67e808995777601ad22cd7171fc10818feb34486e638584d010d347494953a7825158b8f', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:30:02', '2021-08-14 21:30:02', '2022-08-14 21:30:02'),
 	('2f37d6fb4314de8c29fa8532611158b87835d0a38da8b93db9a7232752b020f8a949b5e4ef5decb2', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:15', '2021-08-14 21:24:15', '2022-08-14 21:24:15'),
 	('343bc2f0eb4cd02fe94cbb7a95155a672fe9d1dcb5de273d598da1e7a1476a814ba5f4c70bde67c8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
@@ -372,20 +380,28 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 	('3a7156f3fb286d530ae633b0c8a5894fa5c017ce2adb31dd5da59ab43a37b91af30a465b8d248728', 11, 1, 'Personal Access Token', '[]', 0, '2021-08-14 20:26:17', '2021-08-14 20:26:17', '2022-08-14 20:26:17'),
 	('3e2ccaa71609f0e8e1f14ddd8d2c5bb63aeb12d04d2b151719fdc0150bedaa29abf3b14c41b2a11c', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 15:35:20', '2021-08-12 15:35:20', '2022-08-12 15:35:20'),
 	('48fa82772023dd6dd87b7906b2dc847a6cc5742c2427e2d7a7388c8ede116912dc0169fda1b5e710', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:05:32', '2021-08-14 21:05:32', '2022-08-14 21:05:32'),
+	('4e3810cf2786cc588c5a3ffd1e8aa95c1458085482bf25f3ba65eb98c6a4f3cacf187966b3261e4b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-21 23:33:25', '2021-08-21 23:33:25', '2022-08-21 23:33:25'),
+	('4e486bd7174a815b8c71e37af7e5e4e8300bb0d89846366de722b391ea878427afbe164a26b24064', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 23:35:41', '2021-08-19 23:35:41', '2022-08-19 23:35:41'),
+	('4fabe29711dfd3db61d50041961a8ec82442d0fa7fce9cc17c9032eb994d9f7f5609708bcd5092a8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 23:00:33', '2021-08-22 23:00:33', '2022-08-22 23:00:33'),
 	('50e4da2f0469dbe6a4e1d50c8915eb7e4306ab6bf8cd20a1a2195ad7d21d989b9a3a0e0fec4ab0b2', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:46:00', '2021-08-14 21:46:00', '2022-08-14 21:46:00'),
 	('5622c7db8aa8b7e7405bdb4fe5b2349abb87da7342f6d05e445746f068950c8958ca76a83af2dc85', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:21:05', '2021-08-13 22:21:05', '2022-08-13 22:21:05'),
+	('5c74522a714aa148ebc4b8c60e09113dcc4f531b2661232630946f6fe51382cbacb537823b6ba9c2', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 22:52:50', '2021-08-22 22:52:50', '2022-08-22 22:52:50'),
 	('5e52c9361f3a092daf5ee4f6d942cb28fe57640e129ccfcae57b92e7ce732b1db3f1c174a048029a', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:04', '2021-08-17 09:57:04', '2022-08-17 09:57:04'),
 	('5f7c1763d262ae655d441c5278e45eb19b7447c12819b011795f5262b659599dbe019d221147bdb5', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-16 16:31:45', '2021-08-16 16:31:45', '2022-08-16 16:31:45'),
 	('60054ecf90690b0ef6f3abaf2616b64b23a7e6cac2d50748ec1fa309671a9a8d3ccc4822e2974c38', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 13:54:38', '2021-08-15 13:54:38', '2022-08-15 13:54:38'),
+	('60c12811f5c10bbd2d809190df815f2c3429c4ff8635dbe58834f5d01d869a1980d4f0d5b2097a01', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 22:52:49', '2021-08-22 22:52:49', '2022-08-22 22:52:49'),
 	('616ae9a0d24a80fe4ce44f3ab2a84c6794f630349b5e42290d122bd7383c5ed6382bf4a0a18bec2b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 23:46:32', '2021-08-12 23:46:32', '2022-08-12 23:46:32'),
 	('6272041fad52d357824fbd1f751809e2aaa03c7ae8fc494a2a8e2f84e35030115e184f49dd95a5e1', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-08 00:15:35', '2021-08-08 00:15:35', '2022-08-08 00:15:35'),
 	('62fe08e2b4a7615504b16ab1f6d02bd093cceda4fa91c7e222b99df64bc636d1ecda299e1b5392bf', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-13 22:23:35', '2021-08-13 22:23:35', '2022-08-13 22:23:35'),
+	('63964c0381e459644090d1087d724075641372809d9a05a93a7c4cb306945a4cd90da57a46c710ff', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 16:30:36', '2021-08-22 16:30:36', '2022-08-22 16:30:36'),
+	('67639575b1d46db04c9360eeea2f1021949e38d0afdf0cdeaceaf91745492aef6e72372a37d1605b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-25 15:54:26', '2021-08-25 15:54:26', '2022-08-25 15:54:26'),
 	('6a247434dbe7da42ad5b950d32baeabfe4d81ad053c26e82043a48492b9975d602df711a1d063707', 10, 1, 'Personal Access Token', '[]', 0, '2021-08-14 20:25:21', '2021-08-14 20:25:21', '2022-08-14 20:25:21'),
 	('6aa82fb2b131837e6226d3c2576b9cc7559219a64026d2488a2da922fa24556cf61f98b7c88b049b', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:23:53', '2021-08-14 21:23:53', '2022-08-14 21:23:53'),
 	('6db413b2c1ede2d05d2281ce666f4837699aba3f7fddb40c7e7adcceb76a0b82870a66094b373cf8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:22:10', '2021-08-12 22:22:10', '2022-08-12 22:22:10'),
 	('6e4fdc1c55fe5642d5211d1c21bcb1ce7f93183fb3207f328f91808822e70b5a590e7f97041c26cd', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
 	('6eec0421be16ec2ea08362d1cc12ec54da226ffc0d2526eb7e7556900322cd0b5a811cc1eafcf6f2', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-18 23:20:44', '2021-08-18 23:20:44', '2022-08-18 23:20:44'),
 	('6f3ab7be812827365f92047b2c2362fcfcf19a28f3d9384fd6ddda1c48b168e35cd5832ddfbe2cf6', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
+	('737edffa3bc641e69810384d21af1daa9e6f8a8360570edf17ff142dc4a6a9acfd8a548a28cbfb3a', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-19 19:59:15', '2021-08-19 19:59:15', '2022-08-19 19:59:15'),
 	('7787e9ea29a6698896c19c1a4f953477ecef465ccc39a3393a4dc821de2bfb144637f6909008c6d0', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-12 20:32:29', '2021-08-12 20:32:29', '2022-08-12 20:32:29'),
 	('778fe1d8c6aa4ab97523edaef0c4bf576a42d3cdbd70d8b5ec7503ea3ca5dfcb4bc3038c9b7387bc', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 16:47:30', '2021-08-18 16:47:30', '2022-08-18 16:47:30'),
 	('7bbd9332e7303c4a35c139b727f6adee15befa5acebdce47b1ad55c44e72696fd7e89524d590da6d', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:05:31', '2021-08-14 21:05:31', '2022-08-14 21:05:31'),
@@ -394,30 +410,41 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 	('8699478a5f527f61d2f442a32eb0f87121b3225cfdf94a14243ee8b4f89bbf0787910dcea38a20b1', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-16 17:03:01', '2021-08-16 17:03:01', '2022-08-16 17:03:01'),
 	('88dd5af83834e3a56d9cfa79f195e88ad316c1676b32e7e2ba1235ca34017ff3852292f92e90c877', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:08', '2021-08-14 21:24:08', '2022-08-14 21:24:08'),
 	('8c2c755f73e8aacddc1a681651ffef04b400ec9dfdd70c39c90f3a7c3f73435d85cddf6bf0ece041', 12, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:24:11', '2021-08-14 21:24:11', '2022-08-14 21:24:11'),
+	('8ebeec75287587c5cfd45cdaf41e7c9dc14da480edb9c27c7f9980cb6c65636181f3487982b33e95', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 17:24:26', '2021-08-22 17:24:26', '2022-08-22 17:24:26'),
 	('921869dd7be53a63ccd3e53b6f7b63fdd02526d3ddb2d39919720ec5f2061f9c6b7dfbab0a2e02c9', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 16:27:20', '2021-08-18 16:27:20', '2022-08-18 16:27:20'),
 	('9862b16b9310f375b79b770029bdbe82f1c68cca10701dc1da37705616ad4556dadb3c4f32181e82', 7, 1, 'Personal Access Token', '[]', 0, '2021-08-14 18:32:17', '2021-08-14 18:32:17', '2022-08-14 18:32:17'),
+	('9e5e38ff6a800f236f5282336d854596a44a13b6629e00f318f13208746e04ba9e8c636540001369', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 20:39:37', '2021-08-22 20:39:37', '2022-08-22 20:39:37'),
 	('ad4c749a5dd9dd865a7816aacd105e85a87a4e7783326c19c7b091df1c7570a1da996522b45a7cc1', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-12 22:25:19', '2021-08-12 22:25:19', '2022-08-12 22:25:19'),
 	('aecd9cf6399b7ff98cc47f059b730a856208f1601fd58bf84650f955f1eec4fabd190f8e9ae175ce', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:24:05', '2021-08-14 21:24:05', '2022-08-14 21:24:05'),
 	('b20662f978c960023f924157e607e6fa5d7cce7b6397636128f240256e9fc3e1302a52b9de20d7c4', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 09:57:06', '2021-08-17 09:57:06', '2022-08-17 09:57:06'),
+	('b6a543fc97c6f2f3b3e3e4c6423a6515ca00d563235e405f433ace21a274bc032c86c383e463d6cc', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-25 15:23:28', '2021-08-25 15:23:28', '2022-08-25 15:23:28'),
 	('b732d271d81936bf0e20a4aebbf828065db2b16d95a9598004f3de033ee548bf47526c2e7d968c60', 15, 1, 'Personal Access Token', '[]', 1, '2021-08-18 20:33:12', '2021-08-18 20:33:12', '2022-08-18 20:33:12'),
+	('bb3ce91a4ad05790fcc8737318ac7ce32c6b09038af13c789e9fdf41908183186c2cafb977c094e7', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 16:30:37', '2021-08-22 16:30:37', '2022-08-22 16:30:37'),
+	('be9ab991df63b77a70df83b4f793a68eed39ae6d288b0dc5ece031a4cabafe0f31a39089038afa41', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 19:59:15', '2021-08-19 19:59:15', '2022-08-19 19:59:15'),
+	('c4eb4256f7579b1225f72dcfafbcad9e6796d8256d9b16cbef26758da73a482552825bfdd6fc9d5c', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 20:02:17', '2021-08-19 20:02:17', '2022-08-19 20:02:17'),
+	('c5e353c6a3fbe6edf9a5f37456f799d75d0c560d62bca43c0302ae5172ac83f30f6a800cb9d99cf8', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 20:27:11', '2021-08-19 20:27:11', '2022-08-19 20:27:11'),
 	('c8b7e060dfd032b3d6748505e98a652f2e6724bd05816f82ccce7f7f2679043f13f55d4f5c22ef12', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 17:03:22', '2021-08-17 17:03:22', '2022-08-17 17:03:22'),
 	('c9fc1262337671e58cdb23316ef4f1e0cdfbe7d67b328ef1ac1069ad5ca540da223514a53b99defe', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-18 23:20:43', '2021-08-18 23:20:43', '2022-08-18 23:20:43'),
 	('ca36b840a49152350a61cffcb32402ab6022cd1bbd823fd883d58d41ac7fb9dcb21f48c1586385f1', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 22:17:59', '2021-08-15 22:17:59', '2022-08-15 22:17:59'),
 	('cac01fe9f80c6a1b9a5e0bf9089f70f7dd233cb9823b459febc84d6c8a12b0d11cfcb8079d733865', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-15 14:46:03', '2021-08-15 14:46:03', '2022-08-15 14:46:03'),
 	('d08e4cd74cbf9fa193172edac9875f5df1144100ac04730df8a6d75825dcc38900318ea86a27a34f', 15, 1, 'Personal Access Token', '[]', 0, '2021-08-18 21:15:34', '2021-08-18 21:15:34', '2022-08-18 21:15:34'),
+	('d12862e25a401a7cd2f46be642cb99d3ee81a5d206d65088938462e9ffa35bae2aff91f5e591ac60', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-21 23:33:25', '2021-08-21 23:33:25', '2022-08-21 23:33:25'),
 	('d26a518e3b4f720bd768d0f1d472fa32a1af7cfc36c31e3cd2487e218146f1b4614689e701f33410', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:48:57', '2021-08-14 21:48:57', '2022-08-14 21:48:57'),
 	('d52e73c861a393d1205bc9d570de8a828adaaf2c5603a709045964ad94994311969bfc7a09512ee9', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-17 20:36:48', '2021-08-17 20:36:48', '2022-08-17 20:36:48'),
 	('d7209ba7d2489739e0d8dc09ce62a89c3e7bb0df97b8e6d7321179261db64eff843a699c08f64e51', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 20:26:02', '2021-08-18 20:26:02', '2022-08-18 20:26:02'),
 	('da14162db41066dd9e49558dfb46d1f79ae0c7d35dedac7eb6e8af0947851650730e3cb6606171bd', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-13 22:26:16', '2021-08-13 22:26:16', '2022-08-13 22:26:16'),
+	('e111398a45988461ea7f11058095f55ef35ff6cdb016270b63ec85b638db57599ab7f43885b4ebb7', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 20:50:56', '2021-08-19 20:50:56', '2022-08-19 20:50:56'),
 	('e1ab0b3574a3ef77b786b3a372f6806d26ee687539b83cfb9d77129b2d714ec54ef5e94619ee3301', 12, 1, 'Personal Access Token', '[]', 0, '2021-08-14 21:17:33', '2021-08-14 21:17:33', '2022-08-14 21:17:33'),
 	('e81418b305136fb138fbe34dedc9ce2320c6e1983615a401c0ed33cda544d7d866baec5e130208df', 14, 1, 'Personal Access Token', '[]', 1, '2021-08-18 17:27:20', '2021-08-18 17:27:20', '2022-08-18 17:27:20'),
 	('eb30308f9764f085ce69a97f489611800a5ccef55701f2f8f2d8b308465b0e1d1980a2367f0aaf01', 13, 1, 'Personal Access Token', '[]', 1, '2021-08-14 21:42:16', '2021-08-14 21:42:16', '2022-08-14 21:42:16'),
 	('ec33c34e3a9f62c17591a9a7a33bad7698e47d42142034c482c0dc7ed253b8df2341b86e69b42ccd', 10, 1, 'Personal Access Token', '[]', 1, '2021-08-14 18:34:20', '2021-08-14 18:34:20', '2022-08-14 18:34:20'),
-	('f5ec3c4a147dce9132aa2091bafd08c87084c117330c0453b654a5b49b6e68151033e30511881e5b', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 09:52:45', '2021-08-19 09:52:45', '2022-08-19 09:52:45'),
+	('f222dbe98e3b527dc26ca22ee66aca960c0514d2dae36f53225d15002832e61ebd61ba0b0959dd45', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-22 16:36:19', '2021-08-22 16:36:19', '2022-08-22 16:36:19'),
+	('f5ec3c4a147dce9132aa2091bafd08c87084c117330c0453b654a5b49b6e68151033e30511881e5b', 1, 1, 'Personal Access Token', '[]', 1, '2021-08-19 09:52:45', '2021-08-19 09:52:45', '2022-08-19 09:52:45'),
+	('fdc20319f293146fe305b18c4448709432646e8b9f3d4bb4e6fbcd281552f14d58ea4d569290b7b2', 1, 1, 'Personal Access Token', '[]', 0, '2021-08-19 23:35:41', '2021-08-19 23:35:41', '2022-08-19 23:35:41'),
 	('ffdab722fe005e3eae0a5cb6d552e9d3bf0b98cf2a30029c2c1759e9b3f1ece2f676748f1fdb6361', 1, 1, 'Personal Access Token', '[]', 0, '2021-07-19 02:24:35', '2021-07-19 02:24:35', '2022-07-19 02:24:35');
 /*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.oauth_auth_codes
+-- Dumping structure for table laravel-vue.oauth_auth_codes
 DROP TABLE IF EXISTS `oauth_auth_codes`;
 CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -430,12 +457,12 @@ CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
   KEY `oauth_auth_codes_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.oauth_auth_codes: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_auth_codes: ~0 rows (approximately)
 DELETE FROM `oauth_auth_codes`;
 /*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.oauth_clients
+-- Dumping structure for table laravel-vue.oauth_clients
 DROP TABLE IF EXISTS `oauth_clients`;
 CREATE TABLE IF NOT EXISTS `oauth_clients` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -453,14 +480,14 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
   KEY `oauth_clients_user_id_index` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.oauth_clients: ~1 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_clients: ~0 rows (approximately)
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
 	(1, NULL, 'admin', 'cqaoIFbsHmtZwf6qSyTnYPzLwgrTHFKE7eUPvTee', NULL, 'http://localhost', 1, 0, 0, '2021-07-18 09:25:44', '2021-07-18 09:25:44');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.oauth_personal_access_clients
+-- Dumping structure for table laravel-vue.oauth_personal_access_clients
 DROP TABLE IF EXISTS `oauth_personal_access_clients`;
 CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -470,14 +497,14 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.oauth_personal_access_clients: ~1 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_personal_access_clients: ~0 rows (approximately)
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
 	(1, 1, '2021-07-18 09:25:44', '2021-07-18 09:25:44');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.oauth_refresh_tokens
+-- Dumping structure for table laravel-vue.oauth_refresh_tokens
 DROP TABLE IF EXISTS `oauth_refresh_tokens`;
 CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -488,12 +515,12 @@ CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
   KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.oauth_refresh_tokens: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.oauth_refresh_tokens: ~0 rows (approximately)
 DELETE FROM `oauth_refresh_tokens`;
 /*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.orders
+-- Dumping structure for table laravel-vue.orders
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -512,7 +539,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table dev-poly.orders: ~5 rows (approximately)
+-- Dumping data for table laravel-vue.orders: ~4 rows (approximately)
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`id`, `order_nr`, `upgrade_id`, `user_id`, `amount`, `status`, `expiration`, `created_at`, `updated_at`) VALUES
@@ -523,7 +550,7 @@ INSERT INTO `orders` (`id`, `order_nr`, `upgrade_id`, `user_id`, `amount`, `stat
 	(5, '1508214FKFPZ', 1, 1, 1000, 'Chờ thanh toán', '2021-09-15 22:05:16', '2021-08-15 22:05:16', '2021-08-15 22:05:16');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.password_resets
+-- Dumping structure for table laravel-vue.password_resets
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -532,12 +559,12 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.password_resets: ~0 rows (approximately)
+-- Dumping data for table laravel-vue.password_resets: ~0 rows (approximately)
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.permissions
+-- Dumping structure for table laravel-vue.permissions
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -547,9 +574,9 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.permissions: ~26 rows (approximately)
+-- Dumping data for table laravel-vue.permissions: ~27 rows (approximately)
 DELETE FROM `permissions`;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -578,10 +605,13 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(25, 'delete upgrades', 'api', '2021-08-12 21:54:09', '2021-08-12 21:54:09'),
 	(26, 'edit upgrades', 'api', '2021-08-12 21:55:02', '2021-08-12 21:55:02'),
 	(27, 'edit orders', 'api', '2021-08-12 21:56:30', '2021-08-12 21:56:30'),
-	(28, 'delete orders', 'api', '2021-08-12 22:01:02', '2021-08-12 22:01:02');
+	(28, 'delete orders', 'api', '2021-08-12 22:01:02', '2021-08-12 22:01:02'),
+	(29, 'delete notifications', 'api', '2021-08-25 16:23:22', '2021-08-25 16:23:22'),
+	(30, 'create notifications', 'api', '2021-08-25 16:23:43', '2021-08-25 16:23:43'),
+	(31, 'edit notifications', 'api', '2021-08-25 16:23:58', '2021-08-25 16:23:58');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.roles
+-- Dumping structure for table laravel-vue.roles
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -591,18 +621,19 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.roles: ~3 rows (approximately)
+-- Dumping data for table laravel-vue.roles: ~4 rows (approximately)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'user', 'api', '2021-07-18 08:31:54', '2021-07-26 16:01:58'),
 	(2, 'admin', 'api', '2021-07-18 08:31:54', '2021-07-18 08:31:54'),
-	(3, 'member', 'api', '2021-07-18 08:31:54', '2021-08-06 15:30:37');
+	(3, 'member', 'api', '2021-07-18 08:31:54', '2021-08-06 15:30:37'),
+	(4, 'user vip', 'api', '2021-08-25 16:13:53', '2021-08-25 16:13:53');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.role_has_permissions
+-- Dumping structure for table laravel-vue.role_has_permissions
 DROP TABLE IF EXISTS `role_has_permissions`;
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   `permission_id` int(10) unsigned NOT NULL,
@@ -613,7 +644,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.role_has_permissions: ~40 rows (approximately)
+-- Dumping data for table laravel-vue.role_has_permissions: ~49 rows (approximately)
 DELETE FROM `role_has_permissions`;
 /*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
@@ -645,6 +676,9 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(26, 2),
 	(27, 2),
 	(28, 2),
+	(29, 2),
+	(30, 2),
+	(31, 2),
 	(1, 3),
 	(2, 3),
 	(5, 3),
@@ -656,10 +690,16 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(20, 3),
 	(21, 3),
 	(22, 3),
-	(23, 3);
+	(23, 3),
+	(29, 3),
+	(30, 3),
+	(31, 3),
+	(7, 4),
+	(22, 4),
+	(23, 4);
 /*!40000 ALTER TABLE `role_has_permissions` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.solutions
+-- Dumping structure for table laravel-vue.solutions
 DROP TABLE IF EXISTS `solutions`;
 CREATE TABLE IF NOT EXISTS `solutions` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -680,15 +720,15 @@ CREATE TABLE IF NOT EXISTS `solutions` (
   CONSTRAINT `solutions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.solutions: ~2 rows (approximately)
+-- Dumping data for table laravel-vue.solutions: ~2 rows (approximately)
 DELETE FROM `solutions`;
 /*!40000 ALTER TABLE `solutions` DISABLE KEYS */;
 INSERT INTO `solutions` (`id`, `title`, `description`, `link_github`, `demo_url`, `user_id`, `challen_id`, `created_at`, `updated_at`) VALUES
 	('af6e736b-e161-4593-a9e0-1d889a9e4712', 'Input component', '<p>Input component fffd</p>', 'https://github.com/Hoa98/devpoly/edit/main/resources/js/pages/public/AddSolution.vue', 'https://themify.me/themify-icons', 4, 7, '2021-08-15 18:04:21', '2021-08-16 10:15:53'),
-	('af6e736b-e161-4593-a9e0-1d889a9e4732', 'upload images', '<p>Đ&oacute; l&agrave; một dự &aacute;n tuyệt vời để l&agrave;m việc.&nbsp;Do l&uacute;c đầu, t&ocirc;i nghĩ rằng n&oacute; sẽ kh&oacute; khăn nhưng t&ocirc;i thấy n&oacute; rất vui v&agrave; t&ocirc;i đ&atilde; học được rất nhiều điều trong qu&aacute; tr&igrave;nh thực hiện n&oacute;.</p>\n\n<p>C&ocirc;ng nghệ: T&ocirc;i đ&atilde; sử dụng bộ nhớ firebase l&agrave;m m&aacute;y chủ của m&igrave;nh</p>\n\n<p>Farmwork: React.js Material UI</p>\n\n<p>Th&aacute;ch thức: Đ&oacute; l&agrave; th&aacute;ch thức khi kết nối phản ứng v&agrave; cơ sở lửa.</p>', 'https://github.com/FayVik/Image-uploader', 'https://image-uploader-one.vercel.app/', 4, 1, '2021-07-27 22:57:30', '2021-07-29 09:47:30');
+	('af6e736b-e161-4593-a9e0-1d889a9e4732', 'upload images', '<p>Đ&oacute; l&agrave; một dự &aacute;n tuyệt vời để l&agrave;m việc.&nbsp;Do l&uacute;c đầu, t&ocirc;i nghĩ rằng n&oacute; sẽ kh&oacute; khăn nhưng t&ocirc;i thấy n&oacute; rất vui v&agrave; t&ocirc;i đ&atilde; học được rất nhiều điều trong qu&aacute; tr&igrave;nh thực hiện n&oacute;.</p>\n\n<p>C&ocirc;ng nghệ: T&ocirc;i đ&atilde; sử dụng bộ nhớ firebase l&agrave;m m&aacute;y chủ của m&igrave;nh</p>\n\n<p>Farmwork: React.js Material UI</p>\n\n<p>Th&aacute;ch thức: Đ&oacute; l&agrave; th&aacute;ch thức khi kết nối phản ứng v&agrave; cơ sở lửa.</p>', 'https://github.com/FayVik/Image-uploader', 'https://image-uploader-one.vercel.app/', 1, 1, '2021-07-27 22:57:30', '2021-07-29 09:47:30');
 /*!40000 ALTER TABLE `solutions` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.upgrades
+-- Dumping structure for table laravel-vue.upgrades
 DROP TABLE IF EXISTS `upgrades`;
 CREATE TABLE IF NOT EXISTS `upgrades` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -701,14 +741,14 @@ CREATE TABLE IF NOT EXISTS `upgrades` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table dev-poly.upgrades: ~1 rows (approximately)
+-- Dumping data for table laravel-vue.upgrades: ~0 rows (approximately)
 DELETE FROM `upgrades`;
 /*!40000 ALTER TABLE `upgrades` DISABLE KEYS */;
 INSERT INTO `upgrades` (`id`, `name`, `description`, `price`, `period`, `created_at`, `updated_at`) VALUES
 	(1, 'Premium 1 tháng', '<p>Premium 1 th&aacute;ng</p>', 1000, 1, '2021-08-13 23:24:22', '2021-08-13 23:24:22');
 /*!40000 ALTER TABLE `upgrades` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.upvotes
+-- Dumping structure for table laravel-vue.upvotes
 DROP TABLE IF EXISTS `upvotes`;
 CREATE TABLE IF NOT EXISTS `upvotes` (
   `user_id` int(10) unsigned NOT NULL,
@@ -721,15 +761,15 @@ CREATE TABLE IF NOT EXISTS `upvotes` (
   CONSTRAINT `upvotes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table dev-poly.upvotes: ~2 rows (approximately)
+-- Dumping data for table laravel-vue.upvotes: ~2 rows (approximately)
 DELETE FROM `upvotes`;
 /*!40000 ALTER TABLE `upvotes` DISABLE KEYS */;
 INSERT INTO `upvotes` (`user_id`, `solution_id`, `created_at`, `updated_at`) VALUES
-	(1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', '2021-08-17 17:34:15', '2021-08-17 17:34:15'),
+	(1, 'af6e736b-e161-4593-a9e0-1d889a9e4712', '2021-08-21 22:55:08', '2021-08-21 22:55:08'),
 	(1, 'af6e736b-e161-4593-a9e0-1d889a9e4732', '2021-08-17 21:05:15', '2021-08-17 21:05:15');
 /*!40000 ALTER TABLE `upvotes` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.upvote_feedbacks
+-- Dumping structure for table laravel-vue.upvote_feedbacks
 DROP TABLE IF EXISTS `upvote_feedbacks`;
 CREATE TABLE IF NOT EXISTS `upvote_feedbacks` (
   `user_id` int(10) unsigned NOT NULL,
@@ -742,14 +782,12 @@ CREATE TABLE IF NOT EXISTS `upvote_feedbacks` (
   CONSTRAINT `upvote_feedbacks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table dev-poly.upvote_feedbacks: ~1 rows (approximately)
+-- Dumping data for table laravel-vue.upvote_feedbacks: ~0 rows (approximately)
 DELETE FROM `upvote_feedbacks`;
 /*!40000 ALTER TABLE `upvote_feedbacks` DISABLE KEYS */;
-INSERT INTO `upvote_feedbacks` (`user_id`, `feedback_id`, `created_at`, `updated_at`) VALUES
-	(1, 3, NULL, NULL);
 /*!40000 ALTER TABLE `upvote_feedbacks` ENABLE KEYS */;
 
--- Dumping structure for table dev-poly.users
+-- Dumping structure for table laravel-vue.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -776,7 +814,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_phone_unique` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Dumping data for table dev-poly.users: ~4 rows (approximately)
+-- Dumping data for table laravel-vue.users: ~4 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `gender`, `address`, `phone`, `image`, `provider`, `github_url`, `provider_id`, `is_active`, `verify_token`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES

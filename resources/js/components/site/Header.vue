@@ -16,6 +16,9 @@
         </div>
         <div class="flexbox flex-1 flex-row-reverse col-4 col-sm-12 login-and-setting" v-if="user">
          <ul class="nav navbar-toolbar">
+           <li class="dropdown dropdown-user">
+               <router-link :to="{ name: 'notification' }" class="nav-link"><i class="fa fa-bell-o rel" ><span v-if="notification.notifi_new.length>0" class="notify-signal"></span></i></router-link>
+           </li>
               <li class="dropdown dropdown-user" v-if="user">
                   <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                       <img v-if="user.image" :src="'/'+user.image" width="40" height="40" class="rounded-circle" />
@@ -23,6 +26,8 @@
                       <span></span>{{user.name}}<i class="fa fa-angle-down m-l-5"></i></a>
                   <ul class="dropdown-menu dropdown-menu-right">
                       <router-link :to="{ name: 'profile' }" class="dropdown-item"><i class="fa fa-user mr-3"></i>Thông tin</router-link>
+                      <li class="dropdown-divider"></li>
+                      <router-link :to="{ name: 'notification' }" class="dropdown-item"><i class="ti-comments mr-3"></i>Thông báo</router-link>
                       <li class="dropdown-divider"></li>
                       <router-link :to="{ name: 'homeDashboard' }" class="dropdown-item"><i class="ti-layout-grid2-alt mr-3"></i>Bảng điều khiển</router-link>
                       <li class="dropdown-divider"></li>
@@ -48,12 +53,15 @@ import { mapGetters } from 'vuex'
 
 export default {
    computed: mapGetters({
-    user: 'auth/user'
+    user: 'auth/user',
+      notification: 'notification/notification_by_user'
   }),
   
   created () {
     this.$store.dispatch('auth/fetchUser');
+    this.$store.dispatch('notification/notificationByUser');
   },
+  
   methods: {
     async logout () {
       // Log out the user.

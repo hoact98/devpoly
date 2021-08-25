@@ -557,8 +557,6 @@ export default {
     },
     async replyFeedback(index,id) {
        this.form.feedback_content = this.$refs.feedback_content[index].value;
-       console.log(this.$refs.feedback_content[index].value);
-       console.log('id',id);
         await this.form.post(route('create.feedback',[id,this.$route.params.id]))
         .then(response => {
           if(response.data.status == 'success'){

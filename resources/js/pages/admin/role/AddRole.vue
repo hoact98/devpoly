@@ -81,7 +81,7 @@ export default {
   },
    computed: {
         permissions () {
-            return this.$store.state.permission.permissions;
+            return this.$store.state.permission.all;
         },
          selectAll: {
              get: function () {
@@ -101,7 +101,7 @@ export default {
         },
    },
   created: function () {
-      this.$store.dispatch('permission/fetch');
+      this.$store.dispatch('permission/all');
   },
   methods: {
    

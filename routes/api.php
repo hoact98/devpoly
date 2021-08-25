@@ -10,6 +10,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OmnipayController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UpgradeController;
@@ -156,4 +157,14 @@ Route::prefix('upgrade')->group(function() {
     Route::get('{id}', [UpgradeController::class, 'show'])->name('show.upgrade');
     Route::post('update/{id}', [UpgradeController::class, 'update'])->name('update.upgrade');
     Route::delete('delete/{id}', [UpgradeController::class, 'delete'])->name('delete.upgrade');
+});
+
+Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
+Route::prefix('notification')->group(function() {
+    Route::post('add', [NotificationController::class, 'create'])->name('create.notification');
+    Route::get('by-user', [NotificationController::class, 'notificationByUser'])->name('byUser.notification');
+    Route::get('{id}', [NotificationController::class, 'show'])->name('show.notification');
+    Route::post('read/{id}', [NotificationController::class, 'markAsRead'])->name('markAsRead.notification');
+    Route::post('update/{id}', [NotificationController::class, 'update'])->name('update.notification');
+    Route::delete('delete/{id}', [NotificationController::class, 'delete'])->name('delete.notification');
 });
