@@ -3,6 +3,7 @@
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link :to="{name:'add.order'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -35,7 +36,7 @@ export default {
           search: '',
           length: 10,
           column: 'id',
-          dir: 'asc'
+          dir: 'desc'
       },
       columns: [
           {
@@ -95,7 +96,21 @@ export default {
                 var result = response.data;
                 for(var i in result['data']){
                     result['data'][i].key=Number(i)+1;
+                    switch (result['data'][i].status) {
+                        case 0:
+                            result['data'][i].status = "Chờ Thanh Toán";
+                            break;
+                        case 1:
+                            result['data'][i].status = "Thành Công";
+                            break;
+                            case 2:
+                            result['data'][i].status = "Lỗi";
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                // console.log(result.data);
                 this.data = result;
             })
             // eslint-disable-next-line

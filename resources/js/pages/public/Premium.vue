@@ -11,11 +11,11 @@
         <div class="row content-list">
           <div v-for="upgrade in upgrades" :key="upgrade.id" class="col-md-6 col-xs-12 col-lg-6 col-xl-4">
             <div class="content-item">
-              <div class="content-item-title">
+              <div class="">
                 <h3>{{upgrade.name}}</h3>
                 <h2>{{upgrade.price}} VNĐ</h2>
               </div>
-              <div class="content-item-des">
+              <div class="">
                 <p v-html="upgrade.description"></p>
               </div>
               <div>

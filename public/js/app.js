@@ -2835,113 +2835,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -3656,15 +3549,6 @@ var routes = [{
   component: page("public/chat/Chat.vue"),
   name: 'chat'
 }, {
-  path: '/private-chat',
-  alias: '',
-  meta: {
-    layout: 'home',
-    middleware: _middleware_auth_client__WEBPACK_IMPORTED_MODULE_1__.default
-  },
-  component: page("public/chat/PrivateChat.vue"),
-  name: 'private.chat'
-}, {
   path: '/overview/:slug',
   alias: '',
   meta: {
@@ -3979,6 +3863,14 @@ var routes = [{
   },
   component: page("admin/order/Order.vue"),
   name: 'admin.orders'
+}, {
+  path: '/admin/order-add',
+  meta: {
+    layout: 'admin',
+    middleware: _middleware_auth__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  component: page("admin/order/AddOrder.vue"),
+  name: 'add.order'
 }, {
   path: '/admin/order-edit/:id',
   meta: {
@@ -72900,203 +72792,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "social" }, [
-    _c("div", { staticClass: "container" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-discord" }, [
-              _c(
-                "svg",
-                {
-                  attrs: {
-                    height: "50",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 245 240",
-                    fill: "#fff"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(1)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-yt" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-tw" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(3)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "social-block" }, [
-            _c("div", { staticClass: "social-icon bg-tw" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "social-icon-svg",
-                  attrs: {
-                    fill: "#fff",
-                    focusable: "false",
-                    viewBox: "0 0 24 24",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(4)
-          ])
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("h2", {}, [_vm._v("Stay Update")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Discord")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Join other developers to ask for help or help others.\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Thu Nghiem Youtube")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Watch coding tutorials and listen to my stories\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [
-        _vm._v("DevChallenges Twitter")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              Get updates on DevChallenges and other users\n            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "social-label" }, [_vm._v("Thu Nghiem Twitter")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "social-description" }, [
-        _vm._v(
-          "\n              See what I am up to and let's connect\n            "
-        )
-      ])
+    return _c("section", { staticClass: "social" }, [
+      _c("div", { staticClass: "container" })
     ])
   }
 ]
@@ -92362,6 +92066,14 @@ var map = {
 		"./resources/js/pages/admin/notification/Notification.vue",
 		"resources_js_pages_admin_notification_Notification_vue"
 	],
+	"./admin/order/AddOrder": [
+		"./resources/js/pages/admin/order/AddOrder.vue",
+		"resources_js_pages_admin_order_AddOrder_vue"
+	],
+	"./admin/order/AddOrder.vue": [
+		"./resources/js/pages/admin/order/AddOrder.vue",
+		"resources_js_pages_admin_order_AddOrder_vue"
+	],
 	"./admin/order/EditOrder": [
 		"./resources/js/pages/admin/order/EditOrder.vue",
 		"resources_js_pages_admin_order_EditOrder_vue"
@@ -92681,22 +92393,6 @@ var map = {
 	"./public/chat/Chat.vue": [
 		"./resources/js/pages/public/chat/Chat.vue",
 		"resources_js_pages_public_chat_Chat_vue"
-	],
-	"./public/chat/Message": [
-		"./resources/js/pages/public/chat/Message.vue",
-		"resources_js_pages_public_chat_Message_vue"
-	],
-	"./public/chat/Message.vue": [
-		"./resources/js/pages/public/chat/Message.vue",
-		"resources_js_pages_public_chat_Message_vue"
-	],
-	"./public/chat/PrivateChat": [
-		"./resources/js/pages/public/chat/PrivateChat.vue",
-		"resources_js_pages_public_chat_PrivateChat_vue"
-	],
-	"./public/chat/PrivateChat.vue": [
-		"./resources/js/pages/public/chat/PrivateChat.vue",
-		"resources_js_pages_public_chat_PrivateChat_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -92869,7 +92565,15 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
+<<<<<<< HEAD
 /******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_notification_AddNotification_vue":1,"resources_js_pages_admin_notification_EditNotification_vue":1,"resources_js_pages_admin_notification_Notification_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_Notification_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_ForgotPassword_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_auth_ResetPassword_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Notification_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+=======
+<<<<<<< HEAD
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_notification_AddNotification_vue":1,"resources_js_pages_admin_notification_EditNotification_vue":1,"resources_js_pages_admin_notification_Notification_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_Notification_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Notification_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+=======
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_mentor_AddMentor_vue":1,"resources_js_pages_admin_mentor_EditMentor_vue":1,"resources_js_pages_admin_mentor_Mentor_vue":1,"resources_js_pages_admin_order_AddOrder_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+>>>>>>> fcf64c9 (update version)
+>>>>>>> 69f3a38 (update version)
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

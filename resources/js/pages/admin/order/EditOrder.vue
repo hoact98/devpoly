@@ -74,7 +74,11 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Trạng thái</label>
                             <div class="col-sm-10">
-                                <input v-model="order.status" :class="{ 'is-invalid': form.errors.has('status') }" type="text" name="status" class="form-control" placeholder="Enter status">
+                                <select v-model="order.status" :class="{ 'is-invalid': form.errors.has('status') }" type="text" name="status" class="form-control" placeholder="Enter status">
+                                    <option value="0">Chờ Thanh Toán</option>
+                                    <option value="1">Thành Công</option>
+                                    <option value="2">Lỗi</option>
+                                </select>
                                 <div class="text-danger" v-if="form.errors.has('status')" v-html="form.errors.get('status')">
                                 </div>
                             </div>

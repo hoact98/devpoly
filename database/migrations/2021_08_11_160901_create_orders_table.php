@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('upgrade_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('amount')->default(1000);
-            $table->string('status');
+            $table->integer('status');
             $table->dateTime('expiration');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

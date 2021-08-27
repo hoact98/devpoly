@@ -43,13 +43,6 @@ const routes = [
         name: 'chat',
     },
     {
-        path: '/private-chat',
-        alias: '',
-        meta: {layout: 'home',middleware: auth_client},
-        component: page("public/chat/PrivateChat.vue"),
-        name: 'private.chat',
-    },
-    {
         path: '/overview/:slug',
         alias: '',
         meta: {layout: 'main'},
@@ -293,6 +286,12 @@ const routes = [
         meta: {layout: 'admin',middleware: auth},
         component: page("admin/order/Order.vue"),
         name: 'admin.orders',
+    },
+    {
+        path: '/admin/order-add',
+        meta: {layout: 'admin',middleware: auth},
+        component: page("admin/order/AddOrder.vue"),
+        name: 'add.order',
     },
     {
         path: '/admin/order-edit/:id',

@@ -11,7 +11,7 @@
         <div class="col-7">
           <h3>Chọn hình thức thanh toán</h3>
           <div class="payment-list">
-            <div class="payment-item payment-with-bank">
+            <div  @click="checkoutBanking()" class="payment-item payment-with-bank">
               <img src="/images/bank-icon.png" width="30" />
               <p>Thanh toán qua chuyển khoản ngân hàng</p>
             </div>
@@ -59,6 +59,13 @@ export default {
           .catch(errors => {
               //Handle Errors
           })
+    },
+    checkoutBanking(){
+         Swal.fire({
+              icon: "info",
+              title: "Nội Dung Chuyển Khoản",
+              text: "Kích Hoạt Tài Khoản: "+this.auth.phone,
+            });
     }
   }
 };
