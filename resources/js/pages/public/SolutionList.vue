@@ -16,35 +16,47 @@
             >
               <div class="solution-author">
                 <div class="author-avatar">
-                  <img src="images/avatar-1.png" alt="" />
+                  <img :src="'/' + solution.user.image" alt="" />
                 </div>
-                <span class="author-nickname"> nameUser </span>
+                <span class="author-nickname" style="color: black">
+                  {{ solution.user.name }}
+                </span>
               </div>
               <div class="solution-title">
-                <h3>{{ solution.title }}</h3>
+                <h3 style="color: black">{{ solution.title }}</h3>
               </div>
               <div class="solution-help">
-                <p class="help-message">I would love to hear your feedback</p>
+                <p class="help-message" style="color: black">
+                  I would love to hear your feedback
+                </p>
                 <span>No one reviewed this solution. Be the first one</span>
               </div>
+
               <div class="solution-challenge">
                 <div class="row">
                   <div class="col-5">
                     <div class="challenge-name">
-                      <p>{{ solution.challenges.title }}</p>
+                      <p style="color: black">{{ solution.challenge.title }}</p>
                     </div>
 
                     <div class="challenge-level">
-                      <span>{{ solution.challenges.level }}</span>
+                        <span style="color: black" v-if="solution.challenge.level==1">Beginner</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==2">Elementary</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==3">Intermediate</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==4">Upper intermediate</span>
+                        <span style="color: black" v-else-if="solution.challenge.level==5">Advanced</span>
+                        <span style="color: black" v-else>Proficient</span>
                     </div>
                   </div>
                   <div class="col-7">
                     <div class="challenge-img">
-                      <img src="images/challenge-img-1.png" alt="" />
+                      <img :src="'/' + solution.challenge.image" alt="" />
                     </div>
                   </div>
                 </div>
               </div>
+            </router-link>
+
               <div class="solution-action">
                 <div v-if="auth">
                   <div v-if="solution.upvote.length>0">
@@ -83,10 +95,8 @@
                       <i class="ti-comment"></i>
                     <span class="pl-2" v-if="solution.feedbacks" v-html="solution.feedbacks.length"></span>
                   </div>
-                  <span>feedback</span>
-                </div>
+                </router-link>
               </div>
-            </router-link>
           </div>
         </div>
       </div>
@@ -97,20 +107,40 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     solutions() {
-      return this.$store.state.solution.solutions;
+      return this.$store.state.solution.solutionByCate;
     },
+     auth(){
+      return this.$store.state.auth.user;
+    }
   },
   created: function () {
-    this.$store.dispatch("solution/fetch");
+    this.$store.dispatch("solution/byCate",this.$route.params.slug);
+    this.$store.dispatch('auth/fetchUser');
+    this.$store.dispatch("challengecategory/get_One_Data", this.$route.params.slug);
   },
+  methods:{
+    upvoteSolution(id){
+        axios.post(route('upvote.solution',id))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.$store.dispatch("solution/byCate",this.$route.params.slug);
+          }
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+   
+  }
 };
 </script>
 
 <style lang="scss">
 @import "../../../sass/solution.scss";
 </style>
-
