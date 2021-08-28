@@ -9,7 +9,7 @@
                             <div class="ibox-body">
                                 <form class="mail-search mb-3" action="javascript:;">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Search here...">
+                                        <input v-model="search" @keyup="getUsers" class="form-control" type="text" placeholder="Search here...">
                                     </div>
                                 </form>
                                 <ul class="nav nav-tabs tabs-line">
@@ -106,6 +106,7 @@ import Cookies from 'js-cookie';
 export default {
    data:() => ({
         message:null,
+        search:'',
         files:[],
         activeFriend:{},
         typingFriend:{},
@@ -231,6 +232,14 @@ export default {
                   this.activeFriend=this.friends[0];
                 }
             });
+        },
+         getUsers(){
+           axios.get(route('search.private',this.search)).then(response => {
+                this.users = response.data.data;
+                if(this.friends.length>0){
+                  this.activeFriend=this.friends[0];
+                }
+            }); 
         },
       scrollToEnd: function() {
         setTimeout(function () {

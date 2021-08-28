@@ -174,3 +174,6 @@ Route::get('/reset-password/{token}', [AuthController::class,'checkTokenResset']
 
 Route::post('/reset-password', [AuthController::class,'resetPass'])
         ->middleware('guest')->name('password.update');
+
+Route::get('/search-private/{search}', [ChatController::class,'searchPrivate'])->name('search.private');
+Route::get('/search-room/{search}', [ChatController::class,'searchGroup'])->name('search.room');

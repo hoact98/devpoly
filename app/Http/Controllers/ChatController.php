@@ -8,6 +8,7 @@ use App\Models\ChatRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
 use App\Events\PrivateMessageSent;
+use App\Models\User;
 
 class ChatController extends Controller
 {
@@ -98,5 +99,28 @@ class ChatController extends Controller
         //     'data' => $message,
         // ], 200);
 
+    }
+    
+    public function searchPrivate($search)
+    {
+        $users = User::where('name','like','%'.$search.'%')->get();
+        $users->load('roles');
+        $users->load('challenges');
+        $users->load('solutions');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => $users,
+        ], 200);
+    }
+
+    public function searchGroup($search)
+    {
+        $rooms = ChatRoom::where('name','like','%'.$search.'%')->get();
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list rooms',
+            'data' => $rooms,
+        ], 200);
     }
 }

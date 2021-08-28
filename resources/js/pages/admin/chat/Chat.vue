@@ -11,7 +11,7 @@
                             <div class="ibox-body">
                                 <form class="mail-search mb-3" action="javascript:;">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Search here...">
+                                        <input v-model="search" @keyup="searchRooms" class="form-control" type="text" placeholder="Search here...">
                                     </div>
                                 </form>
                                 <ul class="nav nav-tabs tabs-line">
@@ -105,6 +105,7 @@ import Cookies from 'js-cookie';
 export default {
    data:() => ({
         title: 'Trao đổi',
+        search: '',
         // user:null,
         message:null,
         emoStatus:false,
@@ -168,6 +169,11 @@ export default {
                 this.setRoom(response.data.data[0]);
             });
             
+        },
+        searchRooms(){
+            axios.get(route('search.room',this.search)).then(response => {
+                this.chatRooms = response.data.data;
+            }); 
         },
         setRoom(room) {
             this.currentRoom = room;
