@@ -15,7 +15,7 @@
               <a class="develope-name" href="/">@devfpoly</a></span
             >
           </p>
-          <p>© 2021 devchallenge.io</p>
+          <p>© 2021 devpoy.io</p>
         </div>
         <div class="col-md-3 footer-cate mb-4 pb-4">
           <a href="/">Privacy Policy</a>

@@ -148,9 +148,15 @@
 
 .product-item {
     padding: 12px;
+ 
 }
 
 .product-item .product-content {
+    position: relative;
+    &:hover {
+        .lock-level {
+            display: block;}
+    }
     background-color: var(--background-light);
     border: 1px solid #ccc;
     border-radius: var(--border-radius-main);
@@ -206,5 +212,17 @@
     background-color: var(--primary-color);
 }
 
-
+.lock-level{
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    opacity: 0.5;
+    display:none;
+    object-fit: contain;
+}
 /* ======================================= */

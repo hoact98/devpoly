@@ -189,13 +189,13 @@ class OrderController extends Controller
     public function handleChart()
     {
         $amount = Order::select(DB::raw("SUM(amount) as sum"))
-            ->where('status', 'like', 1)
+            ->where('status', '=', 1)
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('sum');
 
         $months = Order::select(DB::raw("Month(created_at) as month"))
-            ->where('status', 'like', 1)
+            ->where('status', '=', 1)
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('month');

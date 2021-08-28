@@ -157,7 +157,7 @@ class ChallengeCategoryController extends Controller
         ->where('challenges.cate_challen_id','=',$data['category']->id)
         ->get();
         $data['number_solution'] = count($chall);
-        $data['challenges']= Challenge::where('cate_challen_id',$data['category']->id)->get();
+        $data['challenges']= Challenge::where('cate_challen_id',$data['category']->id)->orderBy('level', 'asc')->get();
         return response()->json(['status'=>'success','message'=>'Success get challenge category','data'=>$data],200);
     }
     public function getOneBySlug($slug){
