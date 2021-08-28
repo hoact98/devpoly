@@ -194,11 +194,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     challengecategories: function challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
+      return this.$store.state.challengecategory.all;
     }
   },
   created: function created() {
-    this.$store.dispatch("challengecategory/fetch");
+    this.$store.dispatch("challengecategory/all");
   },
   methods: {
     uploadImage: function uploadImage(event) {

@@ -21,11 +21,21 @@
                                 <div class="text-danger" v-if="form.errors.has('title')" v-html="form.errors.get('title')"></div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tài khoản (id)</label>
+                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Tài khoản: </label>
                             <div class="col-sm-10">
-                                <input v-model="form.user_id" type="number" step="1" min="1" :class="{ 'is-invalid': form.errors.has('user_id') }" name="user_id" class="form-control" placeholder="Nhập id">
-                                <div class="text-danger" v-if="form.errors.has('user_id')" v-html="form.errors.get('user_id')"></div>
+                               <select  class="form-control select2" aria-label="Default select example"
+                                name="user_id" v-model="form.user_id"
+                                :class="{'is-invalid': form.errors.has('user_id'), }">
+                                <option value="">Chọn tài khoản</option>
+                                <option v-for="user in users"
+                                  :key="user.id"
+                                  :value="user.id">
+                                  {{ user.name }}
+                                </option>
+                              </select>
+                              <div class="text-danger"  v-if="form.errors.has('user_id')"
+                                v-html="form.errors.get('user_id')"/>
                             </div>
                         </div>
                          <div class="form-group row">
@@ -63,6 +73,14 @@ export default {
   }),
    components:{
       Footer
+  },
+  computed: {
+    users() {
+      return this.$store.state.user.all;
+    },
+  },
+  created: function () {
+    this.$store.dispatch("user/all");
   },
     methods: {
         async addNotifi () {

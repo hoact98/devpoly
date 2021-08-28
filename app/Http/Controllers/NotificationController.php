@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NotificationRequest;
 use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ class NotificationController extends Controller
      public function show($id)
      {
          $notification = Notification::find($id);
+         $notification['users']= User::all();
          return response()->json(['status'=>'success','message'=>'Succsess get notification','data'=>$notification],200);
      }
  

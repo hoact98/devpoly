@@ -137,11 +137,11 @@ export default {
   },
   computed: {
     challengecategories() {
-      return this.$store.state.challengecategory.challengecategories;
+      return this.$store.state.challengecategory.all;
     },
   },
   created: function () {
-    this.$store.dispatch("challengecategory/fetch");
+    this.$store.dispatch("challengecategory/all");
   },
   methods: {
      uploadImage(event){
