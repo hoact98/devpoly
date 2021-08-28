@@ -25,11 +25,11 @@
         </div>
 
         <div class="col-5">
-          <h3>Thông tin khách hàng</h3>
+          <h3>Thông tin chuyển khoản</h3>
           <div class="info-user-payment" v-if="auth">
-            <p><b>Họ và tên:</b> {{auth.name}}</p>
-            <p><b>Số điện thoại:</b> {{auth.phone}}</p>
-            <p><b>Email:</b> {{auth.email}}</p>
+            <p><b>Họ và tên:</b> TA NGOC NINH</p>
+            <p><b>Số tài khoản:</b> 48810000079810</p>
+            <p><b>Ngân Hàng:</b> BIDV</p>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
          Swal.fire({
               icon: "info",
               title: "Nội Dung Chuyển Khoản",
-              text: "Kích Hoạt Tài Khoản: "+this.auth.phone,
+              text: "Kích Hoạt Tài Khoản: "+this.auth.email,
             });
     }
   }

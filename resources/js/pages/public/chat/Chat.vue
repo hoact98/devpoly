@@ -5,6 +5,7 @@
         <div class="container">
                <div class="row">
         <div class="col-md-6">
+             <a href="https://discord.com/channels/881082669130190898/881082669130190901" >
           <div class="social-block">
             <div class="social-icon bg-discord">
               <svg
@@ -24,14 +25,18 @@
 
             <div>
               <p class="social-label" style="">Discord</p>
-              <a href="https://discord.com/channels/881082669130190898/881082669130190901" class="social-description">
-                Join other developers to ask for help or help others.
-              </a>
+            <p class="social-description">
+                  Join other developers to ask for help or help others.
+            </p>
+            
+           
             </div>
           </div>
+             </a>
         </div>
 
         <div class="col-md-6">
+          <a href="https://www.youtube.com/channel/UCr3kDr9QiZ7VbZxAKh57OFQ">
           <div class="social-block">
             <div class="social-icon bg-yt">
               <svg
@@ -49,14 +54,16 @@
 
             <div>
               <p class="social-label" style="">DevPoly Youtube</p>
-              <a  href="https://www.youtube.com/channel/UCr3kDr9QiZ7VbZxAKh57OFQ" class="social-description" style="">
+              <p  class="social-description" style="">
                 Watch coding tutorials and listen to my stories
-              </a>
+              </p>
             </div>
           </div>
+          </a>
         </div>
 
         <div class="col-md-6">
+          <a href="https://www.facebook.com/groups/892279088305981">
           <div class="social-block">
             <div class="social-icon bg-tw">
               <img src="/images/facebook-app-logo.svg" alt=""  class="social-icon-svg">
@@ -65,11 +72,12 @@
 
             <div>
               <p class="social-label" style="">DevPoly Group Facebook</p>
-              <a href="https://www.facebook.com/groups/892279088305981" class="social-description" style="">
+              <p  class="social-description" style="">
                 Get updates on DevChallenges and other users
-              </a>
+              </p>
             </div>
           </div>
+          </a>
         </div>
 
         <div class="col-md-6">
@@ -107,121 +115,6 @@
 
 <script>
 
-<<<<<<< HEAD
-export default {
-   data:() => ({
-        // user:null,
-        search: '',
-        message:null,
-        emoStatus:false,
-        myText:null,
-        allMessages:[],
-        chatRooms: [],
-        currentRoom:{},
-        files:[],
-        token:document.head.querySelector('meta[name="csrf-token"]').content
-  }),
-   components:{
-      MessageList,
-      Picker
-  },
-  computed:{
-      user(){
-          return this.$store.state.auth.user;
-      },
-    },
-  created(){
-      this.$store.dispatch('auth/fetchUser');
-      this.getRooms();
-    },
-     watch:{
-      currentRoom(val){
-        this.fetchMessages();
-      }
-      
-    },
-    methods: {
-         sendMessage(){
-        //check if there message
-        if(!this.message){
-          return;
-        }
-          axios.post(route("newMessage",this.currentRoom.id), { message: this.message},{headers : {'Accept':'application/json','X-CSRF-TOKEN': this.token,
-        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
-                    this.message=null;
-                    this.emoStatus=false;
-                    this.allMessages.push(response.data.data)
-                    this.scrollToEnd();
-          });
-        },
-        upLoad(file){
-          
-        let data = new FormData();
-        data.append('file',file.file); 
-          axios.post(route("newMessage",this.currentRoom.id), data,{headers : {'Accept':'application/json','Content-Type' : 'image/png',
-        'Authorization': 'Bearer '+ Cookies.get('token')}}).then(response => {
-                    this.files=[];
-                    this.allMessages.push(response.data.data)
-                    this.scrollToEnd();
-          });
-      },
-        getRooms() {
-            axios.get(route('rooms'),{headers : {'Accept':'application/json',
-                'Authorization': 'Bearer '+ Cookies.get('token')}})
-                .then((response) => {
-                this.chatRooms = response.data.data;
-                this.setRoom(response.data.data[0]);
-            });
-            
-        },
-        searchRooms(){
-            axios.get(route('search.room',this.search)).then(response => {
-                this.chatRooms = response.data.data;
-            }); 
-        },
-        setRoom(room) {
-            this.currentRoom = room;
-            this.connect();
-        },
-        connect(){
-                Echo.private("chat." + this.currentRoom.id)
-            .listen('NewChatMessage',(e)=>{
-                this.allMessages.push(e.message)
-                document.getElementById('ChatAudio').play();
-                this.scrollToEnd();
-            });
-        },
-        fetchMessages() {
-            // console.log(this.currentRoom)
-            axios.get(route("messages", this.currentRoom.id),{headers : {'Accept':'application/json',
-            'Authorization': 'Bearer '+ Cookies.get('token')}})
-            .then((response) => {
-            this.allMessages = response.data.data;
-            this.scrollToEnd();
-            }) 
-        },
-        scrollToEnd: function() {
-            setTimeout(function () {
-                document.getElementById('msg_card_body').scrollTo(0,99999);
-            }, 0);
-        },
-        onInput(e){
-        if(!e){
-          return false;
-        }
-        if(!this.message){
-          this.message=e.native;
-        }else{
-          this.message=this.message + e.native;
-        }
-      },
-       toggleEmo(){
-            this.emoStatus= !this.emoStatus;
-      }
-    }
-}
-=======
->>>>>>> 6a3c683 (update version)
 </script>
 
 <style>
