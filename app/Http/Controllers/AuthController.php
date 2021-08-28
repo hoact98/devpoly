@@ -8,10 +8,14 @@ use App\Models\ModelHasRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller 
 {
@@ -162,5 +166,79 @@ class AuthController extends Controller
       ]);
       $userRole->save();
       return $githubUser;
+    }
+    //quên mật khẩu
+    public function postForgot(Request $request)
+    {
+        $rule= [
+            'email' => 'required|email|exists:users,email',
+        ];
+        $messages = [
+            'email.required' => 'Email không được để trống!',
+            'email.email' => 'Email không đúng định dạng',
+            'email.exists' => 'Email không chính xác!',
+        ];
+
+        $validator =  Validator::make($request->all(),$rule,$messages);
+        if ($validator->fails()) { 
+          return response()->json(['errors'=>$validator->errors()],422);
+        }
+
+        $token = Str::random(60);
+
+        DB::table('password_resets')->insert(
+            ['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]
+        );
+
+        Mail::send('password-verify',['token' => $token,'url'=>env('APP_URL')], function($message) use ($request) {
+                  $message->from('hoact98bgg@gmail.com');
+                  $message->to($request->email);
+                  $message->subject('Thông báo đặt lại mật khẩu');
+               });
+
+          return response()->json(['status' => 'success'],200);
+    }
+    public function resetPass(Request $request)
+    {
+       $rule= [
+           'password' => 'required|min:6',
+           'password_confirmation' => 'required|same:password',
+       ];
+       $messages = [
+           'password.required' => 'Mật khẩu không được để trống',
+           'password.min'=>'Mật khẩu ít nhất 6 ký tự',
+           'password_confirmation.required'=>'Mật khẩu không được để trống',
+           'password_confirmation.same' => 'Mật khẩu không khớp',
+       ];
+
+       $validator =  Validator::make($request->all(),$rule,$messages);
+       if ($validator->fails()) { 
+         return response()->json(['errors'=>$validator->errors()],422);
+       }
+
+        $updatePassword = DB::table('password_resets')
+                            ->where(['token' => $request->token])
+                            ->first();
+
+        if(!$updatePassword){
+          return response()->json(['errors' => ['password'=> ['Mã token không hợp lệ!']]],422);
+        }
+           
+          User::where('email', $updatePassword->email)
+                      ->update(['password' => Hash::make($request->password)]);
+
+          DB::table('password_resets')->where(['token' => $request->token])->delete();
+
+          return response()->json(['status' => 'success'],200);
+    }
+    public function checkTokenResset($token)
+    {
+        $updatePassword = DB::table('password_resets')
+                    ->where(['token' => $token])
+                    ->first();
+        if(!$updatePassword){
+          return response()->json(['errors' => ['password'=> ['Mã không hợp lệ!']]],422);
+        }
+        return response()->json(['status' => 'success'],200);
     }
 }

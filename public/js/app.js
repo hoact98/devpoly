@@ -4044,6 +4044,22 @@ var routes = [{
   component: page("admin/notification/EditNotification.vue"),
   name: 'edit.notification'
 }, {
+  path: '/forgot-password',
+  meta: {
+    layout: 'admin-login',
+    middleware: _middleware_guest__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  component: page("auth/ForgotPassword.vue"),
+  name: 'forgot.pass'
+}, {
+  path: '/reset-password/:token',
+  meta: {
+    layout: 'admin-login',
+    middleware: _middleware_guest__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  component: page("auth/ResetPassword.vue"),
+  name: 'reset.pass'
+}, {
   // not found handler
   path: '*',
   component: page("errors/404.vue")
@@ -92474,6 +92490,14 @@ var map = {
 		"./resources/js/pages/admin/user/User.vue",
 		"resources_js_pages_admin_user_User_vue"
 	],
+	"./auth/ForgotPassword": [
+		"./resources/js/pages/auth/ForgotPassword.vue",
+		"resources_js_pages_auth_ForgotPassword_vue"
+	],
+	"./auth/ForgotPassword.vue": [
+		"./resources/js/pages/auth/ForgotPassword.vue",
+		"resources_js_pages_auth_ForgotPassword_vue"
+	],
 	"./auth/Login": [
 		"./resources/js/pages/auth/Login.vue",
 		"resources_js_pages_auth_Login_vue"
@@ -92497,6 +92521,14 @@ var map = {
 	"./auth/Register.vue": [
 		"./resources/js/pages/auth/Register.vue",
 		"resources_js_pages_auth_Register_vue"
+	],
+	"./auth/ResetPassword": [
+		"./resources/js/pages/auth/ResetPassword.vue",
+		"resources_js_pages_auth_ResetPassword_vue"
+	],
+	"./auth/ResetPassword.vue": [
+		"./resources/js/pages/auth/ResetPassword.vue",
+		"resources_js_pages_auth_ResetPassword_vue"
 	],
 	"./errors/404": [
 		"./resources/js/pages/errors/404.vue",
@@ -92821,7 +92853,7 @@ webpackContext.id = "./resources/js/store/modules sync .*\\.js$";
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_notification_AddNotification_vue":1,"resources_js_pages_admin_notification_EditNotification_vue":1,"resources_js_pages_admin_notification_Notification_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_Notification_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Notification_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_admin_challenge_AddChallenge_vue":1,"resources_js_pages_admin_challenge_Challenge_vue":1,"resources_js_pages_admin_challenge_EditChallenge_vue":1,"resources_js_pages_admin_challengeCategory_AddchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_EditchallengeCategory_vue":1,"resources_js_pages_admin_challengeCategory_challengeCategory_vue":1,"resources_js_pages_admin_chat_Chat_vue":1,"resources_js_pages_admin_chat_Message_vue":1,"resources_js_pages_admin_chat_PrivateChat_vue":1,"resources_js_pages_admin_dashboard_Dashboard_vue":1,"resources_js_pages_admin_feedback_AddFeedback_vue":1,"resources_js_pages_admin_feedback_Feedback_vue":1,"resources_js_pages_admin_notification_AddNotification_vue":1,"resources_js_pages_admin_notification_EditNotification_vue":1,"resources_js_pages_admin_notification_Notification_vue":1,"resources_js_pages_admin_order_EditOrder_vue":1,"resources_js_pages_admin_order_Order_vue":1,"resources_js_pages_admin_permission_AddPermission_vue":1,"resources_js_pages_admin_permission_EditPermission_vue":1,"resources_js_pages_admin_permission_Permission_vue":1,"resources_js_pages_admin_profile_Notification_vue":1,"resources_js_pages_admin_profile_ProfileAdmin_vue":1,"resources_js_pages_admin_role_AddRole_vue":1,"resources_js_pages_admin_role_EditRole_vue":1,"resources_js_pages_admin_role_Role_vue":1,"resources_js_pages_admin_solution_EditSolution_vue":1,"resources_js_pages_admin_solution_Solution_vue":1,"resources_js_pages_admin_upgrade_AddUpgrade_vue":1,"resources_js_pages_admin_upgrade_EditUpgrade_vue":1,"resources_js_pages_admin_upgrade_Upgrade_vue":1,"resources_js_pages_admin_user_AddUser_vue":1,"resources_js_pages_admin_user_EditUser_vue":1,"resources_js_pages_admin_user_User_vue":1,"resources_js_pages_auth_ForgotPassword_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_LoginAdmin_vue":1,"resources_js_pages_auth_Register_vue":1,"resources_js_pages_auth_ResetPassword_vue":1,"resources_js_pages_errors_404_vue":1,"resources_js_pages_public_AddSolution_vue":1,"resources_js_pages_public_Chanllenge_vue":1,"resources_js_pages_public_Dashboard_vue":1,"resources_js_pages_public_EditSolution_vue":1,"resources_js_pages_public_Feedback_vue":1,"resources_js_pages_public_Home_vue":1,"resources_js_pages_public_Notification_vue":1,"resources_js_pages_public_Order_vue":1,"resources_js_pages_public_Overview_vue":1,"resources_js_pages_public_Payment_vue":1,"resources_js_pages_public_Premium_vue":1,"resources_js_pages_public_Profile_vue":1,"resources_js_pages_public_Setting_vue":1,"resources_js_pages_public_SolutionDetail_vue":1,"resources_js_pages_public_SolutionList_vue":1,"resources_js_pages_public_chat_Chat_vue":1,"resources_js_pages_public_chat_Message_vue":1,"resources_js_pages_public_chat_PrivateChat_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

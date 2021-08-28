@@ -168,3 +168,9 @@ Route::prefix('notification')->group(function() {
     Route::post('update/{id}', [NotificationController::class, 'update'])->name('update.notification');
     Route::delete('delete/{id}', [NotificationController::class, 'delete'])->name('delete.notification');
 });
+
+Route::post('forgot-pass',[AuthController::class,'postForgot'])->name('user.forgot_pass');
+Route::get('/reset-password/{token}', [AuthController::class,'checkTokenResset'])->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [AuthController::class,'resetPass'])
+        ->middleware('guest')->name('password.update');

@@ -36,7 +36,7 @@
                     </div>
                     <div class="auth-form__aside">
                         <div class="auth-form-help">
-                            <a href="#" class="auth-form__help-link auth-form-help-fogot">Quên mật khẩu</a>
+                            <router-link :to="{ name: 'forgot.pass' }" class="auth-form__help-link auth-form-help-fogot">Quên mật khẩu</router-link>
                             <span class="auth-form-help-separate"> </span>
                             <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
                         </div>

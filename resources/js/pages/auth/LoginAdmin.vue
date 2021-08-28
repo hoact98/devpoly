@@ -23,7 +23,7 @@
                 <label class="ui-checkbox ui-checkbox-info">
                     <input type="checkbox" v-model="form.remember" name="remember">
                     <span class="input-span"></span>Nhớ tôi</label> 
-                <router-link :to="{ name: 'password.request' }">Quên mật khẩu?</router-link>
+                <router-link :to="{ name: 'forgot.pass' }">Quên mật khẩu?</router-link>
             </div>
             <div class="form-group">
                 <button class="btn btn-info btn-block" type="submit">Đăng nhập</button>

@@ -343,6 +343,18 @@ const routes = [
         name: 'edit.notification',
     },
     {
+        path: '/forgot-password',
+        meta: {layout: 'admin-login', middleware: guest},
+        component: page("auth/ForgotPassword.vue"),
+        name: 'forgot.pass',
+    },
+    {
+        path: '/reset-password/:token',
+        meta: {layout: 'admin-login', middleware: guest},
+        component: page("auth/ResetPassword.vue"),
+        name: 'reset.pass',
+    },
+    {
         // not found handler
         path: '*',
         component: page("errors/404.vue"),
