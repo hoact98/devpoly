@@ -1,7 +1,6 @@
 <?php
-
 use Illuminate\Support\Facades\Broadcast;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -13,6 +12,19 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
+
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+    // return ['id' => $user->id, 'name' => $user->name];
+    return $user;
+
+});
+Broadcast::channel('lchat', function ($user) {
+    return $user;
+});
+
+Broadcast::channel('privatechat.{receiverid}', function ($user,$receiverid) {
+    return $user;
 });

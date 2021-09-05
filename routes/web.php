@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/admin/{any?}', function () {
 //     return view('home');
 // })->where('any', '[\/\w\.-]*');
+Route::get('/auth/redirect', [AuthController::class, 'redirect'])->name('redirect.github');
+Route::get('/callback', [AuthController::class, 'callback'])->name('callback.github');
 
-Route::get('/', function () {
-    return view('home');
-})->where('any', '[\/\w\.-]*');
-
-Route::get('/admin/{any?}', function () {
-    return view('admin');
-})->where('any', '[\/\w\.-]*');
+Route::get('/{any?}', [HomeController::class,'index'])->where('any', '[\/\w\.-]*');

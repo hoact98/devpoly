@@ -1,88 +1,188 @@
 <template>
-   <div class="content-wrapper">
-    <breadcrumb :title='title'></breadcrumb>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                 <table  class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>name</th>
-                      <th><router-link :to="{name:'add.permission'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(permission,index) in permissions" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{permission.name}}</td>
-                      <td>
-                         <router-link :to="{name: 'edit.permission', params: { id: permission.id }}" class="btn btn-info">Edit
-                        </router-link>
-                        <button class="btn btn-danger" @click="deletePermission(permission.id)">Delete</button>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+    <div class="content-wrapper">
+      <!-- START PAGE CONTENT-->
+      <div class="page-heading row">
+          <breadcrumb :title='title' class="col-6"></breadcrumb>
+          <router-link v-if="$can('create permissions')" :to="{name:'add.permission'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      <div class="page-content fade-in-up">
+        <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">{{title}}</div>
+              </div>
+              <div class="ibox-body">
+                  <form  @submit.prevent="deleteAll" @keydown="form.onKeydown($event)" class="form-table">
+                      <button type="submit" class="btn btn-gray delete-mul">Xoá mục đánh dấu</button>
+                      <data-table  :data="data"
+                        :columns="columns"
+                        @on-table-props-changed="reloadTable"
+                        class="table table-head-fixed text-nowrap">
+                    </data-table>
+                 </form>
+              </div>
+          </div>
+      </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
+import TableButton from '../../../components/TableButton.vue';
+import CheckboxTableComponent from '../../../components/CheckboxTableComponent.vue';
+
 export default {
    data() {
     return {
      title: 'Permissions',
+     data: {},
+     form: new Form({
+        permission_id: [],
+      }),
+      tableProps: {
+          search: '',
+          length: 10,
+          column: 'id',
+          dir: 'asc'
+      },
+      columns: [
+           {
+              label: '<input type="checkbox" name="checkall" class="checkall">',
+              component: CheckboxTableComponent,
+              orderable: false,
+          },
+          {
+              label: 'ID',
+              name: 'id',
+              orderable: true,
+          },
+          {
+              label: 'Name',
+              name: 'name',
+              orderable: true,
+          },
+           {
+              label: 'Action',
+              name: 'edit.permission',
+              orderable: false,
+              component: TableButton,
+              event: "click",
+              handler: this.deletePermission,
+          }
+      ]
     };
   },
-    computed: {
-          permissions () {
-              return this.$store.state.permission.permissions;
-          }
-      },
-      created: function () {
-          this.$store.dispatch('permission/fetch');
-      },
-      methods: {
-          deletePermission: function (id) {
+   components:{
+      Footer,
+      TableButton,
+      CheckboxTableComponent
+  },
+    created() {
+        this.getData();
+    },
+    methods: {
+      async  getData(url = route("permissions"), options = this.tableProps) {
+           await axios.get(url, {
+                params: options
+            })
+            .then(response => {
+                var result = response.data;
+                for(var i in result['data']){
+                    result['data'][i].key=Number(i)+1;
+                }
+                this.data = result;
+            })
+            // eslint-disable-next-line
+            .catch(errors => {
+                //Handle Errors
+            })
+        },
+        reloadTable(tableProps) {
+            this.getData(route("permissions"), tableProps);
+        },
+         deletePermission: function (id) {
              Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
+              title: 'Bạn có chắc?',
+              text: "Bạn sẽ không thể hoàn tác!",
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
+              confirmButtonText: 'Xoá!'
             }).then((result) => {
-
-              if (result.value) {
-                //Send Request to server
-                this.$store.dispatch('permission/deletePermission', id);
+                if(Permissions.indexOf('delete permissions') == -1){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bạn không có quyền xoá!',
+                    })
+                }else{
+                    if (result.value) {
+                        //Send Request to server
+                        this.$store.dispatch('permission/deletePermission', id).then(
+                            this.getData(route("permissions"), this.tableProps)
+                        )
+                    }
                 }
             })
-          }
+
+          },
+           deleteAll(){
+        var checkboxes = document.querySelectorAll('input[name="selected[]"]:checked');
+        var selected = [];
+        for (var i=0, n=checkboxes.length;i<n;i++) 
+        {
+            selected[i] = Number(checkboxes[i].value);
+        } 
+        this.form.permission_id = selected
+        if(selected.length>0){
+            Swal.fire({
+            title: 'Bạn có chắc?',
+            text: "Bạn sẽ không thể hoàn tác!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xoá!'
+            }).then((result) => {
+                if(Permissions.indexOf('delete permissions') == -1){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bạn không có quyền xoá quyền hạn!',
+                        })
+                }else{
+                    if (result.value) {
+                        this.form.post(route('multiple.permissions'))
+                        .then(response => {
+                            if(response.data.status == 'success'){
+                                 this.getData(route("permissions"), this.tableProps)
+                                Swal.fire(
+                                    'Đã xoá',
+                                    'Xoá quyền hạn thành công!',
+                                    'success'
+                                );
+                            }
+                        }).catch(()=>{
+                        Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Đã  xảy ra lỗi!',
+                                })
+                        });
+                    }
+                }
+            })
+        }else{
+            Swal.fire({
+                title: 'Chưa chọn quyền hạn',
+                text: "Chưa có quyền hạn nào được chọn!",
+                icon: 'warning',
+            });
+        }
       }
+    },
+    
 }
 </script>
 

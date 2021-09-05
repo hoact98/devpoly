@@ -1,13 +1,14 @@
 <template>
   <div class="app">
-      <SidebarHome></SidebarHome>
+     <div class="home-wapper">
+        <SidebarHome></SidebarHome>
       <main>
         <Header></Header>
         <slot />
-        <router-view/>
         <Social></Social>
         <Footer></Footer>
       </main>
+     </div>
   </div>
 </template>
 
@@ -29,5 +30,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../../sass/home.scss";
+// @import "../../sass/home.scss";
 </style>

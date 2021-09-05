@@ -3,19 +3,24 @@ import axios from "axios";
 // state
 export const state = {
   users: [],
-  user: {}
+  user: {},
+  all: []
 };
 
 // getters
 export const getters = {
   user: state => state.user,
-  users: state => state.users
+  users: state => state.users,
+  all: state => state.all
 };
 
 // mutations
 export const mutations = {
   FETCH(state, users) {
     state.users = users;
+  },
+  ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE(state, user) {
     state.user = user;
@@ -29,6 +34,11 @@ export const actions = {
       .get(route("users"))
       .then(response => commit("FETCH", response.data.data))
   },
+  all({ commit }) {
+    return axios
+      .get(route("all.user"))
+      .then(response => commit("ALL", response.data.data))
+  },
   fetchOne({ commit }, id) {
     axios
       .get(route("show.user", id))
@@ -38,7 +48,7 @@ export const actions = {
     axios
       .delete(route("delete.user", id))
       .then((response)=> {
-        this.dispatch("user/fetch")
+        // this.dispatch("user/fetch")
         if(response.data.status == 'success'){
         Swal.fire(
           'Deleted!',
@@ -65,4 +75,5 @@ export const actions = {
       .post(route("create.user"), data)
       .then()
   }
+  
 };

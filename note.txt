@@ -1,30 +1,14 @@
-- figma chưa hiển thị(done)
-- sửa lại thành lever bài học
-- bổ sung ảnh đại điện cho thử thách
-- về đăng nhập chưa làm được gì(đã xong login)
-- làm giao diện trang đăng ký, đăng nhập
-- hiển thị thông tin dashboard
-- chưa đổ dữ liệu trang thông tin user
-- chưa đổ dữ liệu đáp án của người dùng
-- danh sách phản hồi bài tập chưa đổ
-- đổi màu giao diện người dùng
 
+Sau khi tạo quyền: php artisan cache:forget spatie.permission.cache
+            then
+            php artisan cache:clear
 
-
-
-Admin
-- đổ thông tin màn hình chủ admin
-- đổi id thành số thứ tự phần người dùng(Done)
-- crud menter
-- chỗ thêm avatar người dùng sửa lại css phải có khung ảnh để hiển thị khi người dùng thêm(Danh mục cũng phải tương tự)
-- chưa có phân trang
-- sửa giao diện admin
-
-
-
-Phải đi khảo sát thực tế
-- tối thứ 6 Đức ghép báo cáo
-- Tối chủ nhật đẩy code lên server
-- khảo sát giá gói vip các trang web học tập
-
-
+Cấu hình mail (.env): Chức năng quên mật khẩu
+        MAIL_MAILER=smtp
+        MAIL_HOST=smtp.gmail.com
+        MAIL_PORT=587
+        MAIL_USERNAME=hoact98bgg@gmail.com
+        MAIL_PASSWORD=27B08c98a
+        MAIL_ENCRYPTION=tls
+        MAIL_FROM_ADDRESS=hoact98bgg@gmail.com
+        MAIL_FROM_NAME="${APP_NAME}"

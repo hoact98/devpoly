@@ -29,5 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'github' => [
+        'client_id' => '75bda53b5db66fdaa566',
+        'client_secret' => 'be6c6dd0aa42ddabe6f57926813d39bd4256542a',
+        'redirect' => env('APP_URL').'/callback', //link callback về webiste giống link đăng ký trên gỉthub
+      ], 
 
 ];

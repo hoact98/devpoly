@@ -3,19 +3,24 @@ import axios from "axios";
 // state
 export const state = {
   roles: [],
-  role: {}
+  role: {},
+  all: []
 };
 
 // getters
 export const getters = {
   role: state => state.role,
-  roles: state => state.roles
+  roles: state => state.roles,
+  all: state => state.all
 };
 
 // mutations
 export const mutations = {
   FETCH(state, roles) {
     state.roles = roles;
+  },
+  ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE(state, role) {
     state.role = role;
@@ -30,6 +35,12 @@ export const actions = {
       .then(response => commit("FETCH", response.data.data))
       .catch();
   },
+  all({ commit }) {
+    return axios
+      .get(route("all.role"))
+      .then(response => commit("ALL", response.data.data))
+      .catch();
+  },
   fetchOne({ commit }, id) {
     axios
       .get(route("show.role", id))
@@ -40,7 +51,7 @@ export const actions = {
     axios
       .delete(route("delete.role", id))
       .then((response)=> {
-        this.dispatch("role/fetch")
+        // this.dispatch("role/fetch")
         if(response.data.status == 'success'){
         Swal.fire(
           'Deleted!',

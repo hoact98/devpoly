@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
+use Carbon\CarbonImmutable;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable,Uuid,HasRoles;
+    use HasApiTokens,HasFactory, Notifiable,HasRoles,LaravelVueDatatableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,15 +26,82 @@ class User extends Authenticatable implements JWTSubject
         'username',
         'email',
         'password',
-        'avatar',
+        'image',
         'online',
+        'name',
+        'address',
+        'gender',
+        'phone' ,
         'socket_id',
-        'is_active'
+        'is_active',
+        'provider',
+        'provider_id',
+        'github_url'
     ];
 
-    protected $keyType = 'string';
-    public $incrementing = false;
     protected $guard_name = 'api';
+    protected $dataTableColumns = [
+        'id' => [
+            'searchable' => true,
+        ],
+        'username' => [
+            'searchable' => true,
+        ],
+        'email' => [
+            'searchable' => true,
+        ],
+        'image' => [
+            'searchable' => false,
+        ],
+        'name' => [
+            'searchable' => true,
+        ],
+    ];
+
+    protected $dataTableRelationships = [
+        "hasMany" => [
+            'solutions' => [
+                "model" => Solution::class,
+                'foreign_key' => 'user_id',
+                'columns' => [
+                    'title' => [
+                        'searchable' => true,
+                        'orderable' => true,
+                    ],
+                ],
+            ],
+        ],
+        "belongsToMany" => [
+            "roles" => [
+                "model" => Role::class,
+                "pivot" => [
+                    "table_name" => "model_has_roles",
+                    "foreign_key" => "role_id",
+                    "local_key" => "model_id",
+                ],
+                "columns" => [
+                    "name" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ],
+            "challenges" => [
+                "model" => Challenge::class,
+                "pivot" => [
+                    "table_name" => "challenge_users",
+                    "foreign_key" => "challen_id",
+                    "local_key" => "user_id",
+                ],
+                "columns" => [
+                    "title" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ]
+        ]
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -52,9 +121,16 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    // public function roles(){
-    //     return $this->belongsToMany(Role::class,'user_roles');
-    // }
+    protected $appends = [
+        'photo_url',
+        'time',
+
+    ];
+   
+    public function getTimeAttribute()
+    {
+        return CarbonImmutable::parse($this->updated_at)->calendar();
+    }
 
     /**
      * Get the profile photo URL attribute.
@@ -65,28 +141,18 @@ class User extends Authenticatable implements JWTSubject
     {
         return vsprintf('https://www.gravatar.com/avatar/%s.jpg?s=200&d=%s', [
             md5(strtolower($this->email)),
-            $this->username ? urlencode("https://ui-avatars.com/api/$this->username") : 'mp',
+            $this->name ? urlencode("https://ui-avatars.com/api/$this->name") : 'mp',
         ]);
     }
 
-    /**
-     * @return int
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-
-    public function information (){
-        return $this->hasOne(InformationUser::class,'user_id');
+    public function getAllPermissionsAttribute() {
+        $permissions = [];
+          foreach (Permission::all() as $permission) {
+            if (Auth::user()->can($permission->name)) {
+              $permissions[] = $permission->name;
+            }
+          }
+          return $permissions;
     }
     public function roles()
     {
@@ -94,7 +160,7 @@ class User extends Authenticatable implements JWTSubject
     }
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class,'model_has_permissions', 'model_id', 'permission_id');
+        return $this->belongsToMany('App\Models\Permission','model_has_permissions', 'model_id', 'permission_id');
     }
     public function hasPermission()
     {
@@ -106,14 +172,14 @@ class User extends Authenticatable implements JWTSubject
     }
     public function solutions()
     {
-        return $this->belongsToMany(Solution::class,'solution_users', 'user_id', 'solution_id');
+        return $this->hasMany(Solution::class,'user_id');
     }
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class,'user_id');
     }
-
-    public function messages(){
-        return $this->hasMany(Message::class);
+    public function upvote()
+    {
+        return $this->hasMany(Upvote::class,'user_id');
     }
 }

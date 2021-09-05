@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        if (Cookie::get('token') != null) {
+            $this->middleware(['header_api','auth:api']);
+        }
     }
 
     /**
@@ -21,8 +25,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+   
     public function index()
     {
-        return view('home');
+        // dd(Auth::user());
+        // dd(Auth::user()->allPermissions);
+        return view('admin', [
+            'auth' => Auth::user(),
+        ]);
     }
 }

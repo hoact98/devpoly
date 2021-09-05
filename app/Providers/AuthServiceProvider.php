@@ -8,23 +8,22 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
+     * Register services.
      *
-     * @var array
+     * @return void
      */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-    ];
+    public function register()
+    {
+        //
+    }
 
     /**
-     * Register any authentication / authorization services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

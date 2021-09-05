@@ -32,10 +32,10 @@ class SaveUserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->id)
             ],
             'role_id'=>'required',
-            'gender'=>['required'],
-            'address'=>['required'],
-            'phone'=>['required',Rule::unique('information_users')->ignore($this->id,'user_id')],
-            'permission_id'=>'required'
+            // 'gender'=>['required'],
+            // 'address'=>['required'],
+            'phone'=>['required',Rule::unique('users')->ignore($this->id)],
+            // 'permission_id'=>'required'
         ];
     }
 
@@ -51,11 +51,11 @@ class SaveUserRequest extends FormRequest
             'email.unique' => "Email đã tồn tại",
             'username.unique' => "Tên tài khoản đã tồn tại",
             'role_id.required' => "Hãy chọn vai trò",
-            'gender.required' => "Hãy chọn giới tính",
-            'address.required' => "Hãy nhập địa chỉ",
+            // 'gender.required' => "Hãy chọn giới tính",
+            // 'address.required' => "Hãy nhập địa chỉ",
             'phone.required' => "Hãy nhập SDT",
             'phone.unique' => "SDT đã tồn tại",
-            'permission_id.required' => "Hãy chọn quyền",
+            // 'permission_id.required' => "Hãy chọn quyền",
         ];
     }
 }

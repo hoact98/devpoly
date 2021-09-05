@@ -1,24 +1,22 @@
-main {
-    .content {
-        font-family: 'Poppins', sans-serif;
-    }
-}
+/* content */
 
-main .content h1,
-main .social h2 {
-    font-weight: 500;
-    font-size: 2.5rem;
-    padding: 22px 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
+// .home-wapper main .content {
+//     font-family: 'Poppins', sans-serif;
+// }
+// .home-wapper main .content h1,
+// .home-wapper main .social h2 {
+//     font-weight: 500;
+//     font-size: 2.5rem;
+//     padding: 22px 0;
+//     margin: 0;
+//     font-family: 'Poppins', sans-serif;
+// }
 .content-item {
     padding: 22px;
     border: 1px solid var(--border-color-grey);
     border-radius: var(--border-radius-main);
     margin-bottom: 24px;
-    background-color: var(--black-bold);
+    background-color: var(--background-light);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
     transition: 0.3s;
 }
@@ -34,25 +32,28 @@ main .social h2 {
     height: 24px;
     border-radius: var(--border-radius-main);
     margin-right: 12px;
-    img {
-        width: 100%;
-        height: 100%;
-    }
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
 }
 
 .solution-title {
     margin: 16px 0;
-    h3 {
-        font-size: 1.8rem;
-        cursor: pointer;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+}
+
+.solution-title h3 {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.solution-title h3:hover {
+    text-decoration: underline;
 }
 
 .help-message {
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-family: 'Lato', sans-serif;
 }
 
@@ -61,16 +62,17 @@ main .social h2 {
     border: 1px solid var(--border-color-grey);
     padding: 16px 12px;
     cursor: pointer;
-    span {
-        color: var(--purple);
-        font-family: 'Lato', sans-serif;
-    }
+}
+
+.solution-help span {
+    color: var(--purple);
+    font-family: 'Lato', sans-serif;
 }
 
 .solution-challenge {
     padding: 12px;
     border-radius: var(--border-radius-main);
-    background-color: var(--black);
+    background-color: var(--white);
     margin: 22px 0 12px 0;
     cursor: pointer;
 }
@@ -80,33 +82,30 @@ main .social h2 {
     align-items: center;
 }
 
-.challenge-name {
-    p {
-        font-size: 1.6rem;
-    }
+.challenge-name p {
+    font-size: 1rem;
 }
 
-.challenge-level {
-    span {
-        font-family: 'Lato', sans-serif;
-    }
+.challenge-level span {
+    font-family: 'Lato', sans-serif;
 }
 
 .challenge-img {
     height: 110px;
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: var(--border-radius-main);
-    }
 }
 
-.button-block {
+.challenge-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-main);
+}
+
+.button-block-solution {
     font-weight: 600;
     border: 1px solid var(--border-color-grey);
     border-radius: var(--border-radius-main);
     padding: 9px 40px;
-    background-color: var(--black);
+    background: linear-gradient(to right, #6d2fff, #6f42c1);
     color: var(--white);
     display: flex;
     width: 48%;
@@ -115,6 +114,7 @@ main .social h2 {
 
 .upvote {
     margin-right: 12px;
+    cursor: pointer;
 }
 
 .icon {
@@ -130,15 +130,5 @@ main .social h2 {
     margin: 0;
 }
 
-.upvote,
-.feedback {
-    transition: 0.3s;
-}
 
-.upvote:hover,
-.feedback:hover {
-    cursor: pointer;
-    background-color: var(--black);
-    border: 1px solid #8d99a7;
-    //box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
-}
+/* end content */

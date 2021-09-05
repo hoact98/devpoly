@@ -1,146 +1,174 @@
-
 <template>
- <div class="content-wrapper">
-    <breadcrumb :title='title'></breadcrumb>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-
-              <div class="card-body">
-                <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)">
-                  <div class="row">
-                    <div class="col-5 col-sm-3">
-                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
-                          <a class="nav-link active" id="general-tab" data-toggle="pill" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
-                          <a class="nav-link" id="permission-tab" data-toggle="pill" href="#permission" role="tab" aria-controls="permission" aria-selected="false">Permission</a>
-                          <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
-                        </div>
-                    </div>
-                    <div class="col-7 col-sm-9">
-                      <div class="tab-content" id="vert-tabs-tabContent">
-                          <div class="tab-pane text-left fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                              <div class="form-group">
-                                <label for="exampleInputName">Username:</label>
-                                <input type="text" v-model="data.user.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" name="username" placeholder="Enter username">
-                                  <div class="text-danger" v-if="form.errors.has('username')" v-html="form.errors.get('username')" />
-                              </div>
-                                <div class="form-group">
-                                <label for="exampleInputName">Name:</label>
-                                <input type="text" v-model="data.user.information.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" name="username" placeholder="Enter name">
-                                <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Email:</label>
-                                <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Enter email">
-                                  <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-                              
-                              </div>
-                              <div class="form-group">
-                                <label for="">Avatar</label>
-                                <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('avatar') }" class="form-control" name="avatar">
-                                  <div class="text-danger" v-if="form.errors.has('avatar')" v-html="form.errors.get('avatar')" />
-                                <img :src="'/'+data.user.avatar" alt="" width="200">
-                              </div>
-                                <div class="form-group">
-                                  <label>Role</label>
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <breadcrumb :title='title'></breadcrumb>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">{{title}}</div>
+                    <!-- <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    </div> -->
+                </div>
+                <div class="ibox-body">
+                  <div class="clf">
+                    <form @submit.prevent="updateUser"  @keydown="form.onKeydown($event)" class="form-horizontal row">
+                       <ul class="nav nav-tabs tabs-line-left col-2">
+                          <li class="nav-item">
+                              <a class="nav-link active" href="#tab-9-1" data-toggle="tab"><i class="fa fa-line-chart"></i> Tổng quan</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#tab-9-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Quyền hạn</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#tab-9-3" data-toggle="tab"><i class="ti-write"></i> Mật khẩu</a>
+                          </li>
+                      </ul>
+                      <div class="tab-content col-9"  v-if="data.user">
+                          <div class="tab-pane fade show active" id="tab-9-1">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Username <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" v-model="data.user.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" name="username" placeholder="Tên tài khoản">
+                                    <div class="text-danger" v-if="form.errors.has('username')" v-html="form.errors.get('username')" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Họ tên <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" v-model="data.user.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" placeholder="Nhập họ tên">
+                                    <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Email <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                    <input type="email" v-model="data.user.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" name="email" placeholder="Nhập email">
+                                    <div class="text-danger" v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Ảnh:</label>
+                                <div class="col-sm-10">
+                                  <input type="file" @change="upload($event)" :class="{ 'is-invalid': form.errors.has('image') }" class="form-control" name="image">
+                                  <div class="text-danger" v-if="form.errors.has('image')" v-html="form.errors.get('image')" />
+                                  <img id="previewImg" v-if="data.user.image" :src="'/'+data.user.image" alt="" width="200">
+                                  <img id="previewImg" v-else :src="data.user.photo_url" alt="" width="200">
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Vai trò <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
                                   <select class="form-control select2" v-model="data.user.role.role_id" :class="{ 'is-invalid': form.errors.has('role_id') }" name="role_id" style="width: 100%;">
                                     <option v-for="role in data.roles" :key="role.id" :value="role.id" :selected="role.id == data.user.role.role_id">{{role.name}}</option>
                                   </select>
                                   <div class="text-danger" v-if="form.errors.has('role_id')" v-html="form.errors.get('role_id')" />
                                 </div>
-                                <div class="form-group">
-                                  <label for="exampleInputAddress">Address:</label>
-                                  <input type="text" class="form-control" v-model="data.user.information.address" :class="{ 'is-invalid': form.errors.has('address') }" id="exampleInputAdress" placeholder="Enter address">
-                                  <div class="text-danger" v-if="form.errors.has('address')" v-html="form.errors.get('address')" />
+                            </div>
+                             <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Địa chỉ:</label>
+                                <div class="col-sm-10">
+                                   <input type="text" class="form-control" v-model="data.user.address" :class="{ 'is-invalid': form.errors.has('address') }" placeholder="Nhập địa chỉ">
+                                   <div class="text-danger" v-if="form.errors.has('address')" v-html="form.errors.get('address')" />
                                 </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPhone">Phone:</label>
-                                  <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.information.phone" id="exampleInputPhone" placeholder="Enter phone">
+                            </div>
+                             <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Số điện thoại <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" v-model="data.user.phone" placeholder="Nhập số điện thoại">
                                   <div class="text-danger" v-if="form.errors.has('phone')" v-html="form.errors.get('phone')" />
                                 </div>
-                                <div class="form-group">
-                                  <label for="exampleInputGender">Gender:</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" :value="1" v-model="data.user.information.gender" id="male" name="radio1">
-                                    <label class="form-check-label" for="male">Male</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" :value="0" v-model="data.user.information.gender" id="female" name="radio1">
-                                    <label class="form-check-label" for="female">Female</label>
-                                  </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Giới tính:</label>
+                                <div class="col-md-10">
+                                  <label class="ui-radio ui-radio-primary mr-3" for="male">
+                                      <input type="radio" name="gender" :value="1" id="male" v-model="data.user.gender">
+                                      <span class="input-span"></span>Nam</label>
+                                  <label class="ui-radio ui-radio-primary" for="female">
+                                      <input type="radio" name="gender" :value="0" id="female" v-model="data.user.gender">
+                                      <span class="input-span"></span>Nữ</label>
                                   <div class="text-danger" v-if="form.errors.has('gender')" v-html="form.errors.get('gender')" />
                                 </div>
-                                <div class="form-group">
-                                  <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" v-model="data.user.is_active" id="customSwitch1">
-                                    <label class="custom-control-label" for="customSwitch1">Active</label>
-                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Active</label>
+                                <div class="col-md-10">
+                                    <label class="ui-checkbox ui-checkbox-primary" for="is_active">
+                                     <input type="checkbox" v-model="data.user.is_active" class="form-check-input" id="is_active">
+                                    <span class="input-span"></span><strong>Active</strong></label>
                                 </div>
-                                <v-button :loading="form.busy">Submit</v-button>
+                              </div>
+                            <div class="form-group row">
+                              <div class="col-sm-10 ml-sm-auto">
+                                  <button class="btn btn-info" type="submit">Cập nhật</button>
+                              </div>
+                            </div>
                           </div>
-                           <div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
+                          <div class="tab-pane" id="tab-9-2">
                             <input type="hidden" v-model="permission_id">
-                            <div class="form-check" v-for="permission in data.permissions" :key="permission.id">
-                              <input class="form-check-input" type="checkbox" :id="'per_'+permission.id" :value="permission.id" v-model="form.permission_id">
-                              <label class="form-check-label" :for="'per_'+permission.id">{{permission.name}}</label>
+                            <div class="form-group" v-for="permission in data.permissions" :key="permission.id">
+                                <label class="ui-checkbox ui-checkbox-primary" :for="'per_'+permission.id">
+                                    <input class="form-check-input" type="checkbox" :id="'per_'+permission.id" :value="permission.id" v-model="form.permission_id">
+                                    <span class="input-span"></span>{{permission.name}}</label>
+                             </div>
+                           <div class="text-danger" v-if="form.errors.has('permission_id')" v-html="form.errors.get('permission_id')" />
+                             <v-button :loading="form.busy">Submit</v-button>
+                          </div>
+                          <div class="tab-pane" id="tab-9-3">
+                            <form @submit.prevent="updatePassword"  @keydown="form.onKeydown($event)" class="form-horizontal">
+                              <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Mật khẩu hiện tại <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                  <input type="password" v-model="formPass.password" :class="{ 'is-invalid': formPass.errors.has('password') }" class="form-control" name="username" placeholder="Nhập mật khẩu">
+                                  <div class="text-danger" v-if="formPass.errors.has('password')" v-html="formPass.errors.get('password')" />
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Mật khẩu mới <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                  <input type="password" v-model="formPass.new_password" :class="{ 'is-invalid': formPass.errors.has('new_password') }" class="form-control" name="username" placeholder="Nhập mật khẩu mới">
+                                  <div class="text-danger" v-if="formPass.errors.has('new_password')" v-html="formPass.errors.get('new_password')" />
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Xác nhận mật khẩu mới <span class="text-danger">*</span> :</label>
+                                <div class="col-sm-10">
+                                  <input type="password" v-model="formPass.new_confirm_password" :class="{ 'is-invalid': formPass.errors.has('new_confirm_password') }" class="form-control" name="username" placeholder="Xác nhận mật khẩu">
+                                  <div class="text-danger" v-if="formPass.errors.has('new_confirm_password')" v-html="formPass.errors.get('new_confirm_password')" />
+                                </div>
+                              </div>
+                             <div class="form-group row">
+                              <div class="col-sm-10 ml-sm-auto">
+                                  <button class="btn btn-info" type="submit">Đổi mật khẩu</button>
+                              </div>
                             </div>
-                            <div class="text-danger" v-if="form.errors.has('permission_id')" v-html="form.errors.get('permission_id')" />
-                            <v-button :loading="form.busy">Submit</v-button>
-                      </div>
-                      <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                        <form @submit.prevent="updatePassword"  @keydown="form.onKeydown($event)">
-                            <div class="form-group">
-                                <label for="exampleInputName">Mật khẩu hiện tại:</label>
-                                <input type="password" v-model="formPass.password" :class="{ 'is-invalid': formPass.errors.has('password') }" class="form-control" name="username" placeholder="Enter name">
-                                <div class="text-danger" v-if="formPass.errors.has('password')" v-html="formPass.errors.get('password')" />
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputName">Mật khẩu mới:</label>
-                                <input type="password" v-model="formPass.new_password" :class="{ 'is-invalid': formPass.errors.has('new_password') }" class="form-control" name="username" placeholder="Enter name">
-                                <div class="text-danger" v-if="formPass.errors.has('new_password')" v-html="formPass.errors.get('new_password')" />
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputName">Xác nhận mật khẩu:</label>
-                                <input type="password" v-model="formPass.new_confirm_password" :class="{ 'is-invalid': formPass.errors.has('new_confirm_password') }" class="form-control" name="username" placeholder="Enter name">
-                                <div class="text-danger" v-if="formPass.errors.has('new_confirm_password')" v-html="formPass.errors.get('new_confirm_password')" />
-                            </div>
-                            <v-button :loading="formPass.busy">Submit</v-button>
-                        </form>
-                      </div>
-                      </div>
-                    </div>
+                            </form>
+                          </div>
+                      </div> 
+                    </form>
                   </div>
-                </form>
-              </div>
+                    
+                </div>
             </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
+            
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <!-- END PAGE CONTENT-->
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
 export default {
      data:() => ({
     form: new Form({
       username: '',
       name: '',
       email: '',
-      avatar: '',
+      image: '',
       role_id: '',
       address: '',
       password:'',
@@ -156,73 +184,89 @@ export default {
     }),
     title: 'Cập nhật người dùng',
   }),
+  components:{
+    Footer
+  },
    computed: {
-        data () {
-            return this.$store.state.user.user;
-        },
-        
-        permission_id (){
-          var permission_id = [];
-            this.data.user.has_permission.forEach(function (permission) {
-                permission_id.push(permission.permission_id);
-            });
-            this.form.permission_id=permission_id;
-        }
+      data () {
+          return this.$store.state.user.user;
+      },
+      permission_id (){
+        var permission_id = [];
+          this.data.user.has_permission.forEach(function (permission) {
+              permission_id.push(permission.permission_id);
+          });
+          this.form.permission_id=permission_id;
+      }
    },
    created()  {
        this.$store.dispatch('user/fetchOne',this.$route.params.id);
     },
     methods: {
         upload(event){
-         this.form.avatar = event.target.files[0];
+          var file = this.form.image = event.target.files[0];
+            if(file){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    $('#previewImg').attr("src",reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
         },
-      async  updateUser () {
-         this.form.name = this.data.user.information.name
-        this.form.username = this.data.user.username
-        this.form.email = this.data.user.email
-        this.form.role_id = this.data.user.role.role_id
-        this.form.address = this.data.user.information.address
-        this.form.phone = this.data.user.information.phone
-        this.form.gender = this.data.user.information.gender
-        this.form.is_active = this.data.user.is_active
-      await this.form.post(route('update.user',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'User update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+        async updateUser () {
+          if(Permissions.indexOf('edit users') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+              text: 'Bạn không có quyền sửa tài khoản!',
+              })
+        }else{
+          this.form.name = this.data.user.name
+          this.form.username = this.data.user.username
+          this.form.email = this.data.user.email
+          this.form.role_id = this.data.user.role.role_id
+          this.form.address = this.data.user.address
+          this.form.phone = this.data.user.phone
+          this.form.gender = this.data.user.gender
+          this.form.is_active = this.data.user.is_active
+          await this.form.post(route('update.user',this.$route.params.id))
+          .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'users' })
+                Swal.fire(
+                    'Update',
+                    'User update  Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Đã  xảy ra lỗi!',
+                })
+        });
+      }
     },
     updatePassword(){
-      this.formPass.post(route('change.password',this.$route.params.id))
-      .then(response => {
-        if(response.data.status == 'success'){
-           this.$router.push({ name: 'users' })
-            Swal.fire(
-                'Update',
-                'Password update  Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
+        this.formPass.post(route('change.password',this.$route.params.id))
+          .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'users' })
+                Swal.fire(
+                    'Update',
+                    'Password update  Successfully',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Đã  xảy ra lỗi!',
+                })
+        });
     }
-      
     }
 }
 </script>

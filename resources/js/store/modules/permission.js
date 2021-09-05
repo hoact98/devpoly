@@ -3,19 +3,24 @@ import axios from "axios";
 // state
 export const state = {
   permissions: [],
-  permission: {}
+  permission: {},
+  all: []
 };
 
 // getters
 export const getters = {
   permission: state => state.permission,
-  permissions: state => state.permissions
+  permissions: state => state.permissions,
+  all: state => state.all
 };
 
 // mutations
 export const mutations = {
   FETCH(state, permissions) {
     state.permissions = permissions;
+  },
+  ALL(state, all) {
+    state.all = all;
   },
   FETCH_ONE(state, permission) {
     state.permission = permission;
@@ -30,6 +35,12 @@ export const actions = {
       .then(response => commit("FETCH", response.data.data))
       .catch();
   },
+  all({ commit }) {
+    return axios
+      .get(route("all.permission"))
+      .then(response => commit("ALL", response.data.data))
+      .catch();
+  },
   fetchOne({ commit }, id) {
     axios
       .get(route("show.permission", id))
@@ -40,7 +51,7 @@ export const actions = {
     axios
       .delete(route("delete.permission", id))
       .then((response)=> {
-        this.dispatch("permission/fetch")
+        // this.dispatch("permission/fetch")
         if(response.data.status == 'success'){
         Swal.fire(
           'Deleted!',

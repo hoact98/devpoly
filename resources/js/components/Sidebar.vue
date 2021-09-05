@@ -1,158 +1,157 @@
 <template>
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="" class="brand-link">
-      <img src="/dist/img/AdminLTELogo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <router-link :to="{name: 'home'}" class="d-block">Alexander Pierce</router-link>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-              <router-link :to="{name: 'dashboard'}" class="nav-link active">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-             <a href="javascript:;" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Quản trị người dùng
-                <i class="fas fa-angle-left right"></i>
-              </p>
-             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link :to="{name: 'users'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách người dùng</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link :to="{name: 'roles'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Role</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link :to="{name: 'permissions'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Permission</p>
-                </router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-             <a href="javascript:;" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Quản trị Memtor
-                <i class="fas fa-angle-left right"></i>
-              </p>
-             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link :to="{name:'mentors'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách Memtor</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link :to="{name:'add.mentor'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm Memtor</p>
-                </router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-             <a href="javascript:;" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Quản trị Danh Mục
-                <i class="fas fa-angle-left right"></i>
-              </p>
-             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link :to="{name: 'challengecategories'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách Danh Mục</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link :to="{name: 'add.challengecategory'}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm Danh Mục</p>
-                </router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-              <a href="javascript:;" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-              <p>
-                Quản trị Thử Thách
-                <i class="fas fa-angle-left right"></i>
-              </p>
-              </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link :to="{name: 'challenges'}" class="nav-link" >
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách Thử Thách</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link :to="{name: 'add.challenge'}" class="nav-link" >
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm Thử Thách</p>
-                </router-link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
+ <nav class="page-sidebar" id="sidebar">
+            <div id="sidebar-collapse">
+                <div class="admin-block d-flex" v-if="user">
+                    <div>
+                        <img v-if="user.image" :src="'/'+user.image" width="45px" />
+                        <img v-else :src="user.photo_url" width="45px" />
+                    </div>
+                    <div class="admin-info">
+                        <div class="font-strong">{{user.name}}</div><small>{{user.roles[0].name}}</small>
+                        </div>
+                </div>
+                <ul class="side-menu metismenu">
+                    <li>
+                         <router-link :to="{name: 'dashboard'}" class="nav-link active">
+                             <i class="sidebar-item-icon fa fa-th-large"></i>
+                            <span class="nav-label">Tổng quan</span>
+                         </router-link>
+                    </li>
+                    <li class="heading">Chức năng</li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon ti-user"></i>
+                            <span class="nav-label">Tài khoản</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <router-link :to="{name: 'users'}" class="nav-link">
+                                   Danh sách tài khoản
+                                    </router-link>
+                            </li>
+                            <li>
+                                 <router-link :to="{name: 'roles'}" class="nav-link">
+                                   Vai trò
+                                    </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'permissions'}" class="nav-link">
+                                   Quyền hạn
+                                    </router-link>
+                            </li>
+                            <li>
+                                <router-link v-if="$can('create users')" :to="{name: 'add.user'}" class="nav-link">
+                                   Thêm tài khoản
+                                    </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
+                            <span class="nav-label">Mentor</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <router-link :to="{name: 'mentors'}" class="nav-link">
+                                Danh sách Mentor
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'add.mentor'}" class="nav-link">
+                                Thêm Mentor
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
+                            <span class="nav-label">Danh mục</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <router-link :to="{name: 'challengecategories'}" class="nav-link">
+                                Danh sách danh mục
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'add.challengecategory'}" class="nav-link">
+                                Thêm danh mục
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bar-chart"></i>
+                            <span class="nav-label">Thử thách</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <router-link :to="{name: 'challenges'}" class="nav-link">
+                                Danh sách thử thách
+                                </router-link>
+                            </li>
+                            <li>
+                               <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                                Thêm thử thách
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <router-link :to="{name: 'solutions'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-light-bulb"></i>
+                           <span class="nav-label">Giải pháp</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{name: 'feedbacks'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-comment-alt"></i>
+                                <span class="nav-label">Bình luận</span>
+                        </router-link>
+                    </li>
+                    
+                    <li class="heading">PAGES</li>
+                     <li>
+                        <router-link :to="{name: 'admin.private-chat'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-comments"></i>
+                                <span class="nav-label">Trao đổi</span>
+                        </router-link>
+                    </li>
+                    <li>
+                       <router-link :to="{name: 'admin.orders'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-receipt"></i>
+                                <span class="nav-label">Hoá đơn</span>
+                        </router-link>
+                    </li>
+                    <li>
+                      <router-link :to="{name: 'admin.upgrades'}" class="nav-link">
+                            <i class="sidebar-item-icon ti-package"></i>
+                                <span class="nav-label">Gói vip</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon ti-comments"></i>
+                            <span class="nav-label">Thông báo</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <router-link :to="{name: 'admin.notifications'}" class="nav-link">
+                                Danh sách
+                                </router-link>
+                            </li>
+                            <li>
+                               <router-link :to="{name: 'add.notification'}" class="nav-link">
+                                Thêm thông báo
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 </template>
 
 <script>
 
 export default {
-  name: 'sidebar'
+  name: 'sidebar',
+   props: {
+        user: {},
+    },
 }
+
 </script>

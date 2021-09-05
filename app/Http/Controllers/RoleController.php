@@ -7,11 +7,16 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RoleHasPermission;
 use Illuminate\Http\Request;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class RoleController extends Controller
 {
-     // all roles
-     public function index()
+    public function __construct()
+    {
+        $this->middleware(['header_api', 'auth:api']);
+    }
+    // all roles
+     public function roles()
      {
         return response()->json([
             'status'=>'success',
@@ -20,6 +25,20 @@ class RoleController extends Controller
         ], 200);
      }
  
+    public function index(Request $request)
+    {   
+        $length = $request->input('length');
+        $sortBy = $request->input('column');
+        $orderBy = $request->input('dir');
+        $searchValue = $request->input('search');
+        
+        $query = Role::eloquentQuery($sortBy, $orderBy, $searchValue);
+
+        $data = $query->paginate($length);
+        
+        return new DataTableCollectionResource($data);
+    }
+
      // add role
      public function create(SaveRoleRequest $request)
      {
@@ -71,5 +90,16 @@ class RoleController extends Controller
          $role->delete();
  
          return response()->json(['status'=>'success','message'=>'The role successfully deleted'],200);
+     }
+     public function deleteMultiple(Request $request)
+     {
+        foreach ($request->role_id as $id ) {
+            $role = Role::find($id);
+            $role->delete();
+        }
+         return response()->json([
+             'status'=>'success',
+             'messege' => 'Succsess delete user',
+         ], 200);
      }
 }

@@ -1,72 +1,69 @@
 
 <template>
-  <div class="content-wrapper">
-     <breadcrumb :title='title'></breadcrumb>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">{{title}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <div class="card-body">
-                  <form @submit.prevent="updateRole" @keydown="form.onKeydown($event)">
-                    <div class="row">
-                    <div class="col-5 col-sm-3">
-                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="general-tab" data-toggle="pill" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
-                        <a class="nav-link" id="permission-tab" data-toggle="pill" href="#permission" role="tab" aria-controls="permission" aria-selected="false">Permission</a>
-                        </div>
-                    </div>
-                    <div class="col-7 col-sm-9">
-                        <div class="tab-content" id="vert-tabs-tabContent">
-                        <div class="tab-pane text-left fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                            <div class="form-group">
-                                <label for="exampleInputName">Name:</label>
-                                <input type="text" v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" id="exampleInputName" placeholder="Enter username">
-                                <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <breadcrumb :title='title'></breadcrumb>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">{{title}}</div>
+                    <!-- <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    </div> -->
+                </div>
+                <div class="ibox-body">
+                  <div class="clf">
+                    <form @submit.prevent="updateRole" @keydown="form.onKeydown($event)" class="form-horizontal row">
+                       <ul class="nav nav-tabs tabs-line-left col-2">
+                          <li class="nav-item">
+                              <a class="nav-link active" href="#tab-9-1" data-toggle="tab"><i class="fa fa-line-chart"></i> Tổng quan</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#tab-9-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Quyền hạn</a>
+                          </li>
+                      </ul>
+                      <div class="tab-content col-9" v-if="data.role">
+                          <div class="tab-pane fade show active" id="tab-9-1">
+                              <div class="form-group row">
+                                  <label for="" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span> : </label>
+                                  <div class="col-sm-10">
+                                      <input type="text"  v-model="data.role.name" :class="{ 'is-invalid': form.errors.has('name') }"  class="form-control" placeholder="Enter role">
+                                        <div class="text-danger" v-if="form.errors.has('name')" v-html="form.errors.get('name')"></div>
+                                  </div>
+                              </div>
+                            <div class="form-group row">
+                              <div class="col-sm-10 ml-sm-auto">
+                                  <button class="btn btn-info" type="submit">Submit</button>
+                              </div>
                             </div>
-                            <v-button :loading="form.busy">Submit</v-button>
-                        </div>
-                        <div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
-                         <input type="hidden" v-model="permission_id">
-                          <div class="form-check" v-for="permission in data.permissions" :key="permission.id">
-                            <input class="form-check-input" type="checkbox" :id="'per_'+permission.id" :value="permission.id" v-model="form.permission_id">
-                            <label class="form-check-label" :for="'per_'+permission.id">{{permission.name}}</label>
                           </div>
+                          <div class="tab-pane" id="tab-9-2">
+                             <input type="hidden" v-model="permission_id">
+                            <div class="form-group" v-for="permission in data.permissions" :key="permission.id">
+                                <label class="ui-checkbox ui-checkbox-primary" :for="'per_'+permission.id">
+                                    <input class="form-check-input" type="checkbox" :id="'per_'+permission.id" :value="permission.id" v-model="form.permission_id">
+                                    <span class="input-span"></span>{{permission.name}}</label>
+                             </div>
                            <div class="text-danger" v-if="form.errors.has('permission_id')" v-html="form.errors.get('permission_id')" />
                              <v-button :loading="form.busy">Submit</v-button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-              </form>
-              </div>
+                          </div>
+                      </div> 
+                    </form>
+                  </div>
+                    
+                </div>
             </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
+            
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <!-- END PAGE CONTENT-->
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
+import Footer from '../../../components/AdminFooter.vue';
 
 export default {
    data:() => ({
@@ -76,6 +73,9 @@ export default {
     }),
     title: 'Edit role',
   }),
+  components:{
+    Footer
+  },
    computed: {
         data () {
             return this.$store.state.role.role;
@@ -83,10 +83,12 @@ export default {
         
         permission_id (){
           var permission_id = [];
-            this.data.role.role_has_permissions.forEach(function (permission) {
+          if(this.data.role.role_has_permissions.length>0){
+             this.data.role.role_has_permissions.forEach(function (permission) {
                 permission_id.push(permission.permission_id);
             });
-            this.form.permission_id=permission_id;
+          }
+           return this.form.permission_id=permission_id;
         }
    },
   created: function () {
@@ -95,26 +97,34 @@ export default {
   methods: {
   
     async updateRole () {
-      this.form.name = this.data.role.name;
-      // this.form.permission_id = this.permission_id;
-     await this.form.post(route('update.role',this.$route.params.id))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'roles' })
-            Swal.fire(
-                'update',
-                'Role update Successfully',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+       if(Permissions.indexOf('edit roles') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
-            })
-    });
-    },
+              text: 'Bạn không có quyền sửa vai trò!',
+              })
+       }else{
+        this.form.name = this.data.role.name;
+        // this.form.permission_id = this.permission_id;
+        await this.form.post(route('update.role',this.$route.params.id))
+        .then(response => {
+            if(response.data.status == 'success'){
+              this.$router.push({ name: 'roles' })
+                Swal.fire(
+                    'update',
+                    'Cập nhật vai trò thành công!',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+          Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Đã  xảy ra lỗi!',
+                })
+        });
+    }
+  }
   }
 }
 </script>

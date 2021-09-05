@@ -24,6 +24,10 @@ $config = [
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);
+    @if($access_token)
+    document.cookie = 'token='+{!! json_encode($access_token); !!};
+    window.location.href ='/';
+    @endif
   </script>
 
 <script src="{{asset('/js/app.js')}}"></script>

@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SavePermissionRequest;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['header_api', 'auth:api']);
+    }
     // all permissions
-    public function index()
+    public function permissions()
     {
        return response()->json([
            'status'=>'success',
@@ -18,6 +23,19 @@ class PermissionController extends Controller
        ], 200);
     }
 
+    public function index(Request $request)
+    {   
+        $length = $request->input('length');
+        $sortBy = $request->input('column');
+        $orderBy = $request->input('dir');
+        $searchValue = $request->input('search');
+        
+        $query = Permission::eloquentQuery($sortBy, $orderBy, $searchValue);
+
+        $data = $query->paginate($length);
+        
+        return new DataTableCollectionResource($data);
+    }
     // add permission
     public function create(SavePermissionRequest $request)
     {
@@ -53,5 +71,16 @@ class PermissionController extends Controller
         $permission->delete();
 
         return response()->json(['status'=>'success','message'=>'The permission successfully deleted'],200);
+    }
+    public function deleteMultiple(Request $request)
+    {
+       foreach ($request->permission_id as $id ) {
+        $permission = Permission::find($id);
+        $permission->delete();
+       }
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess delete user',
+        ], 200);
     }
 }

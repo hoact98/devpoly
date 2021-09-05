@@ -3,347 +3,336 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-12 col-xs-9 col-lg-9 col-xl-9">
-          <div class="row info-solution">
+          <div class="row info-solution" v-if="solution">
             <div class="col-12">
-              <div class="author">
-                <div class="author-avatar">
-                  <img src="images/avatar-1.png" alt="" />
+              <div class="row">
+                <div class="col-8" v-if="solution.user">
+                  <router-link
+                    :to="{ name: 'portfolio', params: { username: solution.user.username } }"
+                  >
+                   <div class="author">
+                      <div class="author-avatar">
+                        <img v-if="solution.user.image" :src="'/' + solution.user.image" alt="" />
+                        <img v-else :src="solution.user.photo_url" alt="" />
+                      </div>
+                      <span class="author-nickname">{{ solution.user.username }} </span>
+                    </div>
+                  </router-link>
                 </div>
-                <span class="author-nickname"> {{ infoUser.token.email }} </span>
+                <div class="col-4">
+                  <div v-if="auth" class="text-right demo-code-block">
+                      <router-link v-if="auth.id==solution.user_id"
+                      :to="{ name: 'editSolution', params: { slug: solution.challenge.slug } }"
+                    ><button class="btn-view-code">Chỉnh sửa</button></router-link>
+                  </div>
+                </div>
               </div>
 
               <div class="solution-title">
                 <h3>{{ solution.title }}</h3>
               </div>
-
+              
               <div>
-                <span class="solution-time"> in 4 hours </span>
+                <span class="solution-time" v-if="solution.time"> {{solution.time}}</span>
                 <span style="display: inline-block; margin-left: 8px; margin-right: 8px"
                   >.</span
                 >
-                <span class="solution-edit"> edited </span>
               </div>
-
+              
               <div class="solution-detail-des">
-                <p>{{ solution.description }}</p>
+                <p v-html="solution.description"></p>
               </div>
             </div>
           </div>
 
-          <div class="row content-preview-wrap mt-4">
+          <div class="row content-preview-wrap mt-3">
             <div class="col-12">
               <div class="preview-content">
                 <div class="preview-content-head">
-                  <h2>Preview</h2>
+                  <h3>Preview</h3>
 
                   <div class="demo-code-block">
-                    <button class="btn-demo">Demo</button>
-                    <button class="btn-view-code">Code</button>
+                    <a :href="solution.demo_url" target="_blank"><button class="btn-demo">Demo</button></a>
+                    <a :href="solution.link_github" target="_blank"><button class="btn-view-code">Code</button></a>
                   </div>
                 </div>
 
-                <div class="preview-content-body"></div>
+                <div class="preview-content-body">
+                  <iframe
+                    :src="solution.demo_url"
+                      width="100%"
+                    height= "600px"
+                    frameborder="0" 
+                    >
+                  </iframe>
+                </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <h1 class="feedback-title">Feedback</h1>
+              <h3 class="feedback-title" id="feedback">Phản hồi</h3>
             </div>
           </div>
 
-          <div class="feedback-wrapper">
-            <div class="row">
-              <div class="col-12">
+          <div class="feedback-wrapper" v-if="feedbacks.length>0">
+            <div class="row feedback-row">
+              <div class="col-12" v-for="(feedback,index) in feedbacks" :key="index">
+              <div v-if="feedback.parent_id==0"> 
                 <div class="feedback-content">
                   <div class="row">
                     <div class="col-lg-3 col-md-12 col-md-12">
-                      <div class="upvote button-block">
-                        <div class="icon">
-                          <svg
-                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                            focusable="false"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                            ></path>
-                          </svg>
+                      
+                      <div v-if="auth">
+                        <div v-if="feedback.upvote.length>0">
+                            <div v-for="(upvote,index) in feedback.upvote" :key="index">
+                                <button v-if="upvote.user_id==auth.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                                    <div class="icon">
+                                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                  </div>
+                                  <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                </button>
+                                <button v-if="upvote.user_id!=auth.id && feedback.upvote.length==index+1" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
+                                    <div class="icon">
+                                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                  </div>
+                                  <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                </button>
+                            </div>
                         </div>
-                        <span>upvote</span>
+                        <button v-else @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
+                            <div class="icon">
+                          <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                          </div>
+                          <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                        </button>
                       </div>
-
-                      <div class="feedback-user-section">
-                        <div>
+                      <div v-else>
+                        <div class="button-block">
+                          <div class="icon">
+                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                        </div> 
+                              <span v-if="feedback.upvote">{{feedback.upvote.length==0?'Thích':feedback.upvote.length}}</span>
+                        </div>
+                      </div>
+                      <div class="feedback-user-section" v-if="feedback.users">
+                        <router-link
+                          :to="{ name: 'portfolio', params: { username: feedback.users.username } }"
+                        >
                           <div class="feedback-user-info">
                             <div class="feedback-user-img">
-                              <img
-                                src="https://avatars.githubusercontent.com/u/48230483?v=4"
-                                alt=""
-                              />
+                              <img v-if="feedback.users.image" :src="'/'+feedback.users.image" alt=""/>
+                              <img v-else :src="feedback.users.photo_url" alt=""/>
                             </div>
 
                             <div>
-                              <p class="feedback-user-name">Kevin Rodriguez</p>
-                              <span class="feedback-user-reputation">10 reputations</span>
+                              <p class="feedback-user-name">{{feedback.users.username}}</p>
+                              <!-- <span class="feedback-user-reputation">10 reputations</span> -->
                             </div>
                           </div>
-                        </div>
-
-                        <div class="user-skill-wrapper">
-                          <div class="skill-list">
-                            <button class="btn-feedback">
-                              <span class="">Mentoring</span>
-                              <svg
-                                class="MuiSvgIcon-root icon-feedback"
-                                focusable="false"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"
-                                ></path>
-                              </svg>
-                            </button>
-                            <button class="btn-feedback">
-                              <span class="">Mentoring</span>
-                              <svg
-                                class="MuiSvgIcon-root icon-feedback"
-                                focusable="false"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"
-                                ></path>
-                              </svg>
-                            </button>
-                          </div>
-                          <span class="skill-more">more</span>
-                        </div>
+                        </router-link>
                       </div>
+                       <div class="mt-3" v-if="auth">
+                            <button v-if="auth.id == feedback.user_id" ref="btnEdit" @click="editFeedback(index)" type="button" class="edit rounded btn btn-secondary mr-2" style="background-color:#6d2fff">
+                              <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
+                            <span>Sửa</span>
+                            </button>
+                            <button v-if="auth.id == feedback.user_id" ref="btnSave" type="button" @click="saveFeedback(index,feedback.id)" class="edit rounded btn btn-secondary mr-2 d-none" style="background-color:#6d2fff">
+                                <i class="ti-save"></i> <span> Lưu</span>
+                            </button>
+                            <button v-if="auth.id == feedback.user_id" @click="removeFeedback(feedback.id)" type="button" class="edit rounded btn btn-secondary">
+                              <i class="ti-trash"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-lg-9 col-md-12">
                       <div class="feedback-detail">
-                        <p>
-                          It looks dope! Just a small suggestion, try to create the "join"
-                          element like a button or change its cursor to the pointer. Also,
-                          give validations if we try to put invalid style email id.
-                        </p>
+                        <p  ref="feedbackContent" v-html="feedback.feedback_content"></p>
+                        <div v-if="auth">
+                          <form action="" ref="formSave" v-if="auth.id == feedback.user_id" class="d-none">
+                         <ckeditor 
+                                  ref="content"
+                                  v-model="feedback.feedback_content"
+                                ></ckeditor>
+                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-12">
                 <div class="feedback-time">
-                  <span>an hour ago</span>
+                  <span v-if="feedback.time">{{feedback.time}}</span>
                 </div>
               </div>
-              <div>
-                <div class="col-12">
+              <div v-if="feedback.parent_id>0">
                   <div class="row">
                     <div class="col-1"></div>
                     <div class="col-11 reply-feedback">
                       <div class="row">
                         <div class="col-lg-3 col-md-12">
-                          <div class="">
-                            <div class="upvote button-block">
-                              <div class="icon">
-                                <svg
-                                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                  focusable="false"
-                                  viewBox="0 0 24 24"
-                                  aria-hidden="true"
-                                >
-                                  <path
-                                    d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                                  ></path>
-                                </svg>
+                             <div v-if="auth">
+                                  <div v-if="feedback.upvote.length>0">
+                                      <div v-for="(upvote,index) in feedback.upvote" :key="index">
+                                          <button v-if="upvote.user_id==auth.id" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
+                                              <div class="icon">
+                                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                            </div>
+                                            <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                          </button>
+                                          <button v-else-if="upvote.user_id!=auth.id && feedback.upvote.length==index+1" @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
+                                              <div class="icon">
+                                            <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                            </div>
+                                            <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                          </button>
+                                      </div>
+                                  </div>
+                                  <button v-else @click="upvoteFeedback(feedback.id)" type="button" class="upvote button-block" style="width:100%;">
+                                      <div class="icon">
+                                    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                                    </div>
+                                    <span v-if="feedback.upvote" v-html="feedback.upvote.length == 0 ? 'Thích':feedback.upvote.length"></span>
+                                  </button>
+                             </div>
+                            <div v-else>
+                              <div class="button-block">
+                                <div class="icon">
+                                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                              </div> 
+                                    <span v-if="feedback.upvote">{{feedback.upvote.length==0?'Thích':feedback.upvote.length}}</span>
                               </div>
-                              <span>upvote</span>
                             </div>
-
-                            <div class="reply-feedback-user-info">
+                            <router-link
+                              :to="{ name: 'portfolio', params: { username: feedback.users.username } }"
+                            >
+                            <div class="reply-feedback-user-info" v-if="feedback.users">
                               <div class="feedback-user-img">
-                                <img
-                                  src="https://avatars.githubusercontent.com/u/48230483?v=4"
-                                  alt=""
-                                />
+                               <img v-if="feedback.users.image" :src="'/'+feedback.users.image" alt=""/>
+                                <img v-else :src="feedback.users.photo_url" alt=""/>
                               </div>
 
                               <div>
-                                <p class="feedback-user-name">Kevin Rodriguez</p>
-                                <span class="feedback-user-reputation"
-                                  >10 reputations</span
-                                >
+                                <p class="feedback-user-name">{{feedback.users.username}}</p>
+                                <!-- <span class="feedback-user-reputation"
+                                  >10 reputations</span> -->
                               </div>
                             </div>
-                          </div>
+                          </router-link>
+                            <div v-if="auth">
+                              <button v-if="auth.id == feedback.user_id" ref="btnEdit" @click="editFeedback(index-1)" type="button" class="edit button-block">
+                                <div class="icon">
+                               <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
+                              </div>
+                              <span>Sửa</span>
+                              </button>
+
+                            <button v-if="auth.id == feedback.user_id" ref="btnSave" type="button" @click="saveFeedback(index-1,feedback.id)" class="edit button-block d-none">
+                                <div class="icon">
+                                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.59 3.59c-.38-.38-.89-.59-1.42-.59H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.83c0-.53-.21-1.04-.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-.9-2-2s.9-2 2-2h6c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
+                                </div>
+                                <span>Lưu</span>
+                            </button>
+                            </div>
                         </div>
 
                         <div class="col-lg-9 col-md-12">
                           <div class="reply-feedback-detail">
-                            <p>
-                              It looks dope! Just a small suggestion, try to create the
-                              "join" element like a button or change its cursor to the
-                              pointer. Also, give validations if we try to put invalid
-                              style email id.
-                            </p>
+                              <p ref="feedbackContent" v-html="feedback.feedback_content"></p>
+                              <div v-if="auth">
+                                <form action="" ref="formSave" v-if="auth.id == feedback.user_id" class="d-none">
+                                
+                                <ckeditor
+                                  ref="content"
+                                  v-model="feedback.feedback_content"
+                                ></ckeditor>
+                              </form>
+                              </div>
+                               
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div class="col-12">
                   <div class="feedback-time">
-                    <span>54 minutes ago</span>
+                      <span v-if="feedback.time">{{feedback.time}}</span>
                   </div>
-                </div>
               </div>
-
-              <!-- feed back của chính tài khoản -->
-              <div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-11 reply-feedback">
-                      <div class="row">
-                        <div class="col-lg-3 col-md-12">
-                          <div class="">
-                            <div class="upvote button-block">
-                              <div class="icon">
-                                <svg
-                                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                  focusable="false"
-                                  viewBox="0 0 24 24"
-                                  aria-hidden="true"
-                                >
-                                  <path
-                                    d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                                  ></path>
-                                </svg>
-                              </div>
-                              <span>upvote</span>
-                            </div>
-
-                            <div class="reply-feedback-user-info">
-                              <div class="feedback-user-img">
-                                <img
-                                  src="https://avatars.githubusercontent.com/u/48230483?v=4"
-                                  alt=""
-                                />
-                              </div>
-
-                              <div>
-                                <p class="feedback-user-name">Kevin Rodriguez</p>
-                                <span class="feedback-user-reputation"
-                                  >10 reputations</span
-                                >
-                              </div>
-                            </div>
-                            <div class="edit button-block">
-                              <div class="icon">
-                                <svg
-                                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                  focusable="false"
-                                  viewBox="0 0 24 24"
-                                  aria-hidden="true"
-                                >
-                                  <path
-                                    d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                                  ></path>
-                                </svg>
-                              </div>
-                              <span>Edit</span>
-                            </div>
-
-                            <!-- <div class="edit button-block">
-                                                                    <div class="icon">
-                                                                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.59 3.59c-.38-.38-.89-.59-1.42-.59H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.83c0-.53-.21-1.04-.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-.9-2-2s.9-2 2-2h6c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
-                                                                    </div>
-                                                                    <span>Save</span>
-                                                                </div> -->
+              <!-- Thêm feedback theo parent_id -->
+              <div v-if="feedbacks[index+1] && auth">
+                <div v-if="feedbacks[index+1].parent_id==0" class="row">
+                  
+                  <div class="col-1"></div>
+                  <div class="col-11">
+                    <div class="row">
+                      <div class="col-12">
+                        <form  @submit.prevent="replyFeedback(index-1,feedback.parent_id==0 ? feedback.id: feedback.parent_id)"
+                          @keydown="form.onKeydown($event)">
+                              <textarea class="form-control" ref="feedback_content" style="height: 100px"></textarea>
+                        <div
+                          class="text-danger"
+                          v-if="form.errors.has('feedback_content')"
+                          v-html="form.errors.get('feedback_content')"
+                        />
+                          <div style="float: right">
+                            <button type="submit" class="send-feedback">Gửi</button>
                           </div>
-                        </div>
-
-                        <div class="col-lg-9 col-md-12">
-                          <div class="reply-feedback-detail">
-                            <p>
-                              It looks dope! Just a small suggestion, try to create the
-                              "join" element like a button or change its cursor to the
-                              pointer. Also, give validations if we try to put invalid
-                              style email id.
-                            </p>
-                          </div>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div class="col-12">
-                  <div class="feedback-time">
-                    <span>1 minutes ago</span>
-                  </div>
-                </div>
               </div>
-              <!-- end feedback của chính tài khoản đăng nhập -->
-
-              <div>
-                <div class="col-12">
+              <div v-if="!feedbacks[index+1] && auth" class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
                   <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-11">
-                      <div class="row">
-                        <div class="col-12">
-                          <form action="">
-                            <textarea
-                              placeholder="Enter your reply"
-                              name=""
-                              class="reply-feedback-content"
-                              cols="30"
-                              rows="4"
-                            ></textarea>
-                            <div style="float: right">
-                              <button class="send-feedback">Send</button>
-                            </div>
-                          </form>
+                    <div class="col-12">
+                      <form  @submit.prevent="replyFeedback(index,feedback.parent_id==0 ? feedback.id: feedback.parent_id)"
+                        @keydown="form.onKeydown($event)">
+                       
+                      <textarea class="form-control" ref="feedback_content" style="height: 100px"></textarea>
+                      <div
+                        class="text-danger"
+                        v-if="form.errors.has('feedback_content')"
+                        v-html="form.errors.get('feedback_content')"
+                      />
+                        <div style="float: right">
+                          <button type="submit" class="send-feedback">Gửi</button>
                         </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            </div>
           </div>
-
-          <div class="row">
+            <!-- Gửi feedback -->
+          <div class="row" v-if="auth">
             <div class="col-12">
               <div class="row">
                 <div class="col-12">
-                  <form action="">
-                    <textarea
-                      placeholder="Enter your reply"
-                      name=""
-                      class="reply-feedback-content"
-                      cols="30"
-                      rows="6"
-                    ></textarea>
-                    <span class="helper-text"
-                      >You can use Markdown to write and format your feedback.</span
-                    >
+                  <form @submit.prevent="submitFeedback"
+                    @keydown="form.onKeydown($event)">
+                     <ckeditor
+                    v-model="form.feedback_content"
+                    :class="{ 'is-invalid': form.errors.has('feedback_content') }"
+                  ></ckeditor>
+                   <div
+                    class="text-danger"
+                    v-if="form.errors.has('feedback_content')"
+                    v-html="form.errors.get('feedback_content')"
+                  />
                     <div style="float: right">
-                      <button class="send-feedback">Send</button>
+                      <button type="submit" class="send-feedback">Gửi</button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row" v-else>
+            <div class="col-12"><p> Bạn cần đăng nhập mới có thể gửi phản hồi!</p></div>
           </div>
         </div>
 
@@ -352,57 +341,57 @@
             <div class="col-12">
               <div class="content-item">
                 <div class="solution-challenge">
-                  <div class="row">
+                  <div class="row" v-if="solution.challenge">
                     <div class="col-12">
                       <div class="challenge-img">
-                        <img src="images/challenge-img-1.png" alt="" />
+                        <img :src="'/'+solution.challenge.image" alt="" />
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="challenge-name">
-                        <p>{{ solution.challenges.title }}</p>
+                        <p>{{ solution.challenge.title }}</p>
                       </div>
 
                       <div class="challenge-level">
-                        <span>{{ solution.challenges.level }}</span>
+                        <span v-if="solution.challenge.level==1">Beginner</span>
+                        <span v-else-if="solution.challenge.level==2">Elementary</span>
+                        <span v-else-if="solution.challenge.level==3">Intermediate</span>
+                        <span v-else-if="solution.challenge.level==4">Upper intermediate</span>
+                        <span v-else-if="solution.challenge.level==5">Advanced</span>
+                        <span v-else>Proficient</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="solution-action">
-                  <div class="upvote button-block">
+                <div v-if="auth">
+                  <button v-if="checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%; background: #1bb21b;">
                     <div class="icon">
-                      <svg
-                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <span>upvote</span>
+                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
                   </div>
-                  <br />
-                  <div class="feedback button-block">
+                  <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                </button>
+                  <button v-if="!checkVote" @click="upvoteSolution()" type="button" class="upvote button-block" style="width:100%;">
                     <div class="icon">
-                      <svg
-                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M22 4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <span>feedback</span>
+                  <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                  </div>
+                  <span v-if="solution.upvote" v-html="solution.upvote.length == 0 ? 'Thích':solution.upvote.length"></span>
+                </button>
+                </div>
+                <div v-else>
+                  <div class="button-block">
+                    <div class="icon">
+                      <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"></path></svg>
+                  </div> 
+                        <span v-if="solution.upvote">{{solution.upvote.length==0?'Thích':solution.upvote.length}}</span>
                   </div>
                 </div>
+                  <a href="#feedback">
+                    <div class="feedback button-block mt-2">
+                    <i class="ti-comment"></i>
+                  <span class="pl-2" v-if="solution.feedbacks" v-html="solution.feedbacks.length == 0 ?' Phản hồi': solution.feedbacks.length"></span>
+                </div>
+                  </a>
               </div>
             </div>
           </div>
@@ -412,7 +401,7 @@
               <div class="share-block">
                 <div class="row">
                   <div class="col-6">
-                    <h3>Share</h3>
+                    <h3>Chia sẻ</h3>
                   </div>
 
                   <div class="col-6 share-social">
@@ -462,25 +451,22 @@
             </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-12">
               <div class="share-block">
-                <div>
-                  <div class="feedback-user-info">
-                    <div class="feedback-user-img">
-                      <img
-                        src="https://avatars.githubusercontent.com/u/48230483?v=4"
-                        alt=""
-                      />
-                    </div>
+                 <div v-if="solution.user">
+                    <div class="feedback-user-info">
+                      <div class="feedback-user-img">
+                        <img v-if="solution.user.image" :src="'/' + solution.user.image" alt="" />
+                        <img v-else :src="solution.user.photo_url" alt="" />
+                      </div>
 
-                    <div>
-                      <p class="feedback-user-name">Kevin Rodriguez</p>
-                      <span class="feedback-user-reputation">10 reputations</span>
+                      <div>
+                        <p class="feedback-user-name">{{solution.user.name}}</p>
+                        <span class="feedback-user-reputation">1 reputations</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-
                 <div class="user-skill-wrapper">
                   <div class="skill-list">
                     <button class="btn-feedback">
@@ -514,7 +500,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -525,22 +511,161 @@
 export default {
   data() {
     return {
-      infoUser : {}
+      feedbacks: {},
+      checkVote:null,
+      form: new Form({
+        feedback_content: "",
+    }),
     };
   },
   computed: {
     solution() {
       return this.$store.state.solution.solution;
     },
-
+    auth(){
+      return this.$store.state.auth.user;
+    }
   },
   created: function () {
-       this.infoUser =  JSON.parse(localStorage.getItem('infoUser')) 
     this.$store.dispatch("solution/fetchOne", this.$route.params.id);
+    this.$store.dispatch('auth/fetchUser');
+    this.getFeedback();
+    this.checkUpvote();
   },
+  methods:{
+    getFeedback() {
+        axios.get(route('solutionFeedback.feedback',this.$route.params.id))
+        .then(response => {
+          var result = response.data.data;
+          this.feedbacks = result;
+          this.$store.dispatch("challengecategory/fetchOne", this.solution.challenge.cate_challen_id);
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+    async submitFeedback() {
+        await this.form.post(route('create.feedback',[0,this.$route.params.id]))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.form.feedback_content="";
+            this.getFeedback()
+                Swal.fire(
+                    'Thành công',
+                    'Bình luận đang chờ duyệt.',
+                    'success'
+                );
+          }
+        })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Đã xảy ra lỗi!",
+            });
+          });
+    },
+    async replyFeedback(index,id) {
+       this.form.feedback_content = this.$refs.feedback_content[index].value;
+        await this.form.post(route('create.feedback',[id,this.$route.params.id]))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.form.feedback_content="";
+            this.getFeedback()
+                Swal.fire(
+                    'Thành công',
+                    'Bình luận đang chờ duyệt.',
+                    'success'
+                );
+            }
+        })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Đã xảy ra lỗi!",
+            });
+          });
+    },
+    upvoteSolution(){
+        axios.post(route('upvote.solution',this.$route.params.id))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.checkUpvote();
+            this.$store.dispatch("solution/fetchOne", this.$route.params.id);
+          }
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+    saveFeedback(index,id){
+       this.$refs.btnEdit[index].classList.remove("d-none");
+       this.$refs.feedbackContent[index+1].classList.remove("d-none");
+       this.$refs.btnSave[index].classList.add('d-none');
+       this.$refs.formSave[index].classList.add('d-none');
+       this.form.feedback_content = this.$refs.content[index].value;
+       this.form.post(route('update.feedback',id))
+        .then(response => {
+          if(response.data.status == 'success'){
+            this.form.feedback_content="";
+                Swal.fire(
+                    'Thành công',
+                    'Sửa bình luận thành công.',
+                    'success'
+                );
+            }
+        })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Đã xảy ra lỗi!",
+            });
+          });
+    },
+    editFeedback(index){
+       this.$refs.btnEdit[index].classList.add('d-none');
+       this.$refs.feedbackContent[index+1].classList.add('d-none');
+       this.$refs.btnSave[index].classList.remove("d-none");
+       this.$refs.formSave[index].classList.remove("d-none");
+    },
+   async removeFeedback(id){
+      this.$store.dispatch('feedback/deleteFeedback', id).then(
+         await this.getFeedback()
+      )
+    },
+    checkUpvote(){
+      axios.get(route('checkUpvote.solution',this.$route.params.id))
+        .then(response => {
+          var result = response.data.data;
+          this.checkVote = result;
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    },
+    upvoteFeedback(id){
+      axios.post(route('upvote.feedback',id))
+        .then(response => {
+          if(response.data.status == 'success'){
+                this.getFeedback();
+          }
+        })
+        // eslint-disable-next-line
+        .catch(errors => {
+            //Handle Errors
+        })
+    }
+
+  }
 };
 </script>
 
 <style lang="scss">
 @import "../../../sass/solution-detail.scss";
+
 </style>
