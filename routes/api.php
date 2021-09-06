@@ -44,6 +44,7 @@ Route::group(['middleware' => 'api'], function () {
 Route::post('change-password/{id}',[UserController::class, 'changePass'])->name('change.password');
 Route::post('create-password/{id}',[UserController::class, 'createPass'])->name('create.password');
 Route::get('mentors', [UserController::class, 'mentors'])->name('mentors');
+Route::get('chat-user', [UserController::class, 'chatUser'])->name('chat.user');
 Route::get('users', [UserController::class, 'index'])->name('users');
 Route::group(['prefix' => 'user'], function () {
     Route::post('add', [UserController::class, 'create'])->name('create.user');

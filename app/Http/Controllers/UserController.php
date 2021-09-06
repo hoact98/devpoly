@@ -404,4 +404,19 @@ class UserController extends Controller
             'status' => 'success',
             ]);
     }
+
+    public function chatUser()
+    {
+        $users= User::select('users.*')->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+        ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+        ->where('model_has_roles.role_id','=',2)->orWhere('model_has_roles.role_id','=',7)->get();
+        $users->load('roles');
+        $users->load('challenges');
+        $users->load('solutions');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => $users,
+        ], 200);
+    }
 }

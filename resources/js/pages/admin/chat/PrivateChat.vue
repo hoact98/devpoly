@@ -232,7 +232,7 @@ export default {
             });
         },
      fetchUsers() {
-          axios.get(route('all.user')).then(response => {
+          axios.get(route('chat.user')).then(response => {
                 this.users = response.data.data;
                 if(this.friends.length>0){
                   this.activeFriend=this.friends[0];
