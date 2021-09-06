@@ -3,7 +3,7 @@
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.challengecategory'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
+          <router-link v-if="$can('create categories')" :to="{name:'add.challengecategory'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">
@@ -124,12 +124,20 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Xoá!",
       }).then((result) => {
-        if (result.value) {
-          //Send Request to server
-          this.$store.dispatch("challengecategory/deletechallengecategory", id).then(
-                    this.getData(route("challengecategories"), this.tableProps)
-                )
-        }
+          if(Permissions.indexOf('delete categories') == -1){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Bạn không có quyền xoá!',
+                })
+            }else{
+                if (result.value) {
+                //Send Request to server
+                this.$store.dispatch("challengecategory/deletechallengecategory", id).then(
+                            this.getData(route("challengecategories"), this.tableProps)
+                        )
+                }
+            }
       });
     },
      deleteAll(){

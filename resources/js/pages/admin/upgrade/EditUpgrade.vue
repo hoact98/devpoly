@@ -85,11 +85,11 @@ export default {
     methods: {
         async updateUpgrade () {
             if(Permissions.indexOf('edit upgrades') == -1){
-                        Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Bạn không có quyền sửa!',
-                        })
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Bạn không có quyền sửa!',
+                })
             }else{
                 this.form.name = this.upgrade.name
                 this.form.price = this.upgrade.price

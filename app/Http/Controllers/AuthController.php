@@ -29,7 +29,7 @@ class AuthController extends Controller
   public function login(Request $request)
   {
      $rule= [
-          'email' => 'required|email',
+          'email' => 'required|email|exists:users,email',
           'password' => 'required|min:6'
         ];
         $messages = [
@@ -37,6 +37,7 @@ class AuthController extends Controller
             'password.min' => "Ít nhất có 6 ký tự",
             'password.required' => "Nhập mật khẩu",
             'email.email' => "Email không đúng định dạng",
+            'email.exists' => 'Email không chính xác!',
         ];
    
         $validator =  Validator::make($request->all(),$rule,$messages);
@@ -44,7 +45,7 @@ class AuthController extends Controller
             return response()->json(['errors'=>$validator->errors()],422);
           }
       if(!Auth::attempt(['email' => $request->email, 'password' => $request->password]))
-          return response()->json(['errors' => ['password'=> ['Tài khoản hoặc mật khẩu không đúng!']]],422);
+          return response()->json(['errors' => ['password'=> ['Mật khẩu không đúng!']]],422);
       $user = $request->user();
       $tokenResult = $user->createToken('Personal Access Token');
       $token = $tokenResult->token;
@@ -64,13 +65,14 @@ class AuthController extends Controller
   { 
     $rule= [
       'name' => 'required', 
-      'email' => 'required|email', 
+      'email' => 'required|email|unique:users,email', 
       'password' => 'required|min:6', 
       'password_confirmation' => 'required|same:password', 
     ];
     $messages = [
         'name.required' => "Hãy nhập tên",
         'email.required' => "Hãy nhập email",
+        'email.unique' => 'Email đã tồn tại',
         'password.min' => "Ít nhất có 6 ký tự",
         'password.required' => "Nhập mật khẩu",
         'email.email' => "Email không đúng định dạng",
@@ -82,10 +84,7 @@ class AuthController extends Controller
       if ($validator->fails()) { 
         return response()->json(['errors'=>$validator->errors()],422);
       }
-      $checkEmail = User::where('email',$request->email)->get();
-      if(count($checkEmail)>0){
-        return response()->json(['errors' => ['email'=> ['Email đã được đăng ký!']]],422);
-      }
+     
     $postArray = $request->all(); 
     $postArray['password'] = Hash::make($postArray['password']); 
     $user = User::create($postArray); 

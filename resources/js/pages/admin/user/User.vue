@@ -70,6 +70,11 @@ export default {
               orderable: true,
           },
           {
+              label: 'Họ tên',
+              name: 'name',
+              orderable: true,
+          },
+          {
               label: 'Email',
               name: 'email',
               orderable: true,
@@ -180,7 +185,7 @@ export default {
                             })
                     }else{
                         if (result.value) {
-                            this.form.post(route('multiple.user'))
+                            this.form.post(route('multiple.users'))
                             .then(response => {
                                 if(response.data.status == 'success'){
                                     this.getData(route("users"), this.tableProps)

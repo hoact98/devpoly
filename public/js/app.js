@@ -71850,18 +71850,20 @@ var render = function() {
             _c(
               "li",
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "add.mentor" } }
-                  },
-                  [
-                    _vm._v(
-                      "\n                               Thêm Mentor\n                               "
+                _vm.$can("create mentors")
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: { name: "add.mentor" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                               Thêm Mentor\n                               "
+                        )
+                      ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ],
               1
             )
@@ -71894,18 +71896,20 @@ var render = function() {
             _c(
               "li",
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "add.challengecategory" } }
-                  },
-                  [
-                    _vm._v(
-                      "\n                               Thêm danh mục\n                               "
+                _vm.$can("create categories")
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: { name: "add.challengecategory" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                               Thêm danh mục\n                               "
+                        )
+                      ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ],
               1
             )
@@ -71938,18 +71942,20 @@ var render = function() {
             _c(
               "li",
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "add.challenge" } }
-                  },
-                  [
-                    _vm._v(
-                      "\n                               Thêm thử thách\n                               "
+                _vm.$can("create challenges")
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: { name: "add.challenge" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                               Thêm thử thách\n                               "
+                        )
+                      ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ],
               1
             )
@@ -72073,18 +72079,20 @@ var render = function() {
             _c(
               "li",
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: { name: "add.notification" } }
-                  },
-                  [
-                    _vm._v(
-                      "\n                               Thêm thông báo\n                               "
+                _vm.$can("create notifications")
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: { name: "add.notification" } }
+                      },
+                      [
+                        _vm._v(
+                          "\n                               Thêm thông báo\n                               "
+                        )
+                      ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ],
               1
             )

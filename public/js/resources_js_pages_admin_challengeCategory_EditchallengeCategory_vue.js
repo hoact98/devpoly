@@ -161,10 +161,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (!(Permissions.indexOf('edit categories') == -1)) {
+                  _context.next = 4;
+                  break;
+                }
+
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Bạn không có quyền sửa danh mục!'
+                });
+                _context.next = 9;
+                break;
+
+              case 4:
                 _this.form.name = _this.data.name;
                 _this.form.rule = _this.data.rule;
                 _this.form.description = _this.data.description;
-                _context.next = 5;
+                _context.next = 9;
                 return _this.form.post(route("update.challengecategory", _this.$route.params.id)).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
@@ -181,7 +195,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 5:
+              case 9:
               case "end":
                 return _context.stop();
             }

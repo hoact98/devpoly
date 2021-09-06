@@ -32,13 +32,15 @@
                 <h3 style="color: black">{{ solution.title }}</h3>
               </div>
               <div class="solution-help">
-                <p class="help-message" style="color: black">
+                <p v-if="solution.feedbacks.length==0" class="help-message" style="color: black">
+                <span>Hãy là người đầu tiên phản hồi</span>
+                </p>
+                <p v-else class="help-message" style="color: black">
                   Tôi rất thích nghe phản hồi của bạn
                 </p>
-                <span v-if="solution.feedbacks.length==0">Không ai xem xét giải pháp này. Hãy là người đầu tiên</span>
               </div>
 
-              <div class="solution-challenge">
+              <div class="solution-challenges">
                 <div class="row">
                   <div class="col-5">
                     <div class="challenge-name">

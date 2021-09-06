@@ -57,7 +57,7 @@ export default {
               orderable: true,
           },
           {
-              label: 'Name',
+              label: 'Tên',
               name: 'name',
               orderable: true,
           },

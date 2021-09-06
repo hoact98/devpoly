@@ -27,15 +27,15 @@ class RoleController extends Controller
  
     public function index(Request $request)
     {   
-        $length = $request->input('length');
-        $sortBy = $request->input('column');
-        $orderBy = $request->input('dir');
-        $searchValue = $request->input('search');
-        
-        $query = Role::eloquentQuery($sortBy, $orderBy, $searchValue);
-
-        $data = $query->paginate($length);
-        
+        $query = Role::eloquentQuery(
+            $request->input('column'),
+            $request->input('dir'),
+            $request->input('search'),
+            [
+                "users"
+            ],
+        );
+        $data = $query->paginate($request->input('length'));
         return new DataTableCollectionResource($data);
     }
 

@@ -24,7 +24,22 @@ class Role extends Model
     ];
 
     protected $dataTableRelationships = [
-        //
+        "belongsToMany" => [
+            "users" => [
+                "model" => User::class,
+                "pivot" => [
+                    "table_name" => "model_has_roles",
+                    "foreign_key" => "model_id",
+                    "local_key" => "role_id",
+                ],
+                "columns" => [
+                    "name" => [
+                        "searchable" => true,
+                        "orderable" => true,
+                    ]
+                ],
+            ],
+        ]
     ];
     public function users()
     {

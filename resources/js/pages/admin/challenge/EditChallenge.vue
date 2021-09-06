@@ -153,28 +153,36 @@ export default {
         this.form.resources = event.target.files[0];
     },
     async updateChallenge() {
-      this.form.title = this.data.title;
-      this.form.description = this.data.description;
-      this.form.language = this.data.language;
-      this.form.link_figma = this.data.link_figma;
-      this.form.design_on_figma = this.data.design_on_figma;
-      this.form.level = this.data.level;
-    this.form.cate_challen_id = this.data.cate_challen_id;
-      await this.form
-        .post(route("update.challenge", this.$route.params.id))
-        .then((response) => {
-          if (response.data.status == "success") {
-            this.$router.push({ name: "challenges" });
-            Swal.fire("Update", "Cập nhật thử thách thành công", "success");
-          }
-        })
-        .catch(() => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Đã  xảy ra lỗi!",
+       if(Permissions.indexOf('edit challenges') == -1){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Bạn không có quyền sửa thử thách!',
+              })
+        }else{
+        this.form.title = this.data.title;
+        this.form.description = this.data.description;
+        this.form.language = this.data.language;
+        this.form.link_figma = this.data.link_figma;
+        this.form.design_on_figma = this.data.design_on_figma;
+        this.form.level = this.data.level;
+        this.form.cate_challen_id = this.data.cate_challen_id;
+        await this.form
+          .post(route("update.challenge", this.$route.params.id))
+          .then((response) => {
+            if (response.data.status == "success") {
+              this.$router.push({ name: "challenges" });
+              Swal.fire("Update", "Cập nhật thử thách thành công", "success");
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Đã  xảy ra lỗi!",
+            });
           });
-        });
+        }
     },
   },
 };

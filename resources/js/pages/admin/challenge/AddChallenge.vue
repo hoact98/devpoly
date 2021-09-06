@@ -158,6 +158,13 @@ export default {
         this.form.resources = event.target.files[0];
         },
     async addChallenge() {
+       if(Permissions.indexOf('create challenges') == -1){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Bạn không có quyền thêm thử thách!',
+              })
+        }else{
         await this.form
           .post(route("create.challenge"))
           .then((response) => {
@@ -173,6 +180,7 @@ export default {
               text: "Đã  xảy ra lỗi!",
             });
           });
+        }
     },
   },
 };

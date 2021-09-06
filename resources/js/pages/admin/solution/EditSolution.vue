@@ -181,28 +181,36 @@ export default {
   },
   methods: {
     async updateSolution () {
-       this.form.title = this.data.title;
-       this.form.demo_url = this.data.demo_url;
-       this.form.link_github = this.data.link_github;
-       this.form.description = this.data.description;
-       this.form.challen_id = this.data.challen_id;
-     await this.form.post(route('update.solution',this.$route.params.id))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'solutions' })
-            Swal.fire(
-                'Thành công',
-                'Cập nhật giải pháp thành công.',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+         if(Permissions.indexOf('edit solutions') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Đã xảy ra lỗi!',
-            })
-    });
+              text: 'Bạn không có quyền sửa giải pháp!',
+              })
+        }else{
+        this.form.title = this.data.title;
+        this.form.demo_url = this.data.demo_url;
+        this.form.link_github = this.data.link_github;
+        this.form.description = this.data.description;
+        this.form.challen_id = this.data.challen_id;
+        await this.form.post(route('update.solution',this.$route.params.id))
+        .then(response => {
+            if(response.data.status == 'success'){
+            this.$router.push({ name: 'solutions' })
+                Swal.fire(
+                    'Thành công',
+                    'Cập nhật giải pháp thành công.',
+                    'success'
+                );
+            }
+        }).catch(()=>{
+        Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Đã xảy ra lỗi!',
+                })
+        });
+        }
     },
     getData(url = route("solution.feedback",this.$route.params.id), options = this.tableProps) {
             axios.get(url, {

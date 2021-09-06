@@ -264,9 +264,17 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: "#d33",
         confirmButtonText: "Xoá!"
       }).then(function (result) {
-        if (result.value) {
-          //Send Request to server
-          _this2.$store.dispatch("challengecategory/deletechallengecategory", id).then(_this2.getData(route("challengecategories"), _this2.tableProps));
+        if (Permissions.indexOf('delete categories') == -1) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Bạn không có quyền xoá!'
+          });
+        } else {
+          if (result.value) {
+            //Send Request to server
+            _this2.$store.dispatch("challengecategory/deletechallengecategory", id).then(_this2.getData(route("challengecategories"), _this2.tableProps));
+          }
         }
       });
     },
@@ -1094,20 +1102,25 @@ var render = function() {
             attrs: { title: _vm.title }
           }),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "col-6 text-right mt-5",
-              attrs: { to: { name: "add.challengecategory" } }
-            },
-            [
-              _c(
-                "button",
-                { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                [_vm._v("Add New")]
+          _vm.$can("create categories")
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "col-6 text-right mt-5",
+                  attrs: { to: { name: "add.challengecategory" } }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Add New")]
+                  )
+                ]
               )
-            ]
-          )
+            : _vm._e()
         ],
         1
       ),

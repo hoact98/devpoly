@@ -93,6 +93,13 @@ export default {
             }
     },
     async updateChallengeCategory() {
+      if(Permissions.indexOf('edit categories') == -1){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Bạn không có quyền sửa danh mục!',
+              })
+        }else{
       this.form.name = this.data.name;
       this.form.rule = this.data.rule;
       this.form.description = this.data.description;
@@ -115,6 +122,7 @@ export default {
             text: "Đã  xảy ra lỗi!",
           });
         });
+      }
     },
   },
 };

@@ -221,6 +221,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (!(Permissions.indexOf('edit challenges') == -1)) {
+                  _context.next = 4;
+                  break;
+                }
+
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Bạn không có quyền sửa thử thách!'
+                });
+                _context.next = 13;
+                break;
+
+              case 4:
                 _this.form.title = _this.data.title;
                 _this.form.description = _this.data.description;
                 _this.form.language = _this.data.language;
@@ -228,7 +242,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.form.design_on_figma = _this.data.design_on_figma;
                 _this.form.level = _this.data.level;
                 _this.form.cate_challen_id = _this.data.cate_challen_id;
-                _context.next = 9;
+                _context.next = 13;
                 return _this.form.post(route("update.challenge", _this.$route.params.id)).then(function (response) {
                   if (response.data.status == "success") {
                     _this.$router.push({
@@ -245,7 +259,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 9:
+              case 13:
               case "end":
                 return _context.stop();
             }

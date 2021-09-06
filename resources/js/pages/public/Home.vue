@@ -4,7 +4,7 @@
       <div class="step-list mb-3">
         <div class="row">
           <div class="col-md-12 mb-4">
-            <h1 class="welcome">WELCOME TO DEVPOLY</h1>
+            <h1 class="welcome">CHÀO MỪNG BẠN ĐẾN VỚI DEVPOLY</h1>
           </div>
         </div>
 

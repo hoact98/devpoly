@@ -271,9 +271,17 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: "#d33",
         confirmButtonText: "Xoá!"
       }).then(function (result) {
-        if (result.value) {
-          //Send Request to server
-          _this2.$store.dispatch("challenge/deletechallenge", id).then(_this2.getData(route("challenges"), _this2.tableProps));
+        if (Permissions.indexOf('delete challenges') == -1) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Bạn không có quyền xoá!'
+          });
+        } else {
+          if (result.value) {
+            //Send Request to server
+            _this2.$store.dispatch("challenge/deletechallenge", id).then(_this2.getData(route("challenges"), _this2.tableProps));
+          }
         }
       });
     },
@@ -1103,20 +1111,25 @@ var render = function() {
             attrs: { title: _vm.title }
           }),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "col-6 text-right mt-5",
-              attrs: { to: { name: "add.challenge" } }
-            },
-            [
-              _c(
-                "button",
-                { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                [_vm._v("Add New")]
+          _vm.$can("create challenges")
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "col-6 text-right mt-5",
+                  attrs: { to: { name: "add.challenge" } }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Add New")]
+                  )
+                ]
               )
-            ]
-          )
+            : _vm._e()
         ],
         1
       ),

@@ -138,21 +138,29 @@ export default {
         });
     },
         async addOrder() {
-        await this.form
-          .post(route("create.order"))
-          .then((response) => {
-            if (response.data.status == "success") {
-              this.$router.push({ name: "admin.orders" });
-              Swal.fire("Created", "Challenge created Successfully", "success");
-            }
-          })
-          .catch(() => {
+          if(Permissions.indexOf('create orders') == -1){
             Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Đã  xảy ra lỗi!",
-            });
-          });
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Bạn không có quyền thêm danh mục!',
+              })
+            }else{
+            await this.form
+              .post(route("create.order"))
+              .then((response) => {
+                if (response.data.status == "success") {
+                  this.$router.push({ name: "admin.orders" });
+                  Swal.fire("Created", "Challenge created Successfully", "success");
+                }
+              })
+              .catch(() => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Đã  xảy ra lỗi!",
+                });
+              });
+            }
     },
   },
 };

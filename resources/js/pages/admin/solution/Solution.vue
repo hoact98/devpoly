@@ -146,14 +146,20 @@ export default {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Xoá!'
             }).then((result) => {
-
-              if (result.value) {
-                //Send Request to server
-                this.$store.dispatch('solution/deleteSolution', id).then(
-                    this.getData(route("solutions"), this.tableProps)
-                )
+                 if(Permissions.indexOf('delete solutions') == -1){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bạn không có quyền xoá giải pháp!',
+                        })
+                }else{
+                if (result.value) {
+                    //Send Request to server
+                    this.$store.dispatch('solution/deleteSolution', id).then(
+                        this.getData(route("solutions"), this.tableProps)
+                    )
+                    }
                 }
-
             })
           },
            deleteAll(){

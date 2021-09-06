@@ -82,24 +82,32 @@ export default {
             }
         },
         async addChallengeCategory () {
-     await this.form.post(route('create.challengecategory'))
-     .then(response => {
-        if(response.data.status == 'success'){
-          this.$router.push({ name: 'challengecategories' })
-            Swal.fire(
-                'Created',
-                'Tạo danh mục thành công',
-                'success'
-            );
-        }
-    }).catch(()=>{
-      Swal.fire({
+            if(Permissions.indexOf('create categories') == -1){
+            Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Đã  xảy ra lỗi!',
-            })
-    });
-    },
+              text: 'Bạn không có quyền thêm danh mục!',
+              })
+            }else{
+            await this.form.post(route('create.challengecategory'))
+            .then(response => {
+                if(response.data.status == 'success'){
+                this.$router.push({ name: 'challengecategories' })
+                    Swal.fire(
+                        'Created',
+                        'Tạo danh mục thành công',
+                        'success'
+                    );
+                }
+            }).catch(()=>{
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Đã  xảy ra lỗi!',
+                    })
+            });
+            }
+        },
     }
 }
 </script>

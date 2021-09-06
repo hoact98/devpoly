@@ -212,8 +212,8 @@ export default {
                 if(response.data.status == 'success'){
                 this.$router.push({ name: 'users' })
                     Swal.fire(
-                        'Created',
-                        'User created Successfully',
+                        'Đã thêm',
+                        'Tài khoản đã tạo thành công!',
                         'success'
                     );
                 }

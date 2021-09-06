@@ -3,7 +3,7 @@
       <!-- START PAGE CONTENT-->
       <div class="page-heading row">
           <breadcrumb :title='title' class="col-6"></breadcrumb>
-          <router-link :to="{name:'add.order'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
+          <router-link v-if="$can('create orders')" :to="{name:'add.order'}" class="col-6 text-right mt-5"><button type="button" class="btn btn-primary">Add New</button></router-link>
       </div>
       <div class="page-content fade-in-up">
         <div class="ibox">

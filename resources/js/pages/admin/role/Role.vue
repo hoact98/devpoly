@@ -57,9 +57,14 @@ export default {
               orderable: true,
           },
           {
-              label: 'Name',
+              label: 'Tên vai trò',
               name: 'name',
               orderable: true,
+          },
+          {
+              label: 'Số tài khoản',
+              name: 'users.length',
+              orderable: false,
           },
            {
               label: 'Action',

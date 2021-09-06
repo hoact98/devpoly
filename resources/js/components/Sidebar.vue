@@ -54,7 +54,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name: 'add.mentor'}" class="nav-link">
+                                <router-link v-if="$can('create mentors')" :to="{name: 'add.mentor'}" class="nav-link">
                                 Thêm Mentor
                                 </router-link>
                             </li>
@@ -70,7 +70,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name: 'add.challengecategory'}" class="nav-link">
+                                <router-link v-if="$can('create categories')" :to="{name: 'add.challengecategory'}" class="nav-link">
                                 Thêm danh mục
                                 </router-link>
                             </li>
@@ -86,7 +86,7 @@
                                 </router-link>
                             </li>
                             <li>
-                               <router-link :to="{name: 'add.challenge'}" class="nav-link">
+                               <router-link v-if="$can('create challenges')" :to="{name: 'add.challenge'}" class="nav-link">
                                 Thêm thử thách
                                 </router-link>
                             </li>
@@ -134,7 +134,7 @@
                                 </router-link>
                             </li>
                             <li>
-                               <router-link :to="{name: 'add.notification'}" class="nav-link">
+                               <router-link v-if="$can('create notifications')" :to="{name: 'add.notification'}" class="nav-link">
                                 Thêm thông báo
                                 </router-link>
                             </li>

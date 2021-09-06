@@ -234,8 +234,8 @@ export default {
             if(response.data.status == 'success'){
               this.$router.push({ name: 'users' })
                 Swal.fire(
-                    'Update',
-                    'User update  Successfully',
+                    'Đã cập nhật',
+                    'Cập nhật tài khoản thành công!',
                     'success'
                 );
             }

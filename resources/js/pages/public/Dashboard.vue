@@ -13,8 +13,8 @@
             <h5 class="pb-3">Dự án đang thực hiện</h5>
             <div
               class="row mb-3"
-              v-for="challenge in data.challenges"
-              :key="challenge.id"
+              v-for="(challenge,index) in data.challenges"
+              :key="index"
             >
               <div class="col-4">
                 <router-link
@@ -41,7 +41,7 @@
               >
             </div>
           </div>
-          <div v-if="data.solutions" class="lastest-tutorial-content mt-5">
+          <div v-if="data.solutions && data.solutions.length>0" class="lastest-tutorial-content mt-5">
             <h5>Giải pháp</h5>
             <!-- <div class="reputations">
               <span class="reputations-value">0 </span>
@@ -110,7 +110,7 @@
               <span class="reputations-text">Chứng chỉ</span>
             </div>
             <div class="overview-row">
-              <div class="overview-key">Ủng hộ</div>
+              <div class="overview-key">Thích</div>
               <div class="overview-value" v-if="data.upvotes">
                 {{ data.upvotes.length }}
               </div>
@@ -128,33 +128,33 @@
             <div class="tutorial-title">
               <h4>Hướng dẫn mới nhất</h4>
             </div>
-            <a href="#">
+            <a href="https://www.youtube.com/watch?v=QX_tvDZNB8Y&list=PLSo2LcvIId74yRg1IbUP0YlbwdIaslPL1" target="_blank">
               <div class="tutorial-row">
-                <div class="tutorial-title">Css animation</div>
+                <div class="tutorial-title">Xây dựng API bằng NodeJS</div>
                 <div class="tutorial-image">
                   <img src="images/item.PNG" alt="" />
                 </div>
               </div>
             </a>
-            <a href="#">
+            <a href="https://www.youtube.com/watch?v=3ujr0Epj-XU&list=PLSo2LcvIId74ZOYQwIyhRA1AXBt2jy-r8" target="_blank">
               <div class="tutorial-row">
-                <div class="tutorial-title">Media queries</div>
+                <div class="tutorial-title">React cơ bản</div>
                 <div class="tutorial-image">
                   <img src="images/item.PNG" alt="" />
                 </div>
               </div>
             </a>
-            <a href="#">
+            <a href="https://www.youtube.com/watch?v=enAtLVRUOik&list=PLSo2LcvIId75IPf7BA_HuUTi1AhtMRo6J" target="_blank">
               <div class="tutorial-row">
-                <div class="tutorial-title">CSS position</div>
+                <div class="tutorial-title">CSS Grid</div>
                 <div class="tutorial-image">
                   <img src="images/item.PNG" alt="" />
                 </div>
               </div>
             </a>
-            <a href="#">
+            <a href="https://www.youtube.com/watch?v=eL6jY3WbtIA&list=PLSo2LcvIId75cjfNIP8vAMAW62r279yV_" target="_blank">
               <div class="tutorial-row">
-                <div class="tutorial-title">promise, Async/Await</div>
+                <div class="tutorial-title">Cắt giao diện HTML/CSS</div>
                 <div class="tutorial-image">
                   <img src="images/item.PNG" alt="" />
                 </div>
