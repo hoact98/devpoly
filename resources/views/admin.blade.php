@@ -14,7 +14,7 @@ $config = [
   <meta name="csrf-token" value="{{ csrf_token() }}" />
   @routes
   <title>{{ config('app.name') }}</title>
-
+  <link rel="shortcut icon" type="image/x-icon" href="{{url('images/logo-icon.png')}}" />
   <!-- GLOBAL MAINLY STYLES-->
   <link href="{{asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="{{asset('assets/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
